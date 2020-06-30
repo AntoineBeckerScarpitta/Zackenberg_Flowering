@@ -93,9 +93,9 @@ Zsal$Site <- 'Zackenberg'
 Nsal0 <- read.csv("data/datasets/View_BioBasis_Nuuk_Data_Vegetation_Salix_phenology_and_total_count180520202134518138.csv", 
                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
 # delete remarks and comments
-Nsal <- Nsal0[ ,c("Date", "Plot", "Section", "Buds", "Flowers", 
+Nsal <- Nsal0[ ,c("Date", "Plot", "Section", "Buds", 
                   "Male_flowers", "Female_flowers", "Seed_hairs", 
-                  "Total_Male", "Total_Femal", "TotalCount")]
+                  "Total_Male", "Total_Female", "TotalCount")]
 #  add SITE column with NUUK
 Nsal$Site <- 'Nuuk'
 
