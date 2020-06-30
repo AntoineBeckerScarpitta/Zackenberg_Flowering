@@ -22,6 +22,7 @@ source("Scripts/01_Import_DB.r")
 
 # RBIND ALL DB + 
 # SELECT "TOTALCOUNT"
+# SPLIT Date into Year, Month, Day
 
 
 
@@ -35,12 +36,5 @@ flow1 <- subset(flow0, TotalCount=="TOTALCOUNT")
 flow <- cbind(str_split_fixed(flow[,"Date"], '-', n=3), flow)
 colnames(flow) <- c("Year", "Month", "Day", "Site", "Date", "Plot", "Section",
                     "TotalCount", "Flower_var", "Value")
-
-
-
-
-
-
-
 
 
