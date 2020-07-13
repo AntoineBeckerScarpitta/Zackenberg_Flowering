@@ -38,7 +38,8 @@ Zcas1$Site <- 'Zackenberg'
 Zcas <- reshape2::melt(Zcas1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
             variable.name = "Flower_var", 
             value.name = "Value")
-
+# add species names
+Zcas$Species <- 'CAS'
 
 
 
@@ -54,7 +55,8 @@ Zdry1$Site <- 'Zackenberg'
 Zdry <- reshape2::melt(Zdry1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
-
+# add species names
+Zdry$Species <- 'DRY'
 
 
 
@@ -70,7 +72,8 @@ Zpap1$Site <- 'Zackenberg'
 Zpap <- reshape2::melt(Zpap1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
-
+# add species names
+Zpap$Species <- 'PAP'
 
 
 
@@ -86,7 +89,8 @@ Zsax1$Site <- 'Zackenberg'
 Zsax <- reshape2::melt(Zsax1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
-
+# add species names
+Zsax$Species <- 'SAX'
 
 
 
@@ -102,7 +106,8 @@ Zsil1$Site <- 'Zackenberg'
 Zsil <- reshape2::melt(Zsil1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
-
+# add species names
+Zsil$Species <- 'SIL'
 
 
 
@@ -119,7 +124,8 @@ Zsal1$Site <- 'Zackenberg'
 Zsal <- reshape2::melt(Zsal1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
-
+# add species names
+Zsal$Species <- 'SAL'
 
 
 
@@ -138,7 +144,8 @@ Nsal1$Site <- 'Nuuk'
 Nsal <- reshape2::melt(Nsal1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
-
+# add species names
+Nsal$Species <- 'SAL'
 
 
 
@@ -154,7 +161,8 @@ Nsil1$Site <- 'Nuuk'
 Nsil <- reshape2::melt(Nsil1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
-
+# add species names
+Nsil$Species <- 'SIL'
 
 
 
