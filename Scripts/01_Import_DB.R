@@ -8,7 +8,7 @@
 # June 2020
 
 #  clean R work-space
-rm(list=ls())
+# rm(list=ls())
 
 # load library
 # R, Rstudio need to be updated
