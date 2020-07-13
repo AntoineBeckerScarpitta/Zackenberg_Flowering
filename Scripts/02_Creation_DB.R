@@ -36,7 +36,7 @@ flow <- subset(flow0, TotalCount=="TOTALCOUNT")
 # split Date col, to extract year, month, day in new cols
 flow <- cbind(str_split_fixed(flow[,"Date"], '-', n=3), flow)
 colnames(flow) <- c("Year", "Month", "Day", "Site", "Date", "Plot", "Section",
-                    "TotalCount", "Flower_var", "Value")
+                    "TotalCount", "Flower_var", "Value", "Species")
 
 # replace '-9999'
 flow[flow$Value==-9999, 'Value'] <- NA
