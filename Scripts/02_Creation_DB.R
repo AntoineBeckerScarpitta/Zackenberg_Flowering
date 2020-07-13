@@ -41,4 +41,7 @@ colnames(flow) <- c("Year", "Month", "Day", "Site", "Date", "Plot", "Section",
 # replace '-9999'
 flow[flow$Value==-9999, 'Value'] <- NA
 
+# data as numeric
+flow[c("Year", "Month", "Day")] <- sapply(flow[c("Year", "Month", "Day")], as.numeric)
 ### END
+
