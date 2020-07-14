@@ -17,14 +17,18 @@ source("Scripts/00_Load_libraries.r")
 
 
 
-# READ DATASETS + 
-# SELECT COLS + 
-# ADD SITE +
+# READ DATASETS 
+# SELECT COLS 
+# ADD SITE 
 # MELT TABLES
+# ADD SPECIES
 
 
 
 ### ZACKENBERG (6 species)
+# READ PLOT SIZE
+Zplot_size <- read.csv("data/datasets/Plot_size_coord.csv", header=TRUE,  sep=";")
+
 # READ - Cassiope
 Zcas0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Cassiope_phenology_and_total_count.csv", 
                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,
