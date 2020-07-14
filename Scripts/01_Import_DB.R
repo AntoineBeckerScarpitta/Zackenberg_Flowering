@@ -155,6 +155,12 @@ Nsal <- reshape2::melt(Nsal1, id.vars = c("Site", "Date", "Plot", "Section", "To
                        value.name = "Value")
 # add species names
 Nsal$Species <- 'SAL'
+# remane with Zaxk nomenclature
+Nsal[Nsal$Plot=="SAL1", 'Plot'] <- "Sal1"
+Nsal[Nsal$Plot=="SAL2", 'Plot'] <- "Sal2"
+Nsal[Nsal$Plot=="SAL3", 'Plot'] <- "Sal3"
+Nsal[Nsal$Plot=="SAL4", 'Plot'] <- "Sal4"
+
 
 
 
@@ -172,7 +178,11 @@ Nsil <- reshape2::melt(Nsil1, id.vars = c("Site", "Date", "Plot", "Section", "To
                        value.name = "Value")
 # add species names
 Nsil$Species <- 'SIL'
-
+# remane with Zaxk nomenclature
+Nsil[Nsil$Plot=="SIL1", 'Plot'] <- "Sil1"
+Nsil[Nsil$Plot=="SIL2", 'Plot'] <- "Sil2"
+Nsil[Nsil$Plot=="SIL3", 'Plot'] <- "Sil3"
+Nsil[Nsil$Plot=="SIL4", 'Plot'] <- "Sil4"
 
 
 
