@@ -27,34 +27,31 @@ source("Scripts/02_Creation_DB.r")
 # cas5, cas6, dry7, dry8 half no data, should delete them
 
 
-
+# DATA STRUCTURE FOR ANALYSIS
 # select only TotalFlowering line for the total flower per year
 flow_sub <- droplevels(flow[flow$Flower_var=="TotalFlowering", ])
 
 #  delete NA in the subset
 flow_sub <- flow_sub[complete.cases(flow_sub),]
 
-# chekc number of obs per plot per year
-table(flow_sub$Plot, flow_sub$Year)
-
-
-# WORK ON IT _ DO NOT WORK
-flow_sub[c("Year", "Site", "Plot", "Section", "Species")] <- sapply(flow[c("Year","Site","Plot","Section","Species")], as.factor)
-
-flow_sub$Year <- as.factor(flow_sub$Year)
-flow_sub$Site <- as.factor(flow_sub$Site)
-flow_sub$Plot <- as.factor(flow_sub$Plot)
-flow_sub$Section <- as.factor(flow_sub$Section)
-flow_sub$Species <- as.factor(flow_sub$Species)
-
 # calculate the total flower per plot per year (sum of all sections)
-flow_tot <- ddply(flow_sub, .(Site, Year, Species, Plot), 
+flow_tot_plot <- ddply(flow_sub, .(Site, Year, Species, Plot), 
                   summarise, SumFlower=sum(Value))
 
+# calcula sumFlower per species only
+flow_tot_sp <- ddply(flow_tot_plot, .(Site, Year, Species), 
+                  summarise, SumFlower=sum(SumFlower))
+####---
 
 
 # basic explorations
-qplot(data= flow, Year, Value, geom='line') +
+qplot(data= flow_tot_sp, Year, SumFlower, geom='line') +
   facet_wrap(~Species)
+
+
+
+
+
+
 
 
