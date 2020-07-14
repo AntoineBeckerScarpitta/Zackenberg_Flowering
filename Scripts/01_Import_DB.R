@@ -108,6 +108,11 @@ Zsil <- reshape2::melt(Zsil1, id.vars = c("Site", "Date", "Plot", "Section", "To
                        value.name = "Value")
 # add species names
 Zsil$Species <- 'SIL'
+# correct Plot==Si1,2,3 with SIL
+Zsil[Zsil$Plot=="Si1", 'Plot'] <- "Sil1"
+Zsil[Zsil$Plot=="Si2", 'Plot'] <- "Sil2"
+Zsil[Zsil$Plot=="Si3", 'Plot'] <- "Sil3"
+Zsil[Zsil$Plot=="Si4", 'Plot'] <- "Sil4"
 
 
 
