@@ -1,4 +1,4 @@
-﻿Plot_name;Plot_ID;UTM_E;UTM_N;Longitude;Latitude;Plot_size_m;Plot_size;Section;Sampling_period
+﻿Plot_name;Plot;UTM_E;UTM_N;Longitude;Latitude;Plot_size_m;Plot_size;Section;Sampling_period
 Cassiope 1;Cas1;513.3;8.264.809;5133;8264809;1x2;2;SE;Early-late July
 Cassiope 2;Cas2;513.23;8.265.290;51323;8265290;1x3;3;SE;Mid-late July
 Cassiope 3;Cas3;513.42;8.264.746;51342;8264746;1x2;2;E;Early-late July
