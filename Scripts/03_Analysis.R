@@ -1,7 +1,7 @@
 #######################################################################################
 #
 #                           Greenland Flowering project
-#                             03 - Analysis
+#                         03 - Basic Explorations Graph
 #
 #######################################################################################
 # Antoine Becker-Scarpitta
@@ -22,10 +22,10 @@ source("Scripts/02_Creation_DB.r")
 # NA in SECTION => DONE
 # cas5, cas6, dry7, dry8 half no data => DONE
 #  ADD plot size and divide flow numb by plot size => DONE
+# different format of data in SECTION A-D, A-B => DONE
 
 # TO DO 
 # NUUK has a different structure NEED TO FIGURED OUT how to integrated it
-# different format of data in SECTION
 # Check the variation in survey period (month level)
 
 
