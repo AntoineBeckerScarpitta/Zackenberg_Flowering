@@ -54,6 +54,11 @@
 # install.packages("multcomp")
 # install.packages("lmerTest")
 # install.packages("simr")
+# install.packages("LMERConvenienceFunctions")
+# install.packages("jtools")
+# install.packages("interactions")
+# install.packages("emmeans")
+# install.packages("r2glmm")
 # 
 # 
 # # Plot
@@ -103,13 +108,18 @@ library(AICcmodavg)
 library(MuMIn)
 library(car)
 library(arm)
-library(effects)
 library(stats)
 library(bbmle)
 library(sjPlot)
 library(multcomp)
 library(lmerTest)
 library(simr)
+library(LMERConvenienceFunctions)
+library(jtools)
+library(interactions)
+library(emmeans)
+library(r2glmm)
+
 
 
 # Plot
