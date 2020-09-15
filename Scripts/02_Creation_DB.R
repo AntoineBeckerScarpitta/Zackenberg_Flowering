@@ -5,13 +5,28 @@
 #
 #######################################################################################
 # Antoine Becker-Scarpitta
-# Sept 2020
+# September 2020
 
 #  clean R work-space
 # rm(list=ls())
 
 # Load 01 - Import_DB (and 00-Librairies)
 source("Scripts/01_Import_DB.r")
+
+# DID
+# delete K, W, plots => DONE
+# add SITE in all dataset => DONE
+# correct Zack Sil , Si names => DONE
+# as.factor(year) => DONE
+# NA in SECTION => DONE
+# cas5, cas6, dry7, dry8 half no data => DONE
+#  ADD plot size and divide flow numb by plot size => DONE
+# different format of data in SECTION A-D, A-B => DONE
+
+# TO DO 
+# NUUK has a different structure NEED TO FIGURED OUT how to integrated it
+# Check the variation in survey period (month level)
+
 
 
 # WHAT THE SCRIPT DO ----------------
