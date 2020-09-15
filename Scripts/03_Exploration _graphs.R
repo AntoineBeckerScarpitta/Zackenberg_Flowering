@@ -29,119 +29,64 @@ source("Scripts/02_Creation_DB.r")
 # Check the variation in survey period (month level)
 
 
-# basic explorations
-# Raw TotalFlower per sp
-qplot(data= flow_tot_plot, Year, TotalFlower, geom=c('point', 'line')) +
-  geom_smooth(method='lm', se=TRUE) +
-  facet_wrap(~Species) +
-  labs(y='Total number of flower per plot')
 
-# Raw TotalFlower per plot
-ggplot(flow_tot_plot, aes(Year, TotalFlower, group=Plot, color=Plot)) +
+#  PLOT LEVEL 
+# 1 - Flower density per m2  ## --------------------------------------------
+flow_den <- ggplot(flow_tot_plot, aes(Year, Flow_m2, group=Plot, color=Plot)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
-  facet_wrap(~Species) +
-  labs(y='Total number of flower per plot')
+  labs(y='Flower density / m2') +
+  ggtitle('Flower density') +
+  facet_grid(Species~., scales="free_y") +
+  theme_linedraw() +
+  theme(legend.position = "none")
 
-# Flower per m2, at plot level
-ggplot(flow_tot_plot, aes(Year, Flow_m2, group=Plot, color=Plot)) +
+# 2 - Total Flower per plot  ## --------------------------------------------
+flow_tot <- ggplot(flow_tot_plot, aes(Year, TotalFlower, group=Plot, color=Plot)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
-  facet_wrap(~Species) +
-  labs(y='Number of flower per m2 (plot level)')
+  labs(y='Total flower number') +
+  ggtitle('Total flower nubmer') +
+  facet_grid(Species~., scales="free_y")+
+  theme_linedraw() +
+  theme(legend.position = "none")
+
+#  graph
+gridExtra::grid.arrange(flow_den, flow_tot, ncol=2, 
+                        top = "Plot level temporal trends in flowering at Zackenberg")
+
+### END PLOT LEVEL ## ------------------------------------------------------
 
 
-# 1 - Flower density per m2, with plot level ## -------------------------------
-# CAS 
-CAS <- ggplot(flow_tot_plot[flow_tot_plot$Species=="CAS",],
-              aes(Year, Flow_m2, group=Plot, color=Plot)) +
+
+
+#  SPECIE LEVEL 
+# 3 - Flower density per m2  ## --------------------------------------------
+flow_den2 <- ggplot(flow_tot_plot, aes(Year, Flow_m2, group=Species, color=Species)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
-  labs(y='Flow density m2') +
-  ggtitle('CAS')
+  labs(y='Flower density/m2') +
+  ggtitle('Flower density') +
+  facet_grid(Species ~., scales="free_y") +
+  theme_linedraw()+
+  theme(legend.position = "none")
 
-# DRY 
-DRY <- ggplot(flow_tot_plot[flow_tot_plot$Species=="DRY",],
-              aes(Year, Flow_m2, group=Plot, color=Plot)) +
+
+# 4 - Total Flower per plot  ## --------------------------------------------
+flow_tot2 <- ggplot(flow_tot_plot, aes(Year, TotalFlower, group=Species, color=Species)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
-  labs(y='Flow density m2') +
-  ggtitle('DRY')
+  labs(y='Total flower number') +
+  ggtitle('Total flower number') +
+  facet_grid(Species~., scales="free_y")+
+  theme_linedraw() +
+  theme(legend.position = "none")
 
-# PAP 
-PAP <- ggplot(flow_tot_plot[flow_tot_plot$Species=="PAP",],
-       aes(Year, Flow_m2, group=Plot, color=Plot)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Flow density m2') +
-  ggtitle('PAP')
+#  graph
+gridExtra::grid.arrange(flow_den2, flow_tot2, ncol=2, 
+                        top = "Temporal flowering trends at species level in Zackenberg")
 
-# SAX 
-SAX <- ggplot(flow_tot_plot[flow_tot_plot$Species=="SAX",],
-              aes(Year, Flow_m2, group=Plot, color=Plot)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Flow density m2') +
-  ggtitle('SAX')
-
-# SIL 
-SIL <- ggplot(flow_tot_plot[flow_tot_plot$Species=="SIL",],
-              aes(Year, Flow_m2, group=Plot, color=Plot)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Flow density m2') +
-  ggtitle('SIL')
-
-# gridExtra::grid.arrange(CAS, DRY, PAP, SAX, SIL, ncol=2, 
-                        # top = "Flower density, m2")
-### END ## ------------------------------------------------------------------
+### END SP LEVEL ## ------------------------------------------------------------------
 
 
-
-
-# 2 - Total Flower per plot ## -------------------------------
-# CAS 
-CAS_t <- ggplot(flow_tot_plot[flow_tot_plot$Species=="CAS",],
-              aes(Year, TotalFlower, group=Plot, color=Plot)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Total flow nb') +
-  ggtitle('CAS')
-
-# DRY 
-DRY_t <- ggplot(flow_tot_plot[flow_tot_plot$Species=="DRY",],
-              aes(Year, TotalFlower, group=Plot, color=Plot)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Total flow nb') +
-  ggtitle('DRY')
-
-# PAP 
-PAP_t <- ggplot(flow_tot_plot[flow_tot_plot$Species=="PAP",],
-              aes(Year, TotalFlower, group=Plot, color=Plot)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Total flow nb') +
-  ggtitle('PAP')
-
-# SAX 
-SAX_t <- ggplot(flow_tot_plot[flow_tot_plot$Species=="SAX",],
-              aes(Year, TotalFlower, group=Plot, color=Plot)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Total flow nb') +
-  ggtitle('SAX')
-
-# SIL 
-SIL_t <- ggplot(flow_tot_plot[flow_tot_plot$Species=="SIL",],
-              aes(Year, TotalFlower, group=Plot, color=Plot)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Total flow nb') +
-  ggtitle('SIL')
-
-gridExtra::grid.arrange(CAS, CAS_t, DRY, DRY_t,PAP, PAP_t, SAX, SAX_t,SIL, SIL_t, ncol=2, 
-                        top = "Flower density (m2)  /vs/  Total Flower number at plot level")
-
-### END ## ------------------------------------------------------------------
 
