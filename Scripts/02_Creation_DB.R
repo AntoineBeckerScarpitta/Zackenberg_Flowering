@@ -5,7 +5,7 @@
 #
 #######################################################################################
 # Antoine Becker-Scarpitta
-# June 2020
+# Sept 2020
 
 #  clean R work-space
 # rm(list=ls())
@@ -16,9 +16,15 @@ source("Scripts/01_Import_DB.r")
 
 # WHAT THE SCRIPT DO ----------------
 # RBIND ALL DB + 
+# MERGE plot size
 # SELECT "TOTALCOUNT"
+# DELETE K and W plots
 # SPLIT Date into Year, Month, Day
 # REPLACE -9999 with NA
+# DELETE cas5, cas6, dry7, dry8
+# REPLACE Section = A-D, A-B with A
+# CALCUL the total flower per plot per year (sum of all sections)
+# DEVISE by plot_size
 #------------------------------------
 
 
@@ -60,6 +66,10 @@ flow_sub <- flow_sub[complete.cases(flow_sub),]
 # delete cas5, cas6, dry7, dry8
 flow_sub <-flow_sub[!flow_sub$Plot %in% c('Cas5', 'Cas6', 'Dry7', 'Dry8'), ]
 
+# Replace Section = A-D, A-B with A (will be lumped anyway)
+flow_sub[flow_sub$Section=="A-D", "Section"] <- "A"
+flow_sub[flow_sub$Section=="A-B", "Section"] <- "A"
+
 # calculate the total flower per plot per year (sum of all sections)
 flow_tot_plot <- ddply(flow_sub, .(Site, Year, Species, Plot, Plot_size), 
                        summarise, TotalFlower=sum(Value))
@@ -67,4 +77,6 @@ flow_tot_plot <- ddply(flow_sub, .(Site, Year, Species, Plot, Plot_size),
 # devise by plot_size
 flow_tot_plot$Flow_m2 <- round(flow_tot_plot$TotalFlower/flow_tot_plot$Plot_size, 0)
 #### END ---
+
+
 
