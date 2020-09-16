@@ -94,8 +94,8 @@ flow_tot_plot <- ddply(flow_sub, .(Site, Year, Species, Plot, Plot_size),
 flow_tot_plot$Flow_m2 <- round(flow_tot_plot$TotalFlower/flow_tot_plot$Plot_size, 0)
 
 # transform qualitative variable as factor 
-flow_tot_plot[c("Site", "Year", "Species", "Plot")] <- lapply(
-  flow_tot_plot[c("Site", "Year", "Species", "Plot")], factor)
+flow_tot_plot[c("Site", "Species", "Plot")] <- lapply(
+  flow_tot_plot[c("Site", "Species", "Plot")], factor)
 #### END ---
 
 
