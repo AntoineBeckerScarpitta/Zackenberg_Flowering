@@ -5,13 +5,14 @@
 #
 #######################################################################################
 # Antoine Becker-Scarpitta
-# Septmeber 2020
+# September 2020
 
 #  clean R work-space
 rm(list=ls())
 
-# Load 02 - Creation database (wihi load scripts 00 and 01)
+# Load 02 - Creation database (load scripts 00 and 01)
 source("Scripts/02_Creation_DB.r")
+
 
 
 
@@ -72,6 +73,7 @@ gridExtra::grid.arrange(flow_den2, flow_tot2, ncol=2,
 
 
 
+
 # DISTRIBUTION OF FLOWERING VARIABLES 
 # DENSITY
 distdens <- ggplot(flow_tot_plot, aes(x=Flow_m2, fill=Species)) + 
@@ -94,4 +96,5 @@ disttot <- ggplot(flow_tot_plot, aes(x=TotalFlower, fill=Species)) +
 #  graph
 gridExtra::grid.arrange(distdens, disttot, ncol=2, 
                         top = "Distribution of flowering variable per species")
+### END DISTRI PLOTS  ## ------------------------------------------------------------------
 
