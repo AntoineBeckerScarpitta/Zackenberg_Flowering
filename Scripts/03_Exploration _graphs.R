@@ -78,7 +78,7 @@ distdens <- ggplot(flow_tot_plot, aes(x=Flow_m2, fill=Species)) +
   geom_density(alpha=.3) +
   labs(y='Density', x='Flowering density/m2 ') +
   ggtitle('Distribution of Flowering density') +
-  facet_grid(Species~ ., scales="free") +
+  facet_wrap(.~Species, scales="free") +
   theme_linedraw() +
   theme(legend.position = "none")
 
@@ -87,7 +87,7 @@ disttot <- ggplot(flow_tot_plot, aes(x=TotalFlower, fill=Species)) +
   geom_density(alpha=.3) +
   labs(y='Density', x='Total Flowers') +
   ggtitle('Distribution of Total Flowering') +
-  facet_grid(Species~ ., scales="free") +
+  facet_wrap(Species~ ., scales="free") +
   theme_linedraw() +
   theme(legend.position = "none")
 
