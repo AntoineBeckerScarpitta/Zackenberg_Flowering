@@ -14,16 +14,19 @@ rm(list=ls())
 source("Scripts/02_Creation_DB.r")
 
 
+# transform as factor variable
+flow_tot_plot[c("Site", "Year", "Species", "Plot")] <- lapply(
+  flow_tot_plot[c("Site", "Year", "Species", "Plot")], factor)
 
 # Basic LMER models
-mod1 <- glmer(scale(Flow_m2, center=TRUE, scale=TRUE) ~ Year + Species + (1|Plot),
-             family='poisson', data=flow_tot_plot)
+mod1 <- lmer((scale(Flow_m2, center=TRUE, scale=TRUE))~Year*Species+(1|Plot),
+             data=flow_tot_plot)
 
-mod2 <- lmer(scale(Flow_m2, center=TRUE, scale=TRUE) ~ Year + Species + (1|Plot),
-              data=flow_tot_plot)
+mod2 <- glmer(scale(Flow_m2, center=TRUE, scale=TRUE) ~ Year + Species + (1|Plot),
+              poisson(link = "log"), data=flow_tot_plot)
 
-qqmath(mod2)
-summary(mod) ; anova(mod)
+qqmath(mod1)
+summary(mod1) ; anova(mod1)
 
 
 
