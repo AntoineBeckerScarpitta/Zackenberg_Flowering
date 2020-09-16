@@ -40,6 +40,7 @@ source("Scripts/01_Import_DB.r")
 # REPLACE Section = A-D, A-B with A
 # CALCUL the total flower per plot per year (sum of all sections)
 # DEVISE by plot_size
+# TRANSFORM quali variable as factor
 #------------------------------------
 
 
@@ -91,6 +92,10 @@ flow_tot_plot <- ddply(flow_sub, .(Site, Year, Species, Plot, Plot_size),
 
 # devise by plot_size
 flow_tot_plot$Flow_m2 <- round(flow_tot_plot$TotalFlower/flow_tot_plot$Plot_size, 0)
+
+# transform qualitative variable as factor 
+flow_tot_plot[c("Site", "Year", "Species", "Plot")] <- lapply(
+  flow_tot_plot[c("Site", "Year", "Species", "Plot")], factor)
 #### END ---
 
 
