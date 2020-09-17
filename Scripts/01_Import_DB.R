@@ -25,10 +25,12 @@ source("Scripts/00_Load_libraries.r")
 
 
 
-### ZACKENBERG (6 species) ---####
 # READ ZACK PLOT SIZE
-Zplot_size <- read.csv("data/datasets/Plot_ZACK_size_coord.csv", header=TRUE,  sep=";")
+Plot_size <- read.csv("data/datasets/Plot_size_coord_Z_N.csv", header=TRUE,  sep=";")
 
+
+
+### ZACKENBERG (6 species) ---####
 # READ - Cassiope
 Zcas0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Cassiope_phenology_and_total_count.csv", 
                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,
@@ -142,12 +144,7 @@ Zsal$Species <- 'SAL'
 
 
 
-### NUUK (3 species)  ---####
-# READ NUUK PLOT SIZE
-Nplot_size <- read.csv("data/datasets/Plot_NUUK_size_coord.csv", header=TRUE,  sep=";")
-
-
-
+### NUUK (4 species)  ---####
 # READ - Salix
 Nsal0 <- read.csv("data/datasets/View_BioBasis_Nuuk_Data_Vegetation_Salix_phenology_and_total_count180520202134518138.csv", 
                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
