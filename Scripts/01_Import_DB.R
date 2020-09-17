@@ -25,9 +25,9 @@ source("Scripts/00_Load_libraries.r")
 
 
 
-### ZACKENBERG (6 species)
-# READ PLOT SIZE
-Zplot_size <- read.csv("data/datasets/Plot_size_coord.csv", header=TRUE,  sep=";")
+### ZACKENBERG (6 species) ---####
+# READ ZACK PLOT SIZE
+Zplot_size <- read.csv("data/datasets/Plot_ZACK_size_coord.csv", header=TRUE,  sep=";")
 
 # READ - Cassiope
 Zcas0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Cassiope_phenology_and_total_count.csv", 
@@ -135,11 +135,19 @@ Zsal <- reshape2::melt(Zsal1, id.vars = c("Site", "Date", "Plot", "Section", "To
                        value.name = "Value")
 # add species names
 Zsal$Species <- 'SAL'
+#---END ZACKENBERG DATASETS-----
 
 
 
-### NUUK ###
-# 2 species
+
+
+
+### NUUK (3 species)  ---####
+# READ NUUK PLOT SIZE
+Nplot_size <- read.csv("data/datasets/Plot_NUUK_size_coord.csv", header=TRUE,  sep=";")
+
+
+
 # READ - Salix
 Nsal0 <- read.csv("data/datasets/View_BioBasis_Nuuk_Data_Vegetation_Salix_phenology_and_total_count180520202134518138.csv", 
                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
@@ -155,11 +163,23 @@ Nsal <- reshape2::melt(Nsal1, id.vars = c("Site", "Date", "Plot", "Section", "To
                        value.name = "Value")
 # add species names
 Nsal$Species <- 'SAL'
-# remane with Zaxk nomenclature
-Nsal[Nsal$Plot=="SAL1", 'Plot'] <- "Sal1"
-Nsal[Nsal$Plot=="SAL2", 'Plot'] <- "Sal2"
-Nsal[Nsal$Plot=="SAL3", 'Plot'] <- "Sal3"
-Nsal[Nsal$Plot=="SAL4", 'Plot'] <- "Sal4"
+# SALIX correct typo mistakes: replace -9907 with -9999
+Nsal[Nsal$TotalCount==-9907, "TotalCount"] <- -9999
+# rename plots
+Nsal[Nsal$Plot=="SAL1", 'Plot'] <- "N_Sal1"
+Nsal[Nsal$Plot=="SAL2", 'Plot'] <- "N_Sal2"
+Nsal[Nsal$Plot=="SAL3", 'Plot'] <- "N_Sal3"
+Nsal[Nsal$Plot=="SAL4", 'Plot'] <- "N_Sal4"
+
+
+
+
+# ++++++++++++++ PROBLEM ++++++++++++++
+# # calculate sum male female flower for Salix
+# Nsal_sel <- droplevels(Nsal[Nsal$Flower_var=='Total_Female'|Nsal$Flower_var=='Total_Male', ])
+# ddply(Nsal, .(Site, Date, Plot, Section, TotalCount, Species), summarize, sum())
+# # PB DOUBLONS DANS LA SUM DES MALE OF FEMALE FLOWER
+# ++++++++++++++++++++++++++++++++++++
 
 
 
@@ -178,13 +198,61 @@ Nsil <- reshape2::melt(Nsil1, id.vars = c("Site", "Date", "Plot", "Section", "To
                        value.name = "Value")
 # add species names
 Nsil$Species <- 'SIL'
-# remane with Zaxk nomenclature
-Nsil[Nsil$Plot=="SIL1", 'Plot'] <- "Sil1"
-Nsil[Nsil$Plot=="SIL2", 'Plot'] <- "Sil2"
-Nsil[Nsil$Plot=="SIL3", 'Plot'] <- "Sil3"
-Nsil[Nsil$Plot=="SIL4", 'Plot'] <- "Sil4"
+# rename plots
+Nsil[Nsil$Plot=="SIL1", 'Plot'] <- "N_Sil1"
+Nsil[Nsil$Plot=="SIL2", 'Plot'] <- "N_Sil2"
+Nsil[Nsil$Plot=="SIL3", 'Plot'] <- "N_Sil3"
+Nsil[Nsil$Plot=="SIL4", 'Plot'] <- "N_Sil4"
 
 
+
+# READ - Loiseleuria (Kalmia)
+NLoi0 <- read.csv("data/datasets/View_BioBasis_Nuuk_Data_Vegetation_Loiseleuria_phenology_and_total_count170920201306510146.csv", 
+                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
+# SELECT COLS - delete remarks and comments columns
+NLoi0 <- NLoi0[ ,c("Date", "Plot", "Section", "Buds", "Flowers", 
+                   "Senescent", "TotalFlowering", "TotalCount")]
+# ADD SITE - Zack or Nuuk
+NLoi0$Site <- 'Nuuk'
+# MELT - in long format to rbind all DSets
+NLoi <- reshape2::melt(NLoi0, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
+                       variable.name = "Flower_var", 
+                       value.name = "Value")
+# add species names
+NLoi$Species <- 'LOI'
+# rename plots
+NLoi[NLoi$Plot=="LOI1", 'Plot'] <- "N_Loi1"  	
+NLoi[NLoi$Plot=="lOI1", 'Plot'] <- "N_Loi1"  # correct typo
+NLoi[NLoi$Plot=="LOI2", 'Plot'] <- "N_Loi2"
+NLoi[NLoi$Plot=="LOI3", 'Plot'] <- "N_Loi3"
+NLoi[NLoi$Plot=="LOI4", 'Plot'] <- "N_Loi4"
+
+
+
+# READ - Eriophorum 
+NEri0 <- read.csv("data/datasets/View_BioBasis_Nuuk_Data_Vegetation_Eriophorum_total_count170920201325254357.csv", 
+                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
+# SELECT COLS - delete remarks and comments columns
+NEri0 <- NEri0[ ,c("Date", "Plot", "Section", "TotalCount")]
+# ADD SITE - Zack or Nuuk
+NEri0$Site <- 'Nuuk'
+# MELT - in long format to rbind all DSets
+NEri <- reshape2::melt(NEri0, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
+                       variable.name = "Flower_var", 
+                       value.name = "Value")
+# add species names
+NEri$Species <- 'ERI'
+# Add col Flower_var==TotalFLowering
+NEri$Flower_var <- "TotalFlowering"
+# Add Value with the totla flowering value (in totalcount)
+NEri$Value <- NEri$TotalCount
+# rename TOTALCOUNT instead of value
+NEri$TotalCount <- 'TOTALCOUNT'
+# rename plots
+NEri[NEri$Plot=="ERI1", 'Plot'] <- "N_Eri1"
+NEri[NEri$Plot=="ERI2", 'Plot'] <- "N_Eri2"
+NEri[NEri$Plot=="ERI3", 'Plot'] <- "N_Eri3"
+NEri[NEri$Plot=="ERI4", 'Plot'] <- "N_Eri4"
 
 
 
