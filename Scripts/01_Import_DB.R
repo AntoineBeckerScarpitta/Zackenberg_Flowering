@@ -219,16 +219,16 @@ NLoi <- reshape2::melt(NLoi0, id.vars = c("Site", "Date", "Plot", "Section", "To
 NLoi$Species <- 'LOI'
 # Select only TotalFlowering
 NLoi <- NLoi[NLoi$Flower_var=='TotalFlowering', ]
-# replace -9999 with NA (easier to manipulate)
-NLoi[NLoi$TotalCount==-9999, 'TotalCount'] <- NA
-#  delete NA in the subset
-NLoi <- NLoi[complete.cases(NLoi),]
+
+# # replace -9999 with NA (easier to manipulate)
+# NLoi[NLoi$TotalCount==-9999, 'TotalCount'] <- NA
+# #  delete NA in the subset
+# NLoi <- NLoi[complete.cases(NLoi),]
 
 
 # ++++++++++++++ PROBLEM ++++++++++++++
 # TotalCount value does't match with TotalFLowering
 # Are 0 real 0?
-# some value
 
 
 # rename plots
