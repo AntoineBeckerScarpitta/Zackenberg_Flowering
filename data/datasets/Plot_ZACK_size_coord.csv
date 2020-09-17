@@ -1,0 +1,29 @@
+﻿Site;Plot_name;Plot;UTM_E;UTM_N;Longitude;Latitude;Plot_size_m;Plot_size;Section;Sampling_period
+Zackenberg;Cassiope 1;Cas1;513.3;8.264.809;5133;8264809;1x2;2;SE;Early-late July
+Zackenberg;Cassiope 2;Cas2;513.23;8.265.290;51323;8265290;1x3;3;SE;Mid-late July
+Zackenberg;Cassiope 3;Cas3;513.42;8.264.746;51342;8264746;1x2;2;E;Early-late July
+Zackenberg;Cassiope 4;Cas4;513.583;8.264.358;513583;8264358;1x3;3;NE;Early-late July
+Zackenberg;Dryas 1;Dry1;513.116;8.264.708;513116;8264708;1x4;4;N;Early July
+Zackenberg;Dryas 2;Dry2;513.33;8.264.771;51333;8264771;6x 10;60;E;Late July-August
+Zackenberg;Dryas 3;Dry3;513.802;8.265.062;513802;8265062;1x2;2;N;Early-mid July
+Zackenberg;Dryas 4;Dry4;513.348;8.264.694;513348;8264694;2x3;6;N;Early-mid July
+Zackenberg;Dryas 5;Dry5;513.317;8.264.541;513317;8264541;2x3;6;NW;Late June-mid July
+Zackenberg;Dryas 6;Dry6;513.776;8.264.161;513776;8264161;7x 13;91;S;Mid July-August
+Zackenberg;Papaver 1;Pap1;513.215;8.265.280;513215;8265280;7x 15;105;W;Mid July-early Aug
+Zackenberg;Papaver 2;Pap2;513.729;8.264.955;513729;8264955;10x 15;150;E;Mid July-early Aug
+Zackenberg;Papaver 3;Pap3;513.575;8.264.353;513575;8264353;9x 10;90;W;Mid July-early Aug
+Zackenberg;Papaver 4;Pap4;513.776;8.264.161;513776;8264161;7x 13;91;S;Mid July-early Aug
+Zackenberg;Salix 1;Sal1;513.041;8.264.643;513041;8264643;6x 10;60;W;Mid-late June
+Zackenberg;Salix 2;Sal2;513.237;8.264.729;513237;8264729;15x 20;300;W;Early-late July
+Zackenberg;Salix 3;Sal3;513.294;8.264.805;513294;8264805;6x6;36;S;Mid June-mid July
+Zackenberg;Salix 4;Sal4;513.788;8.265.058;513788;8265058;10x 15;150;E;Late June-mid July
+Zackenberg;Salix 5;Sal5;513.729;8.264.955;513729;8264955;10x 15;150;E;Early-mid July
+Zackenberg;Salix 6;Sal6;513.645;8.264.718;513645;8264718;10x 15;150;NE;Early-mid July
+Zackenberg;Salix 7;Sal7;513.33;8.264.771;51333;8264771;6x 10;60;E;Early-mid July
+Zackenberg;Saxifraga 1;Sax1;512.867;8.264.603;512867;8264603;2x3.5;7;W;Mid June
+Zackenberg;Saxifraga 2;Sax2;512.839;8.264.677;512839;8264677;2x3;6;NE;Mid June
+Zackenberg;Saxifraga 3;Sax3;512.994;8.264.433;512994;8264433;2x5;10;NW;Mid-late June
+Zackenberg;Silene 1;Sil1;512.867;8.264.603;512867;8264603;2x3.5;7;W;Late June-mid July
+Zackenberg;Silene 2;Sil2;512.839;8.264.677;512839;8264677;2x3;6;NE;Late June-mid July
+Zackenberg;Silene 3;Sil3;512.994;8.264.433;512994;8264433;2x5;10;NW;Late June-late July
+Zackenberg;Silene 4;Sil4;513.409;8.264.686;513409;8264686;1x1;1;NW;Mid July-mid August
