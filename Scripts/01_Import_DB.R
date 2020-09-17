@@ -246,10 +246,14 @@ NEri$Value <- NEri$TotalCount
 # rename TOTALCOUNT instead of value
 NEri$TotalCount <- 'TOTALCOUNT'
 # rename plots
-NEri[NEri$Plot=="ERI1", 'Plot'] <- "N_Eri1"
+NEri[NEri$Plot=="ERI1", 'Plot'] <- "N_Eri1" 
+NEri[NEri$Plot=="Eri1", 'Plot'] <- "N_Eri1" # typo mistake
 NEri[NEri$Plot=="ERI2", 'Plot'] <- "N_Eri2"
+NEri[NEri$Plot=="Eri2", 'Plot'] <- "N_Eri2"
 NEri[NEri$Plot=="ERI3", 'Plot'] <- "N_Eri3"
+NEri[NEri$Plot=="Eri3", 'Plot'] <- "N_Eri3"
 NEri[NEri$Plot=="ERI4", 'Plot'] <- "N_Eri4"
+NEri[NEri$Plot=="Eri4", 'Plot'] <- "N_Eri4"
 
 
 
