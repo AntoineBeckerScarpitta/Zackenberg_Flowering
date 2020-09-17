@@ -25,6 +25,8 @@ source("Scripts/01_Import_DB.r")
 
 # TO DO 
 # NUUK has a different structure NEED TO FIGURED OUT how to integrated it
+
+
 # Check the variation in survey period (month level)
 
 
@@ -44,30 +46,31 @@ source("Scripts/01_Import_DB.r")
 #------------------------------------
 
 
+
+### -- GENERATE THE FINAL DATABASE  -- 
 # Rbind all datasets together
-flow0 <- rbind(Nsal, Nsil, Zcas, Zdry, Zpap, Zsal, Zsax, Zsil)
+flow0 <- rbind(Nsal, Nsil, NLoi, NEri, Zcas, Zdry, Zpap, Zsal, Zsax, Zsil)
 
 # merge with plot size
-flow1 <- merge(flow0, Zplot_size[,c('Plot_size', 'Plot')], by="Plot")
+flow1 <- merge(flow0, Plot_size[,c('Plot_size', 'Plot')], by="Plot", all.x=TRUE)
 
 # subset only line with "TOTALCOUNT"
 flow <- subset(flow1, TotalCount=="TOTALCOUNT")
 
 # delete plot K and W
-flow <-flow[!flow$Plot %in% c("K1C","K2C","K3C",'K4C',"K5C","W1C","W2C","W3C",
-                  'W4C',"W5C","K3S","K4S","K5S","W3S","W4S","W5S", 
-                  "K1S","K2S","W1S","W2S"), ]
+flow <-flow[!flow$Plot %in% c('Cas5','Cas6','Dry7','Dry8',"K1C","K2C","K3C",'K4C',
+                              "K5C","W1C","W2C","W3C",'W4C',"W5C","K3S","K4S","K5S",
+                              "W3S","W4S","W5S", "K1S","K2S","W1S","W2S"), ]
 
 # split Date col, to extract year, month, day in new cols
 flow <- cbind(str_split_fixed(flow[,"Date"], '-', n=3), flow)
 colnames(flow) <- c("Year", "Month", "Day", "Plot", "Site", "Date", "Section",
                     "TotalCount", "Flower_var", "Value", "Species", "Plot_size")
 
-# replace '-9999'
-flow[flow$Value==-9999, 'Value'] <- NA
-
-# data as numeric
-flow[c("Year", "Month", "Day")] <- sapply(flow[c("Year", "Month", "Day")], as.numeric)
+# data as numeric or factor
+flow[c("Year","Month","Day")] <- sapply(flow[c("Year", "Month", "Day")], as.numeric)
+flow[c("Plot","Site","Section","Species")] <- lapply(flow[c("Plot","Site","Section",
+                                                              "Species" )], as.factor)
 ### END
 
 
@@ -76,11 +79,10 @@ flow[c("Year", "Month", "Day")] <- sapply(flow[c("Year", "Month", "Day")], as.nu
 # select only TotalFlowering line for the total flower per year
 flow_sub <- droplevels(flow[flow$Flower_var=="TotalFlowering", ])
 
+# replace '-9999' with NA
+flow_sub[flow_sub$Value==-9999, 'Value'] <- NA
 #  delete NA in the subset
 flow_sub <- flow_sub[complete.cases(flow_sub),]
-
-# delete cas5, cas6, dry7, dry8
-flow_sub <-flow_sub[!flow_sub$Plot %in% c('Cas5', 'Cas6', 'Dry7', 'Dry8'), ]
 
 # Replace Section = A-D, A-B with A (will be lumped anyway)
 flow_sub[flow_sub$Section=="A-D", "Section"] <- "A"
@@ -92,10 +94,6 @@ flow_tot_plot <- ddply(flow_sub, .(Site, Year, Species, Plot, Plot_size),
 
 # devise by plot_size
 flow_tot_plot$Flow_m2 <- round(flow_tot_plot$TotalFlower/flow_tot_plot$Plot_size, 0)
-
-# transform qualitative variable as factor 
-flow_tot_plot[c("Site", "Species", "Plot")] <- lapply(
-  flow_tot_plot[c("Site", "Species", "Plot")], factor)
 #### END ---
 
 
