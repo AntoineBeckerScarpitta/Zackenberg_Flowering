@@ -1,0 +1,833 @@
+﻿Date;Species;Plot;Subplot;Male;Female;Sum;Remarks
+23/06/2008;Salix_glauca;SAL1;A;494;327;821;3 buds with unknown sex
+23/06/2008;Salix_glauca;SAL1;B;-9999;308;308;No remarks
+23/06/2008;Salix_glauca;SAL1;C;-9999;570;570;No remarks
+23/06/2008;Salix_glauca;SAL1;D;978;-9999;978;No remarks
+23/06/2008;Salix_glauca;SAL2;A;134;-9999;134;No remarks
+23/06/2008;Salix_glauca;SAL2;B;251;-9999;251;No remarks
+23/06/2008;Salix_glauca;SAL2;C;-9999;394;394;No remarks
+23/06/2008;Salix_glauca;SAL2;D;-9999;437;437;No remarks
+23/06/2008;Salix_glauca;SAL3;A;0;109;109;No remarks
+23/06/2008;Salix_glauca;SAL3;B;2;139;141;No remarks
+23/06/2008;Salix_glauca;SAL3;C;13;158;171;No remarks
+23/06/2008;Salix_glauca;SAL3;D;41;69;110;No remarks
+23/06/2008;Salix_glauca;SAL4;A;325;-9999;325;No remarks
+23/06/2008;Salix_glauca;SAL4;B;508;-9999;508;No remarks
+23/06/2008;Salix_glauca;SAL4;C;815;-9999;815;No remarks
+23/06/2008;Salix_glauca;SAL4;D;595;-9999;595;No remarks
+21/07/2009;Salix_glauca;SAL1;A;229;161;390;No remarks
+21/07/2009;Salix_glauca;SAL1;B;-9999;172;172;No remarks
+21/07/2009;Salix_glauca;SAL1;C;-9999;177;177;No remarks
+21/07/2009;Salix_glauca;SAL1;D;411;-9999;411;No remarks
+21/07/2009;Salix_glauca;SAL2;A;23;-9999;23;No remarks
+21/07/2009;Salix_glauca;SAL2;B;51;-9999;51;No remarks
+21/07/2009;Salix_glauca;SAL2;C;-9999;224;224;No remarks
+21/07/2009;Salix_glauca;SAL2;D;-9999;171;171;No remarks
+21/07/2009;Salix_glauca;SAL3;A;11;48;59;No remarks
+21/07/2009;Salix_glauca;SAL3;B;1;54;55;No remarks
+21/07/2009;Salix_glauca;SAL3;C;3;87;90;No remarks
+21/07/2009;Salix_glauca;SAL3;D;93;26;119;No remarks
+21/07/2009;Salix_glauca;SAL4;A;161;-9999;161;No remarks
+21/07/2009;Salix_glauca;SAL4;B;239;-9999;239;No remarks
+21/07/2009;Salix_glauca;SAL4;C;239;-9999;239;No remarks
+21/07/2009;Salix_glauca;SAL4;D;292;-9999;292;No remarks
+01/07/2010;Salix_glauca;SAL1;A;0;0;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL1;B;-9999;0;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL1;C;-9999;0;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL1;D;0;-9999;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL2;A;0;-9999;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL2;B;0;-9999;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL2;C;-9999;0;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL2;D;-9999;0;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL3;A;0;0;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL3;B;0;0;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL3;C;0;0;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL3;D;0;0;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL4;A;0;-9999;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL4;B;0;-9999;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL4;C;0;-9999;0;No flowers due to insect outbreak
+01/07/2010;Salix_glauca;SAL4;D;0;-9999;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL1;A;0;0;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL1;B;-9999;0;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL1;C;-9999;0;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL1;D;0;-9999;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL2;A;0;-9999;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL2;B;0;-9999;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL2;C;-9999;0;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL2;D;-9999;0;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL3;A;0;0;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL3;B;0;0;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL3;C;0;0;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL3;D;0;0;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL4;A;0;-9999;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL4;B;0;-9999;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL4;C;0;-9999;0;No flowers due to insect outbreak
+01/07/2011;Salix_glauca;SAL4;D;0;-9999;0;No flowers due to insect outbreak
+18/06/2012;Salix_glauca;SAL1;A;2;2;4;No remarks
+26/06/2012;Salix_glauca;SAL1;B;-9999;0;0;No remarks
+26/06/2012;Salix_glauca;SAL1;C;-9999;1;1;No remarks
+26/06/2012;Salix_glauca;SAL1;D;9;-9999;9;No remarks
+26/06/2012;Salix_glauca;SAL2;A;0;-9999;0;No remarks
+26/06/2012;Salix_glauca;SAL2;B;0;-9999;0;No remarks
+26/06/2012;Salix_glauca;SAL2;C;-9999;0;0;No remarks
+26/06/2012;Salix_glauca;SAL2;D;-9999;0;0;No remarks
+26/06/2012;Salix_glauca;SAL3;A;0;0;0;No remarks
+26/06/2012;Salix_glauca;SAL3;B;0;0;0;No remarks
+26/06/2012;Salix_glauca;SAL3;C;0;0;0;No remarks
+26/06/2012;Salix_glauca;SAL3;D;0;0;0;No remarks
+02/07/2012;Salix_glauca;SAL4;A;106;-9999;106;No remarks
+26/06/2012;Salix_glauca;SAL4;B;90;-9999;90;No remarks
+26/06/2012;Salix_glauca;SAL4;C;100;-9999;100;No remarks
+18/06/2012;Salix_glauca;SAL4;D;100;-9999;100;No remarks
+17/07/2013;Salix_glauca;SAL1;A;40;61;101;No remarks
+18/07/2013;Salix_glauca;SAL1;B;-9999;210;210;No remarks
+19/07/2013;Salix_glauca;SAL1;C;-9999;46;46;No remarks
+20/07/2013;Salix_glauca;SAL1;D;165;-9999;165;No remarks
+21/07/2013;Salix_glauca;SAL2;A;439;-9999;439;No remarks
+22/07/2013;Salix_glauca;SAL2;B;746;-9999;746;No remarks
+23/07/2013;Salix_glauca;SAL2;C;-9999;321;321;No remarks
+24/07/2013;Salix_glauca;SAL2;D;-9999;163;163;No remarks
+25/07/2013;Salix_glauca;SAL3;A;2;-9999;2;No total count of female flowers
+26/07/2013;Salix_glauca;SAL3;B;9;-9999;9;No total count of female flowers
+27/07/2013;Salix_glauca;SAL3;C;0;-9999;0;No total count of female flowers
+28/07/2013;Salix_glauca;SAL3;D;36;77;113;No remarks
+29/07/2013;Salix_glauca;SAL4;A;118;-9999;118;No remarks
+30/07/2013;Salix_glauca;SAL4;B;240;-9999;240;No remarks
+31/07/2013;Salix_glauca;SAL4;C;130;-9999;130;No remarks
+25/06/2013;Salix_glauca;SAL4;D;66;-9999;66;No remarks
+08/07/2014;Salix_glauca;SAL1;A;193;55;248;No remarks
+08/07/2014;Salix_glauca;SAL1;B;-9999;181;181;No remarks
+08/07/2014;Salix_glauca;SAL1;C;-9999;197;197;No remarks
+08/07/2014;Salix_glauca;SAL1;D;293;-9999;293;No remarks
+08/07/2014;Salix_glauca;SAL2;A;251;-9999;251;No remarks
+08/07/2014;Salix_glauca;SAL2;B;326;-9999;326;No remarks
+08/07/2014;Salix_glauca;SAL2;C;-9999;733;733;No remarks
+08/07/2014;Salix_glauca;SAL2;D;-9999;310;310;No remarks
+08/07/2014;Salix_glauca;SAL3;A;42;430;472;No remarks
+08/07/2014;Salix_glauca;SAL3;B;18;386;404;No remarks
+08/07/2014;Salix_glauca;SAL3;C;3;130;133;No remarks
+08/07/2014;Salix_glauca;SAL3;D;83;148;231;No remarks
+08/07/2014;Salix_glauca;SAL4;A;326;-9999;326;No remarks
+08/07/2014;Salix_glauca;SAL4;B;344;-9999;344;No remarks
+08/07/2014;Salix_glauca;SAL4;C;731;-9999;731;No remarks
+08/07/2014;Salix_glauca;SAL4;D;603;-9999;603;No remarks
+15/07/2015;Salix_glauca;SAL1;A;33;21;54;No remarks
+16/07/2015;Salix_glauca;SAL1;B;-9999;129;129;No remarks
+16/07/2015;Salix_glauca;SAL1;C;-9999;81;81;No remarks
+15/07/2015;Salix_glauca;SAL1;D;59;-9999;59;No remarks
+16/07/2015;Salix_glauca;SAL2;A;107;-9999;107;No remarks
+16/07/2015;Salix_glauca;SAL2;B;165;-9999;165;No remarks
+16/07/2015;Salix_glauca;SAL2;C;-9999;348;348;No remarks
+16/07/2015;Salix_glauca;SAL2;D;-9999;172;172;No remarks
+16/07/2015;Salix_glauca;SAL3;A;7;301;308;No remarks
+16/07/2015;Salix_glauca;SAL3;B;2;125;127;No remarks
+21/07/2015;Salix_glauca;SAL3;C;0;77;77;No remarks
+15/07/2015;Salix_glauca;SAL3;D;20;52;72;No remarks
+15/07/2015;Salix_glauca;SAL4;A;88;-9999;88;No remarks
+15/07/2015;Salix_glauca;SAL4;B;91;-9999;91;No remarks
+15/07/2015;Salix_glauca;SAL4;C;81;-9999;81;No remarks
+15/07/2015;Salix_glauca;SAL4;D;217;-9999;217;No remarks
+14/07/2016;Salix_glauca;SAL1;A;87;88;175;No remarks
+29/06/2016;Salix_glauca;SAL1;B;-9999;209;209;No remarks
+29/06/2016;Salix_glauca;SAL1;C;-9999;310;310;No remarks
+29/06/2016;Salix_glauca;SAL1;D;121;-9999;121;No remarks
+29/06/2016;Salix_glauca;SAL2;A;205;-9999;205;No remarks
+29/06/2016;Salix_glauca;SAL2;B;113;-9999;113;No remarks
+29/06/2016;Salix_glauca;SAL2;C;-9999;569;569;No remarks
+29/06/2016;Salix_glauca;SAL2;D;-9999;279;279;No remarks
+14/07/2016;Salix_glauca;SAL3;A;10;159;169;No remarks
+14/07/2016;Salix_glauca;SAL3;B;5;132;137;No remarks
+14/07/2016;Salix_glauca;SAL3;C;3;108;111;No remarks
+14/07/2016;Salix_glauca;SAL3;D;36;71;107;No remarks
+24/06/2016;Salix_glauca;SAL4;A;146;-9999;146;No remarks
+24/06/2016;Salix_glauca;SAL4;B;136;-9999;136;No remarks
+24/06/2016;Salix_glauca;SAL4;C;408;-9999;408;No remarks
+24/06/2016;Salix_glauca;SAL4;D;191;-9999;191;No remarks
+02/08/2017;Salix_glauca;SAL1;A;0;146;146;No remarks
+02/08/2017;Salix_glauca;SAL1;B;-9999;352;352;No remarks
+02/08/2017;Salix_glauca;SAL1;C;-9999;67;67;No remarks
+02/08/2017;Salix_glauca;SAL1;D;151;-9999;151;No remarks
+02/08/2017;Salix_glauca;SAL2;A;362;-9999;362;No remarks
+02/08/2017;Salix_glauca;SAL2;B;155;-9999;155;No remarks
+02/08/2017;Salix_glauca;SAL2;C;-9999;284;284;No remarks
+02/08/2017;Salix_glauca;SAL2;D;-9999;813;813;No remarks
+28/07/2017;Salix_glauca;SAL3;A;0;384;384;No remarks
+28/07/2017;Salix_glauca;SAL3;B;0;141;141;No remarks
+28/07/2017;Salix_glauca;SAL3;C;0;157;157;No remarks
+28/07/2017;Salix_glauca;SAL3;D;0;154;154;No remarks
+27/06/2017;Salix_glauca;SAL4;A;142;-9999;142;No remarks
+27/06/2017;Salix_glauca;SAL4;B;123;-9999;123;No remarks
+27/06/2017;Salix_glauca;SAL4;C;65;-9999;65;No remarks
+27/06/2017;Salix_glauca;SAL4;D;381;-9999;381;No remarks
+09/07/2018;Salix_glauca;SAL1;A;181;139;320;No remarks
+02/08/2018;Salix_glauca;SAL1;B;-9999;320;320;No remarks
+12/08/2018;Salix_glauca;SAL1;C;-9999;83;83;No remarks
+02/08/2018;Salix_glauca;SAL1;D;138;-9999;138;No remarks
+02/08/2018;Salix_glauca;SAL2;A;251;-9999;251;No remarks
+02/08/2018;Salix_glauca;SAL2;B;64;-9999;64;No remarks
+02/08/2018;Salix_glauca;SAL2;C;-9999;557;557;No remarks
+02/08/2018;Salix_glauca;SAL2;D;-9999;258;258;No remarks
+02/08/2018;Salix_glauca;SAL3;A;0;228;228;No remarks
+02/08/2018;Salix_glauca;SAL3;B;0;156;156;No remarks
+02/08/2018;Salix_glauca;SAL3;C;0;134;134;No remarks
+02/08/2018;Salix_glauca;SAL3;D;16;56;72;No remarks
+09/07/2018;Salix_glauca;SAL4;A;179;-9999;179;No remarks
+09/07/2018;Salix_glauca;SAL4;B;207;-9999;207;No remarks
+09/07/2018;Salix_glauca;SAL4;C;396;-9999;396;No remarks
+09/07/2018;Salix_glauca;SAL4;D;493;-9999;493;No remarks
+19/06/2019;Salix_glauca;SAL1;A;303;181;484;No remarks
+19/06/2019;Salix_glauca;SAL1;B;-9999;246;246;No remarks
+19/06/2019;Salix_glauca;SAL1;C;-9999;66;66;No remarks
+19/06/2019;Salix_glauca;SAL1;D;348;-9999;348;No remarks
+19/06/2019;Salix_glauca;SAL2;A;226;-9999;226;No remarks
+19/06/2019;Salix_glauca;SAL2;B;212;-9999;212;No remarks
+19/06/2019;Salix_glauca;SAL2;C;-9999;576;576;No remarks
+19/06/2019;Salix_glauca;SAL2;D;-9999;121;121;No remarks
+19/06/2019;Salix_glauca;SAL3;A;15;147;162;No remarks
+19/06/2019;Salix_glauca;SAL3;B;0;98;98;No remarks
+19/06/2019;Salix_glauca;SAL3;C;0;136;136;No remarks
+19/06/2019;Salix_glauca;SAL3;D;22;50;72;No remarks
+01/07/2019;Salix_glauca;SAL4;A;111;-9999;111;No remarks
+01/07/2019;Salix_glauca;SAL4;B;121;-9999;121;No remarks
+01/07/2019;Salix_glauca;SAL4;C;156;-9999;156;No remarks
+20/06/2019;Salix_glauca;SAL4;D;369;-9999;369;No remarks
+01/07/2020;Salix_glauca;SAL1;A;421;147;568;No remarks
+01/07/2020;Salix_glauca;SAL1;B;-9999;205;205;No remarks
+01/07/2020;Salix_glauca;SAL1;C;-9999;95;95;No remarks
+01/07/2020;Salix_glauca;SAL1;D;418;-9999;418;No remarks
+15/07/2020;Salix_glauca;SAL2;A;153;-9999;153;No remarks
+15/07/2020;Salix_glauca;SAL2;B;104;-9999;104;No remarks
+15/07/2020;Salix_glauca;SAL2;C;-9999;565;565;No remarks
+15/07/2020;Salix_glauca;SAL2;D;-9999;208;208;No remarks
+15/07/2020;Salix_glauca;SAL3;A;12;88;100;No remarks
+15/07/2020;Salix_glauca;SAL3;B;0;48;48;No remarks
+15/07/2020;Salix_glauca;SAL3;C;0;101;101;No remarks
+15/07/2020;Salix_glauca;SAL3;D;4;33;37;No remarks
+01/07/2020;Salix_glauca;SAL4;A;9;-9999;9;No remarks
+01/07/2020;Salix_glauca;SAL4;B;84;-9999;84;No remarks
+01/07/2020;Salix_glauca;SAL4;C;79;-9999;79;No remarks
+01/07/2020;Salix_glauca;SAL4;D;7;-9999;7;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri1;A;-9999;-9999;16;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri1;B;-9999;-9999;17;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri1;C;-9999;-9999;6;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri1;D;-9999;-9999;18;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri2;A;-9999;-9999;79;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri2;B;-9999;-9999;74;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri2;C;-9999;-9999;96;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri2;D;-9999;-9999;114;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri3;A;-9999;-9999;347;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri3;B;-9999;-9999;136;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri3;C;-9999;-9999;26;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri3;D;-9999;-9999;24;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri4;A;-9999;-9999;152;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri4;B;-9999;-9999;219;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri4;C;-9999;-9999;261;No remarks
+15/07/2008;Eriophorum_angustifolium;Eri4;D;-9999;-9999;220;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri1;A;-9999;-9999;52;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri1;B;-9999;-9999;101;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri1;C;-9999;-9999;94;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri1;D;-9999;-9999;85;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri2;A;-9999;-9999;84;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri2;B;-9999;-9999;41;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri2;C;-9999;-9999;42;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri2;D;-9999;-9999;46;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri3;A;-9999;-9999;335;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri3;B;-9999;-9999;134;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri3;C;-9999;-9999;33;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri3;D;-9999;-9999;63;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri4;A;-9999;-9999;208;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri4;B;-9999;-9999;343;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri4;C;-9999;-9999;423;No remarks
+21/07/2009;Eriophorum_angustifolium;Eri4;D;-9999;-9999;265;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri1;A;-9999;-9999;25;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri1;B;-9999;-9999;48;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri1;C;-9999;-9999;36;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri1;D;-9999;-9999;67;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri2;A;-9999;-9999;98;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri2;B;-9999;-9999;148;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri2;C;-9999;-9999;88;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri2;D;-9999;-9999;76;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri3;A;-9999;-9999;84;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri3;B;-9999;-9999;46;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri3;C;-9999;-9999;123;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri3;D;-9999;-9999;92;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri4;A;-9999;-9999;345;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri4;B;-9999;-9999;295;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri4;C;-9999;-9999;287;No remarks
+12/07/2010;Eriophorum_angustifolium;Eri4;D;-9999;-9999;340;No remarks
+01/07/2011;Eriophorum_angustifolium;Eri1;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri1;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri1;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri1;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri2;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri2;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri2;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri2;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri3;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri3;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri3;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri3;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri4;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri4;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri4;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Eriophorum_angustifolium;Eri4;D;-9999;-9999;0;No flowers due to insect outbreak
+02/07/2012;Eriophorum_angustifolium;ERI1;A;-9999;-9999;36;No remarks
+02/07/2012;Eriophorum_angustifolium;ERI1;B;-9999;-9999;12;No remarks
+02/07/2012;Eriophorum_angustifolium;ERI1;C;-9999;-9999;34;No remarks
+02/07/2012;Eriophorum_angustifolium;ERI1;D;-9999;-9999;95;No remarks
+02/07/2012;Eriophorum_angustifolium;ERI2;A;-9999;-9999;0;No remarks
+02/07/2012;Eriophorum_angustifolium;ERI2;B;-9999;-9999;0;No remarks
+02/07/2012;Eriophorum_angustifolium;ERI2;C;-9999;-9999;0;No remarks
+02/07/2012;Eriophorum_angustifolium;ERI2;D;-9999;-9999;0;No remarks
+09/08/2012;Eriophorum_angustifolium;ERI3;A;-9999;-9999;0;No remarks
+09/08/2012;Eriophorum_angustifolium;ERI3;B;-9999;-9999;1;No remarks
+09/08/2012;Eriophorum_angustifolium;ERI3;C;-9999;-9999;0;No remarks
+09/08/2012;Eriophorum_angustifolium;ERI3;D;-9999;-9999;0;No remarks
+09/08/2012;Eriophorum_angustifolium;ERI4;A;-9999;-9999;2;No remarks
+09/08/2012;Eriophorum_angustifolium;ERI4;B;-9999;-9999;0;No remarks
+09/08/2012;Eriophorum_angustifolium;ERI4;C;-9999;-9999;0;No remarks
+09/08/2012;Eriophorum_angustifolium;ERI4;D;-9999;-9999;1;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI1;A;-9999;-9999;20;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI1;B;-9999;-9999;11;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI1;C;-9999;-9999;14;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI1;D;-9999;-9999;17;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI2;A;-9999;-9999;92;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI2;B;-9999;-9999;112;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI2;C;-9999;-9999;86;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI2;D;-9999;-9999;73;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI3;A;-9999;-9999;7;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI3;B;-9999;-9999;0;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI3;C;-9999;-9999;10;No remarks
+17/07/2013;Eriophorum_angustifolium;ERI3;D;-9999;-9999;22;No remarks
+20/08/2013;Eriophorum_angustifolium;ERI4;A;-9999;-9999;65;No remarks
+20/08/2013;Eriophorum_angustifolium;ERI4;B;-9999;-9999;22;No remarks
+20/08/2013;Eriophorum_angustifolium;ERI4;C;-9999;-9999;42;No remarks
+20/08/2013;Eriophorum_angustifolium;ERI4;D;-9999;-9999;47;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI1;A;-9999;-9999;87;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI1;B;-9999;-9999;71;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI1;C;-9999;-9999;81;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI1;D;-9999;-9999;144;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI2;A;-9999;-9999;48;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI2;B;-9999;-9999;58;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI2;C;-9999;-9999;21;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI2;D;-9999;-9999;19;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI3;A;-9999;-9999;10;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI3;B;-9999;-9999;3;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI3;C;-9999;-9999;15;No remarks
+07/07/2014;Eriophorum_angustifolium;ERI3;D;-9999;-9999;14;No remarks
+08/07/2014;Eriophorum_angustifolium;ERI4;A;-9999;-9999;200;No remarks
+08/07/2014;Eriophorum_angustifolium;ERI4;B;-9999;-9999;280;No remarks
+08/07/2014;Eriophorum_angustifolium;ERI4;C;-9999;-9999;239;No remarks
+08/07/2014;Eriophorum_angustifolium;ERI4;D;-9999;-9999;344;No remarks
+15/07/2015;Eriophorum_angustifolium;ERI1;A;-9999;-9999;27;No remarks
+15/07/2015;Eriophorum_angustifolium;ERI1;B;-9999;-9999;3;No remarks
+15/07/2015;Eriophorum_angustifolium;ERI1;C;-9999;-9999;50;No remarks
+15/07/2015;Eriophorum_angustifolium;ERI1;D;-9999;-9999;12;No remarks
+14/08/2015;Eriophorum_angustifolium;ERI2;A;-9999;-9999;42;No remarks
+14/08/2015;Eriophorum_angustifolium;ERI2;B;-9999;-9999;45;No remarks
+14/08/2015;Eriophorum_angustifolium;ERI2;C;-9999;-9999;2;No remarks
+14/08/2015;Eriophorum_angustifolium;ERI2;D;-9999;-9999;7;No remarks
+15/07/2015;Eriophorum_angustifolium;ERI3;A;-9999;-9999;2;No remarks
+15/07/2015;Eriophorum_angustifolium;ERI3;B;-9999;-9999;0;No remarks
+15/07/2015;Eriophorum_angustifolium;ERI3;C;-9999;-9999;0;No remarks
+15/07/2015;Eriophorum_angustifolium;ERI3;D;-9999;-9999;0;No remarks
+16/07/2015;Eriophorum_angustifolium;ERI4;A;-9999;-9999;147;No remarks
+16/07/2015;Eriophorum_angustifolium;ERI4;B;-9999;-9999;96;No remarks
+16/07/2015;Eriophorum_angustifolium;ERI4;C;-9999;-9999;55;No remarks
+16/07/2015;Eriophorum_angustifolium;ERI4;D;-9999;-9999;95;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI1;A;-9999;-9999;37;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI1;B;-9999;-9999;44;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI1;C;-9999;-9999;55;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI1;D;-9999;-9999;79;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI2;A;-9999;-9999;19;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI2;B;-9999;-9999;25;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI2;C;-9999;-9999;11;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI2;D;-9999;-9999;5;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI3;A;-9999;-9999;30;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI3;B;-9999;-9999;0;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI3;C;-9999;-9999;18;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI3;D;-9999;-9999;16;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI4;A;-9999;-9999;97;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI4;B;-9999;-9999;66;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI4;C;-9999;-9999;47;No remarks
+14/07/2016;Eriophorum_angustifolium;ERI4;D;-9999;-9999;111;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI1;A;-9999;-9999;10;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI1;B;-9999;-9999;7;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI1;C;-9999;-9999;6;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI1;D;-9999;-9999;14;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI2;A;-9999;-9999;15;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI2;B;-9999;-9999;15;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI2;C;-9999;-9999;1;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI2;D;-9999;-9999;1;No remarks
+02/08/2017;Eriophorum_angustifolium;ERI3;A;-9999;-9999;0;No remarks
+02/08/2017;Eriophorum_angustifolium;ERI3;B;-9999;-9999;0;No remarks
+02/08/2017;Eriophorum_angustifolium;ERI3;C;-9999;-9999;1;No remarks
+02/08/2017;Eriophorum_angustifolium;ERI3;D;-9999;-9999;0;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI4;A;-9999;-9999;23;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI4;B;-9999;-9999;14;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI4;C;-9999;-9999;15;No remarks
+25/07/2017;Eriophorum_angustifolium;ERI4;D;-9999;-9999;34;No remarks
+11/08/2018;Eriophorum_angustifolium;ERI1;A;-9999;-9999;108;No Remarks
+11/08/2018;Eriophorum_angustifolium;ERI1;B;-9999;-9999;90;No Remarks
+11/08/2018;Eriophorum_angustifolium;ERI1;C;-9999;-9999;71;No Remarks
+11/08/2018;Eriophorum_angustifolium;ERI1;D;-9999;-9999;153;No Remarks
+11/08/2018;Eriophorum_angustifolium;ERI2;A;-9999;-9999;290;No Remarks
+11/08/2018;Eriophorum_angustifolium;ERI2;B;-9999;-9999;347;No Remarks
+11/08/2018;Eriophorum_angustifolium;ERI2;C;-9999;-9999;57;No Remarks
+11/08/2018;Eriophorum_angustifolium;ERI2;D;-9999;-9999;48;No Remarks
+12/08/2018;Eriophorum_angustifolium;ERI3;A;-9999;-9999;25;No Remarks
+12/08/2018;Eriophorum_angustifolium;ERI3;B;-9999;-9999;2;No Remarks
+12/08/2018;Eriophorum_angustifolium;ERI3;C;-9999;-9999;61;No Remarks
+12/08/2018;Eriophorum_angustifolium;ERI3;D;-9999;-9999;13;No Remarks
+12/08/2018;Eriophorum_angustifolium;ERI4;A;-9999;-9999;130;No Remarks
+12/08/2018;Eriophorum_angustifolium;ERI4;B;-9999;-9999;111;No Remarks
+12/08/2018;Eriophorum_angustifolium;ERI4;C;-9999;-9999;103;No Remarks
+12/08/2018;Eriophorum_angustifolium;ERI4;D;-9999;-9999;185;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI1;A;-9999;-9999;36;No Remarks
+19/06/2019;Eriophorum_angustifolium;ERI1;B;-9999;-9999;23;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI1;C;-9999;-9999;17;No Remarks
+19/06/2019;Eriophorum_angustifolium;ERI1;D;-9999;-9999;45;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI2;A;-9999;-9999;84;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI2;B;-9999;-9999;144;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI2;C;-9999;-9999;113;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI2;D;-9999;-9999;29;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI3;A;-9999;-9999;22;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI3;B;-9999;-9999;7;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI3;C;-9999;-9999;41;No Remarks
+29/07/2019;Eriophorum_angustifolium;ERI3;D;-9999;-9999;9;No Remarks
+20/06/2019;Eriophorum_angustifolium;ERI4;A;-9999;-9999;91;No Remarks
+20/06/2019;Eriophorum_angustifolium;ERI4;B;-9999;-9999;108;No Remarks
+20/06/2019;Eriophorum_angustifolium;ERI4;C;-9999;-9999;73;No Remarks
+20/06/2019;Eriophorum_angustifolium;ERI4;D;-9999;-9999;120;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI1;A;-9999;-9999;15;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI1;B;-9999;-9999;22;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI1;C;-9999;-9999;7;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI1;D;-9999;-9999;18;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI2;A;-9999;-9999;32;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI2;B;-9999;-9999;15;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI2;C;-9999;-9999;13;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI2;D;-9999;-9999;9;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI3;A;-9999;-9999;4;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI3;B;-9999;-9999;0;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI3;C;-9999;-9999;7;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI3;D;-9999;-9999;0;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI4;A;-9999;-9999;7;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI4;B;-9999;-9999;1;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI4;C;-9999;-9999;2;No Remarks
+29/07/2020;Eriophorum_angustifolium;ERI4;D;-9999;-9999;11;No Remarks
+08/07/2008;Silene_acaulis;SIL1;A;-9999;-9999;32;No Remarks
+08/07/2008;Silene_acaulis;SIL1;B;-9999;-9999;9;No Remarks
+01/07/2008;Silene_acaulis;SIL1;C;-9999;-9999;66;No Remarks
+08/07/2008;Silene_acaulis;SIL1;D;-9999;-9999;35;No Remarks
+24/06/2008;Silene_acaulis;SIL2;A;-9999;-9999;7;No Remarks
+24/06/2008;Silene_acaulis;SIL2;B;-9999;-9999;99;No Remarks
+24/06/2008;Silene_acaulis;SIL2;C;-9999;-9999;31;No Remarks
+24/06/2008;Silene_acaulis;SIL2;D;-9999;-9999;119;No Remarks
+08/07/2008;Silene_acaulis;SIL3;A;-9999;-9999;-9999;No total count
+17/06/2008;Silene_acaulis;SIL3;B;-9999;-9999;60;No Remarks
+17/06/2008;Silene_acaulis;SIL3;C;-9999;-9999;-9999;No total count
+24/06/2008;Silene_acaulis;SIL3;D;-9999;-9999;-9999;No total count
+01/07/2008;Silene_acaulis;SIL4;A;-9999;-9999;-9999;No total count
+01/07/2008;Silene_acaulis;SIL4;B;-9999;-9999;62;No Remarks
+23/06/2008;Silene_acaulis;SIL4;C;-9999;-9999;264;No Remarks
+17/06/2008;Silene_acaulis;SIL4;D;-9999;-9999;91;No Remarks
+20/07/2009;Silene_acaulis;SIL1;A;-9999;-9999;-9999;No total count
+20/07/2009;Silene_acaulis;SIL1;B;-9999;-9999;83;No Remarks
+20/07/2009;Silene_acaulis;SIL1;C;-9999;-9999;166;No Remarks
+20/07/2009;Silene_acaulis;SIL1;D;-9999;-9999;77;No Remarks
+20/07/2009;Silene_acaulis;SIL2;A;-9999;-9999;1008;No Remarks
+20/07/2009;Silene_acaulis;SIL2;B;-9999;-9999;496;No Remarks
+20/07/2009;Silene_acaulis;SIL2;C;-9999;-9999;999;No Remarks
+20/07/2009;Silene_acaulis;SIL2;D;-9999;-9999;294;No Remarks
+20/07/2009;Silene_acaulis;SIL3;A;-9999;-9999;727;No Remarks
+20/07/2009;Silene_acaulis;SIL3;B;-9999;-9999;62;No Remarks
+20/07/2009;Silene_acaulis;SIL3;C;-9999;-9999;904;No Remarks
+20/07/2009;Silene_acaulis;SIL3;D;-9999;-9999;136;No Remarks
+20/07/2009;Silene_acaulis;SIL4;A;-9999;-9999;58;No Remarks
+20/07/2009;Silene_acaulis;SIL4;B;-9999;-9999;215;No Remarks
+20/07/2009;Silene_acaulis;SIL4;C;-9999;-9999;319;No Remarks
+20/07/2009;Silene_acaulis;SIL4;D;-9999;-9999;212;No Remarks
+01/07/2010;Silene_acaulis;SIL1;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL1;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL1;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL1;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL2;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL2;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL2;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL2;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL3;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL3;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL3;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL3;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL4;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL4;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL4;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Silene_acaulis;SIL4;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL1;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL1;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL1;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL1;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL2;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL2;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL2;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL2;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL3;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL3;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL3;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL3;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL4;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL4;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL4;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Silene_acaulis;SIL4;D;-9999;-9999;0;No flowers due to insect outbreak
+02/07/2012;Silene_acaulis;SIL1;A;-9999;-9999;117;No Remarks
+02/07/2012;Silene_acaulis;SIL1;B;-9999;-9999;155;No Remarks
+02/07/2012;Silene_acaulis;SIL1;C;-9999;-9999;167;No Remarks
+02/07/2012;Silene_acaulis;SIL1;D;-9999;-9999;52;No Remarks
+02/07/2012;Silene_acaulis;SIL2;A;-9999;-9999;901;No Remarks
+02/07/2012;Silene_acaulis;SIL2;B;-9999;-9999;1557;No Remarks
+02/07/2012;Silene_acaulis;SIL2;C;-9999;-9999;1985;No Remarks
+02/07/2012;Silene_acaulis;SIL2;D;-9999;-9999;1178;No Remarks
+02/07/2012;Silene_acaulis;SIL3;A;-9999;-9999;1074;No Remarks
+02/07/2012;Silene_acaulis;SIL3;B;-9999;-9999;113;No Remarks
+02/07/2012;Silene_acaulis;SIL3;C;-9999;-9999;818;No Remarks
+02/07/2012;Silene_acaulis;SIL3;D;-9999;-9999;399;No Remarks
+02/07/2012;Silene_acaulis;SIL4;A;-9999;-9999;405;No Remarks
+02/07/2012;Silene_acaulis;SIL4;B;-9999;-9999;559;No Remarks
+02/07/2012;Silene_acaulis;SIL4;C;-9999;-9999;1898;No Remarks
+02/07/2012;Silene_acaulis;SIL4;D;-9999;-9999;971;No Remarks
+17/07/2013;Silene_acaulis;SIL1;A;-9999;-9999;404;No Remarks
+17/07/2013;Silene_acaulis;SIL1;B;-9999;-9999;591;No Remarks
+17/07/2013;Silene_acaulis;SIL1;C;-9999;-9999;443;No Remarks
+17/07/2013;Silene_acaulis;SIL1;D;-9999;-9999;351;No Remarks
+17/07/2013;Silene_acaulis;SIL2;A;-9999;-9999;401;No Remarks
+17/07/2013;Silene_acaulis;SIL2;B;-9999;-9999;1050;No Remarks
+17/07/2013;Silene_acaulis;SIL2;C;-9999;-9999;920;No Remarks
+17/07/2013;Silene_acaulis;SIL2;D;-9999;-9999;899;No Remarks
+17/07/2013;Silene_acaulis;SIL3;A;-9999;-9999;1187;No Remarks
+17/07/2013;Silene_acaulis;SIL3;B;-9999;-9999;189;No Remarks
+17/07/2013;Silene_acaulis;SIL3;C;-9999;-9999;1550;No Remarks
+17/07/2013;Silene_acaulis;SIL3;D;-9999;-9999;266;No Remarks
+17/07/2013;Silene_acaulis;SIL4;A;-9999;-9999;436;No Remarks
+17/07/2013;Silene_acaulis;SIL4;B;-9999;-9999;399;No Remarks
+17/07/2013;Silene_acaulis;SIL4;C;-9999;-9999;1378;No Remarks
+17/07/2013;Silene_acaulis;SIL4;D;-9999;-9999;657;No Remarks
+08/07/2014;Silene_acaulis;SIL1;A;-9999;-9999;599;No Remarks
+08/07/2014;Silene_acaulis;SIL1;B;-9999;-9999;877;No Remarks
+08/07/2014;Silene_acaulis;SIL1;C;-9999;-9999;1030;No Remarks
+08/07/2014;Silene_acaulis;SIL1;D;-9999;-9999;949;No Remarks
+08/07/2014;Silene_acaulis;SIL2;A;-9999;-9999;996;No Remarks
+08/07/2014;Silene_acaulis;SIL2;B;-9999;-9999;1508;No Remarks
+08/07/2014;Silene_acaulis;SIL2;C;-9999;-9999;2501;No Remarks
+08/07/2014;Silene_acaulis;SIL2;D;-9999;-9999;1018;No Remarks
+08/07/2014;Silene_acaulis;SIL3;A;-9999;-9999;1503;No Remarks
+08/07/2014;Silene_acaulis;SIL3;B;-9999;-9999;219;No Remarks
+08/07/2014;Silene_acaulis;SIL3;C;-9999;-9999;1234;No Remarks
+08/07/2014;Silene_acaulis;SIL3;D;-9999;-9999;442;No Remarks
+08/07/2014;Silene_acaulis;SIL4;A;-9999;-9999;532;No Remarks
+08/07/2014;Silene_acaulis;SIL4;B;-9999;-9999;935;No Remarks
+08/07/2014;Silene_acaulis;SIL4;C;-9999;-9999;1999;No Remarks
+08/07/2014;Silene_acaulis;SIL4;D;-9999;-9999;1288;No Remarks
+16/07/2015;Silene_acaulis;SIL1;A;-9999;-9999;243;No Remarks
+16/07/2015;Silene_acaulis;SIL1;B;-9999;-9999;215;No Remarks
+16/07/2015;Silene_acaulis;SIL1;C;-9999;-9999;245;No Remarks
+16/07/2015;Silene_acaulis;SIL1;D;-9999;-9999;192;No Remarks
+21/07/2015;Silene_acaulis;SIL2;A;-9999;-9999;3;No Remarks
+21/07/2015;Silene_acaulis;SIL2;B;-9999;-9999;38;No Remarks
+21/07/2015;Silene_acaulis;SIL2;C;-9999;-9999;125;No Remarks
+21/07/2015;Silene_acaulis;SIL2;D;-9999;-9999;52;No Remarks
+21/07/2015;Silene_acaulis;SIL3;A;-9999;-9999;227;No Remarks
+21/07/2015;Silene_acaulis;SIL3;B;-9999;-9999;39;No Remarks
+21/07/2015;Silene_acaulis;SIL3;C;-9999;-9999;564;No Remarks
+21/07/2015;Silene_acaulis;SIL3;D;-9999;-9999;51;No Remarks
+21/07/2015;Silene_acaulis;SIL4;A;-9999;-9999;69;No Remarks
+21/07/2015;Silene_acaulis;SIL4;B;-9999;-9999;116;No Remarks
+21/07/2015;Silene_acaulis;SIL4;C;-9999;-9999;123;No Remarks
+21/07/2015;Silene_acaulis;SIL4;D;-9999;-9999;59;No Remarks
+29/06/2016;Silene_acaulis;SIL1;A;-9999;-9999;345;No Remarks
+29/06/2016;Silene_acaulis;SIL1;B;-9999;-9999;661;No Remarks
+29/06/2016;Silene_acaulis;SIL1;C;-9999;-9999;717;No Remarks
+29/06/2016;Silene_acaulis;SIL1;D;-9999;-9999;565;No Remarks
+14/07/2016;Silene_acaulis;SIL2;A;-9999;-9999;128;No Remarks
+14/07/2016;Silene_acaulis;SIL2;B;-9999;-9999;639;No Remarks
+14/07/2016;Silene_acaulis;SIL2;C;-9999;-9999;825;No Remarks
+14/07/2016;Silene_acaulis;SIL2;D;-9999;-9999;133;No Remarks
+29/06/2016;Silene_acaulis;SIL3;A;-9999;-9999;210;No Remarks
+29/06/2016;Silene_acaulis;SIL3;B;-9999;-9999;50;No Remarks
+29/06/2016;Silene_acaulis;SIL3;C;-9999;-9999;162;No Remarks
+29/06/2016;Silene_acaulis;SIL3;D;-9999;-9999;55;No Remarks
+14/07/2016;Silene_acaulis;SIL4;A;-9999;-9999;137;No Remarks
+14/07/2016;Silene_acaulis;SIL4;B;-9999;-9999;382;No Remarks
+14/07/2016;Silene_acaulis;SIL4;C;-9999;-9999;476;No Remarks
+14/07/2016;Silene_acaulis;SIL4;D;-9999;-9999;329;No Remarks
+28/07/2017;Silene_acaulis;SIL1;A;-9999;-9999;180;No Remarks
+28/07/2017;Silene_acaulis;SIL1;B;-9999;-9999;450;No Remarks
+28/07/2017;Silene_acaulis;SIL1;C;-9999;-9999;371;No Remarks
+28/07/2017;Silene_acaulis;SIL1;D;-9999;-9999;321;No Remarks
+28/07/2017;Silene_acaulis;SIL2;A;-9999;-9999;938;No Remarks
+28/07/2017;Silene_acaulis;SIL2;B;-9999;-9999;1464;No Remarks
+28/07/2017;Silene_acaulis;SIL2;C;-9999;-9999;1073;No Remarks
+28/07/2017;Silene_acaulis;SIL2;D;-9999;-9999;633;No Remarks
+28/07/2017;Silene_acaulis;SIL3;A;-9999;-9999;671;No Remarks
+28/07/2017;Silene_acaulis;SIL3;B;-9999;-9999;90;No Remarks
+28/07/2017;Silene_acaulis;SIL3;C;-9999;-9999;694;No Remarks
+28/07/2017;Silene_acaulis;SIL3;D;-9999;-9999;284;No Remarks
+28/07/2017;Silene_acaulis;SIL4;A;-9999;-9999;168;No Remarks
+28/07/2017;Silene_acaulis;SIL4;B;-9999;-9999;216;No Remarks
+28/07/2017;Silene_acaulis;SIL4;C;-9999;-9999;326;No Remarks
+28/07/2017;Silene_acaulis;SIL4;D;-9999;-9999;278;No Remarks
+30/07/2018;Silene_acaulis;SIL1;A;-9999;-9999;200;No Remarks
+30/07/2018;Silene_acaulis;SIL1;B;-9999;-9999;739;No Remarks
+30/07/2018;Silene_acaulis;SIL1;C;-9999;-9999;327;No Remarks
+30/07/2018;Silene_acaulis;SIL1;D;-9999;-9999;441;No Remarks
+30/07/2018;Silene_acaulis;SIL2;A;-9999;-9999;1744;No Remarks
+30/07/2018;Silene_acaulis;SIL2;B;-9999;-9999;1492;No Remarks
+30/07/2018;Silene_acaulis;SIL2;C;-9999;-9999;1467;No Remarks
+30/07/2018;Silene_acaulis;SIL2;D;-9999;-9999;1381;No Remarks
+30/07/2018;Silene_acaulis;SIL3;A;-9999;-9999;1608;No Remarks
+30/07/2018;Silene_acaulis;SIL3;B;-9999;-9999;217;No Remarks
+30/07/2018;Silene_acaulis;SIL3;C;-9999;-9999;1091;No Remarks
+30/07/2018;Silene_acaulis;SIL3;D;-9999;-9999;347;No Remarks
+02/08/2018;Silene_acaulis;SIL4;A;-9999;-9999;352;No Remarks
+02/08/2018;Silene_acaulis;SIL4;B;-9999;-9999;765;No Remarks
+02/08/2018;Silene_acaulis;SIL4;C;-9999;-9999;1289;No Remarks
+02/08/2018;Silene_acaulis;SIL4;D;-9999;-9999;473;No Remarks
+20/06/2019;Silene_acaulis;SIL1;A;-9999;-9999;234;No Remarks
+20/06/2019;Silene_acaulis;SIL1;B;-9999;-9999;417;No Remarks
+20/06/2019;Silene_acaulis;SIL1;C;-9999;-9999;140;No Remarks
+20/06/2019;Silene_acaulis;SIL1;D;-9999;-9999;471;No Remarks
+20/06/2019;Silene_acaulis;SIL2;A;-9999;-9999;601;No Remarks
+20/06/2019;Silene_acaulis;SIL2;B;-9999;-9999;537;No Remarks
+20/06/2019;Silene_acaulis;SIL2;C;-9999;-9999;781;No Remarks
+20/06/2019;Silene_acaulis;SIL2;D;-9999;-9999;1265;No Remarks
+11/07/2019;Silene_acaulis;SIL3;A;-9999;-9999;1441;No Remarks
+11/07/2019;Silene_acaulis;SIL3;B;-9999;-9999;84;No Remarks
+11/07/2019;Silene_acaulis;SIL3;C;-9999;-9999;918;No Remarks
+11/07/2019;Silene_acaulis;SIL3;D;-9999;-9999;407;No Remarks
+20/06/2019;Silene_acaulis;SIL4;A;-9999;-9999;188;No Remarks
+20/06/2019;Silene_acaulis;SIL4;B;-9999;-9999;453;No Remarks
+20/06/2019;Silene_acaulis;SIL4;C;-9999;-9999;801;No Remarks
+20/06/2019;Silene_acaulis;SIL4;D;-9999;-9999;362;No Remarks
+15/07/2020;Silene_acaulis;SIL1;A;-9999;-9999;99;No Remarks
+15/07/2020;Silene_acaulis;SIL1;B;-9999;-9999;97;No Remarks
+15/07/2020;Silene_acaulis;SIL1;C;-9999;-9999;4;No Remarks
+15/07/2020;Silene_acaulis;SIL1;D;-9999;-9999;147;No Remarks
+15/07/2020;Silene_acaulis;SIL2;A;-9999;-9999;664;No Remarks
+15/07/2020;Silene_acaulis;SIL2;B;-9999;-9999;276;No Remarks
+15/07/2020;Silene_acaulis;SIL2;C;-9999;-9999;443;No Remarks
+15/07/2020;Silene_acaulis;SIL2;D;-9999;-9999;422;No Remarks
+15/07/2020;Silene_acaulis;SIL3;A;-9999;-9999;827;No Remarks
+15/07/2020;Silene_acaulis;SIL3;B;-9999;-9999;39;No Remarks
+15/07/2020;Silene_acaulis;SIL3;C;-9999;-9999;867;No Remarks
+15/07/2020;Silene_acaulis;SIL3;D;-9999;-9999;165;No Remarks
+15/07/2020;Silene_acaulis;SIL4;A;-9999;-9999;120;No Remarks
+15/07/2020;Silene_acaulis;SIL4;B;-9999;-9999;291;No Remarks
+15/07/2020;Silene_acaulis;SIL4;C;-9999;-9999;252;No Remarks
+15/07/2020;Silene_acaulis;SIL4;D;-9999;-9999;249;No Remarks
+24/06/2008;Loiseleuria_procumbens;LOI1;A;-9999;-9999;-9999;No total count
+17/06/2008;Loiseleuria_procumbens;LOI1;B;-9999;-9999;-9999;No total count
+10/06/2008;Loiseleuria_procumbens;LOI1;C;-9999;-9999;-9999;No total count
+10/06/2008;Loiseleuria_procumbens;LOI1;D;-9999;-9999;-9999;No total count
+23/06/2008;Loiseleuria_procumbens;LOI2;A;-9999;-9999;2480;No remarks
+23/06/2008;Loiseleuria_procumbens;LOI2;B;-9999;-9999;380;No remarks
+23/06/2008;Loiseleuria_procumbens;LOI2;C;-9999;-9999;1229;No remarks
+23/06/2008;Loiseleuria_procumbens;LOI2;D;-9999;-9999;539;No remarks
+01/07/2008;Loiseleuria_procumbens;LOI3;A;-9999;-9999;219;No remarks
+01/07/2008;Loiseleuria_procumbens;LOI3;B;-9999;-9999;193;No remarks
+01/07/2008;Loiseleuria_procumbens;LOI3;C;-9999;-9999;219;No remarks
+01/07/2008;Loiseleuria_procumbens;LOI3;D;-9999;-9999;281;No remarks
+24/06/2008;Loiseleuria_procumbens;LOI4;A;-9999;-9999;-9999;No total count
+10/06/2008;Loiseleuria_procumbens;LOI4;B;-9999;-9999;-9999;No total count
+10/06/2008;Loiseleuria_procumbens;LOI4;C;-9999;-9999;-9999;No total count
+10/06/2008;Loiseleuria_procumbens;LOI4;D;-9999;-9999;-9999;No total count
+01/07/2009;Loiseleuria_procumbens;LOI1;A;-9999;-9999;429;No remarks
+01/07/2009;Loiseleuria_procumbens;LOI1;B;-9999;-9999;482;No remarks
+01/07/2009;Loiseleuria_procumbens;LOI1;C;-9999;-9999;803;No remarks
+01/07/2009;Loiseleuria_procumbens;LOI1;D;-9999;-9999;852;No remarks
+21/07/2009;Loiseleuria_procumbens;LOI2;A;-9999;-9999;3186;No remarks
+21/07/2009;Loiseleuria_procumbens;LOI2;B;-9999;-9999;474;No remarks
+21/07/2009;Loiseleuria_procumbens;LOI2;C;-9999;-9999;3362;No remarks
+21/07/2009;Loiseleuria_procumbens;LOI2;D;-9999;-9999;1312;No remarks
+06/07/2009;Loiseleuria_procumbens;LOI3;A;-9999;-9999;27;No remarks
+06/07/2009;Loiseleuria_procumbens;LOI3;B;-9999;-9999;25;No remarks
+06/07/2009;Loiseleuria_procumbens;LOI3;C;-9999;-9999;95;No remarks
+06/07/2009;Loiseleuria_procumbens;LOI3;D;-9999;-9999;100;No remarks
+23/06/2009;Loiseleuria_procumbens;LOI4;A;-9999;-9999;842;No remarks
+23/06/2009;Loiseleuria_procumbens;LOI4;B;-9999;-9999;1338;No remarks
+23/06/2009;Loiseleuria_procumbens;LOI4;C;-9999;-9999;201;No remarks
+23/06/2009;Loiseleuria_procumbens;LOI4;D;-9999;-9999;747;No remarks
+01/07/2010;Loiseleuria_procumbens;LOI1;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI1;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI1;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI1;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI2;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI2;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI2;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI2;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI3;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI3;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2010;Loiseleuria_procumbens;LOI3;D;-9999;-9999;0;No flowers due to insect outbreak
+15/07/2010;Loiseleuria_procumbens;LOI4;A;-9999;-9999;192;No remarks
+15/07/2010;Loiseleuria_procumbens;LOI4;B;-9999;-9999;345;No remarks
+15/07/2010;Loiseleuria_procumbens;LOI4;C;-9999;-9999;57;No remarks
+15/07/2010;Loiseleuria_procumbens;LOI4;D;-9999;-9999;158;No remarks
+01/07/2011;Loiseleuria_procumbens;LOI1;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI1;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI1;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI1;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI2;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI2;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI2;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI2;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI3;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI3;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI3;D;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI4;A;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI4;B;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI4;C;-9999;-9999;0;No flowers due to insect outbreak
+01/07/2011;Loiseleuria_procumbens;LOI4;D;-9999;-9999;0;No flowers due to insect outbreak
+12/06/2012;Loiseleuria_procumbens;LOI1;A;-9999;-9999;20;No remarks
+05/06/2012;Loiseleuria_procumbens;LOI1;B;-9999;-9999;17;No remarks
+18/06/2012;Loiseleuria_procumbens;LOI1;C;-9999;-9999;19;No remarks
+18/06/2012;Loiseleuria_procumbens;LOI1;D;-9999;-9999;10;No remarks
+18/06/2012;Loiseleuria_procumbens;LOI2;A;-9999;-9999;55;No remarks
+18/06/2012;Loiseleuria_procumbens;LOI2;B;-9999;-9999;2;No remarks
+18/06/2012;Loiseleuria_procumbens;LOI2;C;-9999;-9999;3;No remarks
+02/07/2012;Loiseleuria_procumbens;LOI2;D;-9999;-9999;18;No remarks
+26/06/2012;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No remarks
+26/06/2012;Loiseleuria_procumbens;LOI3;B;-9999;-9999;0;No remarks
+26/06/2012;Loiseleuria_procumbens;LOI3;C;-9999;-9999;0;No remarks
+26/06/2012;Loiseleuria_procumbens;LOI3;D;-9999;-9999;4;No remarks
+05/06/2012;Loiseleuria_procumbens;LOI4;A;-9999;-9999;80;No remarks
+26/06/2012;Loiseleuria_procumbens;LOI4;B;-9999;-9999;100;No remarks
+29/05/2012;Loiseleuria_procumbens;LOI4;C;-9999;-9999;24;No remarks
+29/05/2012;Loiseleuria_procumbens;LOI4;D;-9999;-9999;73;No remarks
+17/07/2013;Loiseleuria_procumbens;LOI1;A;-9999;-9999;139;No remarks
+17/07/2013;Loiseleuria_procumbens;LOI1;B;-9999;-9999;198;No remarks
+17/07/2013;Loiseleuria_procumbens;LOI1;C;-9999;-9999;209;No remarks
+17/07/2013;Loiseleuria_procumbens;LOI1;D;-9999;-9999;66;No remarks
+01/07/2013;Loiseleuria_procumbens;LOI2;A;-9999;-9999;-9999;No total count
+01/07/2013;Loiseleuria_procumbens;LOI2;B;-9999;-9999;14;No remarks
+01/07/2013;Loiseleuria_procumbens;LOI2;C;-9999;-9999;-9999;No total count
+01/07/2013;Loiseleuria_procumbens;LOI2;D;-9999;-9999;-9999;No total count
+01/07/2013;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No remarks
+01/07/2013;Loiseleuria_procumbens;LOI3;B;-9999;-9999;0;No remarks
+01/07/2013;Loiseleuria_procumbens;LOI3;C;-9999;-9999;0;No remarks
+01/07/2013;Loiseleuria_procumbens;LOI3;D;-9999;-9999;6;No remarks
+01/07/2013;Loiseleuria_procumbens;LOI4;A;-9999;-9999;190;No remarks
+01/07/2013;Loiseleuria_procumbens;LOI4;B;-9999;-9999;355;No remarks
+25/06/2013;Loiseleuria_procumbens;LOI4;C;-9999;-9999;71;No remarks
+01/07/2013;Loiseleuria_procumbens;LOI4;D;-9999;-9999;390;No remarks
+07/07/2014;Loiseleuria_procumbens;LOI1;A;-9999;-9999;1421;No remarks
+07/07/2014;Loiseleuria_procumbens;LOI1;B;-9999;-9999;818;No remarks
+07/07/2014;Loiseleuria_procumbens;LOI1;C;-9999;-9999;1209;No remarks
+07/07/2014;Loiseleuria_procumbens;LOI1;D;-9999;-9999;774;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI2;A;-9999;-9999;3908;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI2;B;-9999;-9999;495;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI2;C;-9999;-9999;1448;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI2;D;-9999;-9999;1611;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI3;B;-9999;-9999;0;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI3;C;-9999;-9999;0;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI3;D;-9999;-9999;369;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI4;A;-9999;-9999;484;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI4;B;-9999;-9999;922;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI4;C;-9999;-9999;136;No remarks
+08/07/2014;Loiseleuria_procumbens;LOI4;D;-9999;-9999;522;No remarks
+01/07/2015;Loiseleuria_procumbens;LOI1;A;-9999;-9999;1011;No remarks
+01/07/2015;Loiseleuria_procumbens;LOI1;B;-9999;-9999;754;No remarks
+01/07/2015;Loiseleuria_procumbens;LOI1;C;-9999;-9999;830;No remarks
+01/07/2015;Loiseleuria_procumbens;LOI1;D;-9999;-9999;385;No remarks
+16/07/2015;Loiseleuria_procumbens;LOI2;A;-9999;-9999;6347;No remarks
+16/07/2015;Loiseleuria_procumbens;LOI2;B;-9999;-9999;1527;No remarks
+16/07/2015;Loiseleuria_procumbens;LOI2;C;-9999;-9999;2989;No remarks
+16/07/2015;Loiseleuria_procumbens;LOI2;D;-9999;-9999;2943;No remarks
+15/07/2015;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No remarks
+15/07/2015;Loiseleuria_procumbens;LOI3;B;-9999;-9999;5;No remarks
+15/07/2015;Loiseleuria_procumbens;LOI3;C;-9999;-9999;22;No remarks
+15/07/2015;Loiseleuria_procumbens;LOI3;D;-9999;-9999;442;No remarks
+01/07/2015;Loiseleuria_procumbens;LOI4;A;-9999;-9999;680;No remarks
+01/07/2015;Loiseleuria_procumbens;LOI4;B;-9999;-9999;1668;No remarks
+01/07/2015;Loiseleuria_procumbens;LOI4;C;-9999;-9999;256;No remarks
+01/07/2015;Loiseleuria_procumbens;LOI4;D;-9999;-9999;975;No remarks
+29/06/2016;Loiseleuria_procumbens;LOI1;A;-9999;-9999;428;No remarks
+29/06/2016;Loiseleuria_procumbens;LOI1;B;-9999;-9999;529;No remarks
+29/06/2016;Loiseleuria_procumbens;LOI1;C;-9999;-9999;774;No remarks
+29/06/2016;Loiseleuria_procumbens;LOI1;D;-9999;-9999;676;No remarks
+29/06/2016;Loiseleuria_procumbens;LOI2;A;-9999;-9999;4872;No remarks
+21/07/2016;Loiseleuria_procumbens;LOI2;B;-9999;-9999;826;No remarks
+14/07/2016;Loiseleuria_procumbens;LOI2;C;-9999;-9999;819;No remarks
+21/07/2016;Loiseleuria_procumbens;LOI2;D;-9999;-9999;1215;No remarks
+14/07/2016;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No remarks
+14/07/2016;Loiseleuria_procumbens;LOI3;B;-9999;-9999;26;No remarks
+14/07/2016;Loiseleuria_procumbens;LOI3;C;-9999;-9999;61;No remarks
+14/07/2016;Loiseleuria_procumbens;LOI3;D;-9999;-9999;261;No remarks
+14/07/2016;Loiseleuria_procumbens;LOI4;A;-9999;-9999;466;No remarks
+14/07/2016;Loiseleuria_procumbens;LOI4;B;-9999;-9999;1017;No remarks
+14/07/2016;Loiseleuria_procumbens;LOI4;C;-9999;-9999;100;No remarks
+14/07/2016;Loiseleuria_procumbens;LOI4;D;-9999;-9999;589;No remarks
+27/06/2017;Loiseleuria_procumbens;LOI1;A;-9999;-9999;659;No remarks
+27/06/2017;Loiseleuria_procumbens;LOI1;B;-9999;-9999;982;No remarks
+27/06/2017;Loiseleuria_procumbens;LOI1;C;-9999;-9999;1706;No remarks
+27/06/2017;Loiseleuria_procumbens;LOI1;D;-9999;-9999;832;No remarks
+31/07/2017;Loiseleuria_procumbens;LOI2;A;-9999;-9999;10713;No remarks
+25/07/2017;Loiseleuria_procumbens;LOI2;B;-9999;-9999;2227;No remarks
+28/07/2017;Loiseleuria_procumbens;LOI2;C;-9999;-9999;1963;No remarks
+10/08/2017;Loiseleuria_procumbens;LOI2;D;-9999;-9999;3539;No remarks
+25/07/2017;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No remarks
+25/07/2017;Loiseleuria_procumbens;LOI3;B;-9999;-9999;41;No remarks
+25/07/2017;Loiseleuria_procumbens;LOI3;C;-9999;-9999;59;No remarks
+25/07/2017;Loiseleuria_procumbens;LOI3;D;-9999;-9999;710;No remarks
+27/06/2017;Loiseleuria_procumbens;LOI4;A;-9999;-9999;733;No remarks
+27/06/2017;Loiseleuria_procumbens;LOI4;B;-9999;-9999;1292;No remarks
+27/06/2017;Loiseleuria_procumbens;LOI4;C;-9999;-9999;216;No remarks
+27/06/2017;Loiseleuria_procumbens;LOI4;D;-9999;-9999;1029;No remarks
+09/07/2018;Loiseleuria_procumbens;LOI1;A;-9999;-9999;927;No remarks
+09/07/2018;Loiseleuria_procumbens;LOI1;B;-9999;-9999;620;No remarks
+09/07/2018;Loiseleuria_procumbens;LOI1;C;-9999;-9999;649;No remarks
+09/07/2018;Loiseleuria_procumbens;LOI1;D;-9999;-9999;682;No remarks
+30/07/2018;Loiseleuria_procumbens;LOI2;A;-9999;-9999;3906;No remarks
+30/07/2018;Loiseleuria_procumbens;LOI2;B;-9999;-9999;1477;No remarks
+30/07/2018;Loiseleuria_procumbens;LOI2;C;-9999;-9999;1084;No remarks
+30/07/2018;Loiseleuria_procumbens;LOI2;D;-9999;-9999;1566;No remarks
+30/07/2018;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No remarks
+30/07/2018;Loiseleuria_procumbens;LOI3;B;-9999;-9999;86;No remarks
+30/07/2018;Loiseleuria_procumbens;LOI3;C;-9999;-9999;73;No remarks
+30/07/2018;Loiseleuria_procumbens;LOI3;D;-9999;-9999;773;No remarks
+09/07/2018;Loiseleuria_procumbens;LOI4;A;-9999;-9999;613;No remarks
+09/07/2018;Loiseleuria_procumbens;LOI4;B;-9999;-9999;1161;No remarks
+09/07/2018;Loiseleuria_procumbens;LOI4;C;-9999;-9999;122;No remarks
+09/07/2018;Loiseleuria_procumbens;LOI4;D;-9999;-9999;769;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI1;A;-9999;-9999;582;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI1;B;-9999;-9999;484;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI1;C;-9999;-9999;534;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI1;D;-9999;-9999;384;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI2;A;-9999;-9999;3997;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI2;B;-9999;-9999;1336;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI2;C;-9999;-9999;594;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI2;D;-9999;-9999;3597;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI3;B;-9999;-9999;92;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI3;C;-9999;-9999;98;No remarks
+19/06/2019;Loiseleuria_procumbens;LOI3;D;-9999;-9999;568;No remarks
+20/06/2019;Loiseleuria_procumbens;LOI4;A;-9999;-9999;430;No remarks
+20/06/2019;Loiseleuria_procumbens;LOI4;B;-9999;-9999;1317;No remarks
+20/06/2019;Loiseleuria_procumbens;LOI4;C;-9999;-9999;107;No remarks
+20/06/2019;Loiseleuria_procumbens;LOI4;D;-9999;-9999;746;No remarks
+01/07/2020;Loiseleuria_procumbens;LOI1;A;-9999;-9999;1017;No remarks
+01/07/2020;Loiseleuria_procumbens;LOI1;B;-9999;-9999;1519;No remarks
+01/07/2020;Loiseleuria_procumbens;LOI1;C;-9999;-9999;1738;No remarks
+01/07/2020;Loiseleuria_procumbens;LOI1;D;-9999;-9999;964;No remarks
+16/07/2020;Loiseleuria_procumbens;LOI2;A;-9999;-9999;5270;No remarks
+16/07/2020;Loiseleuria_procumbens;LOI2;B;-9999;-9999;1827;No remarks
+16/07/2020;Loiseleuria_procumbens;LOI2;C;-9999;-9999;2210;No remarks
+16/07/2020;Loiseleuria_procumbens;LOI2;D;-9999;-9999;3246;No remarks
+15/07/2020;Loiseleuria_procumbens;LOI3;A;-9999;-9999;0;No remarks
+15/07/2020;Loiseleuria_procumbens;LOI3;B;-9999;-9999;85;No remarks
+15/07/2020;Loiseleuria_procumbens;LOI3;C;-9999;-9999;125;No remarks
+15/07/2020;Loiseleuria_procumbens;LOI3;D;-9999;-9999;625;No remarks
+24/06/2020;Loiseleuria_procumbens;LOI4;A;-9999;-9999;1106;No remarks
+24/06/2020;Loiseleuria_procumbens;LOI4;B;-9999;-9999;1954;No remarks
+24/06/2020;Loiseleuria_procumbens;LOI4;C;-9999;-9999;337;No remarks
+24/06/2020;Loiseleuria_procumbens;LOI4;D;-9999;-9999;1172;No remarks
