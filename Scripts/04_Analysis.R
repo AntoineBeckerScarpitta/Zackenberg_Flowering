@@ -15,16 +15,16 @@ source("Scripts/02_Creation_DB.r")
 
 
 # Correlation between Density and Total
-cor(flow_tot_plot$Flow_m2 , flow_tot_plot$TotalFlower);
-plot(flow_tot_plot$Flow_m2 ~ flow_tot_plot$TotalFlower, col=flow_tot_plot$Species)
+cor(flow$Flow_m2 , flow$TotalFlower);
+plot(flow$Flow_m2 ~ flow$TotalFlower, col=flow$Species)
 
 
 # Basic LMER models
 mod1 <- lmer((scale(Flow_m2, center=TRUE, scale=TRUE))~Year*Species+(1|Plot),
-             data=flow_tot_plot)
+             data=flow)
 
 mod2 <- glmer(scale(Flow_m2, center=TRUE, scale=TRUE) ~ Year + Species + (1|Plot),
-              poisson(link = "log"), data=flow_tot_plot)
+              poisson(link = "log"), data=flow)
 
 qqmath(mod1)
 summary(mod1) ; anova(mod1)
