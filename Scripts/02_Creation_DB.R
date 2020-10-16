@@ -47,54 +47,86 @@ source("Scripts/01_Import_DB.r")
 
 
 
-### -- GENERATE THE FINAL DATABASE  -- 
-# Rbind all datasets together
-flow0 <- rbind(Nsal, Nsil, NLoi, NEri, Zcas, Zdry, Zpap, Zsal, Zsax, Zsil)
+
+
+### -- 1 GENERATE THE FINAL DATABASE  ------------------------------------------------
+#  NUUK
+# split Date col, to extract year, month, day in new cols
+Nuuk_all <- cbind(str_split_fixed(Nuuk_all0[, "Date"], '/', n=3), Nuuk_all0)
+colnames(Nuuk_all) <- c("Day","Month", "Year", "Date", "Species", "Plot", "Section",
+                        "Male_flower", "Female_flower", "TotalFlower", "Remarks", "Site")
+
+# merge NUUK with plot size
+Nuuk_all <- merge(Nuuk_all, Plot_size[, c('Plot_size', 'Plot')], by="Plot", all.x=TRUE)
+
+# Transforme -9999 into NA
+Nuuk_all[Nuuk_all$TotalFlower==-9999, "TotalFlower"] <- NA
+
+# calculate the total flower per plot per year (sum of all sections)
+Nuuk_all_sub <- ddply(Nuuk_all, .(Site, Year, Species, Plot, Plot_size), 
+                      summarise, TotalFlower=sum(TotalFlower))
+
+# remove NA
+Nuuk_tot_plot <- Nuuk_all_sub[complete.cases(Nuuk_all_sub), ]
+
+# devise by plot_size
+Nuuk_tot_plot$Flow_m2 <- round(Nuuk_tot_plot$TotalFlower/Nuuk_tot_plot$Plot_size, 0)
+
+
+
+
+# ZACKENBERG
+# Rbind all ZACK datasets together
+Zack0 <- rbind(Zcas, Zdry, Zpap, Zsal, Zsax, Zsil)
 
 # merge with plot size
-flow1 <- merge(flow0, Plot_size[,c('Plot_size', 'Plot')], by="Plot", all.x=TRUE)
+Zack1 <- merge(Zack0, Plot_size[,c('Plot_size', 'Plot')], by="Plot", all.x=TRUE)
 
 # subset only line with "TOTALCOUNT"
-flow <- subset(flow1, TotalCount=="TOTALCOUNT")
+Zack <- subset(Zack1, TotalCount=="TOTALCOUNT")
 
-# delete plot K and W
-flow <-flow[!flow$Plot %in% c('Cas5','Cas6','Dry7','Dry8',"K1C","K2C","K3C",'K4C',
+# delete plot K and W at Zack
+Zack <- Zack[!Zack$Plot %in% c('Cas5','Cas6','Dry7','Dry8',"K1C","K2C","K3C",'K4C',
                               "K5C","W1C","W2C","W3C",'W4C',"W5C","K3S","K4S","K5S",
                               "W3S","W4S","W5S", "K1S","K2S","W1S","W2S"), ]
 
 # split Date col, to extract year, month, day in new cols
-flow <- cbind(str_split_fixed(flow[,"Date"], '-', n=3), flow)
-colnames(flow) <- c("Year", "Month", "Day", "Plot", "Site", "Date", "Section",
+Zack <- cbind(str_split_fixed(Zack[,"Date"], '-', n=3), Zack)
+colnames(Zack) <- c("Year", "Month", "Day", "Plot", "Site", "Date", "Section",
                     "TotalCount", "Flower_var", "Value", "Species", "Plot_size")
 
-# data as numeric or factor
-flow[c("Year","Month","Day")] <- sapply(flow[c("Year", "Month", "Day")], as.numeric)
-flow[c("Plot","Site","Section","Species")] <- lapply(flow[c("Plot","Site","Section",
-                                                              "Species" )], as.factor)
-### END
-
-
-
-# DATA STRUCTURE FOR ANALYSIS
 # select only TotalFlowering line for the total flower per year
-flow_sub <- droplevels(flow[flow$Flower_var=="TotalFlowering", ])
+Zack_sub <- droplevels(Zack[Zack$Flower_var=="TotalFlowering", ])
 
 # replace '-9999' with NA
-flow_sub[flow_sub$Value==-9999, 'Value'] <- NA
+Zack_sub[Zack_sub$Value==-9999, 'Value'] <- NA
 #  delete NA in the subset
-flow_sub <- flow_sub[complete.cases(flow_sub),]
+Zack_sub <- Zack_sub[complete.cases(Zack_sub),]
 
 # Replace Section = A-D, A-B with A (will be lumped anyway)
-flow_sub[flow_sub$Section=="A-D", "Section"] <- "A"
-flow_sub[flow_sub$Section=="A-B", "Section"] <- "A"
+Zack_sub[Zack_sub$Section=="A-D", "Section"] <- "A"
+Zack_sub[Zack_sub$Section=="A-B", "Section"] <- "A"
 
 # calculate the total flower per plot per year (sum of all sections)
-flow_tot_plot <- ddply(flow_sub, .(Site, Year, Species, Plot, Plot_size), 
+Zack_tot_plot <- ddply(Zack_sub, .(Site, Year, Species, Plot, Plot_size), 
                        summarise, TotalFlower=sum(Value))
 
 # devise by plot_size
-flow_tot_plot$Flow_m2 <- round(flow_tot_plot$TotalFlower/flow_tot_plot$Plot_size, 0)
-#### END ---
+Zack_tot_plot$Flow_m2 <- round(Zack_tot_plot$TotalFlower/Zack_tot_plot$Plot_size, 0)
+
+
+
+# Combined ZACKENBERG AND NUUK in 1 table
+flow <- rbind(Zack_tot_plot, Nuuk_tot_plot)
+
+# data as numeric or factor
+flow[,"Year"] <- as.numeric(flow[,"Year"])
+flow[c("Site","Species", "Plot")] <- lapply(flow[c("Site","Species", "Plot")], as.factor)
+
+
+#### END -----------------------------------------------------------------------------
+
+
 
 
 
