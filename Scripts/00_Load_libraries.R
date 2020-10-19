@@ -26,6 +26,7 @@
 # install.packages("mclust")
 # install.packages("labdsv")
 # install.packages("betapart")
+# install.packages("TR8")
 # 
 # 
 # # Data managment
@@ -86,6 +87,7 @@ library(indicspecies)
 library(mclust)
 library(labdsv)
 library(betapart)
+library(TR8)
 
 
 # Data managment
