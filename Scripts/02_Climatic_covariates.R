@@ -17,24 +17,38 @@ source("Scripts/00_Load_libraries.r")
 
 
 
+
+
+#  1 LOAD CLIMATE COVARIATES
 #  ZACKENBERG
-# CLIMATE COVARIATES
+# Temperature
 Ztemp <- read.csv("data/datasets/View_ClimateBasis_Zackenberg_Data_Temperature_Air_temperature__200cm__60min_average__DegreesC.csv", 
                   stringsAsFactors=FALSE, header=TRUE,  sep="\t",
                   strip.white = T,na.strings = c("","NA"))
 Ztemp$Variable <- "Temperature_C"
-Ztemp$Site <- "Zack"
+Ztemp$Site <- "Zackenberg"
 colnames(Ztemp) <- c('Date', "Time", "Value", "Variable", "Site")
 
+# Precipitation
 Zprec <- read.csv("data/datasets/View_ClimateBasis_Zackenberg_Data_Precipitation_Precipitation_accumulated_mm.csv", 
                   stringsAsFactors=FALSE, header=TRUE,  sep="\t",
                   strip.white = T,na.strings = c("","NA"))
 Zprec$Variable <- "Precipitation_mm"
-Zprec$Site <- "Zack"
+Zprec$Site <- "Zackenberg"
 colnames(Zprec) <- c('Date', "Time", "Value", "Variable", "Site")
+
+# Humidity
+Zhum <- read.csv("data/datasets/View_ClimateBasis_Zackenberg_Data_Humidity_Relative_humidity__200cm__60min_average__Percent.csv", 
+                 stringsAsFactors=FALSE, header=TRUE,  sep="\t",
+                 strip.white = T,na.strings = c("","NA"))
+Zhum$Variable <- "Humidity_%"
+Zhum$Site <- "Zackenberg"
+colnames(Zhum) <- c('Date', "Time", "Value", "Variable", "Site")
+
 
 
 #  NUUK
+# Temperature
 Ntemp <- read.csv("data/datasets/View_ClimateBasis_Nuuk_Data_Temperature_Air_temperature__200_cm__30min_average__DegreesC.csv", 
                   stringsAsFactors=FALSE, header=TRUE,  sep="\t",
                   strip.white = T,na.strings = c("","NA"))
@@ -42,16 +56,31 @@ Ntemp$Variable <- "Temperature_C"
 Ntemp$Site <- "Nuuk"
 colnames(Ntemp) <- c('Date', "Time", "Value", "Variable", 'Site')
 
+# Precicpiation
 Nprec <- read.csv("data/datasets/View_ClimateBasis_Nuuk_Data_Precipitation_Precipitation_accumulated_mm.csv", 
                   stringsAsFactors=FALSE, header=TRUE,  sep="\t",
                   strip.white = T,na.strings = c("","NA"))
 Nprec$Variable <- "Precipitation_mm"
 Nprec$Site <- "Nuuk"
 colnames(Nprec) <- c('Date', "Time", "Value", "Variable", "Site")
+
+# Humidity
+Nhum <- read.csv("data/datasets/View_ClimateBasis_Nuuk_Data_Humidity_Relative_humidity__200_cm__30min_average__Percent.csv", 
+                  stringsAsFactors=FALSE, header=TRUE,  sep="\t",
+                  strip.white = T,na.strings = c("","NA"))
+Nhum$Variable <- "Humidity_%"
+Nhum$Site <- "Nuuk"
+colnames(Nhum) <- c('Date', "Time", "Value", "Variable", "Site")
 #-------------------------------------------------------------------------------------
 
+
+
+
+
+
+# COMPILE COVARIATE DATABASE
 # combine All dataset together
-clim <- rbind(Ztemp, Zprec, Ntemp, Nprec)
+clim <- rbind(Ztemp, Zprec, Zhum, Ntemp, Nprec, Nhum)
 
 # Remove -9999, NA
 clim[clim$Value==-9999, 'Value'] <- NA
@@ -69,24 +98,7 @@ clim_month <- as.data.frame(clim %>%
                 Year=as.factor(Year), 
                 Month=as.factor(Month),
                 Variable=as.factor(Variable))
-
-
-# Plot Climatic trends
-ggplot(clim_month, aes(Year, Value, group=Site, color=Site)) +
-         geom_point() +
-         geom_smooth(method='lm', se=TRUE) +
-         labs(y='Value') +
-         ggtitle('Climatic trends in Nuuk and Zackenberg') +
-         facet_grid(Variable~., scales="free_y") +
-         theme_linedraw() 
-
-
-
-
-
-
-
-
+#END----------------------------------------------------------------------------------
 
 
 
