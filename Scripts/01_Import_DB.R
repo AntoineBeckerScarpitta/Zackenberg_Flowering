@@ -17,11 +17,25 @@ source("Scripts/00_Load_libraries.r")
 
 
 
-# READ DATASETS 
-# SELECT COLS 
-# ADD SITE 
-# MELT TABLES
-# ADD SPECIES
+
+
+# download traits
+# TRY : traits
+# 341, 3401, 3400, 343, 38, 208
+# TRY : species
+# 47788, 21805, 50170, 34012, 78114, 78115, 78116, 78117, 78118, 81864, 81865, 
+# 81866, 92446, 92447, 92449, 92450, 96907, 96909, 96910, 96911, 96913, 96914, 
+# 96915, 96917, 96918, 96919, 96921, 96922, 96924, 96925, 96926, 96927, 96928, 
+# 96929, 96930, 96931, 96932, 96933, 96934, 96935, 96936, 96937, 96938, 96939, 
+# 96940, 96942, 96943, 96944, 96945, 96946, 96947, 96948, 96949, 96950, 96951, 
+# 96952, 96953, 96954, 96955, 96956, 96957, 96958, 96960, 96961, 96962, 96963, 
+# 96964, 96965, 96966, 96967, 96968, 96969, 96970, 96971, 96972, 96973, 96975
+
+my_species <- c("Salix arctica", "Eriophorum angustifolium", "Silene acaulis", 
+                "Cassiope tetragona", "Loiseleuria procumbens", "Dryas octopetala", 
+                "Papaver radicatum", "Saxifraga oppositifolia")
+my_traits <- c("li_form", "li_form_B", "Growth.Habit", "strategy")
+trait_data <- tr8(species_list = my_species, download_list = my_traits)
 
 
 
@@ -30,7 +44,7 @@ Plot_size <- read.csv("data/datasets/Plot_size_coord_Z_N.csv", header=TRUE,  sep
 
 
 
-### ZACKENBERG (6 species) ---####
+### ZACKENBERG (6 species) -----------------------------------------------------------
 # READ - Cassiope
 Zcas0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Cassiope_phenology_and_total_count.csv", 
                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,
@@ -48,7 +62,6 @@ Zcas <- reshape2::melt(Zcas1, id.vars = c("Site", "Date", "Plot", "Section", "To
 Zcas$Species <- 'CAS'
 
 
-
 # READ - Dryas
 Zdry0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Dryas_phenology_and_total_count180520201149561.csv", 
                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
@@ -63,7 +76,6 @@ Zdry <- reshape2::melt(Zdry1, id.vars = c("Site", "Date", "Plot", "Section", "To
                        value.name = "Value")
 # add species names
 Zdry$Species <- 'DRY'
-
 
 
 # READ - Papaver
@@ -83,7 +95,6 @@ Zpap <- reshape2::melt(Zpap1, id.vars = c("Site", "Date", "Plot", "Section", "To
 Zpap$Species <- 'PAP'
 
 
-
 # READ - Saxifraga
 Zsax0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Saxifraga_phenology_and_total_count180520202130297066.csv", 
                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", 
@@ -99,7 +110,6 @@ Zsax <- reshape2::melt(Zsax1, id.vars = c("Site", "Date", "Plot", "Section", "To
                        value.name = "Value")
 # add species names
 Zsax$Species <- 'SAX'
-
 
 
 # READ - Silene
@@ -124,7 +134,6 @@ Zsil[Zsil$Plot=="Si3", 'Plot'] <- "Sil3"
 Zsil[Zsil$Plot=="Si4", 'Plot'] <- "Sil4"
 
 
-
 # READ - Salix
 Zsal0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Salix_phenology_and_total_count18052020213537866.csv", 
                  stringsAsFactors=FALSE, header=TRUE,  sep="\t",
@@ -141,14 +150,14 @@ Zsal <- reshape2::melt(Zsal1, id.vars = c("Site", "Date", "Plot", "Section", "To
                        value.name = "Value")
 # add species names
 Zsal$Species <- 'SAL'
-#---END ZACKENBERG DATASETS-----
+#---END ZACKENBERG DATASETS-----------------------------------------------------------
 
 
 
 
 
 
-### NUUK (4 species)  ---####
+### NUUK (4 species)  ----------------------------------------------------------------
 # Databe given by Katrine Raundrup 
 Nuuk_all0 <- read.csv("data/datasets/Nuuk_all_sp_TotalCounts_Katrine_version.csv", 
                      stringsAsFactors=FALSE, header=TRUE,  sep=";", strip.white = T,
@@ -175,7 +184,7 @@ Nuuk_all0[Nuuk_all0$Species== "Loiseleuria_procumbens", "Species"] <-  "LOI"
 
 
 
-# OLD VERSION WITH DB IN GEM
+# OLD VERSION WITH DB IN GEM. No longer useful since Katrine send new DB
 # --------------------------------------------------------------------------------------
 # # READ - Salix
 # Nsal0 <- read.csv("data/datasets/View_BioBasis_Nuuk_Data_Vegetation_Salix_phenology_and_total_count180520202134518138.csv", 
@@ -200,7 +209,6 @@ Nuuk_all0[Nuuk_all0$Species== "Loiseleuria_procumbens", "Species"] <-  "LOI"
 # Nsal[Nsal$Plot=="SAL3", 'Plot'] <- "N_Sal3"
 # Nsal[Nsal$Plot=="SAL4", 'Plot'] <- "N_Sal4"
 # 
-# 
 # # ++++++++++++++ PROBLEM ++++++++++++++
 # # # calculate sum male female flower for Salix
 # # Nsal_sel <- droplevels(Nsal[Nsal$Flower_var=='Total_Female'|Nsal$Flower_var=='Total_Male', ])
@@ -208,7 +216,6 @@ Nuuk_all0[Nuuk_all0$Species== "Loiseleuria_procumbens", "Species"] <-  "LOI"
 # # # PB DOUBLONS DANS LA SUM DES MALE OF FEMALE FLOWER
 # # ++++++++++++++++++++++++++++++++++++
 # 
-
 # # READ - Silene
 # Nsil0 <- read.csv("data/datasets/View_BioBasis_Nuuk_Data_Vegetation_Silene_phenology_and_total_count180520202134090595.csv", 
 #                   stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
@@ -228,8 +235,6 @@ Nuuk_all0[Nuuk_all0$Species== "Loiseleuria_procumbens", "Species"] <-  "LOI"
 # Nsil[Nsil$Plot=="SIL2", 'Plot'] <- "N_Sil2"
 # Nsil[Nsil$Plot=="SIL3", 'Plot'] <- "N_Sil3"
 # Nsil[Nsil$Plot=="SIL4", 'Plot'] <- "N_Sil4"
-# 
-# 
 # 
 # # READ - Loiseleuria (Kalmia)
 # NLoi0 <- read.csv("data/datasets/View_BioBasis_Nuuk_Data_Vegetation_Loiseleuria_phenology_and_total_count170920201306510146.csv", 
@@ -266,8 +271,6 @@ Nuuk_all0[Nuuk_all0$Species== "Loiseleuria_procumbens", "Species"] <-  "LOI"
 # NLoi[NLoi$Plot=="LOI3", 'Plot'] <- "N_Loi3"
 # NLoi[NLoi$Plot=="LOI4", 'Plot'] <- "N_Loi4"
 # 
-# 
-# 
 # # READ - Eriophorum 
 # NEri0 <- read.csv("data/datasets/View_BioBasis_Nuuk_Data_Vegetation_Eriophorum_total_count170920201325254357.csv", 
 #                   stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
@@ -296,9 +299,4 @@ Nuuk_all0[Nuuk_all0$Species== "Loiseleuria_procumbens", "Species"] <-  "LOI"
 # NEri[NEri$Plot=="Eri3", 'Plot'] <- "N_Eri3"
 # NEri[NEri$Plot=="ERI4", 'Plot'] <- "N_Eri4"
 # NEri[NEri$Plot=="Eri4", 'Plot'] <- "N_Eri4"
-#END -----------------------------------------------------------------------------------
-
-
-
-
-
+#END ----------------------------------------------------------------------------------
