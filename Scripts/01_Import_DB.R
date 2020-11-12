@@ -31,11 +31,11 @@ source("Scripts/00_Load_libraries.r")
 # 96952, 96953, 96954, 96955, 96956, 96957, 96958, 96960, 96961, 96962, 96963, 
 # 96964, 96965, 96966, 96967, 96968, 96969, 96970, 96971, 96972, 96973, 96975
 
-my_species <- c("Salix arctica", "Eriophorum angustifolium", "Silene acaulis", 
-                "Cassiope tetragona", "Loiseleuria procumbens", "Dryas octopetala", 
-                "Papaver radicatum", "Saxifraga oppositifolia")
-my_traits <- c("li_form", "li_form_B", "Growth.Habit", "strategy")
-trait_data <- tr8(species_list = my_species, download_list = my_traits)
+# my_species <- c("Salix arctica", "Eriophorum angustifolium", "Silene acaulis", 
+#                 "Cassiope tetragona", "Loiseleuria procumbens", "Dryas octopetala", 
+#                 "Papaver radicatum", "Saxifraga oppositifolia")
+# my_traits <- c("li_form", "li_form_B", "Growth.Habit", "strategy")
+# trait_data <- tr8(species_list = my_species, download_list = my_traits)
 
 
 
