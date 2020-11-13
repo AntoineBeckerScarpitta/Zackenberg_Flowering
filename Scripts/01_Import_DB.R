@@ -19,23 +19,9 @@ source("Scripts/00_Load_libraries.r")
 
 
 
-# download traits
-# TRY : traits
-# 341, 3401, 3400, 343, 38, 208
-# TRY : species
-# 47788, 21805, 50170, 34012, 78114, 78115, 78116, 78117, 78118, 81864, 81865, 
-# 81866, 92446, 92447, 92449, 92450, 96907, 96909, 96910, 96911, 96913, 96914, 
-# 96915, 96917, 96918, 96919, 96921, 96922, 96924, 96925, 96926, 96927, 96928, 
-# 96929, 96930, 96931, 96932, 96933, 96934, 96935, 96936, 96937, 96938, 96939, 
-# 96940, 96942, 96943, 96944, 96945, 96946, 96947, 96948, 96949, 96950, 96951, 
-# 96952, 96953, 96954, 96955, 96956, 96957, 96958, 96960, 96961, 96962, 96963, 
-# 96964, 96965, 96966, 96967, 96968, 96969, 96970, 96971, 96972, 96973, 96975
+# SPECIES TRAITS
 
-# my_species <- c("Salix arctica", "Eriophorum angustifolium", "Silene acaulis", 
-#                 "Cassiope tetragona", "Loiseleuria procumbens", "Dryas octopetala", 
-#                 "Papaver radicatum", "Saxifraga oppositifolia")
-# my_traits <- c("li_form", "li_form_B", "Growth.Habit", "strategy")
-# trait_data <- tr8(species_list = my_species, download_list = my_traits)
+
 
 
 
