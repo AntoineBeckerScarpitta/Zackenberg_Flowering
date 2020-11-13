@@ -11,8 +11,8 @@
 rm(list=ls())
 
 # Load 02 - Creation database (load scripts 00 and 01)
-source("Scripts/02_Creation_DB.r")
-
+source("Scripts/02_Creation_DB.R")
+source("Scripts/02_Climatic_covariates.R")
 
 
 
@@ -77,6 +77,7 @@ gridExtra::grid.arrange(flow_den2, flow_tot2, ncol=2,
 
 
 
+
 # DISTRIBUTION OF FLOWERING VARIABLES 
 # DENSITY
 distdens <- ggplot(flow, aes(x=Flow_m2, fill=Species)) + 
@@ -100,4 +101,39 @@ disttot <- ggplot(flow, aes(x=TotalFlower, fill=Species)) +
 gridExtra::grid.arrange(distdens, disttot, ncol=2, 
                         top = "Distribution of flowering variable per species")
 ### END DISTRI PLOTS  ## ------------------------------------------------------------------
+
+
+
+
+# CLIMATIC TRENDS
+# Plot Climatic trends
+ggplot(clim_month, aes(Year, Value, group=Site, color=Site)) +
+  geom_point() +
+  geom_smooth(method='lm', se=TRUE) +
+  labs(y='Value') +
+  ggtitle('Climatic trends in Nuuk and Zackenberg') +
+  facet_grid(Variable~., scales="free_y") +
+  theme_linedraw() 
+
+
+
+# GROWING SEASON June to August
+clim_month$Season <- "winter"
+clim_month[clim_month$Month=="06", "Season"] <- "summer"
+clim_month[clim_month$Month=="07", "Season"] <- "summer"
+clim_month[clim_month$Month=="08", "Season"] <- "summer"
+# clim_month[clim_month$Month=="09", "Season"] <- "summer"
+
+
+ggplot(clim_month[clim_month$Season=="summer", ], aes(Year, Value, group=Site, color=Site)) +
+  geom_point() +
+  geom_smooth(method='lm', se=TRUE) +
+  labs(y='Value') +
+  ggtitle('Climatic trends in the growing season (June-Aug) at Nuuk & Zackenberg') +
+  facet_grid(Variable~., scales="free_y") +
+  theme_linedraw() 
+
+
+
+
 
