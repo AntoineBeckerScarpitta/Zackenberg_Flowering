@@ -1,9 +1,9 @@
-#######################################################################################
+###############################################################################
 #
 #                           Greenland Flowering project
 #                         03 - Basic Explorations Graph
 #
-#######################################################################################
+###############################################################################
 # Antoine Becker-Scarpitta
 # September 2020
 
@@ -15,6 +15,12 @@ source("Scripts/00_Load_libraries.r")
 source("Scripts/01_Import_DB.r")
 source("Scripts/02_Creation_DB.R")
 source("Scripts/02_Climatic_covariates.R")
+
+
+
+table(flow[flow$Site=="Nuuk", "Year"], flow[flow$Site=="Nuuk", "Species"])
+table(flow[flow$Site=="Zackenberg", "Year"], flow[flow$Site=="Zackenberg", "Species"])
+
 
 
 

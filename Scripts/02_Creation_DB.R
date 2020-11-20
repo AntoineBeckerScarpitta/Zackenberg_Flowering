@@ -123,10 +123,10 @@ flow <- rbind(Zack_tot_plot, Nuuk_tot_plot)
 # data as numeric or factor
 flow[,"Year"] <- as.numeric(flow[,"Year"])
 flow[c("Site","Species", "Plot")] <- lapply(flow[c("Site","Species", "Plot")], as.factor)
-
-
 #### END -----------------------------------------------------------------------------
 
+table(Nuuk_all$Month, Nuuk_all$Year)
+table(Zack_sub$Month, Zack_sub$Year)
 
 # remove temprary files
 remove("Nuuk_all", "Nuuk_all_sub", "Nuuk_all0",  "Zack", "Zack_sub", "Zack0", "Zack1", 
