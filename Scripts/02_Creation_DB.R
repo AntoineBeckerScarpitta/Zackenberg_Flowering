@@ -11,6 +11,7 @@
 # rm(list=ls())
 
 # Load 01 - Import_DB (and 00-Librairies)
+source("Scripts/00_Load_libraries.r")
 source("Scripts/01_Import_DB.r")
 
 # DID
@@ -127,6 +128,10 @@ flow[c("Site","Species", "Plot")] <- lapply(flow[c("Site","Species", "Plot")], a
 #### END -----------------------------------------------------------------------------
 
 
+# remove temprary files
+remove("Nuuk_all", "Nuuk_all_sub", "Nuuk_all0",  "Zack", "Zack_sub", "Zack0", "Zack1", 
+      "Zcas", "Zcas0", "Zcas1", "Zdry", "Zdry0", "Zdry1", "Zpap", "Zpap0", "Zpap1", 
+      "Zsal", "Zsal0", "Zsal1", "Zsax", "Zsax0", "Zsax1", "Zsil", "Zsil0", "Zsil1")
 
 
 
