@@ -11,6 +11,8 @@
 rm(list=ls())
 
 # Load 02 - Creation database (load scripts 00 and 01)
+source("Scripts/00_Load_libraries.r")
+source("Scripts/01_Import_DB.r")
 source("Scripts/02_Creation_DB.R")
 source("Scripts/02_Climatic_covariates.R")
 
@@ -71,8 +73,8 @@ flow_tot2 <- ggplot(flow, aes(Year, TotalFlower, group=Species, color=Species)) 
 
 #  graph
 gridExtra::grid.arrange(flow_den2, flow_tot2, ncol=2, 
-                        top = "Temporal flowering trends at species level in Zackenberg")
-### END SP LEVEL ## ------------------------------------------------------------------
+           top = "Temporal flowering trends at species level in Zackenberg")
+### END SP LEVEL ## -----------------------------------------------------
 
 
 
@@ -100,18 +102,19 @@ disttot <- ggplot(flow, aes(x=TotalFlower, fill=Species)) +
 #  graph
 gridExtra::grid.arrange(distdens, disttot, ncol=2, 
                         top = "Distribution of flowering variable per species")
-### END DISTRI PLOTS  ## ------------------------------------------------------------------
+### END DISTRI PLOTS  ## -------------------------------------------------
 
 
 
 
 # CLIMATIC TRENDS
-# Plot Climatic trends
+# Plot Climatic trends    ## ---------------------------------------------
+# ALL MONTHS
 ggplot(clim_month, aes(Year, Value, group=Site, color=Site)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='Value') +
-  ggtitle('Climatic trends in Nuuk and Zackenberg') +
+  ggtitle('Climatic trends all months Nuuk & Zackenberg') +
   facet_grid(Variable~., scales="free_y") +
   theme_linedraw() 
 
@@ -124,14 +127,15 @@ clim_month[clim_month$Month=="07", "Season"] <- "summer"
 clim_month[clim_month$Month=="08", "Season"] <- "summer"
 # clim_month[clim_month$Month=="09", "Season"] <- "summer"
 
-
-ggplot(clim_month[clim_month$Season=="summer", ], aes(Year, Value, group=Site, color=Site)) +
+ggplot(clim_month[clim_month$Season=="summer", ], 
+       aes(Year, Value, group=Site, color=Site)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='Value') +
-  ggtitle('Climatic trends in the growing season (June-Aug) at Nuuk & Zackenberg') +
+  ggtitle('Climatic trends in the growing season (June-Aug) Nuuk & Zackenberg') +
   facet_grid(Variable~., scales="free_y") +
   theme_linedraw() 
+### END CLIMATIC PLOTS  ## -----------------------------------------------
 
 
 
