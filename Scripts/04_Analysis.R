@@ -11,7 +11,12 @@
 rm(list=ls())
 
 # Load 02 - Creation database (+ scripts 00 and 01)
+source("Scripts/00_Load_libraries.r")
+source("Scripts/01_Import_DB.r")
 source("Scripts/02_Creation_DB.r")
+source("Scripts/02_Climatic_covariates.R")
+
+
 
 
 # Correlation between Density and Total
@@ -20,14 +25,24 @@ plot(flow$Flow_m2 ~ flow$TotalFlower, col=flow$Species)
 
 
 # Basic LMER models
-mod1 <- lmer((scale(Flow_m2, center=TRUE, scale=TRUE))~Year*Species+(1|Plot),
+mod1 <- lmer((scale(Flow_m2, center=TRUE, scale=TRUE)) ~ Year * Species + (1|Plot),
              data=flow)
+qqmath(mod1)
+summary(mod1) ; anova(mod1)
+
+
+mod1.1 <- lmer((scale(Flow_m2, center=TRUE, scale=TRUE)) ~ Year * Species + clim_year$
+                 +(1|Plot),
+             data=flow)
+
+
+qqmath(mod1.1)
+summary(mod1.1) ; anova(mod1.1)
 
 mod2 <- glmer(scale(Flow_m2, center=TRUE, scale=TRUE) ~ Year + Species + (1|Plot),
               poisson(link = "log"), data=flow)
 
-qqmath(mod1)
-summary(mod1) ; anova(mod1)
+
 
 
 
