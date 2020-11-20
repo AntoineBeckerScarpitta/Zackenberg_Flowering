@@ -8,7 +8,7 @@
 # November 2020
 
 #  clean R work-space
-rm(list=ls())
+# rm(list=ls())
 
 # load library
 # R, Rstudio need to be updated
@@ -76,8 +76,6 @@ colnames(Nhum) <- c('Date', "Time", "Value", "Variable", "Site")
 
 
 
-
-
 # COMPILE COVARIATE DATABASE
 # combine All dataset together
 clim <- rbind(Ztemp, Zprec, Zhum, Ntemp, Nprec, Nhum)
@@ -90,15 +88,43 @@ clim <- clim[complete.cases(clim), ]
 clim <- cbind(as.data.frame(str_split(clim$Date, "-", simplify=TRUE)), clim)
 colnames(clim) <- c("Year", "Month", "Day", 'Date', "Time", "Value", "Variable", "Site")
 
+# calculate the average Value per Day
+clim_day <- as.data.frame(clim %>% 
+  dplyr::group_by(Site, Year, Month, Day, Variable) %>% 
+  dplyr::summarise(Value=round(mean(Value), 2))) %>%
+  dplyr::mutate(Site=as.factor(Site),
+                Year=as.numeric(Year), 
+                Month=as.factor(Month),
+                Day=as.factor(Day),
+                Variable=as.factor(Variable)) %>%
+  ungroup()
+
 # calculate the average Value per Month
 clim_month <- as.data.frame(clim %>% 
   dplyr::group_by(Site, Year, Month, Variable) %>% 
   dplyr::summarise(Value=round(mean(Value), 2))) %>%
   dplyr::mutate(Site=as.factor(Site),
-                Year=as.factor(Year), 
+                Year=as.numeric(Year), 
                 Month=as.factor(Month),
-                Variable=as.factor(Variable))
+                Variable=as.factor(Variable))%>%
+  ungroup()
+
+# calculate the average Value per Year
+clim_year <- as.data.frame(clim %>% 
+                              dplyr::group_by(Site, Year, Variable) %>% 
+                              dplyr::summarise(Value=round(mean(Value), 2))) %>%
+  dplyr::mutate(Site=as.factor(Site),
+                Year=as.numeric(Year), 
+                Variable=as.factor(Variable))%>%
+  ungroup()
 #END----------------------------------------------------------------------------------
+
+
+# remove temporary table
+remove("Nhum", "Nprec", "Ntemp", "Zhum", "Zprec", "Ztemp")
+
+
+
 
 
 
