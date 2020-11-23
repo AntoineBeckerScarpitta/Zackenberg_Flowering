@@ -131,7 +131,7 @@ clim_month$Season <- "winter"
 clim_month[clim_month$Month=="06", "Season"] <- "summer"
 clim_month[clim_month$Month=="07", "Season"] <- "summer"
 clim_month[clim_month$Month=="08", "Season"] <- "summer"
-# clim_month[clim_month$Month=="09", "Season"] <- "summer"
+clim_month[clim_month$Month=="09", "Season"] <- "summer"
 
 ggplot(clim_month[clim_month$Season=="summer", ], 
        aes(Year, Value, group=Site, color=Site)) +
