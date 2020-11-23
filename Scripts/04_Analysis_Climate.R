@@ -27,12 +27,12 @@ par(mfrow=c(3,2))
 # DAILY MEAN TEMPERATURE
 # Nuuk DAY
 mod_Nd_temp <- lm(Value ~ Year , data=clim_day[clim_day$Site=="Nuuk" & 
-                                                 clim_day$Variable=="Temperature_C", ])
+                                               clim_day$Variable=="Temperature_C", ])
 summary(mod_Nd_temp)
 anova(mod_Nd_temp)
 
 plot(Value ~ Year , data=clim_day[clim_day$Site=="Nuuk" &
-                                    clim_day$Variable=="Temperature_C", ], 
+                                  clim_day$Variable=="Temperature_C", ], 
      ylab="Temperatures (°C)", pch=21, ylim=c(-40, 20), 
      cex=2, xaxt='n', xlab=' ', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5, 
      main=paste("Nuuk day mean temp: F=", as.character(round(anova(mod_Nd_temp)[1,4], 3)), 
@@ -337,7 +337,7 @@ anova(mod_Ny_hum)
 
 plot(Value ~ Year , data=clim_year[clim_year$Site=="Nuuk" & 
                                      clim_year$Variable=="Humidity_%", ], 
-     ylab="Humidity (%)", pch=21, ylim=c(30, 100), 
+     ylab="Humidity (%)", pch=21, ylim=c(60, 80), 
      cex=2, xaxt='n', xlab='Year', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5, 
      main=paste("Nuuk year mean hum ***: F=" , as.character(round(anova(mod_Ny_hum)[1,4], 3)), 
                 "P-value=" , as.character(round(anova(mod_Ny_hum)[1,5], 3)),
@@ -354,7 +354,7 @@ anova(mod_Zy_hum)
 
 plot(Value ~ Year , data=clim_year[clim_year$Site=="Zackenberg" & 
                                      clim_year$Variable=="Humidity_%", ], 
-     ylab=" ", pch=21, ylim=c(30, 100), 
+     ylab=" ", pch=21, ylim=c(60, 80), 
      cex=2, xaxt='n', xlab='Year', col="red", bg="red", cex.axis=1.5, cex.lab=1.5, 
      main=paste("Zackenberg year mean hum **: F=" , as.character(round(anova(mod_Zy_hum)[1,4], 3)), 
                 "P-value=" , as.character(round(anova(mod_Zy_hum)[1,5], 3)),
