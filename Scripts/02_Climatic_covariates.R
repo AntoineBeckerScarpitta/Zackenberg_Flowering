@@ -111,8 +111,8 @@ clim_month <- as.data.frame(clim %>%
 
 # calculate the average Value per Year
 clim_year <- as.data.frame(clim %>% 
-                              dplyr::group_by(Site, Year, Variable) %>% 
-                              dplyr::summarise(Value=round(mean(Value), 2))) %>%
+  dplyr::group_by(Site, Year, Variable) %>% 
+  dplyr::summarise(Value=round(mean(Value), 2))) %>%
   dplyr::mutate(Site=as.factor(Site),
                 Year=as.numeric(Year), 
                 Variable=as.factor(Variable))%>%
