@@ -64,14 +64,14 @@ Nuuk_all <- merge(Nuuk_all, Plot_size[, c('Plot_size', 'Plot')], by="Plot", all.
 Nuuk_all[Nuuk_all$TotalFlower==-9999, "TotalFlower"] <- NA
 
 # calculate the total flower per plot per year (sum of all sections)
-Nuuk_all_sub <- ddply(Nuuk_all, .(Site, Year, Species, Plot, Plot_size), 
-                      summarise, TotalFlower=sum(TotalFlower))
+Nuuk_all_sub <- Nuuk_all %>% group_by(Site, Year, Species, Plot, Plot_size) %>%
+  summarise(TotalFlower=sum(TotalFlower))
 
 # remove NA
 Nuuk_tot_plot <- Nuuk_all_sub[complete.cases(Nuuk_all_sub), ]
 
 # devise by plot_size
-Nuuk_tot_plot$Flow_m2 <- round(Nuuk_tot_plot$TotalFlower/Nuuk_tot_plot$Plot_size, 0)
+Nuuk_tot_plot$Flow_m2 <- round(Nuuk_tot_plot$TotalFlower/Nuuk_tot_plot$Plot_size, 2)
 
 
 
@@ -109,16 +109,16 @@ Zack_sub[Zack_sub$Section=="A-D", "Section"] <- "A"
 Zack_sub[Zack_sub$Section=="A-B", "Section"] <- "A"
 
 # calculate the total flower per plot per year (sum of all sections)
-Zack_tot_plot <- ddply(Zack_sub, .(Site, Year, Species, Plot, Plot_size), 
-                       summarise, TotalFlower=sum(Value))
+Zack_tot_plot <- Zack_sub %>% group_by(Site, Year, Species, Plot, Plot_size) %>%
+                          summarise(TotalFlower=sum(Value))
 
 # devise by plot_size
-Zack_tot_plot$Flow_m2 <- round(Zack_tot_plot$TotalFlower/Zack_tot_plot$Plot_size, 0)
+Zack_tot_plot$Flow_m2 <- round(Zack_tot_plot$TotalFlower/Zack_tot_plot$Plot_size, 2)
 
 
 
 # Combined ZACKENBERG AND NUUK in 1 table
-flow <- rbind(Zack_tot_plot, Nuuk_tot_plot)
+flow <- as.data.frame(rbind(Zack_tot_plot, Nuuk_tot_plot))
 
 # data as numeric or factor
 flow[,"Year"] <- as.numeric(flow[,"Year"])
