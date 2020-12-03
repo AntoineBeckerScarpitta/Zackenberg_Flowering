@@ -51,6 +51,12 @@ qqmath(mod0z)
 summary(mod0z) ; anova(mod0z)
 MuMIn::r.squaredGLMM(modoz)
 
+
+library(emmeans)
+emmeans(mod0n, list(pairwise ~ Species), adjust = "tukey")
+emmeans(mod0z, list(pairwise ~ Species), adjust = "tukey")
+
+
 #  mod1 - log(Flow_m2() ~ YEAR + SPECIES + RANEF(plot)
 mod1n <- lmer(log(Flow_m2_log) ~ Year * Species + (1|Plot), data=flow[flow$Site=="Nuuk",])
 qqmath(mod1n)
