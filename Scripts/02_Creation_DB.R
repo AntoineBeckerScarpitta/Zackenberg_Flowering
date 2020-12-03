@@ -123,6 +123,9 @@ flow <- as.data.frame(rbind(Zack_tot_plot, Nuuk_tot_plot))
 # data as numeric or factor
 flow[,"Year"] <- as.numeric(flow[,"Year"])
 flow[c("Site","Species", "Plot")] <- lapply(flow[c("Site","Species", "Plot")], as.factor)
+
+# Remove year 1995 (installation, low trust in that survey)
+flow <- flow[flow$Yea>1995, ]
 #### END -----------------------------------------------------------------------------
 
 table(Nuuk_all$Month, Nuuk_all$Year)
