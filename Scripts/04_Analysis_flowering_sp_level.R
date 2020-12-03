@@ -18,36 +18,34 @@ source("Scripts/02_Climatic_covariates.R")
 
 
 # SPECIFIC DATA MANAGMENT FOR ANALYSIS -----------------------------------------------
-# Create new response variable with no null value (for log transfo)
-flow$Flow_m2_log <- flow$Flow_m2
-flow[flow$Flow_m2==0, "Flow_m2_log"] <- 0.0001
+# log(density) !=0 (Flow_m2 + 0.001 in 02_Creation_DB, line 131)
 
 
 
 # NUUK
 # Erithrum
-mod_eri <- lmer(log(Flow_m2_log) ~ Year + (1|Plot), 
+mod_eri <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
               data=droplevels(flow[flow$Site=="Nuuk" & flow$Species=="ERI",]))
 qqmath(mod_eri)
 summary(mod_eri) ; anova(mod_eri)
 MuMIn::r.squaredGLMM(mod_eri)
 
 # Loiseuria
-mod_loi <- lmer(log(Flow_m2_log) ~ Year + (1|Plot), 
+mod_loi <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
               data=droplevels(flow[flow$Site=="Nuuk" & flow$Species=="LOI",]))
 qqmath(mod_loi)
 summary(mod_loi) ; anova(mod_loi)
 MuMIn::r.squaredGLMM(mod_loi)
 
 # Salix
-mod_sal <- lmer(log(Flow_m2_log) ~ Year + (1|Plot), 
+mod_sal <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
               data=droplevels(flow[flow$Site=="Nuuk" & flow$Species=="SAL",]))
 qqmath(mod_sal)
 summary(mod_sal) ; anova(mod_sal)
 MuMIn::r.squaredGLMM(mod_sal)
 
 # Silene
-mod_sil <- lmer(log(Flow_m2_log) ~ Year + (1|Plot), 
+mod_sil <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
               data=flow[flow$Site=="Nuuk" & flow$Species=="SIL",])
 qqmath(mod_sil)
 summary(mod_sil) ; anova(mod_sil)
@@ -60,35 +58,35 @@ MuMIn::r.squaredGLMM(mod_sil)
 
 # ZACKENBERG
 # Cassiope
-mod_Zcas <- lmer(log(Flow_m2_log) ~ Year + (1|Plot), 
+mod_Zcas <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
               data=flow[flow$Site=="Zackenberg" & flow$Species=="CAS",])
 qqmath(mod_Zcas)
 summary(mod_Zcas) ; anova(mod_Zcas)
 MuMIn::r.squaredGLMM(mod_Zcas)
 
 # Dryas
-mod_Zday <- lmer(log(Flow_m2_log) ~ Year  + (1|Plot), 
+mod_Zday <- lmer(log(trans_Flow_m2) ~ Year  + (1|Plot), 
                  data=flow[flow$Site=="Zackenberg" & flow$Species=="DRY",])
 qqmath(mod_Zday)
 summary(mod_Zday) ; anova(mod_Zday)
 MuMIn::r.squaredGLMM(mod_Zday)
 
 # Papaver
-mod_Zpap <- lmer(log(Flow_m2_log) ~ Year + (1|Plot), 
+mod_Zpap <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
                  data=flow[flow$Site=="Zackenberg" & flow$Species=="PAP",])
 qqmath(mod_Zpap)
 summary(mod_Zpap) ; anova(mod_Zpap)
 MuMIn::r.squaredGLMM(mod_Zpap)
 
 # Saxifraga
-mod_Zsax <- lmer(log(Flow_m2_log) ~ Year + (1|Plot), 
+mod_Zsax <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
                  data=flow[flow$Site=="Zackenberg" & flow$Species=="SAX",])
 qqmath(mod_Zsax)
 summary(mod_Zsax) ; anova(mod_Zsax)
 MuMIn::r.squaredGLMM(mod_Zsax)
 
 # Silene
-mod_Zsil <- lmer(log(Flow_m2_log) ~ Year + (1|Plot), 
+mod_Zsil <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
                  data=flow[flow$Site=="Zackenberg" & flow$Species=="SIL",])
 qqmath(mod_Zsil)
 summary(mod_Zsil) ; anova(mod_Zsil)
