@@ -125,11 +125,16 @@ flow[,"Year"] <- as.numeric(flow[,"Year"])
 flow[c("Site","Species", "Plot")] <- lapply(flow[c("Site","Species", "Plot")], as.factor)
 
 # Remove year 1995 (installation, low trust in that survey)
-flow <- flow[flow$Yea>1995, ]
+flow <- flow[flow$Year>1995, ]
+
+# Create new response variable with no null value (for log transfo)
+flow$trans_Flow_m2 <- flow$Flow_m2 + 0.001
 #### END -----------------------------------------------------------------------------
 
-table(Nuuk_all$Month, Nuuk_all$Year)
-table(Zack_sub$Month, Zack_sub$Year)
+
+# table(Nuuk_all$Month, Nuuk_all$Year)
+# table(Zack_sub$Month, Zack_sub$Year)
+
 
 # remove temprary files
 remove("Nuuk_all", "Nuuk_all_sub", "Nuuk_all0",  "Zack", "Zack_sub", "Zack0", "Zack1", 
