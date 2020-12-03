@@ -17,68 +17,69 @@ source("Scripts/02_Creation_DB.R")
 source("Scripts/02_Climatic_covariates.R")
 
 
-
+# Total number of plot per year Nuuk and Zackenberg
 table(flow[flow$Site=="Nuuk", "Year"], flow[flow$Site=="Nuuk", "Species"])
 table(flow[flow$Site=="Zackenberg", "Year"], flow[flow$Site=="Zackenberg", "Species"])
 
+# Create new response variable with no null value (for log transfo)
+flow$Flow_m2_log <- flow$Flow_m2
+flow[flow$Flow_m2==0, "Flow_m2_log"] <- 0.001
 
 
 
-#  TEMPORAL TRENDS AT PLOT LEVEL 
+
+#  TEMPORAL TRENDS AT PLOT LEVEL WITH LOG ON DENSITY ONLY
 # 1 - Flower density per m2  ## --------------------------------------------
 flow_den <- ggplot(flow, aes(Year, Flow_m2, group=Plot, color=Plot)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='Flower density / m2') +
-  ggtitle('Flower density') +
+  ggtitle('A - Flower density') +
   facet_grid(Site+Species~., scales="free_y") +
   theme_linedraw() +
   theme(legend.position = "none") 
 
-# 2 - Total Flower per plot  ## --------------------------------------------
-flow_tot <- ggplot(flow, aes(Year, TotalFlower, group=Plot, color=Plot)) +
+# 3 - Log Flower density !=0  ## --------------------------------------------
+flow_log_nn <- ggplot(flow, aes(Year, log(Flow_m2_log), group=Plot, color=Plot)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
-  labs(y='Total flower number') +
-  ggtitle('Total flower nubmer') +
+  labs(y='log(Flower density / m2)') +
+  ggtitle('B - Log(Flower density !=0)') +
   facet_grid(Site+Species~., scales="free_y")+
   theme_linedraw() +
   theme(legend.position = "none") 
-
 #  graph
-gridExtra::grid.arrange(flow_den, flow_tot, ncol=2, 
+gridExtra::grid.arrange(flow_den, flow_log_nn, ncol=2, 
                         top = "Plot level temporal trends in flowering")
 ### END PLOT LEVEL ## ------------------------------------------------------
 
 
 
 
-
-#  TEMPORAL TRENDS AT SPECIE LEVEL 
-# 3 - Flower density per m2  ## --------------------------------------------
+#  TEMPORAL TRENDS AT SPECIE LEVEL DENSITY ONLY
+# 4 - Flower density per m2  ## --------------------------------------------
 flow_den2 <- ggplot(flow, aes(Year, Flow_m2, group=Species, color=Species)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='Flower density/m2') +
-  ggtitle('Flower density') +
+  ggtitle('A - Flower density') +
   facet_grid(Site+Species ~., scales="free_y") +
   theme_linedraw()+
   theme(legend.position = "none") +
   scale_color_brewer(palette="Dark2")
 
-# 4 - Total Flower per plot  ## --------------------------------------------
-flow_tot2 <- ggplot(flow, aes(Year, TotalFlower, group=Species, color=Species)) +
+# 6 - Total Flower per plot  ## --------------------------------------------
+flow_den2_log_nn <- ggplot(flow, aes(Year, log(Flow_m2_log), group=Species, color=Species)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
-  labs(y='Total flower number') +
-  ggtitle('Total flower number') +
+  labs(y='log(Flower density/m2)') +
+  ggtitle('B - Log(Flower density !=0)') +
   facet_grid(Site+Species~., scales="free_y")+
   theme_linedraw() +
   theme(legend.position = "none") +
   scale_color_brewer(palette="Dark2")
-
 #  graph
-gridExtra::grid.arrange(flow_den2, flow_tot2, ncol=2, 
+gridExtra::grid.arrange(flow_den2, flow_den2_log_nn, ncol=2, 
            top = "Temporal flowering trends at species level in Zackenberg")
 ### END SP LEVEL ## -----------------------------------------------------
 
@@ -90,25 +91,28 @@ gridExtra::grid.arrange(flow_den2, flow_tot2, ncol=2,
 # DENSITY
 distdens <- ggplot(flow, aes(x=Flow_m2, fill=Species)) + 
   geom_density(alpha=.3) +
-  labs(y='Density', x='Flowering density/m2 ') +
-  ggtitle('Distribution of Flowering density') +
+  labs(y='Density', x='Flowering density/m2') +
+  ggtitle('A - Distribution of Flowering density') +
   facet_wrap(.~Site+Species, scales="free") +
   theme_linedraw() +
   theme(legend.position = "none")
 
 # TOTAL
-disttot <- ggplot(flow, aes(x=TotalFlower, fill=Species)) + 
+dist_logdens <- ggplot(flow, aes(x=log(Flow_m2), fill=Species)) + 
   geom_density(alpha=.3) +
-  labs(y='Density', x='Total Flowers') +
-  ggtitle('Distribution of Total Flowering') +
+  labs(y='Density', x='log(Flowering density/m2)') +
+  ggtitle('B - Distribution of log(Flowering density)') +
   facet_wrap(Site+Species~ ., scales="free") +
   theme_linedraw() +
   theme(legend.position = "none")
 
 #  graph
-gridExtra::grid.arrange(distdens, disttot, ncol=2, 
+gridExtra::grid.arrange(distdens, dist_logdens, ncol=2, 
                         top = "Distribution of flowering variable per species")
 ### END DISTRI PLOTS  ## -------------------------------------------------
+
+
+
 
 
 
