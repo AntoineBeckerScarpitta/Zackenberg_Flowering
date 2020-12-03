@@ -27,10 +27,10 @@
 # install.packages("labdsv")
 # install.packages("betapart")
 # install.packages("TR8")
+# install.packages("ape")
 # 
 # 
 # # Data managment
-# install.packages("reshape")
 # install.packages("reshape2")
 # install.packages("plyr")
 # install.packages("dplyr")
@@ -91,7 +91,6 @@ library(TR8)
 
 
 # Data managment
-library(reshape)
 library(reshape2)
 library(plyr)
 library(dplyr)
