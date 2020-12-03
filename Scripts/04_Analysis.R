@@ -18,57 +18,58 @@ source("Scripts/02_Climatic_covariates.R")
 
 
 # SPECIFIC DATA MANAGMENT FOR ANALYSIS -----------------------------------------------
-# Create new response variable with no null value (for log transfo)
-flow$Flow_m2_log <- flow$Flow_m2
-flow[flow$Flow_m2==0, "Flow_m2_log"] <- 0.0001
+# log(density) !=0 (Flow_m2 + 0.001 in 02_Creation_DB, line 131)
 
 
-# Correlation between Density and Total
-cor(flow$Flow_m2 , flow$TotalFlower);
-plot(flow$Flow_m2 ~ flow$TotalFlower, col=flow$Species)
-
-# basic explo
-hist(flow$Flow_m2)
-hist(log(flow$Flow_m2))
-hist(log(flow$Flow_m2_log))
-
+# data  distribution exploration, flo density, log(flow density)
 par(mfrow=c(2,2))
-hist(flow[flow$Site=="Nuuk", "Flow_m2"], main='Nuuk raw', xlab="Flower m2")
-hist(flow[flow$Site=="Zackenberg", "Flow_m2"], main='Zackenberg raw', xlab="Flower m2")
-hist(log(flow[flow$Site=="Nuuk", "Flow_m2"]), main='Nuuk log', xlab="log(Flower m2)")
-hist(log(flow[flow$Site=="Zackenberg", "Flow_m2"]), main='Zackenberg log', xlab="log(Flower m2)")
+hist(flow[flow$Site=="Nuuk", "Flow_m2"], main='A - Nuuk flowering density', xlab="Flower m2")
+hist(flow[flow$Site=="Zackenberg", "Flow_m2"], main='B - Zackenberg flowering density', xlab="Flower m2")
+hist(log(flow[flow$Site=="Nuuk", "trans_Flow_m2"]), main='C - Nuuk log(flow density)', xlab="log(Flower m2)")
+hist(log(flow[flow$Site=="Zackenberg", "trans_Flow_m2"]), main='D - Zackenberg log(flow density)', xlab="log(Flower m2)")
 par(mfrow=c(1,1))
 
+
+
 #  mod0 - Flow_m2 ~ YEAR + SPECIES + RANEF(plot)
+# NUKK
 mod0n <- lmer(Flow_m2 ~ Year * Species + (1|Plot), data=flow[flow$Site=="Nuuk",])
 qqmath(mod0n)
 summary(mod0n) ; anova(mod0n)
 MuMIn::r.squaredGLMM(mod0n)
 
-
+# ZACKENBERG
 mod0z <- lmer(Flow_m2 ~ Year * Species + (1|Plot), data=flow[flow$Site=="Zackenberg",])
 qqmath(mod0z)
 summary(mod0z) ; anova(mod0z)
 MuMIn::r.squaredGLMM(modoz)
 
-
+# posthoc test
 library(emmeans)
 emmeans(mod0n, list(pairwise ~ Species), adjust = "tukey")
 emmeans(mod0z, list(pairwise ~ Species), adjust = "tukey")
 
 
-#  mod1 - log(Flow_m2() ~ YEAR + SPECIES + RANEF(plot)
-mod1n <- lmer(log(Flow_m2_log) ~ Year * Species + (1|Plot), data=flow[flow$Site=="Nuuk",])
+
+#  mod1 - log(trans_Flow_m2) ~ YEAR + SPECIES + RANEF(plot)
+# trans_Flow_m2 = Flow_m2 + 0.001
+# NUUK
+mod1n <- lmer(log(trans_Flow_m2) ~ Year * Species + (1|Plot), data=flow[flow$Site=="Nuuk",])
 qqmath(mod1n)
 summary(mod1n) ; anova(mod1n)
 MuMIn::r.squaredGLMM(mod1n)
 
-
-mod1z <- lmer(log(Flow_m2_log) ~ Year * Species + (1|Plot), 
+# ZACK
+mod1z <- lmer(log(trans_Flow_m2) ~ Year * Species + (1|Plot), 
               data=flow[flow$Site=="Zackenberg",])
 qqmath(mod1z)
 summary(mod1z) ; anova(mod1z)
 MuMIn::r.squaredGLMM(mod1z)
+
+# posthoc test
+library(emmeans)
+emmeans(mod1n, list(pairwise ~ Species), adjust = "tukey")
+emmeans(mod1z, list(pairwise ~ Species), adjust = "tukey")
 
 
 
