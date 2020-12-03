@@ -1,0 +1,11 @@
+BioBasis Zackenberg - Abiotics - Snow and ice cover
+Data on the snow and ice cover fraction in permanent plant and arthropod plots. For further details, please refer to the newest BioBasis manual available at the website.
+DOI and permanent link: https://doi.org/10.17897/BKEX-JR94
+Read the included PDF with terms of use for information on license and how to cite.
+Also find this item on DataCite, where you can get the formal citation in various formats: https://search.datacite.org/works/10.17897/BKEX-JR94
+-------------------------------------
+Learn more about the Greenland Ecosystem Monitoring Project here: https://www.g-e-m.dk.
+This dataset is managed in accordance with the GEM Data Management Plan: https://g-e-m.dk/gem-publications-and-reports/gem-data-mangement-plan/
+-------------------------------------
+Supplementary data you should review for understanding the dataset:
+The BioBasis Zackenberg monitoring manual: https://g-e-m.dk/fileadmin/g-e-m/Zackenberg/BioBasis_manual_2019.pdf
