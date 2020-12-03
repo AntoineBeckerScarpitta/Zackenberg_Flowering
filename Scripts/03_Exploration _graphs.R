@@ -39,7 +39,7 @@ flow_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), group=Plot, color=Plot
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='log(Flower density / m2)') +
-  ggtitle('B - Log(Flower density !=0)') +
+  ggtitle('B - Log(Flower density)') +
   facet_grid(Site+Species~., scales="free_y")+
   theme_linedraw() +
   theme(legend.position = "none") 
