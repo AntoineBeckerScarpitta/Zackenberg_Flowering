@@ -17,14 +17,6 @@ source("Scripts/00_Load_libraries.r")
 
 
 
-
-
-# SPECIES TRAITS
-
-
-
-
-
 # READ ZACK+NUUK PLOT SIZE
 Plot_size <- read.csv("data/datasets/Plot_size_coord_Z_N.csv", header=TRUE,  sep=";")
 
