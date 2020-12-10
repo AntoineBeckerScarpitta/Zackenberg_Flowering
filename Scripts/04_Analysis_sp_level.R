@@ -17,7 +17,7 @@ source("Scripts/02_Creation_DB.r")
 source("Scripts/02_Climatic_covariates.R")
 
 
-# SPECIFIC DATA MANAGMENT FOR ANALYSIS -----------------------------------------------
+# SPECIFIC DATA MANAGMENT FOR ANALYSIS -------------------------------------------
 # log(density) !=0 (Flow_m2 + 0.001 in 02_Creation_DB, line 131)
 
 
@@ -27,7 +27,8 @@ source("Scripts/02_Climatic_covariates.R")
 mod_eri <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
               data=droplevels(flow[flow$Site=="Nuuk" & flow$Species=="ERI",]))
 qqmath(mod_eri)
-summary(mod_eri) ; anova(mod_eri)
+summary(mod_eri) 
+anova(mod_eri)
 MuMIn::r.squaredGLMM(mod_eri)
 
 # Loiseuria
