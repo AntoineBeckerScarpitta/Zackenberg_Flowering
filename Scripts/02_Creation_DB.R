@@ -23,12 +23,7 @@ source("Scripts/01_Import_DB.r")
 # cas5, cas6, dry7, dry8 half no data => DONE
 #  ADD plot size and divide flow numb by plot size => DONE
 # different format of data in SECTION A-D, A-B => DONE
-
-# TO DO 
-# NUUK has a different structure NEED TO FIGURED OUT how to integrated it
-
-
-# Check the variation in survey period (month level)
+# NUUK has a different structure NEED TO FIGURED OUT how to integrated it => DONE
 
 
 
@@ -77,6 +72,18 @@ Nuuk_tot_plot$Flow_m2 <- round(Nuuk_tot_plot$TotalFlower/Nuuk_tot_plot$Plot_size
 
 
 # ZACKENBERG
+# Salix flower are divided into male and female flowers
+Zsal_sel <- subset(Zsal, TotalCount=="TOTALCOUNT")
+Zsal_sel <- Zsal_sel %>% group_by(Site, Year, Species, Plot, Plot_size) %>%
+  summarise(TotalFlower=sum(Value))
+Zsal_sel[Zsal_sel$Section=="A-D", "Section"] <- "A"
+Zsal_sel <- Zsal_sel[complete.cases(Zsal_sel),]
+
+
+
+
+
+
 # Rbind all ZACK datasets together
 Zack0 <- rbind(Zcas, Zdry, Zpap, Zsal, Zsax, Zsil)
 
