@@ -17,9 +17,31 @@ source("Scripts/02_Creation_DB.r")
 source("Scripts/02_Climatic_covariates.R")
 
 
+### BASIC CLIMATIC EXPLORATION #----------------------------------------------------
+# distribution of temperature along year
+par(mfrow=c(1,2))
+# NUUK TEMPERATURE
+plot(clim_day[clim_day$Site=="Nuuk" & clim_day$Variable=="Temperature_C" , "Month"], 
+     clim_day[clim_day$Site=="Nuuk" & clim_day$Variable=="Temperature_C" , "Value"], 
+     ylab="Temperatures (°C)", xlab="Month of the year", 
+     ylim=range(clim_day[clim_day$Variable=="Temperature_C" , "Value"]), 
+     main="Nuuk, distribution of temperature")
+abline(0, 0, col="red")
+abline(v=c('05', "09"), col="blue")
+# summer at Zùck==06, 07, 08
+
+# ZACKENBERG TEMPERATURE
+plot(clim_day[clim_day$Site=="Zackenberg" & clim_day$Variable=="Temperature_C" , "Month"], 
+     clim_day[clim_day$Site=="Zackenberg" & clim_day$Variable=="Temperature_C" , "Value"], 
+     xlab="Month of the year", 
+     ylim=range(clim_day[clim_day$Variable=="Temperature_C" , "Value"]), 
+     main="Zackenberg, distribution of temperature")
+abline(0, 0, col="red")
+abline(v=c('06', "08"), col="blue")
+# summer at Zack==06, 07, 08
 
 
-### CLIMATIC ANALYSIS #----------------------------------------------------------------
+### TEMPRORAL CLIMATIC ANALYSIS #---------------------------------------------------
 
 ### TEMPERATURE 
 par(mfrow=c(3,2))
