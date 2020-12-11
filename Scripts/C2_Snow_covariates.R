@@ -28,11 +28,12 @@ colnames(Zsnow) <- c("Year", "Month", "Day", 'Date', "Plot", "Section",
 # Create a col DOY=day of the year based on original date
 # Select the DOY with 50 of snow_cover (this will be the date of snow melt)
 # I think we deal the plot level and not the section, thus:
-# ...Section marked as A-D, can be renamed ==A
-# ...Plot==ERI, ART, VEG, can be remove
-# ...we need to figured out the doublons plot (e.g. Sax1Sil1, Sax2Sil2...)
+# ...section marked as A-D, can be renamed ==A
+# ...plot==ERI, ART, VEG, can be remove
+# ...we need to figured out the doubles plots (e.g. Sax1Sil1, Sax2Sil2...)
 # ...correct mistakes Plot==Si4, Sax3Si3 in Plot==Sil4, Sax3Sil3
-
+# we need at the end one table with the DOY when the plot has 50% snow cover of a given  year
+# this DOY will be one explainatory variable with Tem, Prec, Humd and Time
 
 
 
