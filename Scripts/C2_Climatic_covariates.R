@@ -89,7 +89,10 @@ clim <- clim[complete.cases(clim), ]
 clim <- cbind(as.data.frame(str_split(clim$Date, "-", simplify=TRUE)), clim)
 colnames(clim) <- c("Year", "Month", "Day", 'Date', "Time", "Value", "Variable", "Site")
 
-# calculate the average Value per Day
+
+
+
+# calculate the average Value per DAY
 clim_day <- as.data.frame(clim %>% 
   dplyr::group_by(Site, Year, Month, Day, Variable) %>% 
   dplyr::summarise(Value=round(mean(Value), 2))) %>%
@@ -100,7 +103,7 @@ clim_day <- as.data.frame(clim %>%
                 Variable=as.factor(Variable)) %>%
   ungroup()
 
-# calculate the average Value per Month
+# calculate the average Value per MONTH
 clim_month <- as.data.frame(clim %>% 
   dplyr::group_by(Site, Year, Month, Variable) %>% 
   dplyr::summarise(Value=round(mean(Value), 2))) %>%
@@ -110,7 +113,7 @@ clim_month <- as.data.frame(clim %>%
                 Variable=as.factor(Variable))%>%
   ungroup()
 
-# calculate the average Value per Year
+# calculate the average Value per YEAR
 clim_year <- as.data.frame(clim %>% 
   dplyr::group_by(Site, Year, Variable) %>% 
   dplyr::summarise(Value=round(mean(Value), 2))) %>%
@@ -118,6 +121,48 @@ clim_year <- as.data.frame(clim %>%
                 Year=as.numeric(Year), 
                 Variable=as.factor(Variable))%>%
   ungroup()
+
+
+
+# SEASONAL variable
+clim$Season <- "winter"
+clim[clim$Month=="06" |
+       clim$Month=="07" |
+       clim$Month=="08", "Season"] <- "summer"
+clim[clim$Month=="09" |
+       clim$Month=="10", "Season"] <- "autumn"
+
+# clim[clim$Site=="Zackenberg" &
+#      clim$Month=="06" |
+#      clim$Month=="07" |
+#      clim$Month=="08", "Season"] <- "summer"
+
+
+# create new db with only SUMMER value 
+clim_s <- clim[clim$Season=="summer", ]
+
+# calculate the average SUMMER per YEAR
+clim_s_year <- as.data.frame(clim_s %>% 
+                             dplyr::group_by(Site, Year, Variable) %>% 
+                             dplyr::summarise(Value=round(median(Value), 2))) %>%
+                             dplyr::mutate(Site=as.factor(Site),
+                                   Year=as.numeric(Year), 
+                                   Variable=as.factor(Variable))%>%
+  ungroup()
+
+
+# create new db with only AUTUMN value 
+clim_a <- clim[clim$Season=="autumn", ]
+
+# calculate the average AUTUMN per YEAR
+clim_a_year <- as.data.frame(clim_a %>% 
+                               dplyr::group_by(Site, Year, Variable) %>% 
+                               dplyr::summarise(Value=round(median(Value), 2))) %>%
+  dplyr::mutate(Site=as.factor(Site),
+                Year=as.numeric(Year), 
+                Variable=as.factor(Variable))%>%
+  ungroup()
+
 #END----------------------------------------------------------------------------------
 
 
