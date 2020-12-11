@@ -71,17 +71,21 @@ Nuuk_tot_plot$Flow_m2 <- round(Nuuk_tot_plot$TotalFlower/Nuuk_tot_plot$Plot_size
 
 
 
+
 # ZACKENBERG
 # Salix flower are divided into male and female flowers
 Zsal_sel <- subset(Zsal, TotalCount=="TOTALCOUNT")
-Zsal_sel <- Zsal_sel %>% group_by(Site, Year, Species, Plot, Plot_size) %>%
-  summarise(TotalFlower=sum(Value))
+Zsal_sel <- cbind(str_split_fixed(Zsal_sel[,"Date"], '-', n=3), Zsal_sel)
+colnames(Zsal_sel) <- c("Year", "Month", "Day", "Site", "Date", "Plot", "Section",
+                    "TotalCount", "Flower_var", "Value", "Species")
 Zsal_sel[Zsal_sel$Section=="A-D", "Section"] <- "A"
+Zsal_sel[Zsal_sel$Value==-9999, 'Value'] <- NA
 Zsal_sel <- Zsal_sel[complete.cases(Zsal_sel),]
 
+Zsal_sel <- Zsal_sel %>% group_by(Site, Year, Species, Plot) %>%
+  summarise(TotalFlower=sum(Value))
 
-
-
+# Sum male + sum female (with 50/50 buds)
 
 
 # Rbind all ZACK datasets together
