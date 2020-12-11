@@ -47,6 +47,7 @@ colnames(Zhum) <- c('Date', "Time", "Value", "Variable", "Site")
 
 
 
+
 #  NUUK
 # Temperature
 Ntemp <- read.csv("data/datasets/View_ClimateBasis_Nuuk_Data_Temperature_Air_temperature__200_cm__30min_average__DegreesC.csv", 
