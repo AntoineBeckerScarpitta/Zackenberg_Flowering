@@ -12,8 +12,6 @@ rm(list=ls())
 
 # Load 02 - Creation database (+ scripts 00 and 01)
 source("Scripts/00_Load_libraries.r")
-source("Scripts/01_Import_DB.r")
-source("Scripts/02_Creation_DB.r")
 source("Scripts/02_Climatic_covariates.R")
 
 
@@ -126,7 +124,7 @@ plot(Value ~ Year , data=clim_year[clim_year$Site=="Zackenberg" &
      ylim=round(range(clim_year[clim_year$Site=="Zackenberg" & clim_year$Variable=="Precipitation_mm", 
                                 "Value"]), 3),
      cex=2, xaxt='n', xlab='Year', col="red", bg="red", cex.axis=1.5, cex.lab=1.5, 
-     main=paste("Zackenberg year mean prec **: F=" , as.character(round(anova(mod_Zy_prec)[1,4], 3)), 
+     main=paste("Zackenberg year mean prec: F=" , as.character(round(anova(mod_Zy_prec)[1,4], 3)), 
                 "P-value=" , as.character(round(anova(mod_Zy_prec)[1,5], 3)),
                 "R2adj=" , as.character(round(summary(mod_Zy_prec)$adj.r.squared, 3))))
 abline(a=summary(mod_Zy_prec)$coefficients[1] , b=summary(mod_Zy_prec)$coefficients[2], 
@@ -153,7 +151,7 @@ plot(Value ~ Year , data=clim_year[clim_year$Site=="Nuuk" &
      ylim=round(range(clim_year[clim_year$Variable=="Humidity_%", 
                                 "Value"]), 0), 
      cex=2, xaxt='n', xlab='Year', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5, 
-     main=paste("Nuuk year mean hum ***: F=" , as.character(round(anova(mod_Ny_hum)[1,4], 3)), 
+     main=paste("Nuuk year mean hum *: F=" , as.character(round(anova(mod_Ny_hum)[1,4], 3)), 
                 "P-value=" , as.character(round(anova(mod_Ny_hum)[1,5], 3)),
                 "R2adj=" , as.character(round(summary(mod_Ny_hum)$adj.r.squared, 3))))
 abline(a=summary(mod_Ny_hum)$coefficients[1] , b=summary(mod_Ny_hum)$coefficients[2], 
@@ -172,7 +170,7 @@ plot(Value ~ Year , data=clim_year[clim_year$Site=="Zackenberg" &
                                                           clim_year$Variable=="Humidity_%", 
                                                   "Value"]), 0), 
      cex=2, xaxt='n', xlab='Year', col="red", bg="red", cex.axis=1.5, cex.lab=1.5, 
-     main=paste("Zackenberg year mean hum **: F=" , as.character(round(anova(mod_Zy_hum)[1,4], 3)), 
+     main=paste("Zackenberg year mean hum: F=" , as.character(round(anova(mod_Zy_hum)[1,4], 3)), 
                 "P-value=" , as.character(round(anova(mod_Zy_hum)[1,5], 3)),
                 "R2adj=" , as.character(round(summary(mod_Zy_hum)$adj.r.squared, 3))))
 abline(a=summary(mod_Zy_hum)$coefficients[1] , b=summary(mod_Zy_hum)$coefficients[2], 
