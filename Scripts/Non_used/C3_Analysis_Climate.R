@@ -12,17 +12,24 @@ rm(list=ls())
 
 # Load 02 - Creation database (+ scripts 00 and 01)
 source("Scripts/00_Load_libraries.r")
-source("Scripts/02_Climatic_covariates.R")
+source("Scripts/C2_Climatic_covariates.R")
 
 
 ### BASIC CLIMATIC EXPLORATION #----------------------------------------------------
+clim_month <- as.data.frame(clim %>% 
+                                   dplyr::group_by(Site, Year, Variable, Month) %>% 
+                                   dplyr::summarise(Value=round(median(Value), 3))) %>%
+        dplyr::mutate(Site=as.factor(Site),
+                      Year=as.numeric(Year), 
+                      Variable=as.factor(Variable))%>%
+        ungroup()
 # distribution of temperature along year
 par(mfrow=c(1,2))
 # NUUK TEMPERATURE
-plot(clim[clim$Site=="Nuuk" & clim$Variable=="Temperature_C" , "Month"], 
-     clim[clim$Site=="Nuuk" & clim$Variable=="Temperature_C" , "Value"], 
+plot(clim_month[clim_month$Site=="Nuuk" & clim_month$Variable=="Temperature_C" , "Month"], 
+     clim_month[clim_month$Site=="Nuuk" & clim_month$Variable=="Temperature_C" , "Value"], 
      ylab="Temperatures (°C)", xlab="Month", 
-     ylim=range(clim[clim$Variable=="Temperature_C" , "Value"]), 
+     ylim=range(clim_month[clim_month$Variable=="Temperature_C" , "Value"]), 
      main="Nuuk, distribution of temperature")
 abline(0, 0, col="grey")
 abline(v=c('05', "09"), col="red")
@@ -31,10 +38,10 @@ abline(v=c('04', "10"), col="orange")
 # spring at Nuuk==04 ; fall=10
 
 # ZACKENBERG TEMPERATURE
-plot(clim[clim$Site=="Zackenberg" & clim$Variable=="Temperature_C" , "Month"], 
-     clim[clim$Site=="Zackenberg" & clim$Variable=="Temperature_C" , "Value"], 
+plot(clim_month[clim_month$Site=="Zackenberg" & clim_month$Variable=="Temperature_C" , "Month"], 
+     clim_month[clim_month$Site=="Zackenberg" & clim_month$Variable=="Temperature_C" , "Value"], 
      xlab="Month", 
-     ylim=range(clim[clim$Variable=="Temperature_C" , "Value"]), 
+     ylim=range(clim_month[clim_month$Variable=="Temperature_C" , "Value"]), 
      main="Zackenberg, distribution of temperature")
 abline(0, 0, col="grey")
 abline(v=c('06', "08"), col="red")
@@ -44,27 +51,26 @@ abline(v=c('05', "09"), col="orange")
 
 
 
-### CLIMATIC ANALYSIS #----------------------------------------------------------------
-### TEMPERATURE 
-par(mfrow=c(3,2))
 
+### CLIMATIC ANALYSIS #----------------------------------------------------------------
 # YEARLY MEAN TEMPERATURE
+par(mfrow=c(3,2))
 # Nuuk YEAR
 mod_Ny_temp <- lm(Value ~ Year , data=clim_year[clim_year$Site=="Nuuk" & 
                                                         clim_year$Variable=="Temperature_C", ])
 summary(mod_Ny_temp)
 anova(mod_Ny_temp)
 
-plot(Value ~ Year , data=clim_year[clim_year$Site=="Nuuk" & 
-                                           clim_year$Variable=="Temperature_C", ], 
-     ylab="Temperatures (°C)", pch=21, 
-     ylim=round(range(clim_year[clim_year$Variable=="Temperature_C", 
-                                "Value"]), 0), 
-     cex=2, xaxt='n', xlab='Year', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5, 
-     main=paste("Nuuk year mean temp: F=", as.character(round(anova(mod_Ny_temp)[1,4], 3)), 
+plot(Value ~ Year , data=clim_year[clim_year$Site=="Nuuk" &
+                                           clim_year$Variable=="Temperature_C", ],
+     ylab="Temperatures (°C)", pch=21,
+     ylim=round(range(clim_year[clim_year$Variable=="Temperature_C",
+                                "Value"]), 0),
+     cex=2, xaxt='n', xlab='Year', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5,
+     main=paste("Nuuk year mean temp: F=", as.character(round(anova(mod_Ny_temp)[1,4], 3)),
                 "P-value=" , as.character(round(anova(mod_Ny_temp)[1,5], 3)),
-                "R2adj=" , as.character(round(summary(mod_Ny_temp)$adj.r.squared, 3)))) 
-abline(a=summary(mod_Ny_temp)$coefficients[1] , b=summary(mod_Ny_temp)$coefficients[2], 
+                "R2adj=" , as.character(round(summary(mod_Ny_temp)$adj.r.squared, 3))))
+abline(a=summary(mod_Ny_temp)$coefficients[1] , b=summary(mod_Ny_temp)$coefficients[2],
        lwd=2, col="blue")
 axis(side=1, at=seq(2007, 2019, by=5), cex.axis=1.5)
 
