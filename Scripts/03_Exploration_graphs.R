@@ -39,7 +39,7 @@ flow_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), group=Plot, color=Plot
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='log(Flower density / m2)') +
-  ggtitle('B - Log(Flower density)') +
+  ggtitle('B - Log(Flower density) !=0') +
   facet_grid(Site+Species~., scales="free_y")+
   theme_linedraw() +
   theme(legend.position = "none") 
@@ -68,7 +68,7 @@ flow_den2_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), group=Species, co
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='log(Flower density/m2)') +
-  ggtitle('B - Log(Flower density)') +
+  ggtitle('B - Log(Flower density) !=0') +
   facet_grid(Site+Species~., scales="free_y")+
   theme_linedraw() +
   theme(legend.position = "none") +
@@ -110,36 +110,17 @@ gridExtra::grid.arrange(distdens, dist_logdens_nn, ncol=2,
 
 
 
-
-
 # CLIMATIC TRENDS
 # Plot Climatic trends    ## ---------------------------------------------
-# ALL MONTHS
-ggplot(clim_month, aes(Year, Value, group=Site, color=Site)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Value') +
-  ggtitle('Climatic trends all months Nuuk & Zackenberg') +
-  facet_grid(Variable~., scales="free_y") +
-  theme_linedraw() 
-
-
-
 # GROWING SEASON June to August
-clim_month$Season <- "winter"
-clim_month[clim_month$Month=="06", "Season"] <- "summer"
-clim_month[clim_month$Month=="07", "Season"] <- "summer"
-clim_month[clim_month$Month=="08", "Season"] <- "summer"
-clim_month[clim_month$Month=="09", "Season"] <- "summer"
-
-ggplot(clim_month[clim_month$Season=="summer", ], 
-       aes(Year, Value, group=Site, color=Site)) +
+ggplot(clim_season_year, aes(Year, Value, group=Site, color=Season)) +
   geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
+  geom_smooth(aes(group=Season, color=Season), method='lm', se=FALSE) +
   labs(y='Value') +
-  ggtitle('Climatic trends in the growing season (June-Aug) Nuuk & Zackenberg') +
-  facet_grid(Variable~., scales="free_y") +
+  ggtitle('Climatic covariate trends at Nuuk & Zackenberg') +
+  facet_grid(Site+Variable~., scales="free") +
   theme_linedraw() 
 ### END CLIMATIC PLOTS  ## -----------------------------------------------
+
 
 
