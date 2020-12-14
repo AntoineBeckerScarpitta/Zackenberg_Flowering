@@ -91,6 +91,8 @@ colnames(clim) <- c("Year", "Month", "Day", 'Date', "Time", "Value", "Variable",
 
 
 # create a new col==SEASONAL variable
+# Summer : June-August
+# Autumn : Sept-October
 clim$Season <- "winter"
 clim[clim$Month=="06" |
        clim$Month=="07" |
