@@ -112,13 +112,22 @@ gridExtra::grid.arrange(distdens, dist_logdens_nn, ncol=2,
 
 # CLIMATIC TRENDS
 # Plot Climatic trends    ## ---------------------------------------------
-# GROWING SEASON June to August
+# YEAR TRENDS
+ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
+  geom_point() +
+  geom_smooth(aes(group=Site, color=Site), method='lm', se=FALSE) +
+  labs(y='Value') +
+  ggtitle('Temporal climatic trends at Nuuk & Zackenberg') +
+  facet_grid(Variable~., scales="free") +
+  theme_linedraw() 
+
+#  SEASONAL TRENDS
 ggplot(clim_season_year, aes(Year, Value, group=Site, color=Season)) +
   geom_point() +
   geom_smooth(aes(group=Season, color=Season), method='lm', se=FALSE) +
   labs(y='Value') +
-  ggtitle('Climatic covariate trends at Nuuk & Zackenberg') +
-  facet_grid(Site+Variable~., scales="free") +
+  ggtitle('Seasonal climatic trends at Nuuk & Zackenberg') +
+  facet_grid(Variable+Site~., scales="free") +
   theme_linedraw() 
 ### END CLIMATIC PLOTS  ## -----------------------------------------------
 
