@@ -16,7 +16,6 @@ source("Scripts/C2_Climatic_covariates.R")
 
 
 
-
 ### TEMPORAL TRENDS  #----------------------------------------------------------------
 ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
   scale_color_brewer(palette="Set1")+
