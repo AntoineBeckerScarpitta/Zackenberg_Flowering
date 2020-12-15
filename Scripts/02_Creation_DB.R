@@ -46,7 +46,7 @@ source("Scripts/01_Import_DB.r")
 
 
 ### -- 1 GENERATE THE FINAL DATABASE  ------------------------------------------------
-#  NUUK
+####  NUUK ####
 # split Date col, to extract year, month, day in new cols
 Nuuk_all <- cbind(str_split_fixed(Nuuk_all0[, "Date"], '/', n=3), Nuuk_all0)
 colnames(Nuuk_all) <- c("Day","Month", "Year", "Date", "Species", "Plot", "Section",
@@ -67,29 +67,34 @@ Nuuk_tot_plot <- Nuuk_all_sub[complete.cases(Nuuk_all_sub), ]
 
 # devise by plot_size
 Nuuk_tot_plot$Flow_m2 <- round(Nuuk_tot_plot$TotalFlower/Nuuk_tot_plot$Plot_size, 2)
+#---------
 
 
 
 
-
-# ZACKENBERG
-# Salix flower are divided into male and female flowers
-Zsal_sel <- subset(Zsal, TotalCount=="TOTALCOUNT")
-Zsal_sel <- cbind(str_split_fixed(Zsal_sel[,"Date"], '-', n=3), Zsal_sel)
-colnames(Zsal_sel) <- c("Year", "Month", "Day", "Site", "Date", "Plot", "Section",
+####  ZACKENBERG ####
+# Salix : sum male + sum female (with 50/50 buds)
+Zsal <- cbind(str_split_fixed(Zsal[,"Date"], '-', n=3), Zsal)
+colnames(Zsal) <- c("Year", "Month", "Day", "Site", "Date", "Plot", "Section",
                     "TotalCount", "Flower_var", "Value", "Species")
-Zsal_sel[Zsal_sel$Section=="A-D", "Section"] <- "A"
-Zsal_sel[Zsal_sel$Value==-9999, 'Value'] <- NA
-Zsal_sel <- Zsal_sel[complete.cases(Zsal_sel),]
 
-Zsal_sel <- Zsal_sel %>% group_by(Site, Year, Species, Plot) %>%
-  summarise(TotalFlower=sum(Value))
+Zsal_sex <- as.data.frame(Zsal %>% filter(TotalCount=="TOTALCOUNT", 
+                               Value != -9999) %>%
+                        group_by(Site, Date, Plot, TotalCount, Flower_var, Species) %>%
+                        summarise(Value=sum(Value)) %>% 
+                        ungroup() %>%
+                        filter(Flower_var %in% c("Total_Female", "Total_Male", "Buds"),
+                               Value>0) %>%
+                        mutate(Species=ifelse(Flower_var=="Total_Male", "SAL_m", 
+                                              ifelse(Flower_var=="Total_Female", "SAL_f", "SAL_b"))))
+                        
+                        
+                      
 
-# Sum male + sum female (with 50/50 buds)
 
 
-# Rbind all ZACK datasets together
-Zack0 <- rbind(Zcas, Zdry, Zpap, Zsal, Zsax, Zsil)
+# Rbind all ZACK datasets together except SALIX
+Zack0 <- rbind(Zcas, Zdry, Zpap, Zsax, Zsil)
 
 # merge with plot size
 Zack1 <- merge(Zack0, Plot_size[,c('Plot_size', 'Plot')], by="Plot", all.x=TRUE)
@@ -121,7 +126,7 @@ Zack_sub[Zack_sub$Section=="A-B", "Section"] <- "A"
 
 # calculate the total flower per plot per year (sum of all sections)
 Zack_tot_plot <- Zack_sub %>% group_by(Site, Year, Species, Plot, Plot_size) %>%
-                          summarise(TotalFlower=sum(Value))
+                          summarise(TotalFlower=sum(Value)) %>% ungroup()
 
 # devise by plot_size
 Zack_tot_plot$Flow_m2 <- round(Zack_tot_plot$TotalFlower/Zack_tot_plot$Plot_size, 2)
