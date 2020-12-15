@@ -114,8 +114,9 @@ gridExtra::grid.arrange(distdens, dist_logdens_nn, ncol=2,
 # Plot Climatic trends    ## ---------------------------------------------
 # YEAR TRENDS
 ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
+  scale_color_brewer(palette="Set1")+
   geom_point() +
-  geom_smooth(aes(group=Site, color=Site), method='lm', se=FALSE) +
+  geom_smooth(aes(group=Site, color=Site, fill=Site), method='lm', se=TRUE) +
   labs(y='Value') +
   ggtitle('Temporal climatic trends at Nuuk & Zackenberg') +
   facet_grid(Variable~., scales="free") +
@@ -123,6 +124,7 @@ ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
 
 #  SEASONAL TRENDS
 ggplot(clim_season_year, aes(Year, Value, group=Site, color=Season)) +
+  scale_color_brewer(palette="Set1")+
   geom_point() +
   geom_smooth(aes(group=Season, color=Season), method='lm', se=FALSE) +
   labs(y='Value') +
