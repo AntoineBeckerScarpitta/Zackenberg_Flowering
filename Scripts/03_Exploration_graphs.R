@@ -35,7 +35,7 @@ flow_den <- ggplot(flow, aes(Year, Flow_m2, group=Plot, color=Plot)) +
   theme(legend.position = "none") 
 
 # 3 - Log Flower density !=0  ## --------------------------------------------
-flow_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), group=Plot, color=Plot)) +
+flow_log_nn <- ggplot(flow, aes(Year, TotalFlower, group=Plot, color=Plot)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='log(Flower density / m2)') +
@@ -60,8 +60,7 @@ flow_den2 <- ggplot(flow, aes(Year, Flow_m2, group=Species, color=Species)) +
   ggtitle('A - Flower density') +
   facet_grid(Site+Species ~., scales="free_y") +
   theme_linedraw()+
-  theme(legend.position = "none") +
-  scale_color_brewer(palette="Dark2")
+  theme(legend.position = "none") 
 
 # 6 - Total Flower per plot  ## --------------------------------------------
 flow_den2_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), group=Species, color=Species)) +
@@ -71,8 +70,7 @@ flow_den2_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), group=Species, co
   ggtitle('B - Log(Flower density) !=0') +
   facet_grid(Site+Species~., scales="free_y")+
   theme_linedraw() +
-  theme(legend.position = "none") +
-  scale_color_brewer(palette="Dark2")
+  theme(legend.position = "none")
 #  graph
 gridExtra::grid.arrange(flow_den2, flow_den2_log_nn, ncol=2, 
                         top = "Temporal flowering trends at species level in Zackenberg")
