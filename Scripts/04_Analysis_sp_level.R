@@ -35,6 +35,7 @@ summary(mod_eri)
 anova(mod_eri)
 MuMIn::r.squaredGLMM(mod_eri)
 
+
 # Loiseuria
 mod_loi <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
               data=droplevels(flow[flow$Site=="Nuuk" & flow$Species=="LOI",]))
@@ -42,12 +43,22 @@ qqmath(mod_loi)
 summary(mod_loi) ; anova(mod_loi)
 MuMIn::r.squaredGLMM(mod_loi)
 
+
 # Salix
-mod_sal <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
-              data=droplevels(flow[flow$Site=="Nuuk" & flow$Species=="SAL",]))
-qqmath(mod_sal)
-summary(mod_sal) ; anova(mod_sal)
-MuMIn::r.squaredGLMM(mod_sal)
+# female flowers
+mod_sal_f <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
+              data=droplevels(flow[flow$Site=="Nuuk" & flow$Species=="SAL_female",]))
+qqmath(mod_sal_f)
+summary(mod_sal_f) ; anova(mod_sal_f)
+MuMIn::r.squaredGLMM(mod_sal_f)
+
+# male flowers
+mod_sal_m <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
+                data=droplevels(flow[flow$Site=="Nuuk" & flow$Species=="SAL_male",]))
+qqmath(mod_sal_m)
+summary(mod_sal_m) ; anova(mod_sal_m)
+MuMIn::r.squaredGLMM(mod_sal_m)
+
 
 # Silene
 mod_sil <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
@@ -69,12 +80,14 @@ qqmath(mod_Zcas)
 summary(mod_Zcas) ; anova(mod_Zcas)
 MuMIn::r.squaredGLMM(mod_Zcas)
 
+
 # Dryas
 mod_Zday <- lmer(log(trans_Flow_m2) ~ Year  + (1|Plot), 
                  data=flow[flow$Site=="Zackenberg" & flow$Species=="DRY",])
 qqmath(mod_Zday)
 summary(mod_Zday) ; anova(mod_Zday)
 MuMIn::r.squaredGLMM(mod_Zday)
+
 
 # Papaver
 mod_Zpap <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
@@ -83,12 +96,14 @@ qqmath(mod_Zpap)
 summary(mod_Zpap) ; anova(mod_Zpap)
 MuMIn::r.squaredGLMM(mod_Zpap)
 
+
 # Saxifraga
 mod_Zsax <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
                  data=flow[flow$Site=="Zackenberg" & flow$Species=="SAX",])
 qqmath(mod_Zsax)
 summary(mod_Zsax) ; anova(mod_Zsax)
 MuMIn::r.squaredGLMM(mod_Zsax)
+
 
 # Silene
 mod_Zsil <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
@@ -98,6 +113,19 @@ summary(mod_Zsil) ; anova(mod_Zsil)
 MuMIn::r.squaredGLMM(mod_Zsil)
 
 
+# Salix
+# female flowers
+mod_Zsal_f <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
+                  data=droplevels(flow[flow$Site=="Zackenberg" & flow$Species=="SAL_female",]))
+qqmath(mod_Zsal_f)
+summary(mod_Zsal_f) ; anova(mod_Zsal_f)
+MuMIn::r.squaredGLMM(mod_Zsal_f)
 
+# male flowers
+mod_Zsal_m <- lmer(log(trans_Flow_m2) ~ Year + (1|Plot), 
+                  data=droplevels(flow[flow$Site=="Zackenberg" & flow$Species=="SAL_male",]))
+qqmath(mod_Zsal_m)
+summary(mod_Zsal_m) ; anova(mod_Zsal_m)
+MuMIn::r.squaredGLMM(mod_Zsal_m)
 
 
