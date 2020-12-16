@@ -14,11 +14,15 @@ rm(list=ls())
 source("Scripts/00_Load_libraries.r")
 source("Scripts/01_Import_DB.r")
 source("Scripts/02_Creation_DB.r")
-source("Scripts/02_Climatic_covariates.R")
 
 
 # SPECIFIC DATA MANAGMENT FOR ANALYSIS -------------------------------------------
 # log(density) !=0 (Flow_m2 + 0.001 in 02_Creation_DB, line 131)
+
+
+fits_sp_z <- flow %>%
+  group_by(Site, Species) %>%
+  do(broom::glance(lm(log(trans_Flow_m2) ~ Year, data=.)))
 
 
 
