@@ -309,6 +309,10 @@ needtohave$DOY[needtohave$Year_Plot %in% miss_plot$Year_Plot] <- est_DOY$DOY
 
 dim(needtohave[is.na(needtohave$DOY),])  ##no more NAs
 
+
+needtohave<- needtohave %>%
+  separate(., Year_Plot, into= c("Year", "Plot"), sep="_", remove=F)
+
 ##adding the other info from original data
 # SNOW_final<- needtohave %>%
 #   left_join(., Zsnow, by= "Year_Plot")
@@ -321,7 +325,10 @@ ggplot(needtohave %>%
   geom_density(aes(DOY))
 
 
-
+ggplot(needtohave %>%
+         filter(DOY>0)) +
+  geom_density(aes(DOY)) +
+  facet_wrap(~Plot)
 
 
 
