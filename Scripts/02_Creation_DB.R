@@ -55,12 +55,29 @@ colnames(Nuuk_all) <- c("Day","Month", "Year", "Date", "Species", "Plot", "Secti
 # merge NUUK with plot size
 Nuuk_all <- merge(Nuuk_all, Plot_size[, c('Plot_size', 'Plot')], by="Plot", all.x=TRUE)
 
+
+# SALIX SELECTION devided MAle and Female flower
+# devided male and female flower for Salix
+Nsal_tot_plot <- as.data.frame(Nuuk_all %>% filter(Species=="SAL") %>% 
+  dplyr::select(Plot, Year, Species, Section, Site, Plot_size, Male_flower, Female_flower) %>%
+  pivot_longer(cols=c(Male_flower, Female_flower), names_to="Flower_var", values_to="Value") %>%
+  filter(Value != -9999) %>%
+  group_by(Site, Year, Species, Plot, Plot_size, Flower_var) %>%
+  summarise(TotalFlower=sum(Value)) %>%
+  ungroup() %>%
+  mutate(Flow_m2=round(TotalFlower/Plot_size, 2)) %>%
+  mutate(Species=ifelse(Flower_var=="Male_flower", "SAL_male","SAL_female")) %>%
+  dplyr::select(-Flower_var))
+  
+
+# Other Species
 # Transforme -9999 into NA
 Nuuk_all[Nuuk_all$TotalFlower==-9999, "TotalFlower"] <- NA
 
 # calculate the total flower per plot per year (sum of all sections)
-Nuuk_all_sub <- Nuuk_all %>% group_by(Site, Year, Species, Plot, Plot_size) %>%
-  summarise(TotalFlower=sum(TotalFlower))
+Nuuk_all_sub <- Nuuk_all %>% filter(., Species!="SAL") %>%
+  group_by(Site, Year, Species, Plot, Plot_size) %>%
+  summarise(TotalFlower=sum(TotalFlower)) %>% ungroup()
 
 # remove NA
 Nuuk_tot_plot <- Nuuk_all_sub[complete.cases(Nuuk_all_sub), ]
@@ -68,6 +85,8 @@ Nuuk_tot_plot <- Nuuk_all_sub[complete.cases(Nuuk_all_sub), ]
 # devise by plot_size
 Nuuk_tot_plot$Flow_m2 <- round(Nuuk_tot_plot$TotalFlower/Nuuk_tot_plot$Plot_size, 2)
 #---------
+
+
 
 
 
@@ -155,11 +174,14 @@ Zack_tot_plot <- Zack_sub %>% group_by(Site, Year, Species, Plot, Plot_size) %>%
 
 # devise by plot_size
 Zack_tot_plot$Flow_m2 <- round(Zack_tot_plot$TotalFlower/Zack_tot_plot$Plot_size, 2)
+# END ZACK ------
 
 
 
-# Combined ZACKENBERG AND NUUK in 1 table
-flow <- as.data.frame(rbind(Zack_tot_plot, Nuuk_tot_plot, Zsal_tot_plot))
+
+
+# Combined ZACKENBERG AND NUUK _ SALIX in 1 table
+flow <- as.data.frame(rbind(Zack_tot_plot, Nuuk_tot_plot, Zsal_tot_plot, Nsal_tot_plot))
 
 # data as numeric or factor
 flow[,"Year"] <- as.numeric(flow[,"Year"])
