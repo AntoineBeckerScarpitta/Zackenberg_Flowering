@@ -98,7 +98,8 @@ Zsal <- cbind(str_split_fixed(Zsal[,"Date"], '-', n=3), Zsal)
 colnames(Zsal) <- c("Year", "Month", "Day", "Site", "Date", "Plot", "Section",
                     "TotalCount", "Flower_var", "Value", "Species")
 
-# sleect TOTALCOUNT, remove -9999, sum at plot level and select only Total Male, Female and Buds
+# sleect TOTALCOUNT, remove -9999, sum at plot level and 
+# select only Total Male, Female and Buds
 Zsal_sel <- as.data.frame(Zsal %>% filter(TotalCount=="TOTALCOUNT", Value != -9999) %>%
                         group_by(Site, Year, Plot, Flower_var, Species) %>%
                         summarise(Value=sum(Value)) %>% 
@@ -110,17 +111,31 @@ buds <- Zsal_sel%>%filter(Flower_var=="Buds")
 # select only total male and female
 smf <- Zsal_sel%>%filter(Flower_var!="Buds")
 
+
+#SexRatio for Salix Flowers
+#  male / female  = x male:1 female ; 1:1 equilibrium SR
+sexRatio <- smf%>% 
+  pivot_wider(id_cols=c(Site, Year, Plot, Species),
+              names_from=Flower_var, values_from=Value, values_fill = 0) %>%
+  group_by(Plot) %>%
+  summarise(sexratio=Total_Male/Total_Female) %>% #ungroup() %>%
+  summarise(MeanSR=mean(sexratio))
+
+
 # Final arrangement
 Zsal_tot_plot <- as.data.frame(smf %>% pivot_wider(id_cols=c(Site, Year, Plot, Species),
                     names_from=Flower_var, values_from=Value, values_fill = 0) %>%
   # merge Buds and smf (need one row for each obs) 
   left_join(.,  dplyr::select(buds, Year, Plot, Value), by=c("Year", "Plot")) %>%
   replace(is.na(.), 0) %>%
+  # merge SEXRATIO
+  left_join(.,  sexRatio, by="Plot") %>%
   # 50% buds for male 50% for female
-    mutate(Total_Male_b=Total_Male + Value*0.5, 
-         Total_Female_b=Total_Female + Value*0.5) %>%
+    mutate(Total_Male_b=Total_Male + (Value*MeanSR), 
+         Total_Female_b=Total_Female + (Value*(1-MeanSR))) %>%
   dplyr::select(c(Site, Year, Species, Plot, Total_Male_b, Total_Female_b)) %>%
-  pivot_longer(cols=c(Total_Male_b, Total_Female_b), names_to="Flower_var", values_to="TotalFlower") %>%
+  pivot_longer(cols=c(Total_Male_b, Total_Female_b), 
+               names_to="Flower_var", values_to="TotalFlower") %>%
   filter(TotalFlower>0) %>% ungroup() %>%
   #  created a new species level Salix_male and Salix_female
   mutate(Species=ifelse(Flower_var=="Total_Male_b", "SAL_male","SAL_female")) %>%
