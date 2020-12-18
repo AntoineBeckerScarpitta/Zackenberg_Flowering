@@ -91,14 +91,46 @@ est_DOY<- Zsnow %>%
   separate(., Plot, sep = 4, into= c("subPlot1", "subPlot2"))  #example "Dry2Sal7"
 
 
-est_DOY_1<- est_DOY %>%
-  select(-subPlot2) %>%
-  rename(Plot=subPlot1)
-  
-est_DOY_2<- est_DOY %>%
-  filter(!subPlot2=="") %>%
-  select(-subPlot1) %>%
-  rename(Plot=subPlot2)
+##### to do list for January
+#####1. need to check again how to calculate these estimates for the plots (ignoring sections) with values always <50
+
+aux<- Zsnow %>%
+  group_by(Year_Plot) %>%
+  summarise(check50min= ifelse(min(Value<50), "check", "ok"))
+
+
+aux %>% filter(check50min=="check") %>% tally()  ##89 Year_Plot that have values<50
+
+
+
+#####2. If we had used the previous approach to use the 50 values for the ones that have one, this would not necessarily lead to the same estimated DOY via lm!!!
+##two examples
+
+plot(data=Zsnow[Zsnow$Year_Plot=="1997_Sal4",], DOY~Value)
+plot(data=Zsnow[Zsnow$Year_Plot=="1996_Sil4",], DOY~Value)
+
+###plus we were not excluding DOY>200 before for these ones of course, but including them or not for the lm's also makes a difference
+plot(data=Zsnow[Zsnow$Year_Plot=="1996_Sil4"& Zsnow$DOY<200,], DOY~Value)
+
+
+
+
+ggplot(Zsnow %>%
+         filter(Year_Plot %in% aux$Year_Plot)) +
+  geom_point(aes(x=Value, y= DOY, group=Year_Plot)) +
+  facet_wrap(~Year_Plot)
+
+
+
+##then split and re-bind to have a single plot variable including the ones from the "double plots"
+# est_DOY_1<- est_DOY %>%
+#   select(-subPlot2) %>%
+#   rename(Plot=subPlot1)
+#   
+# est_DOY_2<- est_DOY %>%
+#   filter(!subPlot2=="") %>%
+#   select(-subPlot1) %>%
+#   rename(Plot=subPlot2)
 
 
 est_DOY_end <- rbind(est_DOY %>%
@@ -118,11 +150,11 @@ est_DOY_end <- rbind(est_DOY %>%
 #View(Zsnow[Zsnow$Year_Plot=="2000_Sax2Sil2",])
 #View(Zsnow[Zsnow$Year_Plot=="1999_Sax2Sil2",])
 
-plot(data=Zsnow[Zsnow$Year_Plot=="2005_Sax3Sil3" & Zsnow$DOY<200,], DOY ~ Value)
-mod<-lm(DOY ~ Value, data=Zsnow[Zsnow$Year_Plot=="2005_Sax3Sil3" & Zsnow$DOY<200,])
+plot(data=Zsnow[Zsnow$Year_Plot=="1996_Sal1" & Zsnow$DOY<200,], DOY ~ Value)
+mod<-lm(DOY ~ Value, data=Zsnow[Zsnow$Year_Plot=="1996_Sal1" & Zsnow$DOY<200,])
 abline(mod)
 
-est_DOY$DOY[est_DOY$Year_Plot== "2005_Sax3Sil3"]
+est_DOY$DOY[est_DOY$Year_Plot== "1996_Sil4"]
 
 
 ##there a few others where the estimated DOY is way low in the year  -- also have values never reach 50 === e.g. 2000_Sal3 and 2008_Sax1Sil1
@@ -144,6 +176,8 @@ View(est_DOY %>%arrange(DOY))
 
 ###this is what we had done before the meeting!!!!
 
+needtohave<- Zsnow %>%
+  distinct(Year_Plot)
 
 ###different steps now, depending on which subset of data we have
 
