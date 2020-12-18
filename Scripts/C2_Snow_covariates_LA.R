@@ -67,10 +67,82 @@ n_distinct(Zsnow$Plot)  #28
 n_distinct(Zsnow$Year_Plot) #537
 
 
-########create oject with unique Year_Plot records
-needtohave<- Zsnow %>%
-  select(Year_Plot) %>%
-  distinct()  ##can then use this one to join the different info from the different objects below!
+
+##updated 18-12-2020 ####
+##after meeting with Niels and Tomas ==>> simplified everything to simply estimate the DOY for the snowmelt=50 using lm's for all
+
+##also fixing the other plot name
+Zsnow$Plot[Zsnow$Plot== "Sax1Si2"] <- "Sax1Sil2"
+
+
+est_DOY<- Zsnow %>%
+  filter(DOY<200) %>%
+  group_by(Year_Plot) %>% 
+  do(lm(DOY ~ Value, data = .) %>% 
+       predict(., data.frame(Value = 50)) %>%
+       data_frame(DOY = .)) %>%
+  ungroup() %>%
+  
+  ##to deal with "negative" or "small" estimates
+  mutate(DOY1= ifelse(DOY<120, "NA", DOY)) %>%
+  
+  ##splitting the "double" plots
+  separate(., Year_Plot, into= c("Year", "Plot"), sep="_", remove=F) %>%
+  separate(., Plot, sep = 4, into= c("subPlot1", "subPlot2"))  #example "Dry2Sal7"
+
+
+est_DOY_1<- est_DOY %>%
+  select(-subPlot2) %>%
+  rename(Plot=subPlot1)
+  
+est_DOY_2<- est_DOY %>%
+  filter(!subPlot2=="") %>%
+  select(-subPlot1) %>%
+  rename(Plot=subPlot2)
+
+
+est_DOY_end <- rbind(est_DOY %>%
+                       select(-subPlot2) %>%
+                       rename(Plot=subPlot1),
+                     
+                     est_DOY %>%
+                       filter(!subPlot2=="") %>%
+                       select(-subPlot1) %>%
+                       rename(Plot=subPlot2))
+
+
+
+
+##checking the ones with negative or very low estimated DOY
+#View(Zsnow[Zsnow$Year_Plot=="2007_Sax2Sil2",])
+#View(Zsnow[Zsnow$Year_Plot=="2000_Sax2Sil2",])
+#View(Zsnow[Zsnow$Year_Plot=="1999_Sax2Sil2",])
+
+plot(data=Zsnow[Zsnow$Year_Plot=="2005_Sax3Sil3" & Zsnow$DOY<200,], DOY ~ Value)
+mod<-lm(DOY ~ Value, data=Zsnow[Zsnow$Year_Plot=="2005_Sax3Sil3" & Zsnow$DOY<200,])
+abline(mod)
+
+est_DOY$DOY[est_DOY$Year_Plot== "2005_Sax3Sil3"]
+
+
+##there a few others where the estimated DOY is way low in the year  -- also have values never reach 50 === e.g. 2000_Sal3 and 2008_Sax1Sil1
+##but we have to ignore DOY>200 anyway
+View(est_DOY %>%arrange(DOY))
+
+
+
+
+
+
+
+
+
+
+###############################################################################################################################################################
+###############################################################################################################################################################
+###############################################################################################################################################################
+
+###this is what we had done before the meeting!!!!
 
 
 ###different steps now, depending on which subset of data we have
