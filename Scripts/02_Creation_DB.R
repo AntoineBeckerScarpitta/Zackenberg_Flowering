@@ -218,7 +218,8 @@ flow$trans_Flow_m2 <- flow$Flow_m2 + 0.001
 remove("Nuuk_all", "Nuuk_all_sub", "Nuuk_all0",  "Zack", "Zack_sub", "Zack0", "Zack1", 
       "Zcas", "Zcas0", "Zcas1", "Zdry", "Zdry0", "Zdry1", "Zpap", "Zpap0", "Zpap1", 
       "Zsal", "Zsal0", "Zsal_sel", "buds", "smf", "Zsal1", "Zsax", "Zsax0", "Zsax1", 
-      "Zsil", "Zsil0", "Zsil1")
+      "Zsil", "Zsil0", "Zsil1", "sexRatio", "Zack_tot_plot", "Nuuk_tot_plot", "Nsal_tot_plot",
+      "Zsal_tot_plot", "Plot_size")
 
 
 
