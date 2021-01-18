@@ -31,23 +31,23 @@ par(mfrow=c(1,1))
 
 
 
-#  mod0 - Flow_m2 ~ YEAR + SPECIES + RANEF(plot)
-# NUKK
-mod0n <- lmer(Flow_m2 ~ Year * Species + (1|Plot), data=flow[flow$Site=="Nuuk",])
-qqmath(mod0n)
-summary(mod0n) ; anova(mod0n)
-MuMIn::r.squaredGLMM(mod0n)
-
-# ZACKENBERG
-mod0z <- lmer(Flow_m2 ~ Year * Species + (1|Plot), data=flow[flow$Site=="Zackenberg",])
-qqmath(mod0z)
-summary(mod0z) ; anova(mod0z)
-MuMIn::r.squaredGLMM(modoz)
-
-# posthoc test
-library(emmeans)
-emmeans(mod0n, list(pairwise ~ Species), adjust = "tukey")
-emmeans(mod0z, list(pairwise ~ Species), adjust = "tukey")
+# #  mod0 - Flow_m2 ~ YEAR + SPECIES + RANEF(plot)
+# # NUKK
+# mod0n <- lmer(Flow_m2 ~ Year * Species + (1|Plot), data=flow[flow$Site=="Nuuk",])
+# qqmath(mod0n)
+# summary(mod0n) ; anova(mod0n)
+# MuMIn::r.squaredGLMM(mod0n)
+# 
+# # ZACKENBERG
+# mod0z <- lmer(Flow_m2 ~ Year * Species + (1|Plot), data=flow[flow$Site=="Zackenberg",])
+# qqmath(mod0z)
+# summary(mod0z) ; anova(mod0z)
+# MuMIn::r.squaredGLMM(modoz)
+# 
+# # posthoc test
+# library(emmeans)
+# emmeans(mod0n, list(pairwise ~ Species), adjust = "tukey")
+# emmeans(mod0z, list(pairwise ~ Species), adjust = "tukey")
 
 
 
