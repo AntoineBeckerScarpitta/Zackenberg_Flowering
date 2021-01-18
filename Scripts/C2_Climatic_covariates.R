@@ -98,7 +98,8 @@ clim[clim$Month=="06" |
        clim$Month=="07" |
        clim$Month=="08", "Season"] <- "summer"
 clim[clim$Month=="09" |
-       clim$Month=="10", "Season"] <- "autumn"
+       clim$Month=="10" |
+       clim$Month=="11", "Season"] <- "autumn"
 
 # calculate the average variable value for SUMMER, AUTUNM, WINTER per YEAR
 clim_season_year <- as.data.frame(clim %>% 
