@@ -157,7 +157,7 @@ est_DOY$finalDOY[est_DOY$Year_Plot=="2002_Dry4"] <- NA  ##similar to the other 2
 
 
 ##
-##3.4. other checks
+##3.2. other checks
 
 u="2008_Sax2Sil2"
 
