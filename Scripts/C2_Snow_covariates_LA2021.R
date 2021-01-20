@@ -179,4 +179,15 @@ plot(data=Zsnow[Zsnow$Year_Plot==u & Zsnow$DOY<200,], DOY~Value, xlim=c(0,100))
 
 
 
+##then split and re-bind to have a single plot variable including the ones from the "double plots"
+est_DOYfinal <- rbind(est_DOY %>%
+                        select(-subPlot2) %>%
+                        rename(Plot=subPlot1),
+                      
+                      est_DOY %>%
+                        filter(!subPlot2=="") %>%
+                        select(-subPlot1) %>%
+                        rename(Plot=subPlot2))
+
+##end
 
