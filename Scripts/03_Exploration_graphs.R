@@ -8,7 +8,7 @@
 # September 2020
 
 #  clean R work-space
-rm(list=ls())
+# rm(list=ls())
 
 # Load 02 - Creation database (load scripts 00 and 01)
 source("Scripts/00_Load_libraries.r")
@@ -103,6 +103,20 @@ dist_logdens_nn <- ggplot(flow, aes(x=log(trans_Flow_m2), fill=Species)) +
 gridExtra::grid.arrange(distdens, dist_logdens_nn, ncol=2, 
                         top = "Distribution of flowering variable per species")
 ### END DISTRI PLOTS  ## -------------------------------------------------
+
+
+# for models
+# data distribution, flo density, log(flow density)
+par(mfrow=c(2,2))
+hist(flow[flow$Site=="Nuuk", "Flow_m2"], 
+     main='A - Nuuk flowering density', xlab="Flower m2")
+hist(flow[flow$Site=="Zackenberg", "Flow_m2"], 
+     main='B - Zackenberg flowering density', xlab="Flower m2")
+hist(log(flow[flow$Site=="Nuuk", "trans_Flow_m2"]), 
+     main='C - Nuuk log(flow density)', xlab="log(Flower m2)")
+hist(log(flow[flow$Site=="Zackenberg", "trans_Flow_m2"]), 
+     main='D - Zackenberg log(flow density)', xlab="log(Flower m2)")
+par(mfrow=c(1,1))
 
 
 
