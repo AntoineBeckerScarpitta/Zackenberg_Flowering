@@ -8,7 +8,7 @@
 # January 2021 ##updated 19-01-2021
 
 #  clean R work-space
-rm(list=ls())
+# rm(list=ls())
 
 
 ##Laura cleaning and dealing with snow cover data
@@ -108,7 +108,7 @@ aux2 <- Zsnow  %>%
 
 ##for all of these, set a given DOY, keeping the estimated lm value for the others
 est_DOY<- est_DOY %>%
-  mutate(finalDOY= ifelse(Year_Plot %in% aux2$Year_Plot, 90, DOY))  ##now end of March
+  mutate(snowmelt_DOY= ifelse(Year_Plot %in% aux2$Year_Plot, 90, DOY))  ##now end of March
 
 
 
@@ -117,25 +117,27 @@ est_DOY<- est_DOY %>%
 ##3. check and decide what to do with estimated DOYs too small or too large that still remain ####
 ##3.1 - 4 plots with super high estimated values (larger than 365!), all 2018 ---> assign NA
 
-est_DOY$finalDOY[est_DOY$Year_Plot=="2018_Pap2Sal5"] <- NA
-est_DOY$finalDOY[est_DOY$Year_Plot=="2018_Pap3"] <- NA
-est_DOY$finalDOY[est_DOY$Year_Plot=="2018_Pap1"] <- NA
-est_DOY$finalDOY[est_DOY$Year_Plot=="2018_Cas4"] <- NA
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap2Sal5"] <- NA
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap3"] <- NA
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap1"] <- NA
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Cas4"] <- NA
 
-est_DOY$finalDOY[est_DOY$Year_Plot=="2018_Cas3"] <- NA  ##similar to the other 2018 decision
-est_DOY$finalDOY[est_DOY$Year_Plot=="2002_Dry4"] <- NA  ##similar to the other 2018 decision
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Cas3"] <- NA  ##similar to the other 2018 decision
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2002_Dry4"] <- NA  ##similar to the other 2018 decision
 
 
 ##then split and re-bind to have a single plot variable including the ones from the "double plots"
-est_DOYfinal <- rbind(est_DOY %>%
-                        dplyr::select(-subPlot2) %>%
-                        rename(Plot=subPlot1),
+snow <- rbind(est_DOY %>% dplyr::select(-subPlot2) %>%
+                          rename(Plot=subPlot1),
                       
-                      est_DOY %>%
-                        filter(!subPlot2=="") %>%
-                        dplyr::select(-subPlot1) %>%
-                        rename(Plot=subPlot2))
+              est_DOY %>% filter(!subPlot2=="") %>%
+                          dplyr::select(-subPlot1) %>%
+                          rename(Plot=subPlot2))
 
+
+snow$Plot <-  as.factor(snow$Plot)
+snow$Year <-  as.numeric(snow$Year)
+snow <- subset(snow, select=-c(DOY, Year_Plot))
 ##end
 
 remove("aux2", "est_DOY", 'Zsnow' )
