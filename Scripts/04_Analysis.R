@@ -15,73 +15,102 @@ rm(list=ls())
 # source("Scripts/01_Import_DB.r")
 source("Scripts/02_Creation_DB.r")
 source("Scripts/C2_Climatic_covariates.R")
+source("Scripts/C2_Snow_covariates.R")
 
 
-# SPECIFIC DATA MANAGMENT FOR ANALYSIS -----------------------------------------------
+
+# 1 - DATA MANAGMENT FOR MODEL -  ZACKENBERG ----------------------------------------
 # log(density) !=0 (Flow_m2 + 0.001 in 02_Creation_DB, line 131)
+# add snow covariate into flow
+flow_snow <- left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
+                       snow, by=c("Year", "Plot")) 
 
 
-# data  distribution exploration, flo density, log(flow density)
-par(mfrow=c(2,2))
+#reshape climatic data
+temp_clim_z <- droplevels(clim_season_year %>% filter(Site=='Zackenberg') %>%
+  pivot_wider(id_cols=c(Site, Year, Season), names_from=Variable,
+                                 values_from=Value, values_fill=0) %>%
+  dplyr::select(!c('Humidity_%', 'Precipitation_mm')) %>% 
+  filter(Season!="winter") %>%
+  pivot_wider(id_cols=c(Site, Year), names_from=Season,
+              values_from=Temperature_C, values_fill=0))
+#rename cols
+colnames(temp_clim_z) <- c('Site', 'Year', 'Temp_fall', 'Temp_summer')
 
-hist(flow[flow$Site=="Nuuk", "Flow_m2"], 
-     main='A - Nuuk flowering density', xlab="Flower m2")
-hist(flow[flow$Site=="Zackenberg", "Flow_m2"], 
-     main='B - Zackenberg flowering density', xlab="Flower m2")
-hist(log(flow[flow$Site=="Nuuk", "trans_Flow_m2"]), 
-     main='C - Nuuk log(flow density)', xlab="log(Flower m2)")
-hist(log(flow[flow$Site=="Zackenberg", "trans_Flow_m2"]), 
-     main='D - Zackenberg log(flow density)', xlab="log(Flower m2)")
-
-par(mfrow=c(1,1))
-
-
+#create the lag of temp of fall
+temp_clim_z$lag_Temp_fall <- lag(temp_clim_z$Temp_fall, k = 1)
 
 
+# FINAL DATASET:
+#add clim data in flow
+flow_snow_clim <- left_join(flow_snow, temp_clim_z, by=c('Site', 'Year'))
+#---END
 
-#  MODEL 1: flow(t) ~ Sp * Year + flow(t-1) + ranef(plot)
+
+
+
+
+## 2 - MODELS -----------------------------------------------------------------------
+# #  MODEL 0: log(flow) ~ 1
+# mod0 <- lmer(log(trans_Flow_m2) ~ (1|Plot),
+#              data= flow_snow_clim,
+#              REML=T, na.action=na.omit)
+# summary(mod0)
+
+
+#  MODEL 1: flow(t) ~ Sp * Year + ranef(plot)
 mod1 <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + 
-               Lag(log(trans_Flow_m2), k = 1) + (1|Plot),
-             data= as.data.frame(flow %>% filter(Site=="Zackenberg")), 
+             (1|Plot),
+             data= flow_snow_clim, 
              REML=T, na.action=na.omit)
 summary(mod1)
-#------------------------------------------------------------------------------------
 
 
+#  MODEL 3: flow(t) ~ Sp * Year + flow(t-1) + ranef(plot)
+mod2 <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + lag_Temp_fall +
+             (1|Plot),
+             data= flow_snow_clim, 
+             REML=T, na.action=na.omit)
+summary(mod2)
 
 
-#  MODEL 2: flow(t) ~ Sp * clim(summer) + 
-                    # Sp * clim(fall-1) +
-                    # Sp * SnowMelt(DOY) +
-                    # flow(t-1) + 
-                    # ranef(plot)
-mod2 <- lme(
+#  MODEL 3: flow(t) ~ Sp * Year + Sp * SnowMelt + ranef(plot)
+mod3 <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + Species:snowmelt_DOY +
+             (1|Plot),
+             data=flow_snow_clim, 
+             REML=T, na.action=na.omit)
+summary(mod3)
 
-# Yt
-log(trans_Flow_m2) ~
 
-# Species : Temperature_C (june, july, august) = actual flower production condition
-Species : (clim_season_year %>% filter(Site=="Zackenberg",
-                            Variable=="Temperature_C",
-                            Season=="summer")) +
+#  MODEL 4: flow(t) ~ Sp * Year + Sp * SnowMelt + flow(t-1) + ranef(plot)
+mod4 <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + Species:snowmelt_DOY +
+                                  lag_Temp_fall + (1|Plot),
+             data=flow_snow_clim, 
+             REML=T, na.action=na.omit)
+summary(mod4)
 
-# Species : Temperature_C (sept, oct, nov) t-1 = next year preparation (buds)
-Species: (clim_season_year %>% filter(Site=="Zackenberg",
-                            Variable=="Temperature_C",
-                            Season=="fall")) +
 
-# Species : DOYsnowmelt = protection + opening the season
-Species: 
-# Yt-1: autoregressive term to account for residual autocorrelation
-# of counts as a function of time between censuses,
-correlation=corAR1(0.95, form=~Year|Plot),
+#  MODEL 4: flow(t) ~ Sp * Year + Sp * SnowMelt + flow(t-1) + ranef(plot)
+mod4 <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + Species:snowmelt_DOY +
+               lag_Temp_fall + (1|Plot),
+             data=flow_snow_clim, 
+             REML=T, na.action=na.omit)
+summary(mod4)
 
-# Random effect
-random=~1|Plot,
 
-# DataSet
-data=flow, method="REML")
-#------------------------------------------------------------------------------------
+#  MODEL 5: flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + flow(t-1) + ranef(plot)
+mod5 <- lmer(log(trans_Flow_m2) ~ Species*Temp_summer + Species*lag_Temp_fall +
+                                  Species*snowmelt_DOY + lag_Temp_fall + (1|Plot),
+             data=flow_snow_clim, 
+             REML=T, na.action=na.omit)
+summary(mod5)
+#-----------------------------------------------------------------------------------=
+
+#first set mods without snowmelt value
+anova(mod1, mod2)
+#second set mods with snowmelt value
+anova(mod3, mod4, mod5)
+
 
 
 
@@ -89,10 +118,8 @@ data=flow, method="REML")
 
 
 # TEst the AR term in lme
-summary(lmer(
-  log(trans_Flow_m2) ~ Species * Year + 
-  (1|Plot),
-  data= flow %>% filter(Site=="Zackenberg")))
+summary(lmer(log(trans_Flow_m2) ~ Species * Year + (1|Plot),
+  data= flow_snow_clim))
 
 
 
