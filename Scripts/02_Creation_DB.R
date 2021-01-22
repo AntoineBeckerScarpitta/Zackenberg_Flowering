@@ -205,8 +205,10 @@ flow[c("Site","Species", "Plot")] <- lapply(flow[c("Site","Species", "Plot")], a
 # Remove year 1995 (installation, low trust in that survey)
 flow <- flow[flow$Year>1995, ]
 
-# Create new response variable with no null value (for log transfo)
-flow$trans_Flow_m2 <- flow$Flow_m2 + 0.001
+# Create new response variable with 0==0.001 (for log transfo)
+flow$trans_Flow_m2 <- flow$Flow_m2
+flow[flow$Flow_m2==0, 'trans_Flow_m2'] <- 0.001
+
 #### END -----------------------------------------------------------------------------
 
 
