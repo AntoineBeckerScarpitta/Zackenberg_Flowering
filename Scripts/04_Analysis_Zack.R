@@ -125,6 +125,15 @@ mod5 <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fal
              data=flow_snow_clim, 
              REML=T, na.action=na.omit)
 summary(mod5)
+
+
+#  MODEL 6: 
+# flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + flow(t-1) + ranef(plot)
+mod6 <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
+               Species * snowmelt_DOY  + (1|Plot/Year),
+             data=flow_snow_clim, 
+             REML=T, na.action=na.omit)
+summary(mod6)
 #-----------------------------------------------------------------------------------=
 
 # #first set mods without snowmelt value
@@ -132,9 +141,9 @@ summary(mod5)
 #second set mods with snowmelt value
 anova(mod4, mod5)
 
-
-MuMIn::r.squaredGLMM(mod0);MuMIn::r.squaredGLMM(mod1);MuMIn::r.squaredGLMM(mod2);
-MuMIn::r.squaredGLMM(mod3);MuMIn::r.squaredGLMM(mod4);MuMIn::r.squaredGLMM(mod5)
+# R2c, m
+MuMIn::r.squaredGLMM(mod5)
+MuMIn::r.squaredGLMM(mod6)
 
 
 
