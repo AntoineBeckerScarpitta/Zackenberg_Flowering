@@ -108,7 +108,7 @@ aux2 <- Zsnow  %>%
 
 ##for all of these, set a given DOY, keeping the estimated lm value for the others
 est_DOY<- est_DOY %>%
-  mutate(snowmelt_DOY= ifelse(Year_Plot %in% aux2$Year_Plot, 90, DOY))  ##now end of March
+  mutate(snowmelt_DOY= ifelse(Year_Plot %in% aux2$Year_Plot, NA, DOY))  ##now end of March
 
 
 
