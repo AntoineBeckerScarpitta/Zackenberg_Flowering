@@ -62,6 +62,7 @@ ggplot(flow_snow_clim , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black")) 
 #
+#modif
 
 # temporal autocorrelation function
 par(mfrow=c(1,3))
