@@ -20,7 +20,7 @@ source("Scripts/C2_Snow_covariates.R")
 
 
 # 1 - DATA MANAGMENT FOR MODEL -  ZACKENBERG ----------------------------------------
-# log(density) !=0 (Flow_m2 + 0.001 in 02_Creation_DB, line 131)
+# log(density) !=0 (Flow_m2[abundace==0] <- 0.001 in 02_Creation_DB, line 210)
 # add snow covariate into flow
 flow_snow <- left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
                        snow, by=c("Year", "Plot")) 
