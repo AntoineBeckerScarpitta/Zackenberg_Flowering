@@ -22,7 +22,7 @@ source("Scripts/C2_Snow_covariates.R")
 # 1 - DATA MANAGMENT FOR MODEL -  ZACKENBERG ----------------------------------------
 # log(density) !=0 (Flow_m2[abundace==0] <- 0.001 in 02_Creation_DB, line 210)
 # add snow covariate into flow
-flow_snow <- left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
+flow_snow_z <- left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
                        snow, by=c("Year", "Plot")) 
 
 
@@ -43,10 +43,10 @@ temp_clim_z$lag_Temp_fall <- lag(temp_clim_z$Temp_fall, k = 1)
 
 # FINAL DATASET:
 #add clim data in flow
-flow_snow_clim <- left_join(flow_snow, temp_clim_z, by=c('Site', 'Year'))
+flow_snow_clim_z <- left_join(flow_snow_z, temp_clim_z, by=c('Site', 'Year'))
 
 # add a lag form of trans_flow_m2
-flow_snow_clim <- flow_snow_clim %>% 
+flow_snow_clim_z <- flow_snow_clim_z %>% 
   arrange(., Year, Plot) %>% 
   group_by(Plot, Species) %>%
   mutate(., lag_trans_Flow_m2=lag(trans_Flow_m2, order_by = Year))
@@ -54,7 +54,7 @@ flow_snow_clim <- flow_snow_clim %>%
 
 
 # SnowMelt DOY
-ggplot(flow_snow_clim , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) + 
+ggplot(flow_snow_clim_z , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) + 
   geom_point(size=2) +  
   geom_smooth(method='lm', se=F) +
   theme(axis.text=element_text(size=15),
@@ -84,7 +84,7 @@ par(mfrow=c(1,1))
 #  MODEL 1: flow(t) ~ Sp * Year + flow(t-1) + ranef(plot)
 mod1_z <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + lag_trans_Flow_m2 +
              (1|Plot),
-             data= flow_snow_clim,
+             data= flow_snow_clim_z,
              REML=T, na.action=na.omit)
 summary(mod1_z)
 saveRDS(mod1_z, "results/models/mod_basic_z.rds")
@@ -94,7 +94,7 @@ saveRDS(mod1_z, "results/models/mod_basic_z.rds")
 # flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + flow(t-1) + ranef(plot)
 mod2_z <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
                                   Species * snowmelt_DOY  + lag_trans_Flow_m2 + (1|Plot),
-             data=flow_snow_clim, 
+             data=flow_snow_clim_z, 
              REML=T, na.action=na.omit)
 summary(mod2_z)
 saveRDS(mod2_z, "results/models/mod_full_z.rds")
@@ -104,7 +104,7 @@ saveRDS(mod2_z, "results/models/mod_full_z.rds")
 # flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + ranef(plot/year)
 mod3_z <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
                                   Species * snowmelt_DOY  + (1|Plot/Year),
-             data=flow_snow_clim, 
+             data=flow_snow_clim_z, 
              REML=T, na.action=na.omit)
 summary(mod3_z)
 saveRDS(mod3_z, "results/models/mod_full_ranef_plot_year_z.rds")
