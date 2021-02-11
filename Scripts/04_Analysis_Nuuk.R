@@ -8,7 +8,7 @@
 # January 2021
 
 #  clean R work-space
-rm(list=ls())
+# rm(list=ls())
 
 # # Load 02 - Creation database (+ scripts 00 and 01)
 # source("Scripts/00_Load_libraries.r")
@@ -123,36 +123,36 @@ MuMIn::r.squaredGLMM(mod3_n)
 
 
 # POSTHOC TEST ON mod2_n (full model)
-# posthoc test
-emmeans(mod2_n, list(pairwise ~ Species), adjust = "tukey")
-
-
-# # r2 marginal et conditionnels des effets fixes
-r2glmm::r2beta(mod2_n, method = 'nsj') 
-# check les methodes, ?a peux faire une diff?rence...
-
-# # plot les "graph criticism plots"
-LMERConvenienceFunctions::mcp.fnc(mod2_n)$rstand
-
-
-# # plot rapide des effects fixes significatif sous forme de graph
-plot(effects::allEffects(mod2_n),multiline=T,rug=F,ci.style = "line",show.data=T)
-
-
-# # plot rapide de tout les effects fixes ( la ligne verticale du 0 ?tant le "niveau 1" de chaque effet fixe)
-sjPlot::plot_model(mod2_n,show.values = T,vline.color = "grey",value.offset = -0.3)
-
-
-# plot des effets fixes en d?tail
-# ,show.data=T si tu veux voir les points
-# ,type = "eff" si tu veux voir les effets "reels" ; ,type ="pred" si tu veux voir les effets pr?dits par le mod?le
-sjPlot::plot_model(mod2_n, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod2_n, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
-
-# sjPlot::plot_model(mod2_n, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
-
-
-# sjPlot::plot_model(mod2_n, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod2_n, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod2_n, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod2_n, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()
+# # posthoc test
+# emmeans(mod2_n, list(pairwise ~ Species), adjust = "tukey")
+# 
+# 
+# # # r2 marginal et conditionnels des effets fixes
+# r2glmm::r2beta(mod2_n, method = 'nsj') 
+# # check les methodes, ?a peux faire une diff?rence...
+# 
+# # # plot les "graph criticism plots"
+# LMERConvenienceFunctions::mcp.fnc(mod2_n)$rstand
+# 
+# 
+# # # plot rapide des effects fixes significatif sous forme de graph
+# plot(effects::allEffects(mod2_n),multiline=T,rug=F,ci.style = "line",show.data=T)
+# 
+# 
+# # # plot rapide de tout les effects fixes ( la ligne verticale du 0 ?tant le "niveau 1" de chaque effet fixe)
+# sjPlot::plot_model(mod2_n,show.values = T,vline.color = "grey",value.offset = -0.3)
+# 
+# 
+# # plot des effets fixes en d?tail
+# # ,show.data=T si tu veux voir les points
+# # ,type = "eff" si tu veux voir les effets "reels" ; ,type ="pred" si tu veux voir les effets pr?dits par le mod?le
+# sjPlot::plot_model(mod2_n, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod2_n, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
+# 
+# # sjPlot::plot_model(mod2_n, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
+# 
+# 
+# # sjPlot::plot_model(mod2_n, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod2_n, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod2_n, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod2_n, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()

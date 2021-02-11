@@ -8,7 +8,7 @@
 # January 2021
 
 #  clean R work-space
-rm(list=ls())
+# rm(list=ls())
 
 # # Load 02 - Creation database (+ scripts 00 and 01)
 # source("Scripts/00_Load_libraries.r")
@@ -53,29 +53,29 @@ flow_snow_clim_z <- flow_snow_clim_z %>%
 #---END
 
 
-# SnowMelt DOY
-ggplot(flow_snow_clim_z , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) + 
-  geom_point(size=2) +  
-  geom_smooth(method='lm', se=F) +
-  theme(axis.text=element_text(size=15),
-        axis.title=element_text(size=16,face="bold"), 
-        panel.background = element_blank(), 
-        axis.line = element_line(colour = "black")) 
-#
-#modif
-
-# temporal autocorrelation function
-par(mfrow=c(1,3))
-acf(na.omit(flow$TotalFlower), plot = T, lag.max = 22, 
-    main = "Sample Autocorrelation for Total flowering number")
-
-acf(na.omit(flow$Flow_m2), plot = T, lag.max =22, 
-    main = "Sample Autocorrelation for Flowering density")
-
-acf(na.omit(log(flow$trans_Flow_m2)), plot = T, lag.max = 22, 
-    main = "Sample Autocorrelation for Log(Flowering density)")
-par(mfrow=c(1,1))
-#
+# # SnowMelt DOY
+# ggplot(flow_snow_clim_z , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) + 
+#   geom_point(size=2) +  
+#   geom_smooth(method='lm', se=F) +
+#   theme(axis.text=element_text(size=15),
+#         axis.title=element_text(size=16,face="bold"), 
+#         panel.background = element_blank(), 
+#         axis.line = element_line(colour = "black")) 
+# #
+# #modif
+# 
+# # temporal autocorrelation function
+# par(mfrow=c(1,3))
+# acf(na.omit(flow$TotalFlower), plot = T, lag.max = 22, 
+#     main = "Sample Autocorrelation for Total flowering number")
+# 
+# acf(na.omit(flow$Flow_m2), plot = T, lag.max =22, 
+#     main = "Sample Autocorrelation for Flowering density")
+# 
+# acf(na.omit(log(flow$trans_Flow_m2)), plot = T, lag.max = 22, 
+#     main = "Sample Autocorrelation for Log(Flowering density)")
+# par(mfrow=c(1,1))
+# #
 
 
 
@@ -121,36 +121,36 @@ MuMIn::r.squaredGLMM(mod3_z)
 
 
 # POSTHOC TEST ON mod2_z (full model)
-# posthoc test
-emmeans(mod2_z, list(pairwise ~ Species), adjust = "tukey")
-
-
-# # r2 marginal et conditionnels des effets fixes
-r2glmm::r2beta(mod2_z, method = 'nsj') 
-# check les methodes, ?a peux faire une diff?rence...
-
-# # plot les "graph criticism plots"
-LMERConvenienceFunctions::mcp.fnc(mod2_z)$rstand
-
-
-# # plot rapide des effects fixes significatif sous forme de graph
-plot(effects::allEffects(mod2_z),multiline=T,rug=F,ci.style = "line",show.data=T)
-
-
-# # plot rapide de tout les effects fixes ( la ligne verticale du 0 ?tant le "niveau 1" de chaque effet fixe)
-sjPlot::plot_model(mod2_z,show.values = T,vline.color = "grey",value.offset = -0.3)
-
-
-# plot des effets fixes en d?tail
-# ,show.data=T si tu veux voir les points
-# ,type = "eff" si tu veux voir les effets "reels" ; ,type ="pred" si tu veux voir les effets pr?dits par le mod?le
-sjPlot::plot_model(mod2_z, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod2_z, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
-
-sjPlot::plot_model(mod2_z, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
-
-
-sjPlot::plot_model(mod2_z, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod2_z, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod2_z, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod2_z, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()
+# # posthoc test
+# emmeans(mod2_z, list(pairwise ~ Species), adjust = "tukey")
+# 
+# 
+# # # r2 marginal et conditionnels des effets fixes
+# r2glmm::r2beta(mod2_z, method = 'nsj') 
+# # check les methodes, ?a peux faire une diff?rence...
+# 
+# # # plot les "graph criticism plots"
+# LMERConvenienceFunctions::mcp.fnc(mod2_z)$rstand
+# 
+# 
+# # # plot rapide des effects fixes significatif sous forme de graph
+# plot(effects::allEffects(mod2_z),multiline=T,rug=F,ci.style = "line",show.data=T)
+# 
+# 
+# # # plot rapide de tout les effects fixes ( la ligne verticale du 0 ?tant le "niveau 1" de chaque effet fixe)
+# sjPlot::plot_model(mod2_z,show.values = T,vline.color = "grey",value.offset = -0.3)
+# 
+# 
+# # plot des effets fixes en d?tail
+# # ,show.data=T si tu veux voir les points
+# # ,type = "eff" si tu veux voir les effets "reels" ; ,type ="pred" si tu veux voir les effets pr?dits par le mod?le
+# sjPlot::plot_model(mod2_z, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod2_z, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
+# 
+# sjPlot::plot_model(mod2_z, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
+# 
+# 
+# sjPlot::plot_model(mod2_z, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod2_z, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod2_z, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod2_z, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()
