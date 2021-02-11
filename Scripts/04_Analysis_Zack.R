@@ -1,7 +1,7 @@
 #######################################################################################
 #
 #                           Greenland Flowering project
-#                                04 - Analysis
+#                            04 - Analysis Zackenberg
 #
 #######################################################################################
 # Antoine Becker-Scarpitta
@@ -66,13 +66,13 @@ ggplot(flow_snow_clim , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species
 
 # temporal autocorrelation function
 par(mfrow=c(1,3))
-acf(na.omit(flow$TotalFlower), plot = T, lag.max = 30, 
+acf(na.omit(flow$TotalFlower), plot = T, lag.max = 22, 
     main = "Sample Autocorrelation for Total flowering number")
 
-acf(na.omit(flow$Flow_m2), plot = T, lag.max = 30, 
+acf(na.omit(flow$Flow_m2), plot = T, lag.max =22, 
     main = "Sample Autocorrelation for Flowering density")
 
-acf(na.omit(log(flow$trans_Flow_m2)), plot = T, lag.max = 30, 
+acf(na.omit(log(flow$trans_Flow_m2)), plot = T, lag.max = 22, 
     main = "Sample Autocorrelation for Log(Flowering density)")
 par(mfrow=c(1,1))
 #
@@ -80,105 +80,77 @@ par(mfrow=c(1,1))
 
 
 ## 2 - MODELS -----------------------------------------------------------------------
-#  MODEL 0: log(flow) ~ ranef(plot)
-# mod0 <- lmer(log(trans_Flow_m2) ~ (1|Plot),
-#              data= flow_snow_clim,
-#              REML=T, na.action=na.omit)
-# summary(mod0)
-# 
-# 
-# #  MODEL 1: flow(t) ~ Sp * Year + ranef(plot)
-# mod1 <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + 
-#              (1|Plot),
-#              data= flow_snow_clim, 
-#              REML=T, na.action=na.omit)
-# summary(mod1)
-#
-#
-#  MODEL 2: flow(t) ~ Sp * Year + flow(t-1) + ranef(plot)
-mod2 <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + lag_trans_Flow_m2 +
+
+#  MODEL 1: flow(t) ~ Sp * Year + flow(t-1) + ranef(plot)
+mod1_z <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + lag_trans_Flow_m2 +
              (1|Plot),
              data= flow_snow_clim,
              REML=T, na.action=na.omit)
-summary(mod2)
-#
-#
-# #  MODEL 3: flow(t) ~ Sp * Year + Sp * SnowMelt + ranef(plot)
-# mod3 <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + Species * snowmelt_DOY +
-#              (1|Plot),
-#              data=flow_snow_clim, 
-#              REML=T, na.action=na.omit)
-# summary(mod3)
-# 
-# 
-# #  MODEL 4: flow(t) ~ Sp * Year + Sp * SnowMelt + flow(t-1) + ranef(plot)
-# mod4 <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + Species*snowmelt_DOY +
-#                                   lag_trans_Flow_m2 + (1|Plot),
-#              data=flow_snow_clim,
-#              REML=T, na.action=na.omit)
-# summary(mod4)
+summary(mod1_z)
+saveRDS(mod1_z, "results/models/mod_basic_z.rds")
 
 
-#  MODEL 5: 
+#  MODEL 2: 
 # flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + flow(t-1) + ranef(plot)
-mod5 <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
+mod2_z <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
                                   Species * snowmelt_DOY  + lag_trans_Flow_m2 + (1|Plot),
              data=flow_snow_clim, 
              REML=T, na.action=na.omit)
-summary(mod5)
+summary(mod2_z)
+saveRDS(mod2_z, "results/models/mod_full_z.rds")
 
 
-#  MODEL 6: 
-# flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + flow(t-1) + ranef(plot)
-mod6 <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
-               Species * snowmelt_DOY  + (1|Plot/Year),
+#  MODEL 3: ranef plot structured by year
+# flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + ranef(plot/year)
+mod3_z <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
+                                  Species * snowmelt_DOY  + (1|Plot/Year),
              data=flow_snow_clim, 
              REML=T, na.action=na.omit)
-summary(mod6)
+summary(mod3_z)
+saveRDS(mod3_z, "results/models/mod_full_ranef_plot_year_z.rds")
 #-----------------------------------------------------------------------------------=
 
-# #first set mods without snowmelt value
+# models used different data, can't compare them
 # anova(mod1, mod2)
-#second set mods with snowmelt value
-anova(mod4, mod5)
+
 
 # R2c, m
-MuMIn::r.squaredGLMM(mod5)
-MuMIn::r.squaredGLMM(mod6)
+MuMIn::r.squaredGLMM(mod1_z)
+MuMIn::r.squaredGLMM(mod2_z)
+MuMIn::r.squaredGLMM(mod3_z)
 
 
-
-# POSTHOC TEST ON MOD5
+# POSTHOC TEST ON mod2_z (full model)
 # posthoc test
-emmeans(mod5, list(pairwise ~ Species), adjust = "tukey")
+emmeans(mod2_z, list(pairwise ~ Species), adjust = "tukey")
 
 
 # # r2 marginal et conditionnels des effets fixes
-r2glmm::r2beta(mod5, method = 'nsj') 
+r2glmm::r2beta(mod2_z, method = 'nsj') 
 # check les methodes, ?a peux faire une diff?rence...
 
 # # plot les "graph criticism plots"
-LMERConvenienceFunctions::mcp.fnc(mod5)$rstand
+LMERConvenienceFunctions::mcp.fnc(mod2_z)$rstand
 
 
 # # plot rapide des effects fixes significatif sous forme de graph
-plot(effects::allEffects(mod5),multiline=T,rug=F,ci.style = "line",show.data=T)
+plot(effects::allEffects(mod2_z),multiline=T,rug=F,ci.style = "line",show.data=T)
 
 
 # # plot rapide de tout les effects fixes ( la ligne verticale du 0 ?tant le "niveau 1" de chaque effet fixe)
-sjPlot::plot_model(mod5,show.values = T,vline.color = "grey",value.offset = -0.3)
+sjPlot::plot_model(mod2_z,show.values = T,vline.color = "grey",value.offset = -0.3)
 
 
 # plot des effets fixes en d?tail
 # ,show.data=T si tu veux voir les points
 # ,type = "eff" si tu veux voir les effets "reels" ; ,type ="pred" si tu veux voir les effets pr?dits par le mod?le
-sjPlot::plot_model(mod5, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod5, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod2_z, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod2_z, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
 
-sjPlot::plot_model(mod5, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod2_z, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
 
 
-sjPlot::plot_model(mod5, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod5, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod5, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod5, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod2_z, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod2_z, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod2_z, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod2_z, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()
