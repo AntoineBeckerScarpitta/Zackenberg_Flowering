@@ -68,7 +68,7 @@
 # install.packages("ggpubr")
 # install.packages("rworldmap")
 # install.packages("mapdata")
-
+# install.packages("glmmTMB")
 
 
 #  LOAD
@@ -129,7 +129,7 @@ library(ggrepel)
 library(ggpubr)
 library(rworldmap)
 library(mapdata)
-
+library(glmmTMB)
 
 
 
