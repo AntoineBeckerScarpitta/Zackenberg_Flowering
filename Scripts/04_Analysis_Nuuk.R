@@ -82,34 +82,34 @@ flow_snow_clim_n <- flow_snow_clim_n %>%
 
 ## 2 - MODELS -----------------------------------------------------------------------
 #  MODEL 1: flow(t) ~ Sp * Year + flow(t-1) + ranef(plot)
-mod1_n <- lmer(log(trans_Flow_m2) ~ Species * Year + lag_trans_Flow_m2 +
+mod_basic_n <- lmer(log(trans_Flow_m2) ~ Species * Year + lag_trans_Flow_m2 +
                                     (1|Plot),
                data= flow_snow_clim_n,
                REML=T, na.action=na.omit)
-summary(mod1_n)
-saveRDS(mod1_n, "results/models/mod_basic_n.rds")
+summary(mod_basic_n)
+saveRDS(mod_basic_n, "results/models/mod_basic_n.rds")
 
 
 #  MODEL 2: 
 # flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + flow(t-1) + ranef(plot)
-mod2_n <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
+mod_full_n <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
                                     Species * lag_Temp_fall +
                                     lag_trans_Flow_m2 + (1|Plot),
                data=flow_snow_clim_n, 
                REML=T, na.action=na.omit)
-summary(mod2_n)
-saveRDS(mod2_n, "results/models/mod_full_n.rds")
+summary(mod_full_n)
+saveRDS(mod_full_n, "results/models/mod_full_n.rds")
 
 
 #  MODEL 3: ranef plot structured by year
 # flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + ranef(plot/year)
-mod3_n <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
+mod_full_2_n <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
                                     Species * lag_Temp_fall +
                                     (1|Plot/Year),
                data=flow_snow_clim_n, 
                REML=T, na.action=na.omit)
-summary(mod3_n)
-saveRDS(mod3_n, "results/models/mod_full_ranef_plot_year_n.rds")
+summary(mod_full_2_n)
+saveRDS(mod_full_2_n, "results/models/mod_full_ranef_plot_year_n.rds")
 #-----------------------------------------------------------------------------------=
 
 # models used different data, can't compare them
@@ -117,42 +117,42 @@ saveRDS(mod3_n, "results/models/mod_full_ranef_plot_year_n.rds")
 
 
 # R2c, m
-MuMIn::r.squaredGLMM(mod1_n)
-MuMIn::r.squaredGLMM(mod2_n)
-MuMIn::r.squaredGLMM(mod3_n)
+MuMIn::r.squaredGLMM(mod_basic_n)
+MuMIn::r.squaredGLMM(mod_full_n)
+MuMIn::r.squaredGLMM(mod_full_2_n)
 
 
-# POSTHOC TEST ON mod2_n (full model)
+# POSTHOC TEST ON mod_full_n (full model)
 # # posthoc test
-# emmeans(mod2_n, list(pairwise ~ Species), adjust = "tukey")
+# emmeans(mod_full_n, list(pairwise ~ Species), adjust = "tukey")
 # 
 # 
 # # # r2 marginal et conditionnels des effets fixes
-# r2glmm::r2beta(mod2_n, method = 'nsj') 
+# r2glmm::r2beta(mod_full_n, method = 'nsj') 
 # # check les methodes, ?a peux faire une diff?rence...
 # 
 # # # plot les "graph criticism plots"
-# LMERConvenienceFunctions::mcp.fnc(mod2_n)$rstand
+# LMERConvenienceFunctions::mcp.fnc(mod_full_n)$rstand
 # 
 # 
 # # # plot rapide des effects fixes significatif sous forme de graph
-# plot(effects::allEffects(mod2_n),multiline=T,rug=F,ci.style = "line",show.data=T)
+# plot(effects::allEffects(mod_full_n),multiline=T,rug=F,ci.style = "line",show.data=T)
 # 
 # 
 # # # plot rapide de tout les effects fixes ( la ligne verticale du 0 ?tant le "niveau 1" de chaque effet fixe)
-# sjPlot::plot_model(mod2_n,show.values = T,vline.color = "grey",value.offset = -0.3)
+# sjPlot::plot_model(mod_full_n,show.values = T,vline.color = "grey",value.offset = -0.3)
 # 
 # 
 # # plot des effets fixes en d?tail
 # # ,show.data=T si tu veux voir les points
 # # ,type = "eff" si tu veux voir les effets "reels" ; ,type ="pred" si tu veux voir les effets pr?dits par le mod?le
-# sjPlot::plot_model(mod2_n, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
-# sjPlot::plot_model(mod2_n, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
 # 
-# # sjPlot::plot_model(mod2_n, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
+# # sjPlot::plot_model(mod_full_n, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
 # 
 # 
-# # sjPlot::plot_model(mod2_n, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
-# sjPlot::plot_model(mod2_n, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
-# sjPlot::plot_model(mod2_n, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
-# sjPlot::plot_model(mod2_n, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()
+# # sjPlot::plot_model(mod_full_n, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
+# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()
