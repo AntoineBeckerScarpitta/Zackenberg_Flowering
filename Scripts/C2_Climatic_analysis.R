@@ -24,7 +24,11 @@ ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
   labs(y='Value') +
   ggtitle('Temporal climatic trends at Nuuk & Zackenberg') +
   facet_grid(Variable~., scales="free") +
-  theme_linedraw() 
+  theme_linedraw() +
+  theme(text = element_text(size = 20), 
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(),  axis.line = element_line(colour = "black")) 
+
 
 # ZACKENBERG TEMPORAL TRENDS
 fits_year <- droplevels(clim_year[clim_year$Site=="Zackenberg", ]) %>%
