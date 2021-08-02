@@ -64,22 +64,3 @@ mod_full_2_n <- readRDS('results/Models/mod_full_ranef_plot_year_n.rds')
 
 
 
-source("Scripts/00_Load_libraries.r")
-
-
-#Posthoc model exploration
-plot_models(mod_full_z )
-plot_model(mod_full_z, type = "re")
-plot_model(mod_full_z, type = "int")
-
-
-#models table Nuuk vs Zack
-tab_model(mod_basic_n, mod_full_2_n,
-          p.val = "kr", 
-          show.df = TRUE, 
-          dv.labels = c("Full Nuuk", "Full 2 Nuuk"))
-
-
-
-
-

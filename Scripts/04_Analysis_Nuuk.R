@@ -87,7 +87,7 @@ mod_basic_n <- lmer(log(trans_Flow_m2) ~ Species * Year + lag_trans_Flow_m2 +
                data= flow_snow_clim_n,
                REML=T, na.action=na.omit)
 summary(mod_basic_n)
-saveRDS(mod_basic_n, "results/models/mod_basic_n.rds")
+# saveRDS(mod_basic_n, "results/models/mod_basic_n.rds")
 
 
 #  MODEL 2: 
@@ -98,61 +98,98 @@ mod_full_n <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer +
                data=flow_snow_clim_n, 
                REML=T, na.action=na.omit)
 summary(mod_full_n)
-saveRDS(mod_full_n, "results/models/mod_full_n.rds")
+# saveRDS(mod_full_n, "results/models/mod_full_n.rds")
 
 
 #  MODEL 3: ranef plot structured by year
 # flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + ranef(plot/year)
 mod_full_2_n <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
                                     Species * lag_Temp_fall +
-                                    (1|Plot/Year),
+                                    Species * lag_trans_Flow_m2 + (1|Plot/Year),
                data=flow_snow_clim_n, 
                REML=T, na.action=na.omit)
 summary(mod_full_2_n)
-saveRDS(mod_full_2_n, "results/models/mod_full_ranef_plot_year_n.rds")
+# saveRDS(mod_full_2_n, "results/models/mod_full_ranef_plot_year_n.rds")
 #-----------------------------------------------------------------------------------=
 
-# models used different data, can't compare them
-# anova(mod1, mod2)
 
 
+
+#### Variables backward selection ----------------------------------------------------
+# creat a dB without NA (same used for lmer)
+flow_snow_clim_n <- flow_snow_clim_n[complete.cases(flow_snow_clim_n),]
+
+#variable selection (get rid of snowmelt)
+lmerTest::step(mod_full_2_n, direction = "backward", trace=FALSE ) 
+
+#get model after selection
+# mod_bw_sel_n <- get_model(lmerTest::step(mod_full_2_n, 
+#                                               direction="backward", 
+#                                               trace=FALSE ) )
+
+# write our own model sicne we remove lag flower density
+mod_bw_sel_n <- lmer(log(trans_Flow_m2) ~ Species + Temp_summer + 
+                       lag_Temp_fall + (1 | Plot/Year), 
+                     data=flow_snow_clim_n, 
+                     REML=T, na.action=na.omit)
+
+summary(mod_bw_sel_n)
+MuMIn::r.squaredGLMM(mod_bw_sel_n)
+
+# tab for final model
+tab_model(mod_bw_sel_n,
+          p.val = "kr", 
+          show.df = TRUE, 
+          dv.labels = "Final model Nuuk")
+
+
+#All tab mod together
+tab_model(mod_basic_n, mod_full_n, mod_full_2_n, mod_bw_sel_n,
+          p.val = "kr", 
+          show.df = TRUE, 
+          dv.labels = c("Basic Nuuk", "Full Nuuk (1|plot)", 
+                        "Full2 (1|plot/year)", "Full2 BW sel"))
+#END----------------------------------------------------------------------------------
+
+
+
+
+
+
+####  POSTHOC TEST ------------------------------------------------------------------
 # R2c, m
 MuMIn::r.squaredGLMM(mod_basic_n)
 MuMIn::r.squaredGLMM(mod_full_n)
 MuMIn::r.squaredGLMM(mod_full_2_n)
 
 
-# POSTHOC TEST ON mod_full_n (full model)
 # # posthoc test
 # emmeans(mod_full_n, list(pairwise ~ Species), adjust = "tukey")
 # 
 # 
-# # # r2 marginal et conditionnels des effets fixes
-# r2glmm::r2beta(mod_full_n, method = 'nsj') 
-# # check les methodes, ?a peux faire une diff?rence...
-# 
-# # # plot les "graph criticism plots"
-# LMERConvenienceFunctions::mcp.fnc(mod_full_n)$rstand
-# 
-# 
-# # # plot rapide des effects fixes significatif sous forme de graph
-# plot(effects::allEffects(mod_full_n),multiline=T,rug=F,ci.style = "line",show.data=T)
-# 
-# 
-# # # plot rapide de tout les effects fixes ( la ligne verticale du 0 ?tant le "niveau 1" de chaque effet fixe)
-# sjPlot::plot_model(mod_full_n,show.values = T,vline.color = "grey",value.offset = -0.3)
-# 
-# 
-# # plot des effets fixes en d?tail
-# # ,show.data=T si tu veux voir les points
-# # ,type = "eff" si tu veux voir les effets "reels" ; ,type ="pred" si tu veux voir les effets pr?dits par le mod?le
-# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
-# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
-# 
-# # sjPlot::plot_model(mod_full_n, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
-# 
-# 
-# # sjPlot::plot_model(mod_full_n, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
-# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
-# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
-# sjPlot::plot_model(mod_full_n, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()
+# # r2 marginal et conditionnels des effets fixes
+r2glmm::r2beta(mod_full_n, method = 'nsj')
+# check les methodes, ?a peux faire une diff?rence...
+
+# # plot les "graph criticism plots"
+LMERConvenienceFunctions::mcp.fnc(mod_full_n)$rstand
+
+
+# # plot rapide des effects fixes significatif sous forme de graph
+plot(effects::allEffects(mod_bw_sel_n),multiline=T,rug=F,ci.style = "line",show.data=T)
+
+
+# # plot rapide de tout les effects fixes ( la ligne verticale du 0 ?tant le "niveau 1" de chaque effet fixe)
+sjPlot::plot_model(mod_bw_sel_n,show.values = T,vline.color = "grey",value.offset = -0.3)
+
+
+# plot des effets fixes en d?tail
+# ,show.data=T si tu veux voir les points
+# ,type = "eff" si tu veux voir les effets "reels" ; ,type ="pred" si tu veux voir les effets pr?dits par le mod?le
+sjPlot::plot_model(mod_bw_sel_n, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod_bw_sel_n, type = "eff", terms = c("Species","lag_Temp_fall"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod_bw_sel_n, type = "eff", terms = c("Species","Temp_summer"),show.data=F)+theme_bw()
+
+# Linear response
+sjPlot::plot_model(mod_bw_sel_n, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod_bw_sel_n, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()

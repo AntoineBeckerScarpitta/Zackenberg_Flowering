@@ -11,8 +11,8 @@
 # rm(list=ls())
 
 
-##Laura cleaning and dealing with snow cover data
-##aim is to get one DOY value corresponding to 50% snow cover for each plot in each year
+## Laura cleaning and dealing with snow cover data
+## aim is to get one DOY value corresponding to 50% snow cover for each plot in each year
 
 
 library(lubridate)  ##for dealing with dates

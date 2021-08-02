@@ -1,0 +1,512 @@
+ylab="Temperatures (°C)", pch=21,
+ylim=round(range(clim_season_year[clim_season_year$Variable=="Temperature_C"&
+clim_season_year$Season=="summer",
+"Value"]), 0),
+cex=2, xaxt='n', xlab='Year', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5,
+main=paste("Nuuk year mean temp: F=", as.character(round(anova(mod_Ny_temp)[1,4], 3)),
+"P-value=" , as.character(round(anova(mod_Ny_temp)[1,5], 3)),
+"R2adj=" , as.character(round(summary(mod_Ny_temp)$adj.r.squared, 3))))
+abline(a=summary(mod_Ny_temp)$coefficients[1] , b=summary(mod_Ny_temp)$coefficients[2],
+lwd=2, col="blue")
+axis(side=1, at=seq(2007, 2019, by=5), cex.axis=1.5)
+# Zack YEAR
+mod_Zy_temp <- lm(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Zackenberg" &
+clim_season_year$Variable=="Temperature_C"&
+clim_season_year$Season=="summer", ])
+summary(mod_Zy_temp)
+anova(mod_Zy_temp)
+plot(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Zackenberg" &
+clim_season_year$Variable=="Temperature_C"&
+clim_season_year$Season=="summer", ],
+ylab=" ", pch=21, ylim=round(range(clim_season_year[clim_season_year$Variable=="Temperature_C"&
+clim_season_year$Season=="summer",
+"Value"]), 0),
+cex=2, xaxt='n', xlab='Year', col="red", bg="red", cex.axis=1.5, cex.lab=1.5,
+main=paste("Zackenberg year mean temp **: F=", as.character(round(anova(mod_Zy_temp)[1,4], 3)),
+"P-value=" , as.character(round(anova(mod_Zy_temp)[1,5], 3)),
+"R2adj=" , as.character(round(summary(mod_Zy_temp)$adj.r.squared, 3))))
+abline(a=summary(mod_Zy_temp)$coefficients[1] , b=summary(mod_Zy_temp)$coefficients[2],
+lwd=2, col="red")
+axis(side=1, at=seq(1995, 2019, by=5), cex.axis=1.5)
+##END-----------------------------------------------------------------------------------
+### PRECIPITATION
+# YEARLY MEAN PRECIPITATION
+# Nuuk YEAR
+mod_Ny_prec <- lm(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Nuuk" &
+clim_season_year$Variable=="Precipitation_mm"&
+clim_season_year$Season=="summer", ])
+summary(mod_Ny_prec)
+anova(mod_Ny_prec)
+plot(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Nuuk" &
+clim_season_year$Variable=="Precipitation_mm"&
+clim_season_year$Season=="summer", ],
+ylab="Precipitation (mm)", pch=21,
+ylim=round(range(clim_season_year[clim_season_year$Variable=="Precipitation_mm"&
+clim_season_year$Season=="summer","Value"]), 3),
+cex=2, xaxt='n', xlab='Year', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5,
+main=paste("Nuuk year mean prec *: F=", as.character(round(anova(mod_Ny_prec)[1,4], 3)),
+"P-value=" , as.character(round(anova(mod_Ny_prec)[1,5], 3)),
+"R2adj=" , as.character(round(summary(mod_Ny_prec)$adj.r.squared, 3))))
+abline(a=summary(mod_Ny_prec)$coefficients[1] , b=summary(mod_Ny_prec)$coefficients[2],
+lwd=2, col="blue")
+axis(side=1, at=seq(2007, 2019, by=5), cex.axis=1.5)
+# Zack YEAR
+mod_Zy_prec <- lm(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Zackenberg" &
+clim_season_year$Variable=="Precipitation_mm"&
+clim_season_year$Season=="summer", ])
+summary(mod_Zy_prec)
+anova(mod_Zy_prec)
+plot(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Zackenberg" &
+clim_season_year$Variable=="Precipitation_mm"&
+clim_season_year$Season=="summer", ],
+ylab=" ", pch=21,
+ylim=round(range(clim_season_year[clim_season_year$Site=="Zackenberg" &
+clim_season_year$Variable=="Precipitation_mm"&
+clim_season_year$Season=="summer", "Value"]), 3),
+cex=2, xaxt='n', xlab='Year', col="red", bg="red", cex.axis=1.5, cex.lab=1.5,
+main=paste("Zackenberg year mean prec **: F=" , as.character(round(anova(mod_Zy_prec)[1,4], 3)),
+"P-value=" , as.character(round(anova(mod_Zy_prec)[1,5], 3)),
+"R2adj=" , as.character(round(summary(mod_Zy_prec)$adj.r.squared, 3))))
+abline(a=summary(mod_Zy_prec)$coefficients[1] , b=summary(mod_Zy_prec)$coefficients[2],
+lwd=2, col="red")
+axis(side=1, at=seq(1995, 2019, by=5), cex.axis=1.5)
+##END-----------------------------------------------------------------------------------
+### HUMIDITY
+# YEARLY MEAN HUMIDITY
+# Nuuk YEAR
+mod_Ny_hum <- lm(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Nuuk" &
+clim_season_year$Variable=="Humidity_%"&
+clim_season_year$Season=="summer", ])
+summary(mod_Ny_hum)
+anova(mod_Ny_hum)
+plot(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Nuuk" &
+clim_season_year$Variable=="Humidity_%"&
+clim_season_year$Season=="summer", ],
+ylab="Humidity (%)", pch=21,
+ylim=round(range(clim_season_year[clim_season_year$Variable=="Humidity_%"&
+clim_season_year$Season=="summer","Value"]), 0),
+cex=2, xaxt='n', xlab='Year', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5,
+main=paste("Nuuk year mean hum ***: F=" , as.character(round(anova(mod_Ny_hum)[1,4], 3)),
+"P-value=" , as.character(round(anova(mod_Ny_hum)[1,5], 3)),
+"R2adj=" , as.character(round(summary(mod_Ny_hum)$adj.r.squared, 3))))
+abline(a=summary(mod_Ny_hum)$coefficients[1] , b=summary(mod_Ny_hum)$coefficients[2],
+lwd=2, col="blue")
+axis(side=1, at=seq(2007, 2019, by=5), cex.axis=1.5)
+# Zack YEAR
+mod_Zy_hum <- lm(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Zackenberg" &
+clim_season_year$Variable=="Humidity_%"&
+clim_season_year$Season=="summer", ])
+summary(mod_Zy_hum)
+anova(mod_Zy_hum)
+plot(Value ~ Year , data=clim_season_year[clim_season_year$Site=="Zackenberg" &
+clim_season_year$Variable=="Humidity_%"&
+clim_season_year$Season=="summer", ],
+ylab=" ", pch=21,
+ylim=round(range(clim_season_year[clim_season_year$Site=="Zackenberg" &
+clim_season_year$Variable=="Humidity_%"&
+clim_season_year$Season=="summer","Value"]), 0),
+cex=2, xaxt='n', xlab='Year', col="red", bg="red", cex.axis=1.5, cex.lab=1.5,
+main=paste("Zackenberg year mean hum **: F=" , as.character(round(anova(mod_Zy_hum)[1,4], 3)),
+"P-value=" , as.character(round(anova(mod_Zy_hum)[1,5], 3)),
+"R2adj=" , as.character(round(summary(mod_Zy_hum)$adj.r.squared, 3))))
+abline(a=summary(mod_Zy_hum)$coefficients[1] , b=summary(mod_Zy_hum)$coefficients[2],
+lwd=2, col="red")
+axis(side=1, at=seq(1995, 2019, by=5), cex.axis=1.5)
+# END -------------------------------------------------------------------------------
+### BASIC CLIMATIC EXPLORATION #----------------------------------------------------
+# distribution of temperature along year
+par(mfrow=c(1,2))
+# NUUK TEMPERATURE
+plot(clim[clim$Site=="Nuuk" & clim$Variable=="Temperature_C" , "Month"],
+clim[clim$Site=="Nuuk" & clim$Variable=="Temperature_C" , "Value"],
+ylab="Temperatures (°C)", xlab="Month",
+ylim=range(clim[clim$Variable=="Temperature_C" , "Value"]),
+main="Nuuk, distribution of temperature")
+abline(0, 0, col="grey")
+abline(v=c('05', "09"), col="red")
+abline(v=c('04', "10"), col="orange")
+# summer at Nuuk==05, 06, 07, 08, 09
+# spring at Nuuk==04 ; fall=10
+# ZACKENBERG TEMPERATURE
+plot(clim[clim$Site=="Zackenberg" & clim$Variable=="Temperature_C" , "Month"],
+clim[clim$Site=="Zackenberg" & clim$Variable=="Temperature_C" , "Value"],
+xlab="Month",
+ylim=range(clim[clim$Variable=="Temperature_C" , "Value"]),
+main="Zackenberg, distribution of temperature")
+abline(0, 0, col="grey")
+abline(v=c('06', "08"), col="red")
+abline(v=c('05', "09"), col="orange")
+# summer at Zack==06, 07, 08
+# spring at Nuuk==05 ; fall=09
+### CLIMATIC ANALYSIS #----------------------------------------------------------------
+### TEMPERATURE
+par(mfrow=c(3,2))
+# YEARLY MEAN TEMPERATURE
+# Nuuk YEAR
+mod_Ny_temp <- lm(Value ~ Year , data=clim_year[clim_year$Site=="Nuuk" &
+clim_year$Variable=="Temperature_C", ])
+summary(mod_Ny_temp)
+anova(mod_Ny_temp)
+plot(Value ~ Year , data=clim_year[clim_year$Site=="Nuuk" &
+clim_year$Variable=="Temperature_C", ],
+ylab="Temperatures (°C)", pch=21,
+ylim=round(range(clim_year[clim_year$Variable=="Temperature_C",
+"Value"]), 0),
+cex=2, xaxt='n', xlab='Year', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5,
+main=paste("Nuuk year mean temp: F=", as.character(round(anova(mod_Ny_temp)[1,4], 3)),
+"P-value=" , as.character(round(anova(mod_Ny_temp)[1,5], 3)),
+"R2adj=" , as.character(round(summary(mod_Ny_temp)$adj.r.squared, 3))))
+abline(a=summary(mod_Ny_temp)$coefficients[1] , b=summary(mod_Ny_temp)$coefficients[2],
+lwd=2, col="blue")
+axis(side=1, at=seq(2007, 2019, by=5), cex.axis=1.5)
+# Zack YEAR
+mod_Zy_temp <- lm(Value ~ Year , data=clim_year[clim_year$Site=="Zackenberg" &
+clim_year$Variable=="Temperature_C", ])
+summary(mod_Zy_temp)
+anova(mod_Zy_temp)
+plot(Value ~ Year , data=clim_year[clim_year$Site=="Zackenberg" &
+clim_year$Variable=="Temperature_C", ],
+ylab=" ", pch=21, ylim=round(range(clim_year[clim_year$Variable=="Temperature_C",
+"Value"]), 0),
+cex=2, xaxt='n', xlab='Year', col="red", bg="red", cex.axis=1.5, cex.lab=1.5,
+main=paste("Zackenberg year mean temp **: F=", as.character(round(anova(mod_Zy_temp)[1,4], 3)),
+"P-value=" , as.character(round(anova(mod_Zy_temp)[1,5], 3)),
+"R2adj=" , as.character(round(summary(mod_Zy_temp)$adj.r.squared, 3))))
+abline(a=summary(mod_Zy_temp)$coefficients[1] , b=summary(mod_Zy_temp)$coefficients[2],
+lwd=2, col="red")
+axis(side=1, at=seq(1995, 2019, by=5), cex.axis=1.5)
+##END---------------
+### PRECIPITATION
+# YEARLY MEAN PRECIPITATION
+# Nuuk YEAR
+mod_Ny_prec <- lm(Value ~ Year , data=clim_year[clim_year$Site=="Nuuk" &
+clim_year$Variable=="Precipitation_mm", ])
+summary(mod_Ny_prec)
+anova(mod_Ny_prec)
+plot(Value ~ Year , data=clim_year[clim_year$Site=="Nuuk" &
+clim_year$Variable=="Precipitation_mm", ],
+ylab="Precipitation (mm)", pch=21, ylim=round(range(clim_year[clim_year$Variable=="Precipitation_mm",
+"Value"]), 3),
+cex=2, xaxt='n', xlab='Year', col="blue", bg="blue", cex.axis=1.5, cex.lab=1.5,
+main=paste("Nuuk year mean prec *: F=", as.character(round(anova(mod_Ny_prec)[1,4], 3)),
+"P-value=" , as.character(round(anova(mod_Ny_prec)[1,5], 3)),
+"R2adj=" , as.character(round(summary(mod_Ny_prec)$adj.r.squared, 3))))
+abline(a=summary(mod_Ny_prec)$coefficients[1] , b=summary(mod_Ny_prec)$coefficients[2],
+lwd=2, col="blue")
+axis(side=1, at=seq(2007, 2019, by=5), cex.axis=1.5)
+summary(mod_Ny_prec)
+summary(mod_Zy_prec)
+summary(mod_Ny_hum)
+summary(mod_Zy_hum)
+#  clean R work-space
+rm(list=ls())
+# Load 02 - Creation database (load scripts 00 and 01)
+source("Scripts/00_Load_libraries.r")
+source("Scripts/01_Import_DB.r")
+source("Scripts/02_Creation_DB.R")
+source("Scripts/02_Climatic_covariates.R")
+source("Scripts/C2_Climatic_covariates.R")
+#  TEMPORAL TRENDS AT PLOT LEVEL WITH LOG ON DENSITY ONLY
+# 1 - Flower density per m2  ## --------------------------------------------
+flow_den <- ggplot(flow, aes(Year, Flow_m2, group=Plot, color=Plot)) +
+geom_point() +
+geom_smooth(method='lm', se=TRUE) +
+labs(y='Flower density / m2') +
+ggtitle('A - Flower density') +
+facet_grid(Site+Species~., scales="free_y") +
+theme_linedraw() +
+theme(legend.position = "none")
+# 3 - Log Flower density !=0  ## --------------------------------------------
+flow_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), group=Plot, color=Plot)) +
+geom_point() +
+geom_smooth(method='lm', se=TRUE) +
+labs(y='log(Flower density / m2)') +
+ggtitle('B - Log(Flower density)') +
+facet_grid(Site+Species~., scales="free_y")+
+theme_linedraw() +
+theme(legend.position = "none")
+#  graph
+gridExtra::grid.arrange(flow_den, flow_log_nn, ncol=2,
+top = "Plot level temporal trends in flowering")
+### END PLOT LEVEL ## ------------------------------------------------------
+#  TEMPORAL TRENDS AT SPECIE LEVEL DENSITY ONLY
+# 4 - Flower density per m2  ## --------------------------------------------
+flow_den2 <- ggplot(flow, aes(Year, Flow_m2, group=Species, color=Species)) +
+geom_point() +
+geom_smooth(method='lm', se=TRUE) +
+labs(y='Flower density/m2') +
+ggtitle('A - Flower density') +
+facet_grid(Site+Species ~., scales="free_y") +
+theme_linedraw()+
+theme(legend.position = "none") +
+scale_color_brewer(palette="Dark2")
+# 6 - Total Flower per plot  ## --------------------------------------------
+flow_den2_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), group=Species, color=Species)) +
+geom_point() +
+geom_smooth(method='lm', se=TRUE) +
+labs(y='log(Flower density/m2)') +
+ggtitle('B - Log(Flower density)') +
+facet_grid(Site+Species~., scales="free_y")+
+theme_linedraw() +
+theme(legend.position = "none") +
+scale_color_brewer(palette="Dark2")
+#  graph
+gridExtra::grid.arrange(flow_den2, flow_den2_log_nn, ncol=2,
+top = "Temporal flowering trends at species level in Zackenberg")
+### END SP LEVEL ## -----------------------------------------------------
+#  graph
+gridExtra::grid.arrange(flow_den, flow_log_nn, ncol=2,
+top = "Plot level temporal trends in flowering")
+#  graph
+gridExtra::grid.arrange(flow_den, flow_log_nn, ncol=2,
+top = "Plot level temporal trends in flowering")
+# DISTRIBUTION OF FLOWERING VARIABLES
+# DENSITY
+distdens <- ggplot(flow, aes(x=Flow_m2, fill=Species)) +
+geom_density(alpha=.3) +
+labs(y='Density', x='Flowering density/m2') +
+ggtitle('A - Distribution of Flowering density') +
+facet_wrap(.~Site+Species, scales="free") +
+theme_linedraw() +
+theme(legend.position = "none")
+# log(density) !=0 (Flow_m2 + 0.0001 in 02_Creation_DB, line 131)
+dist_logdens_nn <- ggplot(flow, aes(x=log(trans_Flow_m2), fill=Species)) +
+geom_density(alpha=.3) +
+labs(y='Density', x='log(Flowering density/m2)') +
+ggtitle('B - Distribution of log(Flowering density) !=0') +
+facet_wrap(Site+Species~ ., scales="free") +
+theme_linedraw() +
+theme(legend.position = "none")
+#  graph
+gridExtra::grid.arrange(distdens, dist_logdens_nn, ncol=2,
+top = "Distribution of flowering variable per species")
+### END DISTRI PLOTS  ## -------------------------------------------------
+# CLIMATIC TRENDS
+# Plot Climatic trends    ## ---------------------------------------------
+# ALL MONTHS
+ggplot(clim_month, aes(Year, Value, group=Site, color=Site)) +
+geom_point() +
+geom_smooth(method='lm', se=TRUE) +
+labs(y='Value') +
+ggtitle('Climatic trends all months Nuuk & Zackenberg') +
+facet_grid(Variable~., scales="free_y") +
+theme_linedraw()
+library(dplyr)
+library(stringr)
+library(tidyverse)
+library(lubridate)  ##for dealing with dates
+# Snow cover (remarks on original fields only)
+# load file
+Zsnow <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Abiotics_Snow_and_ice_cover02122020113324881.csv",
+stringsAsFactors=FALSE, header=TRUE,  sep="\t",
+strip.white = T,na.strings = c("","NA"))
+Zsnow<- Zsnow %>% dplyr::rename(Date=ï..Date)  ##for some reason this changed when importing the file
+# create a new col==Variable
+Zsnow$Variable <- "Snow_cover"
+# create new col==Site
+Zsnow$Site <- "Zackenberg"
+# remove field and general remarks
+Zsnow <- as.data.frame(Zsnow %>%
+dplyr::select(Date, Plot, Section, SnowCoverFraction,
+Variable, Site)) %>%
+#remove plots==ERI, ART, VEG
+filter(!Plot %in% c("Art1","Art2","Art3","Art4","Art5","Art6","Art7",
+"Eri1","Eri2","Eri3","Eri4", "Veg1"))
+# devided the date into year, month, day
+Zsnow <- cbind(as.data.frame(str_split(Zsnow$Date, "-", simplify=TRUE)), Zsnow)
+colnames(Zsnow) <- c("Year", "Month", "Day", 'Date', "Plot", "Section",
+"Value", "Variable", "Site")
+##renaming plots and sections
+sort(unique(Zsnow$Plot))
+Zsnow$Plot[Zsnow$Plot== "Sax1Si1"] <- "Sax1Sil1"
+Zsnow$Plot[Zsnow$Plot== "Sax2Si2"] <- "Sax2Sil2"
+Zsnow$Plot[Zsnow$Plot== "Sax3Si3"] <- "Sax3Sil3"
+Zsnow$Plot[Zsnow$Plot== "Si4"] <- "Sil4"
+Zsnow$Section[Zsnow$Section== "A-D"] <- "A"
+# Remove -9999, NA
+Zsnow[Zsnow$Value==-9999, 'Value'] <- NA
+Zsnow <- Zsnow[complete.cases(Zsnow), ]
+# Snow cover (remarks on original fields only)
+# load file
+Zsnow <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Abiotics_Snow_and_ice_cover02122020113324881.csv",
+stringsAsFactors=FALSE, header=TRUE,  sep="\t",
+strip.white = T,na.strings = c("","NA"))
+Zsnow<- Zsnow %>% dplyr::rename(Date=ï..Date)  ##for some reason this changed when importing the file
+# Snow cover (remarks on original fields only)
+# load file
+Zsnow <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Abiotics_Snow_and_ice_cover02122020113324881.csv",
+stringsAsFactors=FALSE, header=TRUE,  sep="\t",
+strip.white = T,na.strings = c("","NA"))
+# create a new col==Variable
+Zsnow$Variable <- "Snow_cover"
+# create new col==Site
+Zsnow$Site <- "Zackenberg"
+# remove field and general remarks
+Zsnow <- as.data.frame(Zsnow %>%
+dplyr::select(Date, Plot, Section, SnowCoverFraction,
+Variable, Site)) %>%
+#remove plots==ERI, ART, VEG
+filter(!Plot %in% c("Art1","Art2","Art3","Art4","Art5","Art6","Art7",
+"Eri1","Eri2","Eri3","Eri4", "Veg1"))
+# devided the date into year, month, day
+Zsnow <- cbind(as.data.frame(str_split(Zsnow$Date, "-", simplify=TRUE)), Zsnow)
+colnames(Zsnow) <- c("Year", "Month", "Day", 'Date', "Plot", "Section",
+"Value", "Variable", "Site")
+##renaming plots and sections
+sort(unique(Zsnow$Plot))
+Zsnow$Plot[Zsnow$Plot== "Sax1Si1"] <- "Sax1Sil1"
+Zsnow$Plot[Zsnow$Plot== "Sax2Si2"] <- "Sax2Sil2"
+Zsnow$Plot[Zsnow$Plot== "Sax3Si3"] <- "Sax3Sil3"
+Zsnow$Plot[Zsnow$Plot== "Si4"] <- "Sil4"
+Zsnow$Section[Zsnow$Section== "A-D"] <- "A"
+# Remove -9999, NA
+Zsnow[Zsnow$Value==-9999, 'Value'] <- NA
+Zsnow <- Zsnow[complete.cases(Zsnow), ]
+Zsnow <- Zsnow %>%
+# Create a col DOY=day of the year based on original date
+mutate(DOY=yday(Date))  %>%
+mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "_")))  ##adding concatenation of Year and plot (as these are the units to look at)
+Zsnow
+Zsnow <- Zsnow %>%
+# Create a col DOY=day of the year based on original date
+mutate(DOY=yday(Date))  %>%
+mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "_")))  ##adding concatenation of Year and plot (as these are the units to look at)
+library(lubridate)  ##for dealing with dates
+Zsnow <- Zsnow %>%
+# Create a col DOY=day of the year based on original date
+mutate(DOY=yday(Date))  %>%
+mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "_")))  ##adding concatenation of Year and plot (as these are the units to look at)
+Zsnow
+##some checks
+#how many plots
+n_distinct(Zsnow$Plot)  #28
+n_distinct(Zsnow$Year_Plot) #537
+needtohave<- Zsnow %>%
+select(Year_Plot) %>%
+distinct()
+View(needtohave)
+needtohave
+Zsnow_meltday50 <- Zsnow %>%
+# Select the DOY with 50 of snow_cover (this will be the date of snow melt)
+group_by(Year, Plot, Section) %>%
+filter(Value==50) %>%
+mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "_"))) %>%  ##adding concatenation of Year and plot (as these are the units to look at)
+ungroup()
+Zsnow_meltday50
+n_distinct(Zsnow_meltday50$Plot)  #25
+n_distinct(Zsnow_meltday50$Year_Plot)  #152
+Zsnow_meltday50 %>%
+group_by(Year, Plot) %>%
+summarise(n= n_distinct(DOY)) %>%
+arrange(., Year, Plot)
+#1.1. how many DOY per plot and year -- to see if there is differences between sections
+check1<- Zsnow_meltday50 %>%
+group_by(Year, Plot) %>%
+summarise(n= n_distinct(DOY)) %>%
+arrange(., Year, Plot)
+View(check1)
+Zsnow_meltday50 %>%
+group_by(Year, Plot) %>%
+count(DOY)) %>%
+arrange(., Year, Plot)
+Zsnow_meltday50 %>%
+group_by(Year, Plot) %>%
+count(DOY) %>%
+arrange(., Year, Plot)
+View(Zsnow_meltday50 %>%
+group_by(Year, Plot) %>%
+count(DOY) %>%
+arrange(., Year, Plot))
+check1
+##for the ones with only one DOY - use that value
+doy_ok1<- check1 %>%
+filter(n==1) %>%
+mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "_")))
+doy_ok1
+Zsnow_meltday50
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(Year_Plot %in% doy_ok1$Year_Plot),  ##this has 114 Year_Plot!! (152-114=38 in check2)
+by="Year_Plot")
+dim(needtohave[is.na(needtohave$DOY),])
+dim(doy_ok1)
+needtohave
+##so just joining the DOY info
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(Year_Plot %in% doy_ok1$Year_Plot, by="Year_Plot",)
+is.na(DOY))
+##so just joining the DOY info
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(Year_Plot %in% doy_ok1$Year_Plot, by="Year_Plot",
+is.na(DOY)))  #
+##so just joining the DOY info
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(Year_Plot %in% doy_ok1$Year_Plot),  ##this has 114 Year_Plot!! (152-114=38 in check2)
+by="Year_Plot")
+##so just joining the DOY info
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(Year_Plot %in% doy_ok1$Year_Plot),  ##this has 114 Year_Plot!! (152-114=38 in check2)
+by="Year_Plot")
+dim(needtohave[is.na(needtohave$DOY),])
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(Year_Plot %in% doy_ok1$Year_Plot),  ##this has 114 Year_Plot!! (152-114=38 in check2)
+by="Year_Plot") %>%
+drop_na()
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(DOY!=NA,
+Year_Plot %in% doy_ok1$Year_Plot),  ##this has 114 Year_Plot!! (152-114=38 in check2)
+by="Year_Plot")
+dim(needtohave)
+dim(needtohave[is.na(needtohave$DOY),])
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(Year_Plot %in% doy_ok1$Year_Plot),  ##this has 114 Year_Plot!! (152-114=38 in check2)
+by="Year_Plot")
+dim(needtohave[is.na(needtohave$DOY),])
+dim(needtohave)
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(DOY!=NA,
+Year_Plot %in% doy_ok1$Year_Plot),  ##this has 114 Year_Plot!! (152-114=38 in check2)
+by="Year_Plot")
+dim(needtohave)
+head(needtohave)
+##so just joining the DOY info
+needtohave<- needtohave %>% left_join(., Zsnow_meltday50 %>%
+select(Year_Plot, DOY) %>%
+distinct(Year_Plot, .keep_all = T) %>%
+filter(Year_Plot %in% doy_ok1$Year_Plot),  ##this has 114 Year_Plot!! (152-114=38 in check2)
+by="Year_Plot")
+dim(needtohave[is.na(needtohave$DOY),])
+check2 <- check1 %>%
+##remove the ones that have only a single DOY==all good
+filter(n!=1) %>%
+mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "_")))
+unique(check2$Year_Plot)
+dim(unique(check2$Year_Plot))
+length(unique(check2$Year_Plot))
+auxdata1 <- Zsnow_meltday50 %>%
+filter(Year_Plot %in% check2$Year_Plot)  ##get the records that match the problematic Year_Plot
+auxdata1
+ggplot(auxdata1) +
+geom_point(aes(x=Year_Plot, y=DOY, colour=Section)) +
+theme(axis.text.x = element_text(angle = 90))
+library(ggplot2)
+ggplot(auxdata1) +
+geom_point(aes(x=Year_Plot, y=DOY, colour=Section)) +
+theme(axis.text.x = element_text(angle = 90))
