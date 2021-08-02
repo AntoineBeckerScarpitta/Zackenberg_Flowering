@@ -10,14 +10,15 @@
 #  clean R work-space
 # rm(list=ls())
 
+library(lubridate)  ##for dealing with dates
 
 ## Laura cleaning and dealing with snow cover data
 ## aim is to get one DOY value corresponding to 50% snow cover for each plot in each year
 
 
-library(lubridate)  ##for dealing with dates
 
 
+# 1 - ZACKENBERG ----------------------------------------
 # Snow cover (remarks on original fields only)
 # load file
 Zsnow <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Abiotics_Snow_and_ice_cover02122020113324881.csv",
