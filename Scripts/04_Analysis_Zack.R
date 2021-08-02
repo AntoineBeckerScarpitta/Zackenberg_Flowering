@@ -53,15 +53,15 @@ flow_snow_clim_z <- flow_snow_clim_z %>%
 #---END
 
 
-# # SnowMelt DOY
-# ggplot(flow_snow_clim_z , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) + 
-#   geom_point(size=2) +  
-#   geom_smooth(method='lm', se=F) +
-#   theme(axis.text=element_text(size=15),
-#         axis.title=element_text(size=16,face="bold"), 
-#         panel.background = element_blank(), 
-#         axis.line = element_line(colour = "black")) 
-# #
+## SnowMelt DOY Zackenberg
+ggplot(flow_snow_clim_z , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) +
+  geom_point(size=2) +
+  geom_smooth(method='lm', se=F) +
+  theme(axis.text=element_text(size=15),
+        axis.title=element_text(size=16,face="bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+
 # #modif
 # 
 # # temporal autocorrelation function
@@ -75,109 +75,157 @@ flow_snow_clim_z <- flow_snow_clim_z %>%
 # acf(na.omit(log(flow$trans_Flow_m2)), plot = T, lag.max = 22, 
 #     main = "Sample Autocorrelation for Log(Flowering density)")
 # par(mfrow=c(1,1))
-# #
+##-----------------------------------------------------------------------------------
+
 
 
 
 ## 2 - MODELS -----------------------------------------------------------------------
-
-#  MODEL 1: flow(t) ~ Sp * Year + flow(t-1) + ranef(plot)
-mod_basic_z <- lmer(log(trans_Flow_m2) ~ Species * Year + lag_trans_Flow_m2 +
-             (1|Plot),
+#  MODEL 1: EQ1 - temporal trends in flowering density for each sp?
+# flow(t) ~ Sp * Year + ranef(plot)
+mod_basic_z <- lmer(log(trans_Flow_m2) ~ Species * Year + (1|Plot),
              data= flow_snow_clim_z,
              REML=T, na.action=na.omit)
 summary(mod_basic_z)
-saveRDS(mod_basic_z, "results/models/mod_basic_z.rds")
+# saveRDS(mod_basic_z, "results/models/mod_basic_z.rds")
 
 
-#  MODEL 2: 
+#  MODEL 2: EQ2 -  what climatic variable drive the trends, controlling for lag(flow_density)?
 # flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + flow(t-1) + ranef(plot)
-mod_full_z <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
-                                  Species * snowmelt_DOY  + lag_trans_Flow_m2 + (1|Plot),
+mod_full_z <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
+                                        Species * lag_Temp_fall +
+                                        Species * snowmelt_DOY + 
+                                        Species * lag_trans_Flow_m2 + 
+                                        (1|Year/Plot),
              data=flow_snow_clim_z, 
              REML=T, na.action=na.omit)
 summary(mod_full_z)
-saveRDS(mod_full_z, "results/models/mod_full_z.rds")
+# saveRDS(mod_full_z, "results/models/mod_full_z.rds")
 
 
-#  MODEL 3: ranef plot structured by year
-# flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + ranef(plot/year)
-mod_full_2_z <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
-                                  Species * snowmelt_DOY  + (1|Plot/Year),
-             data=flow_snow_clim_z, 
-             REML=T, na.action=na.omit)
-summary(mod_full_2_z)
-saveRDS(mod_full_2_z, "results/models/mod_full_ranef_plot_year_z.rds")
+
+#  MODEL 3: TEST -  what climatic variable drive the trends, controlling for lag(flow_density)?
+# flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + flow(t-1) + ranef(plot)
+mod_full_z2 <- lmer(log(trans_Flow_m2) ~  Species * Temp_summer + 
+                                          Species * lag_Temp_fall +
+                                          Species * snowmelt_DOY + 
+                                          Species * lag_trans_Flow_m2 + 
+                                          (1|Year) + (1|Plot),
+                    data=flow_snow_clim_z, 
+                    REML=T, na.action=na.omit)
+summary(mod_full_z2)
+# saveRDS(mod_full_z, "results/models/mod_full_z.rds")
 #-----------------------------------------------------------------------------------=
 
-# models used different data, can't compare them
-# anova(mod1, mod2)
 
 
+
+#### Variables backward selection ----------------------------------------------------
+# create a dB without NA (same used in lmer, Mod1 & Mod2)
+flow_snow_clim_z <- flow_snow_clim_z[complete.cases(flow_snow_clim_z),]
+
+# Backward variable selection on full model EQ2 
+lmerTest::step(mod_full_z, direction = "backward", trace=FALSE ) 
+
+# get model after selection
+mod_bw_sel_z <- get_model(lmerTest::step(mod_full_z, 
+                                              direction="backward", 
+                                              trace=FALSE ) )
+summary(mod_bw_sel_z)
+MuMIn::r.squaredGLMM(mod_bw_sel_z)
+
+#All tab mod together
+tab_model(mod_basic_z, mod_full_z, mod_full_z2, mod_bw_sel_z,
+          p.val = "kr", 
+          show.df = TRUE, 
+          dv.labels = c("Basic Zack", "Full Zack nested", 
+                        "Full Zack crossed", "Full Zack sel"))
+
+# tab for final model
+tab_model(mod_bw_sel_z,
+          p.val = "kr", 
+          show.df = TRUE, 
+          dv.labels = "Final model Zackenberg")
+
+
+# tab for basic model Zackenberg + Nuuk
+tab_model(mod_basic_z, mod_basic_n,
+          p.val = "kr", 
+          show.df = TRUE, 
+          dv.labels = c("Zackenberg", "Nuuk"))
+#END----------------------------------------------------------------------------------
+
+
+
+
+
+####  POSTHOC TEST ------------------------------------------------------------------
 # R2c, m
 MuMIn::r.squaredGLMM(mod_basic_z)
 MuMIn::r.squaredGLMM(mod_full_z)
 MuMIn::r.squaredGLMM(mod_full_2_z)
 
 
-# POSTHOC TEST ON mod_full_z (full model)
-# posthoc test
-emmeans(mod_full_z, list(pairwise ~ Species), adjust = "tukey")
-
-
-# # r2 marginal et conditionnels des effets fixes
-r2glmm::r2beta(mod_full_z, method = 'nsj')
-# check les methodes, ?a peux faire une diff?rence...
-
-# # plot les "graph criticism plots"
-LMERConvenienceFunctions::mcp.fnc(mod_full_z)$rstand
-
-
-# # plot rapide des effects fixes significatif sous forme de graph
-plot(effects::allEffects(mod_full_z),multiline=T,rug=F,ci.style = "line",show.data=T)
-
-
-# # plot rapide de tout les effects fixes ( la ligne verticale du 0 ?tant le "niveau 1" de chaque effet fixe)
-sjPlot::plot_model(mod_full_z,show.values = T,vline.color = "grey",value.offset = -0.3)
-
-
-# plot des effets fixes en d?tail
-# ,show.data=T si tu veux voir les points
-# ,type = "eff" si tu veux voir les effets "reels" ; ,type ="pred" si tu veux voir les effets pr?dits par le mod?le
+# # posthoc test
+# emmeans(mod_full_z, list(pairwise ~ Species), adjust = "tukey")
+# 
+# 
+# # # r2 marginal et conditionnels des effets fixes
+# r2glmm::r2beta(mod_full_z, method = 'nsj')
+# # check les methodes, ?a peux faire une diff?rence...
+# 
+# # # plot les "graph criticism plots"
+# LMERConvenienceFunctions::mcp.fnc(mod_full_z)$rstand
+# 
+# 
+# # # plot rapide des effects fixes significatif sous forme de graph
+# plot(effects::allEffects(mod_full_z_final),multiline=T,rug=F,
+ci.style = "line",show.data=T)
+# 
+# 
+# # # plot rapide de tout les effects fixes 
+# ##(la ligne verticale du 0 = le "niveau 1" de chaque effet fixe)
+# sjPlot::plot_model(mod_full_z_final,show.values = T,vline.color = "grey",value.offset = -0.3)
+# 
+# 
+# # plot des effets fixes en detail
+# # show.data=T si tu veux voir les points
+# # type = "eff" si tu veux voir les effets "reels" ; ,
+# # type ="pred" si tu veux voir les effets predits par le modele
 sjPlot::plot_model(mod_full_z, type = "eff", terms = c("Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod_full_z, type = "eff", terms = c("Species","lag_trans_Flow_m2"),show.data=F)+theme_bw()
+sjPlot::plot_model(mod_full_z, type = "eff", terms = c("Species","lag_trans_Flow_m2"),
+                   show.data=F)+theme_bw()
 
-sjPlot::plot_model(mod_full_z, type = "eff", terms = c("Species","snowmelt_DOY"),show.data=F)+theme_bw()
-
-
-sjPlot::plot_model(mod_full_z, type = "eff", terms = c("snowmelt_DOY", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod_full_z, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod_full_z, type = "eff", terms = c("Temp_summer", "Species"),show.data=F)+theme_bw()
-sjPlot::plot_model(mod_full_z, type = "eff", terms = c("lag_Temp_fall", "Species"),show.data=F)+theme_bw()
-
-
-
-
-# print table model ZACK
-#computation of p-values is based on conditional F-tests with Kenward-Roger
-tab_model(mod_full_z, 
-          p.val = "kr", 
-          show.df = TRUE)
-
-#model table to compare model
-tab_model(mod_full_z, mod_full_2_z,
-          p.val = "kr", 
-          show.df = TRUE, 
-          dv.labels = c("Full(1|plot)", "Full_2(1|Plot/Year)"))
-
-#Forest plot on ZACK
-plot_model(mod_full_z , 
-           show.intercept = TRUE, 
-           show.values=T, 
-           value.offset = -0.3, 
-           show.p = TRUE, 
-           vline.color = "red", 
-           title = "Zackenberg") + theme_bw()
+sjPlot::plot_model(mod_bw_sel_z, type = "eff", terms = c("Temp_summer", "Species"),
+                   show.data=F)+theme_bw()
+sjPlot::plot_model(mod_bw_sel_z, type = "eff", terms = c("lag_trans_Flow_m2", "Species"),
+                   show.data=T)+theme_bw()
+sjPlot::plot_model(mod_bw_sel_z, type = "eff", terms = c("lag_Temp_fall", "Species"),
+                   show.data=F)+theme_bw()
+# 
+# 
+# 
+# 
+# # print table model ZACK
+# #computation of p-values is based on conditional F-tests with Kenward-Roger
+# tab_model(mod_full_z, 
+#           p.val = "kr", 
+#           show.df = TRUE)
+# 
+# #model table to compare model
+# tab_model(mod_full_z, mod_full_2_z,
+#           p.val = "kr", 
+#           show.df = TRUE, 
+#           dv.labels = c("Full(1|plot)", "Full_2(1|Plot/Year)"))
+# 
+# #Forest plot on ZACK
+# plot_model(mod_full_z, 
+#            show.intercept = TRUE, 
+#            show.values=T, 
+#            value.offset = -0.3, 
+#            show.p = TRUE, 
+#            vline.color = "red", 
+#            title = "Zackenberg") + theme_bw()
 
 
 
