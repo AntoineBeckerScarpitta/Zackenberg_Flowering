@@ -146,13 +146,6 @@ tab_model(mod_bw_sel_z,
           p.val = "kr", 
           show.df = TRUE, 
           dv.labels = "Final model Zackenberg")
-
-
-# tab for basic model Zackenberg + Nuuk
-tab_model(mod_basic_z, mod_basic_n,
-          p.val = "kr", 
-          show.df = TRUE, 
-          dv.labels = c("Zackenberg", "Nuuk"))
 #END----------------------------------------------------------------------------------
 
 
@@ -163,7 +156,24 @@ tab_model(mod_basic_z, mod_basic_n,
 # R2c, m
 MuMIn::r.squaredGLMM(mod_basic_z)
 MuMIn::r.squaredGLMM(mod_full_z)
-MuMIn::r.squaredGLMM(mod_full_2_z)
+MuMIn::r.squaredGLMM(mod_full_z2)
+MuMIn::r.squaredGLMM(mod_bw_sel_z)
+
+
+
+
+
+
+# NEED TO figured out the structure of the raneff crossed or nested
+
+
+
+
+
+
+
+
+
 
 
 # # posthoc test
