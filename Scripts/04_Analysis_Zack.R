@@ -152,14 +152,14 @@ summary(mod_bw_sel_z)
 
 #### Results tables -----------------------------------------------------------------
 #All tab mod together
-tab_model(mod_basic_z, mod_full_z_cross, mod_full_z_cross, mod_bw_sel_z,
+tab_model(mod_basic_z, mod_full_z_nest, mod_full_z_cross, mod_bw_sel_z,
           p.val = "kr", 
           show.df = TRUE, 
           dv.labels = c("Basic Zack", "Full Zack nested", 
                         "Full Zack crossed", "Full Zack sel"))
 
 # tab for final model
-tab_model(mod_full_z_cross,
+tab_model(mod_full_z_nest,
           p.val = "kr", 
           show.df = TRUE, 
           dv.labels = "Final model Zackenberg")
