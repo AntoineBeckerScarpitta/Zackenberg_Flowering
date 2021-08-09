@@ -15,11 +15,16 @@ source("Scripts/00_Load_libraries.r")
 source("Scripts/01_Import_DB.r")
 source("Scripts/02_Creation_DB.R")
 source("Scripts/C2_Climatic_covariates.R")
+source("Scripts/C2_Snow_covariates.R")
 
 
 # Total number of plot per year Nuuk and Zackenberg
-# write.csv(table(flow[flow$Site=="Nuuk", "Year"], flow[flow$Site=="Nuuk", "Species"]), "results/Plot_num_year_Nuuk.csv")
-# write.csv(table(flow[flow$Site=="Zackenberg", "Year"], flow[flow$Site=="Zackenberg", "Species"]), "results/Plot_num_year_Zack.csv")
+# write.csv(table(flow[flow$Site=="Nuuk", "Year"], 
+#                 flow[flow$Site=="Nuuk", "Species"]), 
+#           "results/Plot_num_year_Nuuk.csv")
+# write.csv(table(flow[flow$Site=="Zackenberg", "Year"],
+#                 flow[flow$Site=="Zackenberg", "Species"]), 
+#           "results/Plot_num_year_Zack.csv")
 
 
 
@@ -138,12 +143,31 @@ ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
 ggplot(clim_season_year, aes(Year, Value, group=Site, color=Season)) +
   scale_color_brewer(palette="Set1")+
   geom_point() +
-  geom_smooth(aes(group=Season, color=Season), method='lm', se=FALSE) +
+  geom_smooth(aes(group=Season, color=Season, fill=Season), method='lm', se=TRUE) +
   labs(y='Value') +
   ggtitle('Seasonal climatic trends at Nuuk & Zackenberg') +
   facet_grid(Variable+Site~., scales="free") +
   theme_linedraw() 
 ### END CLIMATIC PLOTS  ## -----------------------------------------------
 
+
+
+
+
+# SNOW MELT DAY OF THE YEAR ZACKENBERG
+# Plot SnowMelt DOY    ## ------------------------------------------------
+# YEAR TRENDS
+ggplot(left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
+                 snow, by=c("Year", "Plot")), 
+       aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) +
+  geom_point(size=2) +
+  geom_smooth(aes(group=Species, color=Species, fill=Species), 
+              method='lm', se=T) +
+  ggtitle('Temporal change of snowmelt day of the year - Zackenberg') +
+  theme(axis.text=element_text(size=16, face='bold'),
+        axis.title=element_text(size=16, face="bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
+  
 
 
