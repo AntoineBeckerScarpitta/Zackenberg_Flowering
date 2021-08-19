@@ -10,57 +10,41 @@
 #  clean R work-space
 rm(list=ls())
 
+source("Scripts/00_Load_libraries.r")
 
 # In this script you have no data, ONLY models outputs
 # script to run models are: 04_Analysis_Zackenberg & 04_Analysis_Nuuk
-# in these scripts (04_), you will find code line to explore plot effects
-
+# in these scripts (04_), you will find mod and plot effects
 
 
 # 1 - MODELS STRUCTURE FOR A-ZACKENBERG ; B-NUUK
 # A - ZACKENBERG
-# mod1_z <- lmer(log(trans_Flow_m2) ~ Species * as.numeric(Year) + lag_trans_Flow_m2 +
-#                  (1|Plot),
-#                data= flow_snow_clim_z,
-#                REML=T, na.action=na.omit)
 mod_basic_z <- readRDS('results/Models/mod_basic_z.rds')
+mod_full_z_cross <- readRDS('results/Models/mod_full_z_cross')
+mod_full_z_nest <- readRDS('results/Models/mod_full_z_nest')
+mod_bw_sel_z <- readRDS('results/Models/mod_bw_sel_z')
 
-# mod2_z <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
-#                  Species * snowmelt_DOY  + lag_trans_Flow_m2 + (1|Plot),
-#                data=flow_snow_clim_z, 
-#                REML=T, na.action=na.omit)
-mod_full_z <- readRDS('results/Models/mod_full_z.rds')
-
-# mod3_z <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + Species * lag_Temp_fall +
-#                  Species * snowmelt_DOY  + (1|Plot/Year),
-#                data=flow_snow_clim_z, 
-#                REML=T, na.action=na.omit)
-mod_full_2_z <- readRDS('results/Models/mod_full_ranef_plot_year_z.rds')
-# 
-# 
 # B - NUUK
-# mod1_n <- lmer(log(trans_Flow_m2) ~ Species * Year + lag_trans_Flow_m2 +
-#                  (1|Plot),
-#                data= flow_snow_clim_n,
-#                REML=T, na.action=na.omit)
 mod_basic_n <- readRDS('results/Models/mod_basic_n.rds')
-
-# #  MODEL 2: 
-# mod2_n <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
-#                  Species * lag_Temp_fall +
-#                  lag_trans_Flow_m2 + (1|Plot),
-#                data=flow_snow_clim_n, 
-#                REML=T, na.action=na.omit)
 mod_full_n <- readRDS('results/Models/mod_full_n.rds')
-
-# #  MODEL 3: ranef plot structured by year
-# mod3_n <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
-#                  Species * lag_Temp_fall +
-#                  (1|Plot/Year),
-#                data=flow_snow_clim_n, 
-#                REML=T, na.action=na.omit)
 mod_full_2_n <- readRDS('results/Models/mod_full_ranef_plot_year_n.rds')
 
 
 
 
+# 2 - MODELS TABS
+# Tab basic mod Zack+Nuuk
+tab_model(mod_basic_z, mod_basic_n,
+          p.val = "kr", 
+          show.df = TRUE, 
+          dv.labels = c("Basic Zack", "Basic Nuuk"))
+
+# Tab full cross mod Zack+Nuuk
+tab_model(mod_full_z_cross, mod_full_n_cross,
+          p.val = "kr", 
+          show.df = TRUE, 
+          dv.labels = c("Full cross mod Zack", "Full cross mod Nuuk"))
+          
+          
+          
+          
