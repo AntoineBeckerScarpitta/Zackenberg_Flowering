@@ -136,12 +136,14 @@ performance::icc(mod_full_z_cross, by_group = TRUE)
 flow_snow_clim_z <- flow_snow_clim_z[complete.cases(flow_snow_clim_z),]
 
 # Backward variable selection on full model EQ2 
-lmerTest::step(mod_full_z, direction = "backward", trace=FALSE ) 
+lmerTest::step(mod_full_z_cross, direction = "backward", trace=FALSE ) 
 
 # get model after selection
-mod_bw_sel_z <- get_model(lmerTest::step(mod_full_z_nest, 
+mod_bw_sel_z <- get_model(lmerTest::step(mod_full_z_cross, 
                                               direction="backward", 
                                               trace=FALSE ) )
+
+# saveRDS(mod_bw_sel_z, "results/models/mod_bw_sel_z")
 summary(mod_bw_sel_z)
 #------------------------------------------------------------------------------------
 
