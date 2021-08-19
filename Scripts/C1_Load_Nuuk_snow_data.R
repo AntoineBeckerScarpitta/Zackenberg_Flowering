@@ -19,7 +19,8 @@ Nsal0 <- read.csv("data/datasets/snow_cover_nuuk/View_BioBasis_Nuuk_Data_Vegetat
 Nsal <- Nsal0 %>% 
   dplyr::select(Date, Plot, Section, Snow) %>%
   mutate(Site="Nuuk",
-         Species="SAL") 
+         #Species="SAL", 
+         Variable="Snow_cover")
 
 
 # READ - Silene
@@ -28,7 +29,8 @@ Nsil0 <- read.csv("data/datasets/snow_cover_nuuk/View_BioBasis_Nuuk_Data_Vegetat
 Nsil <- Nsil0 %>% 
   dplyr::select(Date, Plot, Section, Snow) %>%
   mutate(Site="Nuuk",
-         Species="SIL")
+         #Species="SIL", 
+         Variable="Snow_cover")
 
 
 # READ - Loiseleuria (Kalmia)
@@ -37,7 +39,8 @@ NLoi0 <- read.csv("data/datasets/snow_cover_nuuk/View_BioBasis_Nuuk_Data_Vegetat
 NLoi <- NLoi0 %>% 
   dplyr::select(Date, Plot, Section, Snow) %>%
   mutate(Site="Nuuk",
-         Species="LOI")
+         #Species="LOI", 
+         Variable="Snow_cover")
 
 
 # READ - Eriophorum
@@ -46,42 +49,43 @@ NEri0 <- read.csv("data/datasets/snow_cover_nuuk/View_BioBasis_Nuuk_Data_Vegetat
 NEri <- NEri0 %>% 
   dplyr::select(Date, Plot, Section, Snow) %>%
   mutate(Site="Nuuk",
-         Species="ERI")
+         #Species="ERI", 
+         Variable="Snow_cover")
 
 
 # bind all dataset
-snow_nuuk <- rbind(NEri, NLoi, Nsal, Nsil)
+Nsnow <- rbind(NEri, NLoi, Nsal, Nsil)
 
 
 # rename plots
-snow_nuuk[snow_nuuk$Plot=="SAL1", 'Plot'] <- "N_Sal1"
-snow_nuuk[snow_nuuk$Plot=="SAL2", 'Plot'] <- "N_Sal2"
-snow_nuuk[snow_nuuk$Plot=="SAL3", 'Plot'] <- "N_Sal3"
-snow_nuuk[snow_nuuk$Plot=="SAL4", 'Plot'] <- "N_Sal4"
+Nsnow[Nsnow$Plot=="SAL1", 'Plot'] <- "N_Sal1"
+Nsnow[Nsnow$Plot=="SAL2", 'Plot'] <- "N_Sal2"
+Nsnow[Nsnow$Plot=="SAL3", 'Plot'] <- "N_Sal3"
+Nsnow[Nsnow$Plot=="SAL4", 'Plot'] <- "N_Sal4"
 
-snow_nuuk[snow_nuuk$Plot=="SIL1", 'Plot'] <- "N_Sil1"
-snow_nuuk[snow_nuuk$Plot=="SIL2", 'Plot'] <- "N_Sil2"
-snow_nuuk[snow_nuuk$Plot=="SIL3", 'Plot'] <- "N_Sil3"
-snow_nuuk[snow_nuuk$Plot=="SIL4", 'Plot'] <- "N_Sil4"
+Nsnow[Nsnow$Plot=="SIL1", 'Plot'] <- "N_Sil1"
+Nsnow[Nsnow$Plot=="SIL2", 'Plot'] <- "N_Sil2"
+Nsnow[Nsnow$Plot=="SIL3", 'Plot'] <- "N_Sil3"
+Nsnow[Nsnow$Plot=="SIL4", 'Plot'] <- "N_Sil4"
 
-snow_nuuk[snow_nuuk$Plot=="LOI1", 'Plot'] <- "N_Loi1"
-snow_nuuk[snow_nuuk$Plot=="lOI1", 'Plot'] <- "N_Loi1"  # correct typo
-snow_nuuk[snow_nuuk$Plot=="LOI2", 'Plot'] <- "N_Loi2"
-snow_nuuk[snow_nuuk$Plot=="LOI3", 'Plot'] <- "N_Loi3"
-snow_nuuk[snow_nuuk$Plot=="LOI4", 'Plot'] <- "N_Loi4"
+Nsnow[Nsnow$Plot=="lOI1", 'Plot'] <- "N_Loi1"  # correct typo
+Nsnow[Nsnow$Plot=="LOI1", 'Plot'] <- "N_Loi1" 
+Nsnow[Nsnow$Plot=="LOI2", 'Plot'] <- "N_Loi2"  
+Nsnow[Nsnow$Plot=="LOI3", 'Plot'] <- "N_Loi3"  
+Nsnow[Nsnow$Plot=="LOI4", 'Plot'] <- "N_Loi4"
 
-snow_nuuk[snow_nuuk$Plot=="ERI1", 'Plot'] <- "N_Eri1"
-snow_nuuk[snow_nuuk$Plot=="Eri1", 'Plot'] <- "N_Eri1" # typo mistake
-snow_nuuk[snow_nuuk$Plot=="ERI2", 'Plot'] <- "N_Eri2"
-snow_nuuk[snow_nuuk$Plot=="Eri2", 'Plot'] <- "N_Eri2"
-snow_nuuk[snow_nuuk$Plot=="ERI3", 'Plot'] <- "N_Eri3"
-snow_nuuk[snow_nuuk$Plot=="Eri3", 'Plot'] <- "N_Eri3"
-snow_nuuk[snow_nuuk$Plot=="ERI4", 'Plot'] <- "N_Eri4"
-snow_nuuk[snow_nuuk$Plot=="Eri4", 'Plot'] <- "N_Eri4"
-
-
-# Remove NA
-snow_nuuk[snow_nuuk$Snow==-9999, 'Snow'] <-  NA
+Nsnow[Nsnow$Plot=="Eri1", 'Plot'] <- "N_Eri1" # typo mistake
+Nsnow[Nsnow$Plot=="Eri2", 'Plot'] <- "N_Eri2"
+Nsnow[Nsnow$Plot=="Eri3", 'Plot'] <- "N_Eri3"
+Nsnow[Nsnow$Plot=="Eri4", 'Plot'] <- "N_Eri4"
+Nsnow[Nsnow$Plot=="ERI1", 'Plot'] <- "N_Eri1"
+Nsnow[Nsnow$Plot=="ERI2", 'Plot'] <- "N_Eri2"
+Nsnow[Nsnow$Plot=="ERI3", 'Plot'] <- "N_Eri3"
+Nsnow[Nsnow$Plot=="ERI4", 'Plot'] <- "N_Eri4"
 
 
-remove("NEri0", "NLoi0", "Nsal0", "Nsil0")
+# Recode NA
+Nsnow[Nsnow$Snow==-9999, 'Snow'] <-  NA
+
+
+remove("NEri", "NEri0", "NLoi", "NLoi0", "Nsal", "Nsal0", "Nsil", "Nsil0")
