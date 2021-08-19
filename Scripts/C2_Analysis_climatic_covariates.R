@@ -12,9 +12,7 @@ rm(list=ls())
 
 # Load 02 - Creation database (+ scripts 00 and 01)
 source("Scripts/00_Load_libraries.r")
-source("Scripts/C2_Climatic_covariates.R")
-
-
+source("Scripts/C1_Load_climatic_covariates.R")
 
 ### TEMPORAL TRENDS  #----------------------------------------------------------------
 ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +

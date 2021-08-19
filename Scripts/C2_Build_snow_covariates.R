@@ -1,7 +1,7 @@
 #######################################################################################
 #
 #                           Greenland Flowering project
-#                                04 - Analysis
+#                             C2 - SNOW COVARIATES
 #
 #######################################################################################
 # Laura Antao
@@ -142,7 +142,6 @@ snow <- subset(snow, select=-c(DOY, Year_Plot))
 ##end
 
 remove("aux2", "est_DOY", 'Zsnow' )
-
 
 
 
