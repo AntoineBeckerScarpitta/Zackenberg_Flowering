@@ -51,7 +51,6 @@ NEri <- NEri0 %>%
 
 # bind all dataset
 snow_nuuk <- rbind(NEri, NLoi, Nsal, Nsil)
-remove("NEri0", "NLoi0", "Nsal0", "Nsil0")
 
 
 # rename plots
@@ -83,4 +82,6 @@ snow_nuuk[snow_nuuk$Plot=="Eri4", 'Plot'] <- "N_Eri4"
 
 # Remove NA
 snow_nuuk[snow_nuuk$Snow==-9999, 'Snow'] <-  NA
-snow_n <- snow_nuuk[complete.cases(snow_nuuk),]
+
+
+remove("NEri0", "NLoi0", "Nsal0", "Nsil0")

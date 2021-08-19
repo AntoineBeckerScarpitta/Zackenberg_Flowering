@@ -11,7 +11,7 @@
 # rm(list=ls())
 
 library(lubridate)  ##for dealing with dates
-
+source("scripts/C1_Load_Nuuk_snow_data.R")
 ## Laura cleaning and dealing with snow cover data
 ## aim is to get one DOY value corresponding to 50% snow cover for each plot in each year
 
