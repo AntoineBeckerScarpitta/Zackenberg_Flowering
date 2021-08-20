@@ -24,7 +24,8 @@ library('performance')
 # log(density) !=0 (Flow_m2[abundace==0] <- 0.001 in 02_Creation_DB, line 210)
 # add snow covariate into flow
 flow_snow_z <- left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
-                       snow, by=c("Year", "Plot")) 
+                         droplevels(snow%>% filter(Site=="Zackenberg"))
+                         , by=c("Year", "Plot", "Site")) 
 
 
 #reshape climatic data
@@ -105,7 +106,7 @@ mod_full_z_nest <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer +
              data=flow_snow_clim_z, 
              REML=T, na.action=na.omit)
 summary(mod_full_z_nest)
-# saveRDS(mod_full_z_nest, "results/models/mod_full_z_nest")
+# saveRDS(mod_full_z_nest, "results/models/mod_full_z_nest.rds")
 
 
 
@@ -119,7 +120,7 @@ mod_full_z_cross <- lmer(log(trans_Flow_m2) ~  Species * Temp_summer +
                     data=flow_snow_clim_z, 
                     REML=T, na.action=na.omit)
 summary(mod_full_z_cross)
-# saveRDS(mod_full_z_cross, "results/models/mod_full_z_cross")
+# saveRDS(mod_full_z_cross, "results/models/mod_full_z_cross.rds")
 #-----------------------------------------------------------------------------------
 
 
@@ -143,7 +144,7 @@ mod_bw_sel_z <- get_model(lmerTest::step(mod_full_z_cross,
                                               direction="backward", 
                                               trace=FALSE ) )
 
-# saveRDS(mod_bw_sel_z, "results/models/mod_bw_sel_z")
+# saveRDS(mod_bw_sel_z, "results/models/mod_bw_sel_z.rds")
 summary(mod_bw_sel_z)
 #------------------------------------------------------------------------------------
 
