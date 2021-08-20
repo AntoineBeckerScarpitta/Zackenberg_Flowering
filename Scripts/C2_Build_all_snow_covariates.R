@@ -8,7 +8,7 @@
 # January 2021 ##updated 19-01-2021
 
 #  clean R work-space
-rm(list=ls())
+# rm(list=ls())
 
 library(lubridate)  ##for dealing with dates
 
