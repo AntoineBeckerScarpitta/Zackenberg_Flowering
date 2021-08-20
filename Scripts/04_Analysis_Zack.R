@@ -14,8 +14,8 @@
 # source("Scripts/00_Load_libraries.r")
 # source("Scripts/01_Import_DB.r")
 source("Scripts/02_Creation_DB.r")
-source("Scripts/C2_Load_climatic_covariates.R")
-source("Scripts/C2_Build_snow_covariates.R")
+source("Scripts/C1_Load_climatic_covariates.R")
+source("Scripts/C2_Build_all_snow_covariates.R")
 
 library('performance')
 
