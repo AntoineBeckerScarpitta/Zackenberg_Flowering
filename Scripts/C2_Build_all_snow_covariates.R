@@ -91,7 +91,6 @@ All_snow <- All_snow %>%
 
 # 3 - LM to PREDICT the DOY with 50% snow cover --------------------------------------
 ##1. use lm's for all Year_Plot to get estimated DOY with 50% snow cover using predict()
-
 est_DOY <- All_snow %>%
   group_by(Year_Plot, Site) %>% 
   do(lm(DOY ~ Snow, data = .) %>% 
@@ -119,17 +118,19 @@ est_DOY <- est_DOY %>%
 
 
 ##3. check and decide what to do with estimated DOYs too small or too large that still remain
-##3.1 - 4 plots with super high estimated values (larger than 365!) + NA
+##3.1 - 4 plots with super high estimated values 
+# Extrem date ---> assign NA (2018 = NA LM does not work)
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Pap2Sal5"] <- NA
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Pap3"] <- NA
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Pap1"] <- NA
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Cas3"] <- NA  ##similar to the other 2018 decision
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2002-Dry4"] <- NA  
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Cas4"] <- NA
+
+# (remove larger than 365!) + NA
 snow <- est_DOY %>% filter(snowmelt_DOY<365)
 
-# all 2018 ---> assign NA
-# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap2Sal5"] <- NA
-# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap3"] <- NA
-# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap1"] <- NA
-# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Cas4"] <- NA
-# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Cas3"] <- NA  ##similar to the other 2018 decision
-# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2002_Dry4"] <- NA  ##similar to the other 2018 decision
-
+# basic structure
 snow[c('Plot', "Site")] <-  lapply(snow[c('Plot', "Site")], as.factor)
 snow$Year <-  as.numeric(snow$Year)
 snow <- subset(snow, select=-c(DOY, Year_Plot))
