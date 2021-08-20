@@ -46,6 +46,10 @@ tab_model(mod_full_z_cross, mod_full_n_cross,
           show.df = TRUE, 
           dv.labels = c("Full cross Zack", "Full cross Nuuk"))
           
-          
+# # Tab full cross mod Zack+Nuuk
+# tab_model(mod_bw_sel_z, mod_bw_sel_n,
+#           p.val = "kr", 
+#           show.df = TRUE, 
+#           dv.labels = c("Sel cross Zack", "Sel cross Nuuk"))        
           
           
