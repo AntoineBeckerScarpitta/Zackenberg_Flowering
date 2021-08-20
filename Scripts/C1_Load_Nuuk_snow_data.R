@@ -58,30 +58,30 @@ Nsnow <- rbind(NEri, NLoi, Nsal, Nsil)
 
 
 # rename plots
-Nsnow[Nsnow$Plot=="SAL1", 'Plot'] <- "N_Sal1"
-Nsnow[Nsnow$Plot=="SAL2", 'Plot'] <- "N_Sal2"
-Nsnow[Nsnow$Plot=="SAL3", 'Plot'] <- "N_Sal3"
-Nsnow[Nsnow$Plot=="SAL4", 'Plot'] <- "N_Sal4"
+Nsnow[Nsnow$Plot=="SAL1", 'Plot'] <- "N_SAL1"
+Nsnow[Nsnow$Plot=="SAL2", 'Plot'] <- "N_SAL2"
+Nsnow[Nsnow$Plot=="SAL3", 'Plot'] <- "N_SAL3"
+Nsnow[Nsnow$Plot=="SAL4", 'Plot'] <- "N_SAL4"
 
-Nsnow[Nsnow$Plot=="SIL1", 'Plot'] <- "N_Sil1"
-Nsnow[Nsnow$Plot=="SIL2", 'Plot'] <- "N_Sil2"
-Nsnow[Nsnow$Plot=="SIL3", 'Plot'] <- "N_Sil3"
-Nsnow[Nsnow$Plot=="SIL4", 'Plot'] <- "N_Sil4"
+Nsnow[Nsnow$Plot=="SIL1", 'Plot'] <- "N_SIL1"
+Nsnow[Nsnow$Plot=="SIL2", 'Plot'] <- "N_SIL2"
+Nsnow[Nsnow$Plot=="SIL3", 'Plot'] <- "N_SIL3"
+Nsnow[Nsnow$Plot=="SIL4", 'Plot'] <- "N_SIL4"
 
-Nsnow[Nsnow$Plot=="lOI1", 'Plot'] <- "N_Loi1"  # correct typo
-Nsnow[Nsnow$Plot=="LOI1", 'Plot'] <- "N_Loi1" 
-Nsnow[Nsnow$Plot=="LOI2", 'Plot'] <- "N_Loi2"  
-Nsnow[Nsnow$Plot=="LOI3", 'Plot'] <- "N_Loi3"  
-Nsnow[Nsnow$Plot=="LOI4", 'Plot'] <- "N_Loi4"
+Nsnow[Nsnow$Plot=="lOI1", 'Plot'] <- "N_LOI1"  # correct typo
+Nsnow[Nsnow$Plot=="LOI1", 'Plot'] <- "N_LOI1" 
+Nsnow[Nsnow$Plot=="LOI2", 'Plot'] <- "N_LOI2"  
+Nsnow[Nsnow$Plot=="LOI3", 'Plot'] <- "N_LOI3"  
+Nsnow[Nsnow$Plot=="LOI4", 'Plot'] <- "N_LOI4"
 
-Nsnow[Nsnow$Plot=="Eri1", 'Plot'] <- "N_Eri1" # typo mistake
-Nsnow[Nsnow$Plot=="Eri2", 'Plot'] <- "N_Eri2"
-Nsnow[Nsnow$Plot=="Eri3", 'Plot'] <- "N_Eri3"
-Nsnow[Nsnow$Plot=="Eri4", 'Plot'] <- "N_Eri4"
-Nsnow[Nsnow$Plot=="ERI1", 'Plot'] <- "N_Eri1"
-Nsnow[Nsnow$Plot=="ERI2", 'Plot'] <- "N_Eri2"
-Nsnow[Nsnow$Plot=="ERI3", 'Plot'] <- "N_Eri3"
-Nsnow[Nsnow$Plot=="ERI4", 'Plot'] <- "N_Eri4"
+Nsnow[Nsnow$Plot=="Eri1", 'Plot'] <- "N_ERI1" # typo mistake
+Nsnow[Nsnow$Plot=="Eri2", 'Plot'] <- "N_ERI2"
+Nsnow[Nsnow$Plot=="Eri3", 'Plot'] <- "N_ERI3"
+Nsnow[Nsnow$Plot=="Eri4", 'Plot'] <- "N_ERI4"
+Nsnow[Nsnow$Plot=="ERI1", 'Plot'] <- "N_ERI1"
+Nsnow[Nsnow$Plot=="ERI2", 'Plot'] <- "N_ERI2"
+Nsnow[Nsnow$Plot=="ERI3", 'Plot'] <- "N_ERI3"
+Nsnow[Nsnow$Plot=="ERI4", 'Plot'] <- "N_ERI4"
 
 
 # Recode NA
