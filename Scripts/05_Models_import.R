@@ -20,14 +20,15 @@ source("Scripts/00_Load_libraries.r")
 # 1 - MODELS STRUCTURE FOR A-ZACKENBERG ; B-NUUK
 # A - ZACKENBERG
 mod_basic_z <- readRDS('results/Models/mod_basic_z.rds')
-mod_full_z_cross <- readRDS('results/Models/mod_full_z_cross')
-mod_full_z_nest <- readRDS('results/Models/mod_full_z_nest')
-mod_bw_sel_z <- readRDS('results/Models/mod_bw_sel_z')
+mod_full_z_cross <- readRDS('results/Models/mod_full_z_cross.rds')
+mod_full_z_nest <- readRDS('results/Models/mod_full_z_nest.rds')
+mod_bw_sel_z <- readRDS('results/Models/mod_bw_sel_z.rds')
 
 # B - NUUK
 mod_basic_n <- readRDS('results/Models/mod_basic_n.rds')
-mod_full_n <- readRDS('results/Models/mod_full_n.rds')
-mod_full_2_n <- readRDS('results/Models/mod_full_ranef_plot_year_n.rds')
+mod_full_n_cross <- readRDS('results/Models/mod_full_n_cross.rds')
+mod_full_n_nest <- readRDS('results/Models/mod_full_n_nest.rds')
+mod_bw_sel_n <- readRDS('results/Models/mod_bw_sel_n.rds')
 
 
 
@@ -43,7 +44,7 @@ tab_model(mod_basic_z, mod_basic_n,
 tab_model(mod_full_z_cross, mod_full_n_cross,
           p.val = "kr", 
           show.df = TRUE, 
-          dv.labels = c("Full cross mod Zack", "Full cross mod Nuuk"))
+          dv.labels = c("Full cross Zack", "Full cross Nuuk"))
           
           
           
