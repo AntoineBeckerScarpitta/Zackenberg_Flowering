@@ -135,7 +135,7 @@ snow$Year <-  as.numeric(snow$Year)
 snow <- subset(snow, select=-c(DOY, Year_Plot))
 ##end
 
-remove("aux2", "est_DOY", 'Zsnow', "Nsnow" )
+remove("aux2", "est_DOY", 'Zsnow', "Nsnow", "All_snow")
 
 
 
