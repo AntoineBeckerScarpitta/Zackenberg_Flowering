@@ -43,6 +43,20 @@ Zsnow$Plot[Zsnow$Plot== "Si4"] <- "Sil4"
 Zsnow$Plot[Zsnow$Plot== "Sax1Si2"] <- "Sax1Sil2"
 
 Zsnow$Section[Zsnow$Section== "A-D"] <- "A"
+
+
+# seperate the double names  #e.g. "Dry2Sal7"
+Zsnow_temp <- Zsnow %>% 
+  separate(Plot, sep = 4, into= c("subPlot1", "subPlot2"))
+  
+Zsnow <- rbind(Zsnow_temp %>% dplyr::select(-subPlot2) %>%
+                rename(Plot=subPlot1),
+               
+               Zsnow_temp %>% filter(!subPlot2=="") %>%
+                dplyr::select(-subPlot1) %>%
+                rename(Plot=subPlot2))
+
+remove("Zsnow_temp")
 #-------------------------------------------------------------------------------------
 
 
@@ -61,7 +75,7 @@ All_snow <- All_snow %>%
   # Create new col DOY=day of the year based on original date
   mutate(DOY=yday(Date))  %>%
   ##adding concatenation of Year and Plot (as these are the units to look at)
-  mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "_"))) %>% 
+  mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "-"))) %>% 
   ##exclude late-season records (>late July)
   filter(!Snow %in% c(-9999, NA),
          DOY<200)
@@ -75,14 +89,6 @@ All_snow <- All_snow %>%
 
 
 
-
-
-ISSUES WITH BINDED TABLE
-On ne peux pas séparer les plot à Zack car le format des plot à nuuk est different
-Harmoniser ça
-
-
-
 # 3 - LM to PREDICT the DOY with 50% snow cover --------------------------------------
 ##1. use lm's for all Year_Plot to get estimated DOY with 50% snow cover using predict()
 
@@ -92,76 +98,44 @@ est_DOY <- All_snow %>%
        predict(., data.frame(Snow = 50)) %>%
        tibble(DOY = .)) %>%
   ungroup() %>%
-  
   ##to deal with negative, small or very large estimates (was doing this before)
   ##adding new variable to indicate if estimated DOY is < 30 April
   ##and also if estimated DOY is > mid July
   # mutate(DOY1= ifelse(DOY<120, "NA", 
   #                     ifelse(DOY>200, "NA", DOY))) %>%  ##might not be necessary anymore
-  
-  separate(., Year_Plot, into= c("Year", "Plot"), sep="_", remove=F) %>%
-  
-  ##and splitting the "double" plots at Zackenberg
-  cbind(., 
-        filter(Site=="Zackenberg") %>%
-          mutate(Plot_split=Plot) %>%
-          separate(., Plot_split, sep = 4, into= c("subPlot1", "subPlot2")) #e.g. "Dry2Sal7"
-
-        
-        
-        
-        
-        
-        
-        
-        
+  separate(., Year_Plot, into= c("Year", "Plot"), sep="-", remove=F)
         
 
 ##2. identify which plots never reach 50 value
 aux2 <- All_snow  %>%
   group_by(Year_Plot, Site) %>%
-  summarize(max.pt = max(Snow)) %>%
-  filter(max.pt<50)  ##212 Year_Plot that only have values<50
+  summarize(max_cover = max(Snow)) %>%
+  filter(max_cover<50)  ##212 Year_Plot that only have values<50
 
-##for all of these, set a given DOY, keeping the estimated lm value for the others
+##for all of these, set a NA, keeping the estimated lm value for the others
 est_DOY <- est_DOY %>%
-  mutate(snowmelt_DOY= ifelse(Year_Plot %in% aux2$Year_Plot, NA, DOY))  ##now end of March
+  mutate(snowmelt_DOY= ifelse(Year_Plot %in% aux2$Year_Plot, NA, DOY))
 
 
 
 ##3. check and decide what to do with estimated DOYs too small or too large that still remain
-##3.1 - 4 plots with super high estimated values (larger than 365!), all 2018 ---> assign NA
+##3.1 - 4 plots with super high estimated values (larger than 365!) + NA
+snow <- est_DOY %>% filter(snowmelt_DOY<365)
 
-est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap2Sal5"] <- NA
-est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap3"] <- NA
-est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap1"] <- NA
-est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Cas4"] <- NA
+# all 2018 ---> assign NA
+# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap2Sal5"] <- NA
+# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap3"] <- NA
+# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Pap1"] <- NA
+# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Cas4"] <- NA
+# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Cas3"] <- NA  ##similar to the other 2018 decision
+# est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2002_Dry4"] <- NA  ##similar to the other 2018 decision
 
-est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018_Cas3"] <- NA  ##similar to the other 2018 decision
-est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2002_Dry4"] <- NA  ##similar to the other 2018 decision
-
-
-##then split and re-bind to have a single plot variable including the ones from the "double plots"
-snow <- rbind(est_DOY %>% dplyr::select(-subPlot2) %>%
-                rename(Plot=subPlot1),
-              
-              est_DOY %>% filter(!subPlot2=="") %>%
-                dplyr::select(-subPlot1) %>%
-                rename(Plot=subPlot2))
-
-
-snow$Plot <-  as.factor(snow$Plot)
+snow[c('Plot', "Site")] <-  lapply(snow[c('Plot', "Site")], as.factor)
 snow$Year <-  as.numeric(snow$Year)
 snow <- subset(snow, select=-c(DOY, Year_Plot))
 ##end
 
-remove("aux2", "est_DOY", 'Zsnow' )
-
-
-
-
-
-
+remove("aux2", "est_DOY", 'Zsnow', "Nsnow" )
 
 
 
