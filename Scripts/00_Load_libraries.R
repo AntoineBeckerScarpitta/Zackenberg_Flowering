@@ -13,62 +13,62 @@
 # # INSTALATION
 # 
 # # General
-# install.packages("devtools")
-# install.packages("knitr")
-# 
-# 
-# # Community
-# install.packages("vegan")
-# install.packages("ade4")
-# install.packages("FD")
-# install.packages("RVAideMemoire")
-# install.packages("indicspecies")
-# install.packages("mclust")
-# install.packages("labdsv")
-# install.packages("betapart")
-# install.packages("TR8")
-# install.packages("ape")
-# 
-# 
-# # Data managment
-# install.packages("reshape2")
-# install.packages("plyr")
-# install.packages("dplyr")
-# install.packages("tidyr")
-# install.packages("gridExtra")
-# install.packages("stringr")
-# install.packages("stringi")
-# install.packages("data.table")
-# install.packages("Taxonstand")
-# 
-# 
-# # Analysis
-# install.packages("lme4")
-# install.packages("effects")
-# install.packages("AICcmodavg")
-# install.packages("MuMIn")
-# install.packages("car")
-# install.packages("arm")
-# install.packages("effects")
-# install.packages("bbmle")
-# install.packages("sjPlot")
-# install.packages("multcomp")
-# install.packages("lmerTest")
-# install.packages("simr")
-# install.packages("LMERConvenienceFunctions")
-# install.packages("jtools")
-# install.packages("interactions")
-# install.packages("emmeans")
-# install.packages("r2glmm")
-# 
-# 
-# # Plot
-# install.packages("ggplot2")
-# install.packages("ggrepel")
-# install.packages("ggpubr")
-# install.packages("rworldmap")
-# install.packages("mapdata")
-# install.packages("glmmTMB")
+install.packages("devtools")
+install.packages("knitr")
+
+
+# Community
+install.packages("vegan")
+install.packages("ade4")
+install.packages("FD")
+install.packages("RVAideMemoire")
+install.packages("indicspecies")
+install.packages("mclust")
+install.packages("labdsv")
+install.packages("betapart")
+install.packages("TR8")
+install.packages("ape")
+
+
+# Data managment
+install.packages("reshape2")
+install.packages("plyr")
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("gridExtra")
+install.packages("stringr")
+install.packages("stringi")
+install.packages("data.table")
+install.packages("Taxonstand")
+
+
+# Analysis
+install.packages("lme4")
+install.packages("effects")
+install.packages("AICcmodavg")
+install.packages("MuMIn")
+install.packages("car")
+install.packages("arm")
+install.packages("effects")
+install.packages("bbmle")
+install.packages("sjPlot")
+install.packages("multcomp")
+install.packages("lmerTest")
+install.packages("simr")
+install.packages("LMERConvenienceFunctions")
+install.packages("jtools")
+install.packages("interactions")
+install.packages("emmeans")
+install.packages("r2glmm")
+
+
+# Plot
+install.packages("ggplot2")
+install.packages("ggrepel")
+install.packages("ggpubr")
+install.packages("rworldmap")
+install.packages("mapdata")
+install.packages("glmmTMB")
 
 
 #  LOAD
