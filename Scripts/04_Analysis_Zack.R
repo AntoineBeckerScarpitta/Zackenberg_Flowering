@@ -98,6 +98,7 @@ ggplot(flow_snow_clim_z , aes(x=Year, y=snowmelt_DOY,
 
 ## 2 - MODELS -----------------------------------------------------------------------
 #  MODEL 1: EQ1 - temporal trends in flowering density for each sp?
+# flow(t) ~ Sp * Year + ranef(plot)
 mod_basic_z <- lmer(log(trans_Flow_m2) ~ Species * Year + (1|Plot),
              data= flow_snow_clim_z,
              REML=T, na.action=na.omit)
@@ -108,19 +109,20 @@ summary(mod_basic_z)
 # #  MODEL 2a: EQ2 NESTED - What climatic variables and density dep. drive the trends?
 # # The design is crossed, since all plot are sampled every year :
 # # every year all plot are sample, then repetition of plot withtin year
-# mod_full_z_nest <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
-#                                         Species * lag_Temp_fall +
-#                                         Species * snowmelt_DOY + 
-#                                         Species * log(lag_trans_Flow_m2) + 
-#                                         (1|Plot) + (1|Plot:Year),
-#              data=flow_snow_clim_z, 
-#              REML=T, na.action=na.omit)
+mod_full_z_nest <- lmer(log(trans_Flow_m2) ~  Species * Temp_summer +
+                                              Species * lag_Temp_fall +
+                                              Species * snowmelt_DOY +
+                                              Species * log(lag_trans_Flow_m2) +
+                                              (1|Plot) + (1|Plot:Year),
+             data=flow_snow_clim_z,
+             REML=T, na.action=na.omit)
 # summary(mod_full_z_nest)
 # # saveRDS(mod_full_z_nest, "results/models/mod_full_z_nest.rds")
 
 
 
-#  MODEL 2b: EQ2 CROSSED - VALIDE STRUCTURE
+#  MODEL 2b: EQ2 CROSSED - 
+# The valide structure is crossed
 mod_full_z_cross <- lmer(log(trans_Flow_m2) ~  Species * Temp_summer + 
                                           Species * lag_Temp_fall +
                                           Species * snowmelt_DOY + 
@@ -171,7 +173,7 @@ tab_model(mod_basic_z, mod_full_z_nest, mod_full_z_cross,
                         "Full Zack crossed"))
 
 # tab for final model
-tab_model(mod_full_z_nest,
+tab_model(mod_full_z_cross,
           p.val = "kr", 
           show.df = TRUE, 
           dv.labels = "Final model Zackenberg")
@@ -186,7 +188,7 @@ tab_model(mod_full_z_nest,
 MuMIn::r.squaredGLMM(mod_basic_z)
 MuMIn::r.squaredGLMM(mod_full_z_nest)
 MuMIn::r.squaredGLMM(mod_full_z_cross)
-# MuMIn::r.squaredGLMM(mod_bw_sel_z)
+MuMIn::r.squaredGLMM(mod_bw_sel_z)
 
 # Value per Sp and Sp paire-wise difference
 emmeans(mod_full_z_nest, list(pairwise ~ Species), adjust = "tukey")
@@ -201,25 +203,25 @@ r2glmm::r2beta(mod_full_z_nest, method = 'nsj', data=flow_snow_clim_z)
 ## graph 1= density of the model residuals
 ## graph 2= quantile-quantile plot, standardized residuals vs theoretical quantiles
 ## graph 3= fitted values vs the standardized residuals
-LMERConvenienceFunctions::mcp.fnc(mod_full_z_cross, trim = 2.5)
+LMERConvenienceFunctions::mcp.fnc(mod_full_z_nest, trim = 2.5)
 
 
 ## Plot of the fixed effects
-plot(Effect(c("Species", "Temp_summer"), mod_full_z_cross, residuals=TRUE)) 
-plot(Effect(c("Species", "lag_Temp_fall"), mod_full_z_cross, residuals=TRUE))
-plot(Effect(c("Species", "snowmelt_DOY"), mod_full_z_cross, residuals=TRUE))
-plot(Effect(c("Species", "lag_trans_Flow_m2"), mod_full_z_cross, residuals=TRUE))
+plot(Effect(c("Species", "Temp_summer"), mod_full_z_nest, residuals=TRUE)) 
+plot(Effect(c("Species", "lag_Temp_fall"), mod_full_z_nest, residuals=TRUE))
+plot(Effect(c("Species", "snowmelt_DOY"), mod_full_z_nest, residuals=TRUE))
+plot(Effect(c("Species", "lag_trans_Flow_m2"), mod_full_z_nest, residuals=TRUE))
 
 
 ## Forest plot of all fixed effects
 ## vertical grey line = level 1 of each fixed effects
-sjPlot::plot_model(mod_full_z_cross, 
+sjPlot::plot_model(mod_full_z_nest, 
                    show.values=T, 
                    show.intercept = TRUE,
                    show.p = TRUE,
                    vline.color="grey", 
                    value.offset=-0.3, 
-                   title = "Full Zack cross")
+                   title = "Full Zack nested")
 
 
 ## Detailed fixed effect plots
@@ -228,18 +230,18 @@ sjPlot::plot_model(mod_full_z_cross,
 ## type ="pred" to show models predictions
 
 # SPECIES
-sjPlot::plot_model(mod_full_z_cross, type="eff", 
+sjPlot::plot_model(mod_full_z_nest, type="eff", 
                    terms=c("Species"), show.data=T) + theme_bw()
 
 # SPECIES * SUMMER TEMPERATURE
-sjPlot::plot_model(mod_full_z_cross, type="eff", show.data=F, 
+sjPlot::plot_model(mod_full_z_nest, type="eff", show.data=F, 
                    terms=c("Species", "Temp_summer")) + theme_bw()
 
 # SPECIES * LAG FALL TEMP (previous automn temperature)
-sjPlot::plot_model(mod_full_z_cross, type="eff", show.data=F, 
+sjPlot::plot_model(mod_full_z_nest, type="eff", show.data=F, 
                    terms=c("Species", "lag_Temp_fall")) + theme_bw()
 
 # SPECIES * LAG FLOW DENSITY (density dependence)
-sjPlot::plot_model(mod_full_z_cross, type="eff", show.data=F, 
+sjPlot::plot_model(mod_full_z_nest, type="eff", show.data=F, 
                    terms=c("Species", "lag_trans_Flow_m2")) + theme_bw()
 

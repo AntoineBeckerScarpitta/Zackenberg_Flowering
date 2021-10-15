@@ -68,7 +68,7 @@ flow_snow_clim_n <- flow_snow_clim_n %>%
 
 
 # # SnowMelt DOY 
-ggplot(flow_snow_clim_n , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) +
+temp_graph_N <- ggplot(flow_snow_clim_n , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) +
   geom_point(size=2) +
   geom_smooth(method='lm', se=F) +
   theme(axis.text=element_text(size=15),
@@ -82,7 +82,6 @@ ggplot(flow_snow_clim_n , aes(x=Year, y=snowmelt_DOY, group=Species, color=Speci
 
 ## 2 - MODELS -----------------------------------------------------------------------
 #  MODEL 1: EQ1 - temporal trends in flowering density for each sp?
-# flow(t) ~ Sp * Year + ranef(plot)
 mod_basic_n <- lmer(log(trans_Flow_m2) ~ Species * Year + (1|Plot),
                data= flow_snow_clim_n,
                REML=T, na.action=na.omit)
@@ -92,28 +91,27 @@ summary(mod_basic_n)
 
 
 #  MODEL 2a: EQ2 NESTED - What climatic variables and density dep. drive the trends?
-# flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + Sp*flow(t-1) + ranef(plot)+(year)
 # The design is crossed, since all plot are sampled every year :
 # every year all plot are sample, then repetition of plot withtin year == Crossed
 mod_full_n_nest <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
                           Species * lag_Temp_fall +
                           Species * snowmelt_DOY + 
-                          Species * lag_trans_Flow_m2 + 
+                          Species * log(lag_trans_Flow_m2) + 
                           (1|Plot) + (1|Plot:Year),
                         data=flow_snow_clim_n, 
                         REML=T, na.action=na.omit)
-summary(mod_full_n_nest)
+# summary(mod_full_n_nest)
 # saveRDS(mod_full_n_nest, "results/models/mod_full_n_nest.rds")
 
 
 
 
-#  MODEL 2b: EQ2 CROSSED - 
-# flow(t)~ Sp*clim(summer) + Sp*clim(fall-1) + Sp*SnowMelt + flow(t-1) + ranef(plot)
+#  MODEL 2b: EQ2 CROSSED - VALIDE STRUCTURE
+# The valide structure is crossed
 mod_full_n_cross <- lmer(log(trans_Flow_m2) ~  Species * Temp_summer + 
                            Species * lag_Temp_fall +
                            Species * snowmelt_DOY + 
-                           Species * lag_trans_Flow_m2 + 
+                           Species * log(lag_trans_Flow_m2) + 
                            (1|Plot) + (1|Year),
                          data=flow_snow_clim_n, 
                          REML=T, na.action=na.omit)
@@ -125,27 +123,27 @@ summary(mod_full_n_cross)
 
 
 #### Variables backward selection ----------------------------------------------------
-# NOT USEFUL - BEST MODEL = mod_full_z_cross
-# create a dB without NA (same used in lmer, Mod1 & Mod2)
-flow_snow_clim_n <- flow_snow_clim_n[complete.cases(flow_snow_clim_n),]
-
-# Backward variable selection on full model EQ2 
-lmerTest::step(mod_full_n_cross, direction = "backward", trace=FALSE ) 
-
-# get model after selection
-mod_bw_sel_n <- get_model(lmerTest::step(mod_full_n_cross, 
-                                         direction="backward", 
-                                         trace=FALSE ) )
-
-# saveRDS(mod_bw_sel_n, "results/models/mod_bw_sel_n.rds")
-summary(mod_bw_sel_n)
+# # NOT USEFUL - BEST MODEL = mod_full_z_cross
+# # create a dB without NA (same used in lmer, Mod1 & Mod2)
+# flow_snow_clim_n <- flow_snow_clim_n[complete.cases(flow_snow_clim_n),]
+# 
+# # Backward variable selection on full model EQ2 
+# lmerTest::step(mod_full_n_cross, direction = "backward", trace=FALSE ) 
+# 
+# # get model after selection
+# mod_bw_sel_n <- get_model(lmerTest::step(mod_full_n_cross, 
+#                                          direction="backward", 
+#                                          trace=FALSE ) )
+# 
+# # saveRDS(mod_bw_sel_n, "results/models/mod_bw_sel_n.rds")
+# summary(mod_bw_sel_n)
 #------------------------------------------------------------------------------------
 
 
 
 #### Results tables -----------------------------------------------------------------
 #All tab mod together
-tab_model(mod_basic_n, mod_full_n_nest, mod_full_n_cross, mod_bw_sel_n,
+tab_model(mod_basic_n, mod_full_n_nest, mod_full_n_cross,
           p.val = "kr", 
           show.df = TRUE, 
           dv.labels = c("Basic Nuuk", "Full Nuuk nested", 
