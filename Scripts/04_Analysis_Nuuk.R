@@ -17,7 +17,7 @@ source("Scripts/02_Creation_DB.r")
 source("Scripts/C1_Load_climatic_covariates.R")
 source("Scripts/C2_Build_all_snow_covariates.R")
 
-
+remove("clim", "clim_year")
 
 #Documentation for sjPLOT 
 # https://cloud.r-project.org/web/packages/sjPlot/index.html
@@ -68,7 +68,7 @@ flow_snow_clim_n <- flow_snow_clim_n %>%
 
 
 # # SnowMelt DOY 
-temp_graph_N <- ggplot(flow_snow_clim_n , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) +
+temp_graph_n <- ggplot(flow_snow_clim_n , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) +
   geom_point(size=2) +
   geom_smooth(method='lm', se=F) +
   theme(axis.text=element_text(size=15),
@@ -85,7 +85,7 @@ temp_graph_N <- ggplot(flow_snow_clim_n , aes(x=Year, y=snowmelt_DOY, group=Spec
 mod_basic_n <- lmer(log(trans_Flow_m2) ~ Species * Year + (1|Plot),
                data= flow_snow_clim_n,
                REML=T, na.action=na.omit)
-summary(mod_basic_n)
+# summary(mod_basic_n)
 # saveRDS(mod_basic_n, "results/models/mod_basic_n.rds")
 
 
@@ -115,7 +115,7 @@ mod_full_n_cross <- lmer(log(trans_Flow_m2) ~  Species * Temp_summer +
                            (1|Plot) + (1|Year),
                          data=flow_snow_clim_n, 
                          REML=T, na.action=na.omit)
-summary(mod_full_n_cross)
+# summary(mod_full_n_cross)
 # saveRDS(mod_full_n_cross, "results/models/mod_full_n_cross.rds")
 #------------------------------------------------------------------------------------
 
@@ -141,20 +141,20 @@ summary(mod_full_n_cross)
 
 
 
-#### Results tables -----------------------------------------------------------------
-#All tab mod together
-tab_model(mod_basic_n, mod_full_n_nest, mod_full_n_cross,
-          p.val = "kr", 
-          show.df = TRUE, 
-          dv.labels = c("Basic Nuuk", "Full Nuuk nested", 
-                        "Full Nuuk crossed", "Full Nuuk sel"))
-
-# tab for final model
-tab_model(mod_full_n_nest,
-          p.val = "kr", 
-          show.df = TRUE, 
-          dv.labels = "Final model Nuuk")
-#END----------------------------------------------------------------------------------
+# #### Results tables -----------------------------------------------------------------
+# #All tab mod together
+# tab_model(mod_basic_n, mod_full_n_nest, mod_full_n_cross,
+#           p.val = "kr", 
+#           show.df = TRUE, 
+#           dv.labels = c("Basic Nuuk", "Full Nuuk nested", 
+#                         "Full Nuuk crossed", "Full Nuuk sel"))
+# 
+# # tab for final model
+# tab_model(mod_full_n_nest,
+#           p.val = "kr", 
+#           show.df = TRUE, 
+#           dv.labels = "Final model Nuuk")
+# #END----------------------------------------------------------------------------------
 
 
 
