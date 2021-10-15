@@ -60,6 +60,7 @@
 # install.packages("interactions")
 # install.packages("emmeans")
 # install.packages("r2glmm")
+# install.packages("performance")
 # 
 # 
 # # Plot
@@ -120,6 +121,7 @@ library(jtools)
 library(interactions)
 library(emmeans)
 library(r2glmm)
+library(performance)
 
 
 
