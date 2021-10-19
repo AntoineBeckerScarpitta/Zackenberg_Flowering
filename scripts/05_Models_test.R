@@ -92,7 +92,7 @@ emmeans(mod_full_z_cross, list(pairwise ~ Species), adjust = "tukey")
 
 ## R2 marginal et conditionnels des effets fixes
 ## Methods nsj = Nakagawa and Schielzeth for lmer
-r2glmm::r2beta(mod_full_z_cross, method = 'nsj')
+r2glmm::r2beta(mod_full_z_cross, method = 'nsj', data=flow_snow_clim_z)
 
 ## Graph of models residuals (criticism plots)
 ## graph 1= density of the model residuals
@@ -151,11 +151,11 @@ MuMIn::r.squaredGLMM(mod_basic_n)
 MuMIn::r.squaredGLMM(mod_full_n_cross)
 
 # Value per Sp and Sp paire-wise difference
-emmeans(mod_full_n_cross, list(pairwise ~ Species), adjust = "tukey", data=)
+emmeans(mod_full_n_cross, list(pairwise ~ Species), adjust = "tukey", data=flow_snow_clim_n)
 
 ## R2 marginal et conditionnels des effets fixes
 ## Methods nsj = Nakagawa and Schielzeth for lmer
-r2glmm::r2beta(mod_full_n_cross, method = 'nsj')
+r2glmm::r2beta(mod_full_n_cross, method = 'nsj', data=flow_snow_clim_n)
 
 ## Graph of models residuals (criticism plots)
 ## graph 1= density of the model residuals
