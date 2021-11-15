@@ -61,7 +61,8 @@
 # install.packages("emmeans")
 # install.packages("r2glmm")
 # install.packages("performance")
-# 
+# install.packages("terra")
+#
 # 
 # # Plot
 # install.packages("ggplot2")
@@ -70,6 +71,7 @@
 # install.packages("rworldmap")
 # install.packages("mapdata")
 # install.packages("glmmTMB")
+
 
 
 #  LOAD
@@ -106,7 +108,7 @@ library(Taxonstand)
 # Analysis
 library(lme4)
 library(effects)
-library(AICcmodavg)
+# library(AICcmodavg)
 library(MuMIn)
 library(car)
 library(arm)
@@ -125,6 +127,7 @@ library(performance)
 
 
 
+
 # Plot
 library(ggplot2)
 library(ggrepel)
@@ -132,6 +135,7 @@ library(ggpubr)
 library(rworldmap)
 library(mapdata)
 library(glmmTMB)
+
 
 
 

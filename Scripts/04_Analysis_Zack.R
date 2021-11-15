@@ -67,7 +67,7 @@ flow_snow_clim_z <- flow_snow_clim_z %>%
 #---END
 
 
-## SnowMelt DOY Zackenberg
+## PLOT SnowMelt DOY Zackenberg
 temp_graph_z <- ggplot(flow_snow_clim_z , aes(x=Year, y=snowmelt_DOY, 
                               group=Species, 
                               color=Species)) +
