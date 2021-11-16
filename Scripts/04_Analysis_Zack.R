@@ -30,6 +30,16 @@ remove("clim", "clim_year")
 # https://cloud.r-project.org/web/packages/sjPlot/vignettes/tab_mixed.html
 
 
+##-- DATA FOR TOMAS --##
+flow_zack_TR <- flow %>% 
+  dplyr::select(-trans_Flow_m2) %>%
+  dplyr::filter(Site=='Zackenberg') %>%
+  droplevels(.$Species)
+   
+# table(flow_zack_TR$Year, flow_zack_TR$Species)
+# write.csv(flow_zack_TR, 'data/data_TR_pheno/flow_zack_TR.csv')
+##-----------------------
+
 
 
 # 1 - DATA MANAGMENT FOR MODEL -  ZACKENBERG ----------------------------------------

@@ -130,7 +130,7 @@ Zsal_tot_plot <- as.data.frame(smf %>% pivot_wider(id_cols=c(Site, Year, Plot, S
   replace(is.na(.), 0) %>%
   # merge SEXRATIO
   left_join(.,  sexRatio, by="Plot") %>%
-  # 50% buds for male 50% for female
+  # divided following sexratio
     mutate(Total_Male_b=Total_Male + (Value*MeanSR), 
          Total_Female_b=Total_Female + (Value*(1-MeanSR))) %>%
   dplyr::select(c(Site, Year, Species, Plot, Total_Male_b, Total_Female_b)) %>%
