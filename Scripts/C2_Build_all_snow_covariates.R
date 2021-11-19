@@ -12,8 +12,6 @@
 
 library(lubridate)  ##for dealing with dates
 
-# Load Nuuk Snow cover variable
-library(lubridate)  ##for dealing with dates
 
 # 1 - NUUK -------------------------------------------------------------
 # READ - Salix
@@ -120,7 +118,7 @@ Zsnow <- as.data.frame(Zsnow %>%
 Zsnow$Plot[Zsnow$Plot== "Sax1Si1"] <- "Sax1Sil1"
 Zsnow$Plot[Zsnow$Plot== "Sax2Si2"] <- "Sax2Sil2"
 Zsnow$Plot[Zsnow$Plot== "Sax3Si3"] <- "Sax3Sil3"
-Zsnow$Plot[Zsnow$Plot== "Si4"] <- "Sil4"
+Zsnow$Plot[Zsnow$Plot== "Si4"]     <- "Sil4"
 Zsnow$Plot[Zsnow$Plot== "Sax1Si2"] <- "Sax1Sil2"
 
 Zsnow$Section[Zsnow$Section== "A-D"] <- "A"

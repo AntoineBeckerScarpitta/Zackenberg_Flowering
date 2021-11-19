@@ -31,13 +31,14 @@ remove("clim", "clim_year")
 
 
 ##-- DATA FOR TOMAS --##
-flow_zack_TR <- flow %>% 
-  dplyr::select(-trans_Flow_m2) %>%
-  dplyr::filter(Site=='Zackenberg') %>%
-  droplevels(.$Species)
-   
+# flow_snow_zack_TR <- flow %>%
+#   dplyr::select(-trans_Flow_m2) %>%
+#   dplyr::filter(Site=='Zackenberg') %>%
+#   droplevels(.$Species) %>%
+#   left_join(., droplevels(snow %>% filter(Site=="Zackenberg"))
+#             , by=c("Year", "Plot", "Site")) 
 # table(flow_zack_TR$Year, flow_zack_TR$Species)
-# write.csv(flow_zack_TR, 'data/data_TR_pheno/flow_zack_TR.csv')
+ # write.csv(flow_snow_zack_TR, 'data/data_TR_pheno/flow_zack_TR.csv')
 ##-----------------------
 
 
