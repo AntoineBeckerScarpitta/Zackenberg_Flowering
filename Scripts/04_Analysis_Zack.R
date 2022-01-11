@@ -20,16 +20,6 @@ source("Scripts/C2_Build_all_snow_covariates.R")
 remove("clim", "clim_year")
 
 
-
-#Documentation for sjPLOT 
-# https://cloud.r-project.org/web/packages/sjPlot/index.html
-# http://www.strengejacke.de/sjPlot/reference/plot_model.html
-# https://cloud.r-project.org/web/packages/sjPlot/vignettes/plot_interactions.html
-# https://cloud.r-project.org/web/packages/sjPlot/vignettes/plot_marginal_effects.html
-# https://cloud.r-project.org/web/packages/sjPlot/vignettes/plot_model_estimates.html
-# https://cloud.r-project.org/web/packages/sjPlot/vignettes/tab_mixed.html
-
-
 ##-- DATA FOR TOMAS --##
 # flow_snow_zack_TR <- flow %>%
 #   dplyr::select(-trans_Flow_m2) %>%
@@ -49,7 +39,6 @@ remove("clim", "clim_year")
 flow_snow_z <- left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
                          droplevels(snow%>% filter(Site=="Zackenberg"))
                          , by=c("Year", "Plot", "Site")) 
-
 
 #reshape climatic data
 temp_clim_z <- droplevels(clim_season_year %>% filter(Site=='Zackenberg') %>%

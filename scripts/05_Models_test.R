@@ -29,7 +29,19 @@ source("Scripts/00_Load_libraries.r")
 #   3.B - Nuuk
 
 
-# 1 - LOAD MODELS -------------------------------------------------------------------
+
+#Documentation for sjPLOT 
+# https://cloud.r-project.org/web/packages/sjPlot/index.html
+# http://www.strengejacke.de/sjPlot/reference/plot_model.html
+# https://cloud.r-project.org/web/packages/sjPlot/vignettes/plot_interactions.html
+# https://cloud.r-project.org/web/packages/sjPlot/vignettes/plot_marginal_effects.html
+# https://cloud.r-project.org/web/packages/sjPlot/vignettes/plot_model_estimates.html
+# https://cloud.r-project.org/web/packages/sjPlot/vignettes/tab_mixed.html
+
+
+
+
+# 1.1 - LOAD MODELS ----------------------------------------------------------------
 # Run mods
 source("Scripts/04_Analysis_Zack.r")
 source("Scripts/04_Analysis_Nuuk.r")
@@ -49,6 +61,36 @@ remove("clim_season_year", "temp_clim_z", "temp_clim_n", "flow_snow_z",
 # mod_full_n_cross <- readRDS('results/Models/mod_full_n_cross.rds')
 # # mod_full_n_nest <- readRDS('results/Models/mod_full_n_nest.rds')
 ##-----------------------------------------------------------------------------------
+
+
+
+
+# 1.2 Exploratory graphs DOY ~ FLow density  ---------------------------------------
+#Zack
+cor_doy_flow_z <- ggplot(flow_snow_clim_z, 
+       aes(snowmelt_DOY, trans_Flow_m2, group=Species, color=Species)) +
+  geom_point() +
+  geom_smooth(method='loess', se=TRUE) +
+  labs(y='Flower density / m2') +
+  ggtitle('Zackenberg') +
+  facet_grid(Species~., scales="free_y") +
+  theme_linedraw() 
+
+#Nuuk
+cor_doy_flow_n <- ggplot(flow_snow_clim_n, 
+        aes(snowmelt_DOY, trans_Flow_m2, group=Species, color=Species)) +
+  geom_point() +
+  geom_smooth(method='loess', se=TRUE) +
+  labs(y='Flower density / m2') +
+  ggtitle('Nuuk') +
+  facet_grid(Species~., scales="free_y") +
+  theme_linedraw() 
+
+#  graph
+gridExtra::grid.arrange(cor_doy_flow_z, cor_doy_flow_n, ncol=2, 
+          top = "Snowmelt_DOY ~ flowering density")
+##-----------------------------------------------------------------------------------
+
 
 
 
@@ -77,6 +119,7 @@ tab_model(mod_full_z_cross, mod_full_n_cross,
 performance::icc(mod_full_z_cross, by_group = TRUE)
 performance::icc(mod_full_n_cross, by_group = TRUE)
 ##-----------------------------------------------------------------------------------
+
 
 
 
@@ -137,11 +180,8 @@ sjPlot::plot_model(mod_full_z_cross, type="eff", show.data=F,
 # SPECIES * LAG FLOW DENSITY (density dependence)
 sjPlot::plot_model(mod_full_z_cross, type="eff", show.data=F, 
                    terms=c("Species", "lag_trans_Flow_m2")) + theme_bw()
+##-----------------------------------------------------------------------------------
 
-
-
-##------------------------------------
-##------------------------------------
 
 
 
@@ -151,7 +191,8 @@ MuMIn::r.squaredGLMM(mod_basic_n)
 MuMIn::r.squaredGLMM(mod_full_n_cross)
 
 # Value per Sp and Sp paire-wise difference
-emmeans(mod_full_n_cross, list(pairwise ~ Species), adjust = "tukey", data=flow_snow_clim_n)
+emmeans(mod_full_n_cross, list(pairwise ~ Species), 
+        adjust = "tukey", data=flow_snow_clim_n)
 
 ## R2 marginal et conditionnels des effets fixes
 ## Methods nsj = Nakagawa and Schielzeth for lmer
@@ -200,4 +241,5 @@ sjPlot::plot_model(mod_full_n_cross, type="eff", show.data=F,
 # SPECIES * LAG FLOW DENSITY (density dependence)
 sjPlot::plot_model(mod_full_n_cross, type="eff", show.data=F, 
                    terms=c("Species", "lag_trans_Flow_m2")) + theme_bw()
-          
+##-----------------------------------------------------------------------------------
+

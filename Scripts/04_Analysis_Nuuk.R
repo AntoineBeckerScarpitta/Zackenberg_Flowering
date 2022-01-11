@@ -19,16 +19,6 @@ source("Scripts/C2_Build_all_snow_covariates.R")
 
 remove("clim", "clim_year")
 
-#Documentation for sjPLOT 
-# https://cloud.r-project.org/web/packages/sjPlot/index.html
-# http://www.strengejacke.de/sjPlot/reference/plot_model.html
-# https://cloud.r-project.org/web/packages/sjPlot/vignettes/plot_interactions.html
-# https://cloud.r-project.org/web/packages/sjPlot/vignettes/plot_marginal_effects.html
-# https://cloud.r-project.org/web/packages/sjPlot/vignettes/plot_model_estimates.html
-# https://cloud.r-project.org/web/packages/sjPlot/vignettes/tab_mixed.html
-
-
-
 
 # 1 - DATA MANAGMENT FOR MODEL -  ZACKENBERG ----------------------------------------
 # log(density) !=0 (Flow_m2[abundace==0] <- 0.001 in 02_Creation_DB, line 210)
