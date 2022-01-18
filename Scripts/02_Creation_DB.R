@@ -208,12 +208,25 @@ flow <- flow[flow$Year>1995, ]
 # Create new response variable with 0==0.001 (for log transfo)
 flow$trans_Flow_m2 <- flow$Flow_m2
 flow[flow$Flow_m2==0, 'trans_Flow_m2'] <- 0.001
-
 #### END -----------------------------------------------------------------------------
-
-
 # table(Nuuk_all$Month, Nuuk_all$Year)
 # table(Zack_sub$Month, Zack_sub$Year)
+
+
+
+
+# Community level flower production
+flow_com <- flow %>% group_by(Site, Year) %>%
+  #summarising the total site flower production and plot are per year
+  summarise(ComFlow=sum(TotalFlower), 
+            ComArea=sum(Plot_size)) %>%
+  ungroup() %>%
+  #calculate the community level density
+  mutate(ComFlow_m2=ComFlow/ComArea) %>%
+  #replace 0 with 0.001 as in sp level data
+  mutate(ComFlow_m2 = replace(ComFlow_m2, ComFlow_m2==0, 0.001))
+#### END -----------------------------------------------------------------------------
+
 
 
 # remove temprary files
