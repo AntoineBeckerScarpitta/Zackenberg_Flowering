@@ -30,12 +30,16 @@ flow_snow_n <- left_join(droplevels(flow %>% filter(Site=="Nuuk")),
 
 #reshape climatic data
 temp_clim_n <- droplevels(clim_season_year %>% filter(Site=='Nuuk') %>%
-                            pivot_wider(id_cols=c(Site, Year, Season), names_from=Variable,
-                                        values_from=Value, values_fill=0) %>%
+                            pivot_wider(id_cols=c(Site, Year, Season), 
+                                        names_from=Variable,
+                                        values_from=Value, 
+                                        values_fill=0) %>%
                             dplyr::select(!c('Humidity_%', 'Precipitation_mm')) %>% 
                             filter(Season!="winter") %>%
-                            pivot_wider(id_cols=c(Site, Year), names_from=Season,
-                                        values_from=Temperature_C, values_fill=0))
+                            pivot_wider(id_cols=c(Site, Year), 
+                                        names_from=Season,
+                                        values_from=Temperature_C, 
+                                        values_fill=0))
 #rename cols
 colnames(temp_clim_n) <- c('Site', 'Year', 'Temp_fall', 'Temp_summer')
 
@@ -45,7 +49,7 @@ temp_clim_n$lag_Temp_fall <- lag(temp_clim_n$Temp_fall, k = 1)
 
 # FINAL DATASET:
 #add clim data in flow
-flow_snow_clim_n <- left_join(flow_snow_n,temp_clim_n, 
+flow_snow_clim_n <- left_join(flow_snow_n, temp_clim_n, 
                               by=c('Site', 'Year'))
 
 # add a lag form of trans_flow_m2
@@ -57,8 +61,11 @@ flow_snow_clim_n <- flow_snow_clim_n %>%
 
 
 
-# # SnowMelt DOY 
-temp_graph_n <- ggplot(flow_snow_clim_n , aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) +
+# # SnowMelt DOY ~ Year
+temp_graph_n <- ggplot(flow_snow_clim_n , aes(x=Year, 
+                                              y=snowmelt_DOY, 
+                                              group=Species, 
+                                              color=Species)) +
   geom_point(size=2) +
   geom_smooth(method='lm', se=F) +
   theme(axis.text=element_text(size=15),
