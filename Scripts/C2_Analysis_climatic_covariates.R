@@ -31,11 +31,18 @@ ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
         panel.background = element_blank(),  axis.line = element_line(colour = "black")) 
 
 
-# ZACKENBERG TEMPORAL TRENDS
-fits_year <- droplevels(clim_year[clim_year$Site=="Zackenberg", ]) %>%
+# ANNUAL TRENDS
+#Zack
+fits_year_z <- droplevels(clim_year[clim_year$Site=="Zackenberg", ]) %>%
   group_by(Variable) %>%
   do(broom::tidy(lm(Value ~ Year, data=.))) %>%
   filter(term!= "(Intercept)")
+#Nuuk
+fits_year_n <- droplevels(clim_year[clim_year$Site=="Nuuk", ]) %>%
+  group_by(Variable) %>%
+  do(broom::tidy(lm(Value ~ Year, data=.))) %>%
+  filter(term!= "(Intercept)")
+
 
 
 ### CLIMATIC SEASONAL TRENDS  #------------------------------------------------------
@@ -48,10 +55,16 @@ ggplot(clim_season_year, aes(Year, Value, group=Site, color=Season)) +
   facet_grid(Variable+Site~., scales="free") +
   theme_linedraw() 
 
-# ZACKENBERG SEASONAL TRENDS
-fits_season <- droplevels(clim_season_year[clim_season_year$Site=="Zackenberg", ]) %>%
+# SEASONAL TRENDS
+#Zack
+fits_season_z <- droplevels(clim_season_year[clim_season_year$Site=="Zackenberg", ]) %>%
   group_by(Variable) %>%
-  do(broom::tidy(lm(Value ~ Year, data=.))) %>%
+  do(broom::tidy(lm(Value ~ Year*Season, data=.))) %>%
+  filter(term!= "(Intercept)")
+#Nuuk
+fits_season_n <- droplevels(clim_season_year[clim_season_year$Site=="Nuuk", ]) %>%
+  group_by(Variable) %>%
+  do(broom::tidy(lm(Value ~ Year*Season, data=.))) %>%
   filter(term!= "(Intercept)")
 # END-------------------------------------------------------------------------------
 
