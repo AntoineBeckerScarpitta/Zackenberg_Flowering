@@ -168,6 +168,28 @@ ggplot(left_join(droplevels(flow %>% filter(Site=="Zackenberg")),
         axis.title=element_text(size=16, face="bold"),
         panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
-  
+### END SNOW MELT DOY   ## -----------------------------------------------
+
+
+
+
+
+
+# COMMUNITY FLOWER DENSITY  ##--------------------------------------------
+ ggplot(flow_com, aes(Year, ComFlow_m2, group=Site, color=Site)) +
+  geom_point() +
+  geom_smooth(method='lm', se=TRUE) +
+  labs(y='Flower density / m2') +
+  ggtitle('Community Flower density') +
+  facet_grid(Site~., scales="free_y") +
+  theme_linedraw() 
+
+# summary(lm(ComFlow_m2 ~ Year*Site, data=flow_com))
+# summary(lm(ComFlow_m2 ~ Year, data=flow_com %>% filter(Site=="Nuuk")))
+# summary(lm(ComFlow_m2 ~ Year, data=flow_com %>% filter(Site=="Zackenberg")))
+### END COMMUNITY FLOWER DENSITY   ## ------------------------------------
+
+
+
 
 
