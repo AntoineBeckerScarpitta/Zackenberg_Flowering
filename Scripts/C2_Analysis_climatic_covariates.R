@@ -18,7 +18,7 @@ source("Scripts/C2_Build_all_snow_covariates.R")
 
 
 ### CLIMATIC TEMPORAL TRENDS  #-------------------------------------------------------
-ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
+ggplot(clim_year %>% dplyr::filter(Variable!="Humidity_%"), aes(Year, Value, group=Site, color=Site)) +
   scale_color_brewer(palette="Set1")+
   geom_point() +
   geom_smooth(aes(group=Site, color=Site, fill=Site), method='lm', se=TRUE) +
@@ -34,11 +34,13 @@ ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
 # ANNUAL TRENDS
 #Zack
 fits_year_z <- droplevels(clim_year[clim_year$Site=="Zackenberg", ]) %>%
+  dplyr::filter(Variable!="Humidity_%") %>% 
   group_by(Variable) %>%
   do(broom::tidy(lm(Value ~ Year, data=.))) %>%
   filter(term!= "(Intercept)")
 #Nuuk
 fits_year_n <- droplevels(clim_year[clim_year$Site=="Nuuk", ]) %>%
+  dplyr::filter(Variable!="Humidity_%") %>% 
   group_by(Variable) %>%
   do(broom::tidy(lm(Value ~ Year, data=.))) %>%
   filter(term!= "(Intercept)")
@@ -46,26 +48,36 @@ fits_year_n <- droplevels(clim_year[clim_year$Site=="Nuuk", ]) %>%
 
 
 ### CLIMATIC SEASONAL TRENDS  #------------------------------------------------------
-ggplot(clim_season_year, aes(Year, Value, group=Site, color=Season)) +
+ggplot(clim_season_year %>% dplyr::filter(Variable!="Humidity_%", 
+                                          Season!="winter"), 
+       aes(Year, Value, group=Site, color=Season)) +
   scale_color_brewer(palette="Set1")+
   geom_point() +
   geom_smooth(aes(group=Season, color=Season), method='lm', se=FALSE) +
   labs(y='Value') +
   ggtitle('Seasonal climatic trends at Nuuk & Zackenberg') +
-  facet_grid(Variable+Site~., scales="free") +
-  theme_linedraw() 
+  facet_grid(Variable~Site, scales="free") +
+  theme_linedraw() +
+  theme(text = element_text(size = 20), 
+        panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+        panel.background = element_blank(),  axis.line = element_line(colour = "black")) 
+
 
 # SEASONAL TRENDS
 #Zack
 fits_season_z <- droplevels(clim_season_year[clim_season_year$Site=="Zackenberg", ]) %>%
+  dplyr::filter(Variable!="Humidity_%", 
+                Season!="winter") %>% 
   group_by(Variable) %>%
-  do(broom::tidy(lm(Value ~ Year*Season, data=.))) %>%
-  filter(term!= "(Intercept)")
+  do(broom::tidy(lm(Value ~ Year*Season, data=.))) #%>%
+  #filter(term!= "(Intercept)")
 #Nuuk
 fits_season_n <- droplevels(clim_season_year[clim_season_year$Site=="Nuuk", ]) %>%
+  dplyr::filter(Variable!="Humidity_%", 
+                Season!="winter") %>% 
   group_by(Variable) %>%
-  do(broom::tidy(lm(Value ~ Year*Season, data=.))) %>%
-  filter(term!= "(Intercept)")
+  do(broom::tidy(lm(Value ~ Year*Season, data=.))) #%>%
+  # filter(term!= "(Intercept)")
 # END-------------------------------------------------------------------------------
 
 

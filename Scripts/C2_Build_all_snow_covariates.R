@@ -4,8 +4,8 @@
 #                             C2 - SNOW COVARIATES
 #
 #######################################################################################
-# Laura Antao & antoine Becker-Scarpitta
-# January 2021 ##updated 19-01-2021
+# Laura Antao & Antoine Becker-Scarpitta
+# January 2022 ##updated 19-01-2021
 
 #  clean R work-space
 # rm(list=ls())
@@ -98,7 +98,7 @@ remove("NEri", "NEri0", "NLoi", "NLoi0", "Nsal", "Nsal0", "Nsil", "Nsil0")
 # 1 - ZACKENBERG ----------------------------------------
 # Snow cover (remarks on original fields only)
 # load file
-Zsnow <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Abiotics_Snow_and_ice_cover02122020113324881.csv",
+Zsnow <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Abiotics_Snow_and_ice_cover220220221309182528.csv",
                   stringsAsFactors=FALSE, header=TRUE,  sep="\t",
                   strip.white = T,na.strings = c("","NA"))
 
@@ -152,11 +152,11 @@ colnames(All_snow) <- c("Year", "Month", "Day", 'Date', "Plot", "Section",
 # Add DOY col AND remove NA
 All_snow <- All_snow %>%
   # Create new col DOY=day of the year based on original date
-  mutate(DOY=yday(Date))  %>%
+  dplyr::mutate(DOY=yday(Date))  %>%
   ##adding concatenation of Year and Plot (as these are the units to look at)
-  mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "-"))) %>% 
+  dplyr::mutate(Year_Plot = as.factor(paste(Year, Plot, sep = "-"))) %>% 
   ##exclude late-season records (>late July)
-  filter(!Snow %in% c(-9999, NA),
+  dplyr::filter(!Snow %in% c(-9999, NA),
          DOY<200)
 
 # how many plots
@@ -199,7 +199,8 @@ est_DOY <- est_DOY %>%
 ##3. check and decide what to do with estimated DOYs too small or too large that still remain
 ##3.1 - 4 plots with super high estimated values 
 # Extrem date ---> assign NA (2018 = NA LM does not work)
-est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Pap2Sal5"] <- NA
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Pap2"] <- NA
+est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Sal5"] <- NA
 est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Pap3"] <- NA
 est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Pap1"] <- NA
 est_DOY$snowmelt_DOY[est_DOY$Year_Plot=="2018-Cas3"] <- NA  ##similar to the other 2018 decision
