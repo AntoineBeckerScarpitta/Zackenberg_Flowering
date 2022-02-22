@@ -5,7 +5,7 @@
 #
 #######################################################################################
 # Antoine Becker-Scarpitta
-# June 2020
+# Jan 2022
 
 #  clean R work-space
 # rm(list=ls())
@@ -24,49 +24,66 @@ Plot_size <- read.csv("data/datasets/Plot_size_coord_Z_N.csv", header=TRUE,  sep
 
 ### ZACKENBERG (6 species) -----------------------------------------------------------
 # READ - Cassiope
-Zcas0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Cassiope_phenology_and_total_count.csv", 
-                 stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,
-                 na.strings = c("","NA"))
+Zcas0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Cassiope_total_count220220221223339434.csv", 
+                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,
+                  na.strings = c("","NA"))
 # SELECT COLS - delete remarks and comments columns
 Zcas1 <- Zcas0[ ,c("Date", "Plot", "Section", "Buds", "Flowers", 
-                  "Senescent", "TotalFlowering", "TotalCount")]
+                   "Senescent", "TotalFlowering")]
 # ADD SITE - Zack or Nuuk
 Zcas1$Site <- 'Zackenberg'
 # MELT - in long format to rbind all DSets
-Zcas <- reshape2::melt(Zcas1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
-            variable.name = "Flower_var", 
-            value.name = "Value")
+Zcas <- reshape2::melt(Zcas1, id.vars = c("Site", "Date", "Plot", "Section"),
+                       variable.name = "Flower_var", 
+                       value.name = "Value")
 # add species names
 Zcas$Species <- 'CAS'
 
 
 # READ - Dryas
-Zdry0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Dryas_phenology_and_total_count180520201149561.csv", 
-                 stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
+Zdry0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Dryas_total_count220220221226468141.csv", 
+                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", strip.white = T,na.strings = c("","NA"))
 # SELECT COLS - delete remarks and comments columns
 Zdry1 <- Zdry0[ ,c("Date", "Plot", "Section", "Buds", "Flowers", 
-                  "Senescent", "Larvae", "Eaten", "TotalFlowering", "TotalCount")]
+                   "Senescent", "Larvae", "Eaten", "TotalFlowering")]
 # ADD SITE - Zack or Nuuk
 Zdry1$Site <- 'Zackenberg'
 # MELT - in long format to rbind all DSets
-Zdry <- reshape2::melt(Zdry1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
+Zdry <- reshape2::melt(Zdry1, id.vars = c("Site", "Date", "Plot", "Section"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
 # add species names
 Zdry$Species <- 'DRY'
 
 
+# # READ - Eriophorum
+# Zeri0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Eriophorum_total_count220220221231266363.csv", 
+#                   stringsAsFactors=FALSE, header=TRUE,  sep="\t", 
+#                   strip.white = T,na.strings = c("","NA"))
+# # SELECT COLS - delete remarks and comments columns
+# Zeri1 <- Zeri0[ ,c("Date", "Plot", "Section", "Buds", "Flowers", 
+#                    "Senescent", "Open", "Eaten", "TotalFlowering", "TotalCount")]
+# # ADD SITE - Zack or Nuuk
+# Zeri1$Site <- 'Zackenberg'
+# # MELT - in long format to rbind all DSets
+# Zeri <- reshape2::melt(Zeri1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
+#                        variable.name = "Flower_var", 
+#                        value.name = "Value")
+# # add species names
+# Zpap$Species <- 'PAP'
+
+
 # READ - Papaver
-Zpap0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Papaver_phenology_and_total_count180520202129447952.csv", 
-                 stringsAsFactors=FALSE, header=TRUE,  sep="\t", 
-                 strip.white = T,na.strings = c("","NA"))
+Zpap0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Papaver_total_count220220221228015829.csv", 
+                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", 
+                  strip.white = T,na.strings = c("","NA"))
 # SELECT COLS - delete remarks and comments columns
 Zpap1 <- Zpap0[ ,c("Date", "Plot", "Section", "Buds", "Flowers", 
-                  "Senescent", "Open", "Eaten", "TotalFlowering", "TotalCount")]
+                   "Senescent", "Open", "Eaten", "TotalFlowering")]
 # ADD SITE - Zack or Nuuk
 Zpap1$Site <- 'Zackenberg'
 # MELT - in long format to rbind all DSets
-Zpap <- reshape2::melt(Zpap1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
+Zpap <- reshape2::melt(Zpap1, id.vars = c("Site", "Date", "Plot", "Section"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
 # add species names
@@ -74,16 +91,16 @@ Zpap$Species <- 'PAP'
 
 
 # READ - Saxifraga
-Zsax0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Saxifraga_phenology_and_total_count180520202130297066.csv", 
-                 stringsAsFactors=FALSE, header=TRUE,  sep="\t", 
-                 strip.white = T,na.strings = c("","NA"))
+Zsax0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Saxifraga_total_count220220221230026228.csv", 
+                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", 
+                  strip.white = T,na.strings = c("","NA"))
 # SELECT COLS - delete remarks and comments columns
 Zsax1 <- Zsax0[ ,c("Date", "Plot", "Section", "Buds", "Flowers", 
-                  "Senescent", "Open", "TotalFlowering", "TotalCount")]
+                   "Senescent", "Open", "TotalFlowering")]
 # ADD SITE - Zack or Nuuk
 Zsax1$Site <- 'Zackenberg'
 # MELT - in long format to rbind all DSets
-Zsax <- reshape2::melt(Zsax1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
+Zsax <- reshape2::melt(Zsax1, id.vars = c("Site", "Date", "Plot", "Section"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
 # add species names
@@ -91,39 +108,34 @@ Zsax$Species <- 'SAX'
 
 
 # READ - Silene
-Zsil0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Silene_phenology_and_total_count180520202130532109.csv", 
-                 stringsAsFactors=FALSE, header=TRUE,  sep="\t", 
-                 strip.white = T,na.strings = c("","NA"))
+Zsil0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Silene_total_count220220221230453905.csv", 
+                  stringsAsFactors=FALSE, header=TRUE,  sep="\t", 
+                  strip.white = T,na.strings = c("","NA"))
 # SELECT COLS - delete remarks and comments columns
 Zsil1 <- Zsil0[ ,c("Date", "Plot", "Section", "Buds", "Flowers", 
-                  "Senescent", "TotalFlowering", "TotalCount")]
+                   "Senescent", "TotalFlowering")]
 # ADD SITE - Zack or Nuuk
 Zsil1$Site <- 'Zackenberg'
 # MELT - in long format to rbind all DSets
-Zsil <- reshape2::melt(Zsil1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
+Zsil <- reshape2::melt(Zsil1, id.vars = c("Site", "Date", "Plot", "Section"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
 # add species names
 Zsil$Species <- 'SIL'
-# correct Plot==Si1,2,3 with SIL
-Zsil[Zsil$Plot=="Si1", 'Plot'] <- "Sil1"
-Zsil[Zsil$Plot=="Si2", 'Plot'] <- "Sil2"
-Zsil[Zsil$Plot=="Si3", 'Plot'] <- "Sil3"
-Zsil[Zsil$Plot=="Si4", 'Plot'] <- "Sil4"
 
 
 # READ - Salix
-Zsal0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Salix_phenology_and_total_count18052020213537866.csv", 
-                 stringsAsFactors=FALSE, header=TRUE,  sep="\t",
-                 strip.white = T,na.strings = c("","NA"))
+Zsal0 <- read.csv("data/datasets/View_BioBasis_Zackenberg_Data_Vegetation_Salix_total_count220220221228497914.csv", 
+                  stringsAsFactors=FALSE, header=TRUE,  sep="\t",
+                  strip.white = T,na.strings = c("","NA"))
 # SELECT COLS - delete remarks and comments columns
 Zsal1 <- Zsal0[ ,c("Date", "Plot", "Section", "Buds", 
-                  "Male_flowers", "Female_flowers", "Seed_hairs", 
-                  "Total_Male", "Total_Female", "TotalCount")]
+                   "Male_flowers", "Female_flowers", "Seed_hairs", 
+                   "Total_Male", "Total_Female")]
 # ADD SITE - Zack or Nuuk
 Zsal1$Site <- 'Zackenberg'
 # MELT - in long format to rbind all DSets
-Zsal <- reshape2::melt(Zsal1, id.vars = c("Site", "Date", "Plot", "Section", "TotalCount"),
+Zsal <- reshape2::melt(Zsal1, id.vars = c("Site", "Date", "Plot", "Section"),
                        variable.name = "Flower_var", 
                        value.name = "Value")
 # add species names
@@ -138,8 +150,8 @@ Zsal$Species <- 'SAL'
 ### NUUK (4 species)  ----------------------------------------------------------------
 # Databe given by Katrine Raundrup 
 Nuuk_all0 <- read.csv("data/datasets/Nuuk_all_sp_TotalCounts_Katrine_version.csv", 
-                     stringsAsFactors=FALSE, header=TRUE,  sep=";", strip.white = T,
-                     na.strings = c("","NA"))
+                      stringsAsFactors=FALSE, header=TRUE,  sep=";", strip.white = T,
+                      na.strings = c("","NA"))
 
 # Add Site col
 Nuuk_all0$Site <- "Nuuk"

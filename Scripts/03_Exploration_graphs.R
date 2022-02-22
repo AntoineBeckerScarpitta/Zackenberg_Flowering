@@ -28,57 +28,35 @@ source("Scripts/C2_Build_all_snow_covariates.R")
 
 
 
-#  TEMPORAL TRENDS AT PLOT LEVEL WITH LOG ON DENSITY ONLY
+#  TEMPORAL TRENDS AT PLOT LEVEL 
 # 1 - Flower density per m2  ## --------------------------------------------
-flow_den <- ggplot(flow, aes(Year, Flow_m2, group=Plot, color=Plot)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Flower density / m2') +
-  ggtitle('A - Flower density') +
-  facet_grid(Site+Species~., scales="free_y") +
-  theme_linedraw() +
-  theme(legend.position = "none") 
-
-# 3 - Log Flower density !=0  ## --------------------------------------------
-flow_log_nn <- ggplot(flow, aes(Year, TotalFlower, group=Plot, color=Plot)) +
+flow_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), 
+                                group=Plot, color=Plot)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='log(Flower density / m2)') +
-  ggtitle('B - Log(Flower density) !=0') +
+  ggtitle('Plot-level') +
   facet_grid(Site+Species~., scales="free_y")+
   theme_linedraw() +
   theme(legend.position = "none") 
-#  graph
-gridExtra::grid.arrange(flow_den, flow_log_nn, ncol=2, 
-                        top = "Plot level temporal trends in flowering")
 ### END PLOT LEVEL ## ------------------------------------------------------
 
 
-
-
-#  TEMPORAL TRENDS AT SPECIE LEVEL DENSITY ONLY
-# 4 - Flower density per m2  ## --------------------------------------------
-flow_den2 <- ggplot(flow, aes(Year, Flow_m2, group=Species, color=Species)) +
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Flower density/m2') +
-  ggtitle('A - Flower density') +
-  facet_grid(Site+Species ~., scales="free_y") +
-  theme_linedraw()+
-  theme(legend.position = "none") 
-
-# 6 - Total Flower per plot  ## --------------------------------------------
-flow_den2_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), group=Species, color=Species)) +
+#  TEMPORAL TRENDS AT SPECIE LEVEL 
+# 2 - Total Flower per m2  ## --------------------------------------------
+flow_den2_log_nn <- ggplot(flow, aes(Year, log(trans_Flow_m2), 
+                                     group=Species, color=Species)) +
   geom_point() +
   geom_smooth(method='lm', se=TRUE) +
   labs(y='log(Flower density/m2)') +
-  ggtitle('B - Log(Flower density) !=0') +
+  ggtitle('Species-level') +
   facet_grid(Site+Species~., scales="free_y")+
   theme_linedraw() +
   theme(legend.position = "none")
+
 #  graph
-gridExtra::grid.arrange(flow_den2, flow_den2_log_nn, ncol=2, 
-                        top = "Temporal flowering trends at species level in Zackenberg")
+gridExtra::grid.arrange(flow_log_nn, flow_den2_log_nn, ncol=2,
+          top = "Temporal trends of flowering density")
 ### END SP LEVEL ## -----------------------------------------------------
 
 
@@ -143,7 +121,7 @@ ggplot(clim_year, aes(Year, Value, group=Site, color=Site)) +
 ggplot(clim_season_year, aes(Year, Value, group=Site, color=Season)) +
   scale_color_brewer(palette="Set1")+
   geom_point() +
-  geom_smooth(aes(group=Season, color=Season, fill=Season), method='lm', se=TRUE) +
+  geom_smooth(aes(group=Season, color=Season, fill=Season), method='loess', se=TRUE) +
   labs(y='Value') +
   ggtitle('Seasonal climatic trends at Nuuk & Zackenberg') +
   facet_grid(Variable+Site~., scales="free") +
@@ -157,17 +135,17 @@ ggplot(clim_season_year, aes(Year, Value, group=Site, color=Season)) +
 # SNOW MELT DAY OF THE YEAR ZACKENBERG
 # Plot SnowMelt DOY    ## ------------------------------------------------
 # YEAR TRENDS
-ggplot(left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
-                 snow, by=c("Year", "Plot")), 
+ggplot(left_join(flow, snow, by=c("Year", "Plot", "Site")), 
        aes(x=Year, y=snowmelt_DOY, group=Species, color=Species)) +
   geom_point(size=2) +
-  geom_smooth(aes(group=Species, color=Species, fill=Species), 
-              method='lm', se=T) +
-  ggtitle('Temporal change of snowmelt day of the year - Zackenberg') +
+  geom_smooth(aes(group=Species, color=Species), 
+              method='lm', se=F) +
+  ggtitle('Temporal trend of snowmelt day') +
   theme(axis.text=element_text(size=16, face='bold'),
         axis.title=element_text(size=16, face="bold"),
         panel.background = element_blank(),
-        axis.line = element_line(colour = "black"))
+        axis.line = element_line(colour = "black")) +
+  facet_grid(Site~., scales="free") 
 ### END SNOW MELT DOY   ## -----------------------------------------------
 
 
@@ -177,12 +155,18 @@ ggplot(left_join(droplevels(flow %>% filter(Site=="Zackenberg")),
 
 # COMMUNITY FLOWER DENSITY  ##--------------------------------------------
  ggplot(flow_com, aes(Year, ComFlow_m2, group=Site, color=Site)) +
+  scale_color_brewer(palette="Set1")+
   geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
+  geom_smooth(aes(group=Site, color=Site, fill=Site), 
+                  method='lm', se=TRUE) +
   labs(y='Flower density / m2') +
   ggtitle('Community Flower density') +
-  facet_grid(Site~., scales="free_y") +
-  theme_linedraw() 
+  facet_grid(Site~., scales="free") +
+  theme_linedraw()  +
+  theme(axis.text=element_text(size=16, face='bold'),
+        axis.title=element_text(size=16, face="bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"))
 
 # summary(lm(ComFlow_m2 ~ Year*Site, data=flow_com))
 # summary(lm(ComFlow_m2 ~ Year, data=flow_com %>% filter(Site=="Nuuk")))
