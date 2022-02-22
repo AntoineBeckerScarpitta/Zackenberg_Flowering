@@ -1,0 +1,11 @@
+BioBasis Zackenberg - Vegetation - Dryas total count
+Annual total flower production in permanent Dryas plots. For further details, please refer to the newest BioBasis manual available at the website.
+DOI and permanent link: https://doi.org/10.17897/5K19-0K71
+Read the included PDF with terms of use for information on license and how to cite.
+Also find this item on DataCite, where you can get the formal citation in various formats: https://search.datacite.org/works/10.17897/5K19-0K71
+-------------------------------------
+Learn more about the Greenland Ecosystem Monitoring Project here: https://www.g-e-m.dk.
+This dataset is managed in accordance with the GEM Data Management Plan: https://g-e-m.dk/gem-publications-and-reports/gem-data-mangement-plan/
+-------------------------------------
+Supplementary data you should review for understanding the dataset:
+The BioBasis Zackenberg monitoring manual: https://g-e-m.dk/fileadmin/g-e-m/Zackenberg/BioBasis_manual_2019.pdf
