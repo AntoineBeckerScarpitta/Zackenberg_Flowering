@@ -197,10 +197,11 @@ flow <- flow[flow$Year>1995, ]
 flow$trans_Flow_m2 <- flow$Flow_m2
 flow[flow$Flow_m2==0, 'trans_Flow_m2'] <- 0.001
 #### END -----------------------------------------------------------------------------
-# table(Nuuk_all$Month, Nuuk_all$Year)
-# table(Zack_sub$Month, Zack_sub$Year)
 
 
+# #Study design
+# table(flow[flow$Site=="Zackenberg", "Year"], flow[flow$Site=="Zackenberg", "Species"])
+# table(flow[flow$Site=="Nuuk", "Year"], flow[flow$Site=="Nuuk", "Species"])
 
 
 # Community level flower production

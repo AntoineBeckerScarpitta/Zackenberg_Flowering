@@ -59,18 +59,24 @@ com_n2 <- lm(ComFlow_m2 ~ Year,
 tab_model(com_z2, com_n2,
           p.val = "kr", 
           show.df = TRUE, 
-          dv.labels = c("Community Zack - Clim", "Community Nuuk - Clim"))
+          dv.labels = c("Community Zack", "Community Nuuk"))
 
 
 # Plot
 ggplot(flow_clim_com, aes(Year, ComFlow_m2, group=Site, color=Site)) +
   scale_color_brewer(palette="Set1")+
   geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
+  geom_smooth(aes(group=Site, color=Site, fill=Site),
+    method='lm', se=TRUE) +
   labs(y='Flower density / m2') +
   ggtitle('Community Flower density') +
   facet_grid(Site~., scales="free_y") +
-  theme_linedraw() 
+  theme_linedraw()  +
+  theme(axis.text=element_text(size=14, face='bold'),
+        axis.title=element_text(size=14, face="bold"),
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"), 
+        title=element_text(size=18, face="bold"))
 
 
 
@@ -88,26 +94,9 @@ ggplot(flow_clim_com, aes(Year, ComFlow_m2, group=Site, color=Site)) +
 # 
 # #mod results
 # tab_model(com_zS2, com_zS2,
-#           p.val = "kr", 
-#           show.df = TRUE, 
+#           p.val = "kr",
+#           show.df = TRUE,
 #           dv.labels = c("Community Zack - Clim", "Community Nuuk - Clim"))
-# 
-# 
-
-  
-# plot avec year and temp
-
-
-# Plot
-ggplot(flow_clim_com, aes(Temp_year, ComFlow_m2, group=Site, color=Site)) +
-  scale_color_brewer(palette="Set1")+
-  geom_point() +
-  geom_smooth(method='lm', se=TRUE) +
-  labs(y='Flower density / m2') +
-  ggtitle('Community Flower density') +
-  facet_grid(Site~., scales="free") +
-  theme_linedraw() 
-
 
 
 
