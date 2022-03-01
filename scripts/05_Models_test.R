@@ -95,7 +95,6 @@ gridExtra::grid.arrange(cor_doy_flow_z, cor_doy_flow_n, ncol=2,
 
 
 
-
 # 2 - MODELS TABS -------------------------------------------------------------------
 # 2.1 - basic mod Zack + Nuuk
 tab_model(mod_basic_z, mod_basic_n,
@@ -124,8 +123,89 @@ performance::icc(mod_full_n_cross, by_group = TRUE)
 
 
 
+
+
+
 # 3 - MODELS PLOTS and  POSTHOC TEST-------------------------------------------------
-# 3.A - Zackenberg
+#ZACKENBERG
+#extract the data used in mod_basic_z
+data_mod_z <- as.data.frame(mod_basic_z@frame)
+
+#extract the predict from mod_basic_z
+data_mod_z$pred <- predict(mod_basic_z, re.form=NA)  ## population level
+
+#graph plot effect + predict sp level
+zack <- ggplot(data_mod_z, aes(Year, `log(trans_Flow_m2)`, 
+                               group=Plot, color=Plot)) +
+  geom_point(size=1) +
+  geom_smooth(method='lm', se=TRUE, aes(fill=Plot), alpha = 0.1) + # plot trends
+  geom_smooth(method='loess', se=FALSE, colour="black", 
+              aes(y=pred, group=Species)) + # sp prediction
+  labs(y='log(flower density)') +
+  ggtitle('High Arctic - Zackenberg') +
+  facet_grid(Species~., scales="free_y") +
+  theme_linedraw() +
+  scale_x_continuous(limits = c(1997, 2019),
+                     breaks = c(1997, 2002, 2007, 2012, 2017)) +
+  theme(legend.position = "none", 
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10, face="bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"), 
+        strip.background = element_blank(),
+        strip.text = element_text(face = "bold", color="black"))
+
+
+#NUUK
+#extract the data used in mod_basic_n
+data_mod_n <- as.data.frame(mod_basic_n@frame)
+
+#extract the predict from mod_basic_n
+data_mod_n$pred <- predict(mod_basic_n, re.form=NA)  ## population level
+
+#graph plot effect + predict sp level
+nuuk <- ggplot(data_mod_n, aes(Year, `log(trans_Flow_m2)`, 
+                               group=Plot, color=Plot)) +
+  geom_point(size=1) +
+  geom_smooth(method='lm', se=TRUE, aes(fill=Plot), alpha = 0.1) + # plot trends
+  # geom_point(aes(y=pred), color="black", size=1) +
+  geom_smooth(method='loess', se=FALSE, colour="black", 
+              aes(y=pred, group=Species)) + # sp prediction
+  labs(y='log(flower density)') +
+  ggtitle('Low Arctic - Nuuk') +
+  facet_grid(Species~., scales="free_y")+
+  theme_linedraw() +
+  scale_x_continuous(limits = c(2009, 2019),
+                     breaks = c(2009, 2011, 2013, 2015, 2017, 2019)) +
+  theme(legend.position = "none", 
+        axis.text=element_text(size=10),
+        axis.title=element_text(size=10, face="bold"),
+        panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.line = element_line(colour = "black"), 
+        strip.background = element_blank(),
+        strip.text = element_text(face = "bold", color="black"))
+
+
+#panel
+gridExtra::grid.arrange(zack, nuuk, ncol=2)
+
+
+
+
+
+
+
+
+
+
+
+# 4 - POSTHOC TEST-------------------------------------------------
+
+# 4.A - Zackenberg
 # R2c,m
 MuMIn::r.squaredGLMM(mod_basic_z)
 MuMIn::r.squaredGLMM(mod_full_z_cross)

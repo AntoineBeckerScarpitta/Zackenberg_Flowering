@@ -18,7 +18,8 @@ source("Scripts/C2_Build_all_snow_covariates.R")
 
 
 ### CLIMATIC TEMPORAL TRENDS  #-------------------------------------------------------
-ggplot(clim_year %>% dplyr::filter(Variable!="Humidity_%"), aes(Year, Value, group=Site, color=Site)) +
+ggplot(clim_year %>% dplyr::filter(Variable!="Humidity_%"), 
+       aes(Year, Value, group=Site, color=Site)) +
   scale_color_brewer(palette="Set1")+
   geom_point() +
   geom_smooth(aes(group=Site, color=Site, fill=Site), method='lm', se=TRUE) +
