@@ -1,9 +1,9 @@
-#######################################################################################
+###############################################################################
 #
 #                           Greenland Flowering project
 #                             04 - Analysis Nuuk
 #
-#######################################################################################
+###############################################################################
 # Antoine Becker-Scarpitta
 # January 2021
 
@@ -20,8 +20,9 @@ source("Scripts/C2_Build_all_snow_covariates.R")
 remove("clim", "clim_year")
 
 
-# 1 - DATA MANAGMENT FOR MODEL -  ZACKENBERG ----------------------------------------
+# 1 - DATA MANAGMENT FOR MODEL -  NUUK ----------------------------------
 # log(density) !=0 (Flow_m2[abundace==0] <- 0.001 in 02_Creation_DB, line 210)
+# will be replace by NA later for full mod
 
 # add snow covariate into flow _ NO DATA FOR NUUK YET
 flow_snow_n <- left_join(droplevels(flow %>% filter(Site=="Nuuk")),
@@ -56,103 +57,81 @@ flow_snow_clim_n <- left_join(flow_snow_n, temp_clim_n,
 flow_snow_clim_n <- flow_snow_clim_n %>% 
   arrange(., Year, Plot) %>% 
   group_by(Plot, Species) %>%
-  mutate(., lag_trans_Flow_m2=lag(trans_Flow_m2, order_by = Year))
-###---END
+  mutate(., lag_trans_Flow_m2=lag(trans_Flow_m2, order_by = Year)) %>%
+  mutate(., log_flow=log(trans_Flow_m2), 
+          log_lag_flow=log(lag_trans_Flow_m2)) %>%
+  dplyr::select(Site, Year,  Plot, Species, log_flow, snowmelt_DOY, 
+         lag_Temp_fall, Temp_summer, log_lag_flow)
+#-----------------------------------------------------------------------------=
+
+##full dataset for mod
+# write.csv2(flow_snow_clim_n, "flow_snow_clim_n.csv")
 
 
 
-# # SnowMelt DOY ~ Year
-temp_graph_n <- ggplot(flow_snow_clim_n , aes(x=Year, 
-                                              y=snowmelt_DOY, 
-                                              group=Species, 
-                                              color=Species)) +
+
+
+#-----------------------------------------------------------------------------=
+## PLOT SnowMelt DOY Nuuk
+temp_graph_n <- ggplot(flow_snow_clim_n,
+                       aes(x=Year, 
+                           y=snowmelt_DOY, 
+                           group=Species, 
+                           color=Species)) +
   geom_point(size=2) +
   geom_smooth(method='lm', se=F) +
   theme(axis.text=element_text(size=15),
         axis.title=element_text(size=16,face="bold"),
         panel.background = element_blank(),
         axis.line = element_line(colour = "black"))
-#-----------------------------------------------------------------------------------=
+#-----------------------------------------------------------------------------=
 
 
 
 
-## 2 - MODELS -----------------------------------------------------------------------
+## 2 - MODELS -----------------------------------------------------------------
 #  MODEL 1: EQ1 - temporal trends in flowering density for each sp?
-mod_basic_n <- lmer(log(trans_Flow_m2) ~ Species * Year + (1|Plot),
+mod_basic_n <- lmer(log_flow ~ 0 + Species * Year + (1|Plot),
                data= flow_snow_clim_n,
                REML=T, na.action=na.omit)
-# summary(mod_basic_n)
-# saveRDS(mod_basic_n, "results/models/mod_basic_n.rds")
 
 
 
-#  MODEL 2a: EQ2 NESTED - What climatic variables and density dep. drive the trends?
-# The design is crossed, since all plot are sampled every year :
-# every year all plot are sample, then repetition of plot withtin year == Crossed
-mod_full_n_nest <- lmer(log(trans_Flow_m2) ~ Species * Temp_summer + 
-                          Species * lag_Temp_fall +
-                          Species * snowmelt_DOY + 
-                          Species * log(lag_trans_Flow_m2) + 
-                          (1|Plot) + (1|Plot:Year),
-                        data=flow_snow_clim_n, 
-                        REML=T, na.action=na.omit)
-# summary(mod_full_n_nest)
-# saveRDS(mod_full_n_nest, "results/models/mod_full_n_nest.rds")
+# Reorganise data a little
+datN <- flow_snow_clim_n
+
+# Make all 0s count of flowers NAs
+datN$log_flow[which(datN$log_flow == min(datN$log_flow))] <- NA
+
+# Scale explanatory variable except for lag log_flow
+datN$snowmelt_DOY <- scale(datN$snowmelt_DOY)
+datN$Temp_summer <- scale(datN$Temp_summer)
+datN$lag_Temp_fall <- scale(datN$lag_Temp_fall)
+
+# Make all 0s count of flowers NAs
+datN$log_lag_flow[which(datN$log_lag_flow == min(datN$log_lag_flow))] <- NA
 
 
-
-
-#  MODEL 2b: EQ2 CROSSED - VALIDE STRUCTURE
-# The valide structure is crossed
-mod_full_n_cross <- lmer(log(trans_Flow_m2) ~  Species * Temp_summer + 
+#  MODEL EQ3 - Full model
+mod_full_n_cross <- lmer(log_flow ~ 0 +
+                           Species * Temp_summer +
                            Species * lag_Temp_fall +
-                           Species * snowmelt_DOY + 
-                           Species * log(lag_trans_Flow_m2) + 
-                           (1|Plot) + (1|Year),
-                         data=flow_snow_clim_n, 
-                         REML=T, na.action=na.omit)
-# summary(mod_full_n_cross)
-# saveRDS(mod_full_n_cross, "results/models/mod_full_n_cross.rds")
-#------------------------------------------------------------------------------------
+                           Species * snowmelt_DOY +
+                           Species * log_lag_flow +
+                           (1|Plot) + (1|Plot:Year),
+                         data=datN,
+                         REML=T, 
+                         na.action=na.omit)
 
-
-
-
-#### Variables backward selection ----------------------------------------------------
-# # NOT USEFUL - BEST MODEL = mod_full_z_cross
-# # create a dB without NA (same used in lmer, Mod1 & Mod2)
-# flow_snow_clim_n <- flow_snow_clim_n[complete.cases(flow_snow_clim_n),]
-# 
-# # Backward variable selection on full model EQ2 
-# lmerTest::step(mod_full_n_cross, direction = "backward", trace=FALSE ) 
-# 
-# # get model after selection
-# mod_bw_sel_n <- get_model(lmerTest::step(mod_full_n_cross, 
-#                                          direction="backward", 
-#                                          trace=FALSE ) )
-# 
-# # saveRDS(mod_bw_sel_n, "results/models/mod_bw_sel_n.rds")
-# summary(mod_bw_sel_n)
-#------------------------------------------------------------------------------------
-
-
-
-# #### Results tables -----------------------------------------------------------------
-# #All tab mod together
-# tab_model(mod_basic_n, mod_full_n_nest, mod_full_n_cross,
-#           p.val = "kr", 
-#           show.df = TRUE, 
-#           dv.labels = c("Basic Nuuk", "Full Nuuk nested", 
-#                         "Full Nuuk crossed", "Full Nuuk sel"))
-# 
-# # tab for final model
-# tab_model(mod_full_n_nest,
-#           p.val = "kr", 
-#           show.df = TRUE, 
-#           dv.labels = "Final model Nuuk")
-# #END----------------------------------------------------------------------------------
-
-
-
+#  MODEL EQ3 -  Only interactions
+mod_full_n_cross_int <- lmer(log_flow ~   0 + 
+                               Species : Temp_summer + 
+                               Species : lag_Temp_fall +
+                               Species : snowmelt_DOY + 
+                               Species : log_lag_flow + 
+                               (1|Plot) + (1|Plot:Year),
+                             data=datN, 
+                             REML=T, 
+                             na.action=na.omit)
+#------------------------------------------------------------------------------
 
