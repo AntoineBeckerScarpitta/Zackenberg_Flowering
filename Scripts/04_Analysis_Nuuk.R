@@ -30,7 +30,7 @@ flow_snow_n <- left_join(droplevels(flow %>% filter(Site=="Nuuk")),
                        by=c("Year", "Plot", "Site"))
 
 #reshape climatic data
-temp_clim_n <- droplevels(clim_season_year %>% filter(Site=='Nuuk') %>%
+temp_clim_n <- droplevels(clim_season_year %>% filter(Site=='Low_Arctic') %>%
                             pivot_wider(id_cols=c(Site, Year, Season), 
                                         names_from=Variable,
                                         values_from=Value, 
@@ -47,6 +47,12 @@ colnames(temp_clim_n) <- c('Site', 'Year', 'Temp_fall', 'Temp_summer')
 #create the lag of temp of fall
 temp_clim_n$lag_Temp_fall <- lag(temp_clim_n$Temp_fall, k = 1)
 
+#Rename Site names
+flow_snow_n <- flow_snow_n %>%
+  dplyr::mutate(Site=
+                  dplyr::recode(Site,
+                                "Nuuk"="Low_Arctic",
+                                "Zackenberg"="High_Arctic"))
 
 # FINAL DATASET:
 #add clim data in flow
@@ -57,15 +63,15 @@ flow_snow_clim_n <- left_join(flow_snow_n, temp_clim_n,
 flow_snow_clim_n <- flow_snow_clim_n %>% 
   arrange(., Year, Plot) %>% 
   group_by(Plot, Species) %>%
-  mutate(., lag_trans_Flow_m2=lag(trans_Flow_m2, order_by = Year)) %>%
-  mutate(., log_flow=log(trans_Flow_m2), 
-          log_lag_flow=log(lag_trans_Flow_m2)) %>%
+  mutate(., lag_Flow_m2=lag(Flow_m2, order_by = Year)) %>%
+  mutate(., log_flow=log1p(Flow_m2), 
+          log_lag_flow=log1p(lag_Flow_m2)) %>%
   dplyr::select(Site, Year,  Plot, Species, log_flow, snowmelt_DOY, 
          lag_Temp_fall, Temp_summer, log_lag_flow)
 #-----------------------------------------------------------------------------=
 
 ##full dataset for mod
-# write.csv2(flow_snow_clim_n, "flow_snow_clim_n.csv")
+# write.csv2(flow_snow_clim_n, "Guillaume/V2/flow_snow_clim_n.csv")
 
 
 
@@ -97,41 +103,47 @@ mod_basic_n <- lmer(log_flow ~ 0 + Species * Year + (1|Plot),
 
 
 
+#  MODEL EQ3 -  Only interactions
 # Reorganise data a little
 datN <- flow_snow_clim_n
-
-# Make all 0s count of flowers NAs
-datN$log_flow[which(datN$log_flow == min(datN$log_flow))] <- NA
 
 # Scale explanatory variable except for lag log_flow
 datN$snowmelt_DOY <- scale(datN$snowmelt_DOY)
 datN$Temp_summer <- scale(datN$Temp_summer)
 datN$lag_Temp_fall <- scale(datN$lag_Temp_fall)
 
-# Make all 0s count of flowers NAs
-datN$log_lag_flow[which(datN$log_lag_flow == min(datN$log_lag_flow))] <- NA
-
 
 #  MODEL EQ3 - Full model
-mod_full_n_cross <- lmer(log_flow ~ 0 +
-                           Species * Temp_summer +
-                           Species * lag_Temp_fall +
-                           Species * snowmelt_DOY +
-                           Species * log_lag_flow +
-                           (1|Plot) + (1|Plot:Year),
-                         data=datN,
-                         REML=T, 
-                         na.action=na.omit)
+# mod_full_n_cross <- lmer(log_flow ~ 0 +
+#                            Species * Temp_summer +
+#                            Species * lag_Temp_fall +
+#                            Species * snowmelt_DOY +
+#                            Species * log_lag_flow +
+#                            (1|Plot) + (1|Plot:Year),
+#                          data=datN,
+#                          REML=T, 
+#                          na.action=na.omit)
 
 #  MODEL EQ3 -  Only interactions
 mod_full_n_cross_int <- lmer(log_flow ~   0 + 
                                Species : Temp_summer + 
                                Species : lag_Temp_fall +
                                Species : snowmelt_DOY + 
-                               Species : log_lag_flow + 
-                               (1|Plot) + (1|Plot:Year),
+                               Species : log_lag_flow + offset(1 * log_lag_flow) + 
+                               (1|Plot:Year),
                              data=datN, 
                              REML=T, 
                              na.action=na.omit)
 #------------------------------------------------------------------------------
 
+#abbe plot Flo t ~ t-1
+# ggplot(datN , aes(y=log_flow, x=log_lag_flow)) + 
+#   xlim(0,7) + 
+#   ylim(0,7) + 
+#   geom_abline(intercept = 0, slope = 1, color="black", size=1) + 
+#   geom_point(aes(color=Species)) +
+#   labs(title="t~t-1 High Arctic") + 
+#   xlab('t-1') + 
+#   ylab('t') +
+#   theme_classic()  +
+#   theme(text = element_text(size = 20))

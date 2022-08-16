@@ -28,7 +28,7 @@
 # install.packages("betapart")
 # install.packages("TR8")
 # install.packages("ape")
-# 
+
 # 
 # # Data managment
 # install.packages("reshape2")
@@ -78,19 +78,13 @@
 
 # General
 library(devtools)
-library(knitr)
+# library(knitr)
 
 
 # Community
-library(vegan)
-library(ade4)
-library(FD)
-library(RVAideMemoire)
-library(indicspecies)
-library(mclust)
-library(labdsv)
-library(betapart)
-library(TR8)
+# library(vegan)
+# library(ade4)
+
 
 
 # Data managment
@@ -102,7 +96,7 @@ library(gridExtra)
 library(stringr)
 library(stringi)
 library(data.table)
-library(Taxonstand)
+
 
 
 # Analysis
@@ -113,28 +107,28 @@ library(MuMIn)
 library(car)
 library(arm)
 library(stats)
-library(bbmle)
+# library(bbmle)
 library(sjPlot)
-library(multcomp)
+# library(multcomp)
 library(lmerTest)
 library(simr)
-library(LMERConvenienceFunctions)
+# library(LMERConvenienceFunctions)
 library(jtools)
-library(interactions)
+# library(interactions)
 library(emmeans)
 library(r2glmm)
-library(performance)
+# library(performance)
 
 
 
 
 # Plot
 library(ggplot2)
-library(ggrepel)
-library(ggpubr)
-library(rworldmap)
-library(mapdata)
-library(glmmTMB)
+# library(ggrepel)
+# library(ggpubr)
+# library(rworldmap)
+# library(mapdata)
+# library(glmmTMB)
 
 
 

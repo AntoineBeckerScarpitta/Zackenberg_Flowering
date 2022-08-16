@@ -63,20 +63,24 @@ tab_model(com_z2, com_n2,
 
 
 # Plot
-ggplot(flow_clim_com, aes(Year, ComFlow_m2, group=Site, color=Site)) +
+ggplot(flow_clim_com %>%
+         dplyr::mutate(Site=
+         dplyr::recode(Site,
+                       "Nuuk"="Low_Arctic",
+                       "Zackenberg"="High_Arctic")), 
+       aes(Year, ComFlow_m2, group=Site, color=Site)) +
   scale_color_brewer(palette="Set1")+
   geom_point() +
   geom_smooth(aes(group=Site, color=Site, fill=Site),
     method='lm', se=TRUE) +
-  labs(y='Flower density / m2') +
-  ggtitle('Community Flower density') +
+  labs(y='Flower density') +
   facet_grid(Site~., scales="free_y") +
-  theme_linedraw()  +
-  theme(axis.text=element_text(size=14, face='bold'),
-        axis.title=element_text(size=14, face="bold"),
+  theme_apa() +
+  theme(axis.text=element_text(size=13),
+        axis.title=element_text(size=13),
         panel.background = element_blank(),
         axis.line = element_line(colour = "black"), 
-        title=element_text(size=18, face="bold"))
+        title=element_text(size=18, face="bold")) 
 
 
 

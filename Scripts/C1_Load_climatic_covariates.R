@@ -22,15 +22,16 @@ source("Scripts/00_Load_libraries.r")
 #  1 LOAD CLIMATE COVARIATES
 #  ZACKENBERG
 # Temperature
-Ztemp <- read.csv("data/datasets/View_ClimateBasis_Zackenberg_Data_Temperature_Air_temperature__200cm__60min_average__DegreesC.csv", 
+Ztemp <- read.csv("data/datasets/View_ClimateBasis_Zackenberg_Data_Air_temperature_Air_temperature__200cm_@_60min_sample__DegreesC020620221446384402.csv", 
                   stringsAsFactors=FALSE, header=TRUE,  sep="\t",
                   strip.white = T,na.strings = c("","NA"))
+Ztemp <- subset(Ztemp, select=-Quality.Flag)
 Ztemp$Variable <- "Temperature_C"
 Ztemp$Site <- "Zackenberg"
 colnames(Ztemp) <- c('Date', "Time", "Value", "Variable", "Site")
 
 # Precipitation
-Zprec <- read.csv("data/datasets/View_ClimateBasis_Zackenberg_Data_Precipitation_Precipitation_accumulated_mm.csv", 
+Zprec <- read.csv("data/datasets/View_ClimateBasis_Zackenberg_Data_Precipitation_Precipitation_accumulated_mm020620221447546344.csv", 
                   stringsAsFactors=FALSE, header=TRUE,  sep="\t",
                   strip.white = T,na.strings = c("","NA"))
 Zprec$Variable <- "Precipitation_mm"
@@ -50,15 +51,16 @@ colnames(Zhum) <- c('Date', "Time", "Value", "Variable", "Site")
 
 #  NUUK
 # Temperature
-Ntemp <- read.csv("data/datasets/View_ClimateBasis_Nuuk_Data_Temperature_Air_temperature__200_cm__30min_average__DegreesC.csv", 
+Ntemp <- read.csv("data/datasets/View_ClimateBasis_Nuuk_Data_Temperature_Air_temperature_@_200_cm__30min_average__DegreesC020620221439316485.csv", 
                   stringsAsFactors=FALSE, header=TRUE,  sep="\t",
                   strip.white = T,na.strings = c("","NA"))
 Ntemp$Variable <- "Temperature_C"
 Ntemp$Site <- "Nuuk"
 colnames(Ntemp) <- c('Date', "Time", "Value", "Variable", 'Site')
 
+
 # Precicpiation
-Nprec <- read.csv("data/datasets/View_ClimateBasis_Nuuk_Data_Precipitation_Precipitation_accumulated_mm.csv", 
+Nprec <- read.csv("data/datasets/View_ClimateBasis_Nuuk_Data_Precipitation_Precipitation_accumulated_mm020620221442057809.csv", 
                   stringsAsFactors=FALSE, header=TRUE,  sep="\t",
                   strip.white = T,na.strings = c("","NA"))
 Nprec$Variable <- "Precipitation_mm"
@@ -88,6 +90,7 @@ clim <- clim[complete.cases(clim), ]
 # Devided Date into Year  Month Day
 clim <- cbind(as.data.frame(str_split(clim$Date, "-", simplify=TRUE)), clim)
 colnames(clim) <- c("Year", "Month", "Day", 'Date', "Time", "Value", "Variable", "Site")
+clim <- clim %>% dplyr::filter(Year<=2020)
 
 
 # create a new col==SEASONAL variable
@@ -107,7 +110,10 @@ clim_season_year <- as.data.frame(clim %>%
                              dplyr::summarise(Value=round(mean(Value), 3))) %>%
                              dplyr::mutate(Site=as.factor(Site),
                                    Year=as.numeric(Year), 
-                                   Variable=as.factor(Variable))%>%
+                                   Variable=as.factor(Variable)) %>%
+  dplyr::mutate(Site=dplyr::recode(Site, 
+                                   "Nuuk"="Low_Arctic",
+                                   "Zackenberg"="High_Arctic")) %>%
                              ungroup()
 
 
@@ -117,8 +123,12 @@ clim_year <- as.data.frame(clim %>%
                              dplyr::summarise(Value=round(mean(Value), 2))) %>%
                              dplyr::mutate(Site=as.factor(Site),
                                      Year=as.numeric(Year), 
-                                     Variable=as.factor(Variable))%>%
+                                     Variable=as.factor(Variable)) %>%
+  dplyr::mutate(Site=dplyr::recode(Site, 
+                                   "Nuuk"="Low_Arctic",
+                                   "Zackenberg"="High_Arctic")) %>%
                              ungroup()
+
 
 #END----------------------------------------------------------------------------------
 

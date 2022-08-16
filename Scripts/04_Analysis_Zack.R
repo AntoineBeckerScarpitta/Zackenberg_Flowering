@@ -34,14 +34,16 @@ remove("clim", "clim_year")
 
 
 # 1 - DATA MANAGMENT FOR MODEL -  ZACKENBERG ----------------------------------
+
+
 # log(density) !=0 (Flow_m2[abundace==0] <- 0.001 in 02_Creation_DB, line 210)
 # add snow covariate into flow
 flow_snow_z <- left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
-                         droplevels(snow%>% filter(Site=="Zackenberg"))
+                         droplevels(snow %>% filter(Site=="Zackenberg"))
                          , by=c("Year", "Plot", "Site")) 
 
 #reshape climatic data
-temp_clim_z <- droplevels(clim_season_year %>% filter(Site=='Zackenberg') %>%
+temp_clim_z <- droplevels(clim_season_year %>% filter(Site=='High_Arctic') %>%
   pivot_wider(id_cols=c(Site, Year, Season), names_from=Variable,
                                  values_from=Value, values_fill=0) %>%
   dplyr::select(!c('Humidity_%', 'Precipitation_mm')) %>% 
@@ -54,24 +56,31 @@ colnames(temp_clim_z) <- c('Site', 'Year', 'Temp_fall', 'Temp_summer')
 #create the lag of temp of fall
 temp_clim_z$lag_Temp_fall <- lag(temp_clim_z$Temp_fall, k = 1)
 
+#Rename Site names
+flow_snow_z <- flow_snow_z %>%
+  dplyr::mutate(Site=
+                  dplyr::recode(Site,
+                                "Nuuk"="Low_Arctic",
+                                "Zackenberg"="High_Arctic"))
+
 
 # FINAL DATASET:
 #add clim data in flow
 flow_snow_clim_z <- left_join(flow_snow_z, temp_clim_z, by=c('Site', 'Year'))
 
-# add a lag form of trans_flow_m2
+# add a lag form of flow_m2
 flow_snow_clim_z <- flow_snow_clim_z %>% 
   arrange(., Year, Plot) %>% 
   group_by(Plot, Species) %>%
-  mutate(., lag_trans_Flow_m2=lag(trans_Flow_m2, order_by = Year)) %>%
-  mutate(., log_flow=log(trans_Flow_m2), 
-         log_lag_flow=log(lag_trans_Flow_m2)) %>%
+  mutate(., lag_Flow_m2=lag(Flow_m2, order_by = Year)) %>%
+  mutate(., log_flow=log1p(Flow_m2), 
+         log_lag_flow=log1p(lag_Flow_m2)) %>%
   dplyr::select(Site, Year,  Plot, Species, log_flow, snowmelt_DOY, 
                 lag_Temp_fall, Temp_summer, log_lag_flow)
 ##----------------------------------------------------------------------------
 
 ##full dataset for mod
-# write.csv2(flow_snow_clim_z, "flow_snow_clim_z.csv")
+# write.csv2(flow_snow_clim_z, "Guillaume/V2/flow_snow_clim_z.csv")
 
 
 
@@ -94,70 +103,67 @@ temp_graph_z <- ggplot(flow_snow_clim_z , aes(x=Year, y=snowmelt_DOY,
 ## 2 - MODELS -----------------------------------------------------------------
 #  MODEL 1: EQ1 - temporal trends in flowering density for each sp?
 # flow(t) ~ Sp * Year + ranef(plot)
-mod_basic_z <- lmer(log_flow ~ 0 + Species * Year + (1|Plot),
-             data= flow_snow_clim_z,
-             REML=T, 
-             na.action=na.omit)
+mod_basic_z <- lmer(log_flow ~ 0 + 
+                      Species * Year +
+                      (1|Plot),
+                    data= flow_snow_clim_z,
+                    REML=T, 
+                    na.action=na.omit)
 
 
+#  MODEL EQ3 - Full model
 # Reorganise data
 datZ <- flow_snow_clim_z
-
-# Make all 0s count of flowers NAs
-datZ$log_flow[which(datZ$log_flow == min(datZ$log_flow))] <- NA
 
 # Scale explanatory variable except for lag log_flow
 datZ$snowmelt_DOY <- scale(datZ$snowmelt_DOY)
 datZ$Temp_summer <- scale(datZ$Temp_summer)
 datZ$lag_Temp_fall <- scale(datZ$lag_Temp_fall)
 
-# Make all 0s count of flowers NAs
-datZ$log_lag_flow[which(datZ$log_lag_flow == min(datZ$log_lag_flow))] <- NA
-
 
 #  MODEL EQ3 - Full model
-mod_full_z_cross <- lmer(log_flow ~  0 +
-                           Species * Temp_summer +
-                           Species * lag_Temp_fall +
-                           Species * snowmelt_DOY +
-                           Species * log_lag_flow +
-                           (1|Plot) + (1|Plot:Year),
-                         data=datZ,
-                         REML=TRUE, 
-                         na.action=na.omit)
+# mod_full_z_cross <- lmer(log_flow ~  0 +
+#                            Species * Temp_summer +
+#                            Species * lag_Temp_fall +
+#                            Species * snowmelt_DOY +
+#                            Species * log_lag_flow +
+#                            (1|Plot) + (1|Plot:Year),
+#                          data=datZ,
+#                          REML=TRUE, 
+#                          na.action=na.omit)
 
 #  MODEL EQ3 - Interaction model
 mod_full_z_cross_int <- lmer(log_flow ~  0 +
                                Species : Temp_summer +
                                Species : lag_Temp_fall +
                                Species : snowmelt_DOY +
-                               Species : log_lag_flow +
-                               (1|Plot) + (1|Plot:Year),
+                               Species : log_lag_flow + offset(1 * log_lag_flow) +
+                               (1|Plot:Year),
                              data=datZ,
                              REML=TRUE, 
                              na.action=na.omit)
+
+# mod_full_z_cross_int <- lmer(log_flow ~  0 +
+#                                Species : Temp_summer +
+#                                Species : lag_Temp_fall +
+#                                Species : snowmelt_DOY +
+#                                Species : offset(1 * log_lag_flow) +
+#                                (1|Plot) + (1|Plot:Year),
+#                              data=datZ,
+#                              REML=TRUE, 
+#                              na.action=na.omit)
+
 #------------------------------------------------------------------------------
 
 
-
-
-# #### Variables backward selection -------------------------------------------
-# # NOT USEFUL - BEST MODEL = mod_full_z_cross
-# # create a dB without NA (same used in lmer, Mod1 & Mod2)
-# flow_snow_clim_z <- flow_snow_clim_z[complete.cases(flow_snow_clim_z),]
-# 
-# # Backward variable selection on full model EQ2 
-# lmerTest::step(mod_full_z_cross, direction = "backward", trace=FALSE ) 
-# 
-# # get model after selection
-# mod_bw_sel_z <- get_model(lmerTest::step(mod_full_z_cross, 
-#                                               direction="backward", 
-#                                               trace=FALSE ) )
-# 
-# # saveRDS(mod_bw_sel_z, "results/models/mod_bw_sel_z.rds")
-# summary(mod_bw_sel_z)
-#------------------------------------------------------------------------------
-
-
-
-
+#abbe plot Flo t ~ t-1
+# ggplot(datZ , aes(y=log_flow, x=log_lag_flow)) + 
+#   xlim(0,7) + 
+#   ylim(0,7) + 
+#   geom_abline(intercept = 0, slope = 1, color="black", size=1) + 
+#   geom_point(aes(color=Species)) +
+#   labs(title="t~t-1 High Arctic") + 
+#   xlab('t-1') + 
+#   ylab('t') +
+#   theme_classic()  +
+#   theme(text = element_text(size = 20))

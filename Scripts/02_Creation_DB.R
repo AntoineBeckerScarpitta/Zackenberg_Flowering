@@ -11,7 +11,7 @@
 # rm(list=ls())
 
 # Load 01 - Import_DB (and 00-Librairies)
-source("Scripts/00_Load_libraries.r")
+# source("Scripts/00_Load_libraries.r")
 source("Scripts/01_Import_DB.r")
 
 
@@ -192,10 +192,6 @@ flow[c("Site","Species", "Plot")] <- lapply(flow[c("Site","Species", "Plot")], a
 
 # Remove year 1995 (installation, low trust in that survey)
 flow <- flow[flow$Year>1995, ]
-
-# Create new response variable with 0==0.001 (for log transfo)
-flow$trans_Flow_m2 <- flow$Flow_m2
-flow[flow$Flow_m2==0, 'trans_Flow_m2'] <- 0.001
 #### END -----------------------------------------------------------------------------
 
 
@@ -212,18 +208,18 @@ flow_com <- flow %>% group_by(Site, Year) %>%
   ungroup() %>%
   #calculate the community level density
   dplyr::mutate(ComFlow_m2=ComFlow/ComArea) %>%
-  #replace 0 with 0.001 as in sp level data
-  dplyr::mutate(ComFlow_m2 = replace(ComFlow_m2, ComFlow_m2==0, 0.001))
 #### END -----------------------------------------------------------------------------
 
 
 
 # remove temprary files
-remove("Nuuk_all", "Nuuk_all_sub", "Nuuk_all0",  "Zack", "Zack_sub", "Zack0", "Zack1", 
-      "Zcas", "Zcas0", "Zcas1", "Zdry", "Zdry0", "Zdry1", "Zpap", "Zpap0", "Zpap1", 
-      "Zsal", "Zsal0", "Zsal_sel", "buds", "smf", "Zsal1", "Zsax", "Zsax0", "Zsax1", 
-      "Zsil", "Zsil0", "Zsil1", "sexRatio", "Zack_tot_plot", "Nuuk_tot_plot", "Nsal_tot_plot",
-      "Zsal_tot_plot", "Plot_size")
+remove("buds","Nsal_tot_plot", "Nuuk_all", "Nuuk_all_sub" ,
+       "Nuuk_all0", "Nuuk_tot_plot", "Plot_size", "sexRatio" ,    
+       "smf", "Zack", "Zack_sub", "Zack_tot_plot",
+       "Zack0", "Zack1", "Zcas", "Zcas0", "Zcas1", "Zdry" ,        
+       "Zdry0", "Zdry1", "Zpap", "Zpap0", "Zpap1", "Zsal" ,        
+       "Zsal_sel", "Zsal_tot_plot", "Zsal0", "Zsal1"    ,    
+       "Zsax", "Zsax0", "Zsax1", "Zsil", "Zsil0", "Zsil1" )
 
 
 
