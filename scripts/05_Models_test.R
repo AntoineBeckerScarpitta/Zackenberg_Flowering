@@ -61,138 +61,20 @@ tab_model(mod_basic_z, mod_basic_n,
 
 #Zackenberg ANOVA(mod_sp)
 mod_z <- anova(mod_basic_z)
-# extract values
-n_z <- rownames(mod_z)
-F_z <- round(mod_z$`F value`, 2)
-df_z <- mod_z$NumDF
-p_z <- mod_z$`Pr(>F)`
 #compile in df
-data.frame(n_z,F_z ,df_z, p_z )
-
+data.frame(rownames(mod_z), 
+           round(mod_z$`F value`, 2), 
+           mod_z$NumDF, 
+           mod_z$`Pr(>F)`)
 
 #Nuuk ANOVA(mod_sp)
 mod_n <- anova(mod_basic_n)
-# extract values
-n_n <- rownames(mod_n)
-F_n <- round(mod_n$`F value`, 2)
-df_n <- mod_n$NumDF
-p_n <- mod_n$`Pr(>F)`
 #compile in df
-data.frame(n_n,F_n ,df_n, p_n )
+data.frame(rownames(mod_n), 
+           round(mod_n$`F value`, 2), 
+           mod_n$NumDF, 
+           mod_n$`Pr(>F)`)
 ##----------------------------------------------------------------------------
-
-
-
-# 3 -  SPECIES LEVEL GRAPH---------------------------------
-#ZACKENBERG
-#extract the data used in mod_basic_z
-data_mod_z <- as.data.frame(mod_basic_z@frame)
-#extract the predict from mod_basic_z
-data_mod_z$pred <- predict(mod_basic_z, re.form=NULL)  ## population level
-
-
-
-#graph plot effect + predict sp level
-zack <- ggplot(data_mod_z, aes(Year, log_flow, 
-                               group=Species, color=Species)) +
-  geom_point(size=1) +
-  # geom_smooth(method='lm', se=TRUE, aes(fill=Plot), alpha = 0.1) + #plot trends
-  geom_smooth(method='lm', se=FALSE, colour="black", 
-              aes(y=pred)) + # sp prediction  , group=Species
-  labs(y='log(flower density)') +
-  ggtitle('High Arctic - Zackenberg') +
-  facet_grid(Species~., scales="free_y") +
-  theme_linedraw() +
-  scale_x_continuous(limits = c(1997, 2019),
-                     breaks = c(1997, 2002, 2007, 2012, 2017)) +
-  theme(legend.position = "none", 
-        axis.text=element_text(size=10),
-        axis.title=element_text(size=10, face="bold"),
-        panel.background = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black"), 
-        strip.background = element_blank(),
-        strip.text = element_text(face = "bold", color="black"))
-
-
-
-#NUUK
-#extract the data used in mod_basic_n
-data_mod_n <- as.data.frame(mod_basic_n@frame)
-#extract the predict from mod_basic_n
-data_mod_n$pred <- predict(mod_basic_n, re.form=NA)  ## population level
-
-#graph plot effect + predict sp level
-nuuk <- ggplot(data_mod_n, aes(Year, log_flow, 
-                               group=Plot, color=Plot)) +
-  geom_point(size=1) +
-  geom_smooth(method='lm', se=TRUE, aes(fill=Plot), alpha = 0.1) + # plottrends
-  # geom_point(aes(y=pred), color="black", size=1) +
-  geom_smooth(method='loess', se=FALSE, colour="black", 
-              aes(y=pred, group=Species)) + # sp prediction
-  labs(y='log(flower density)') +
-  ggtitle('Low Arctic - Nuuk') +
-  facet_grid(Species~., scales="fixed")+
-  theme_linedraw() +
-  scale_x_continuous(limits = c(2009, 2019),
-                     breaks = c(2009, 2011, 2013, 2015, 2017, 2019)) +
-  theme(legend.position = "none", 
-        axis.text=element_text(size=10),
-        axis.title=element_text(size=10, face="bold"),
-        panel.background = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black"), 
-        strip.background = element_blank(),
-        strip.text = element_text(face = "bold", color="black"))
-
-##panel
-# gridExtra::grid.arrange(zack, nuuk, ncol=2)
-# 
-# #PDF SAVING ------------------------------------------------------------------
-# # Customizing the output
-# pdf("results/Models/Sp_level_plot.pdf",         # File name
-#     width = 9, height = 8, # Width and height in inches
-#     bg = "white",          # Background color
-#     colormodel = "cmyk",    # Color model (cmyk is required for  publications)
-#     paper = "A4")          # Paper size
-# 
-# # Creating a plot
-# gridExtra::grid.arrange(zack, nuuk, ncol=2)
-# 
-# # Closing the graphical device
-# dev.off() 
-##------------------------------------------------------------------------------
-
-# 
-# ## sorti unique par site
-# # Customizing the output
-# pdf("results/Models/Sp_level_plot_NUUK.pdf",         # File name
-#     width = 4, height = 8, # Width and height in inches
-#     bg = "white",          # Background color
-#     colormodel = "cmyk",    # Color model (cmyk is required for  publications)
-#     paper = "A4")          # Paper size
-# 
-# # Creating a plot
-# nuuk
-# 
-# # Closing the graphical device
-# dev.off() 
-# 
-# # Customizing the output
-# pdf("results/Models/Sp_level_plot_ZACK.pdf",         # File name
-#     width = 4, height = 8, # Width and height in inches
-#     bg = "white",          # Background color
-#     colormodel = "cmyk",    # Color model (cmyk is required for  publications)
-#     paper = "A4")          # Paper size
-# 
-# # Creating a plot
-# zack
-# 
-# # Closing the graphical device
-# dev.off() 
-
 
 
 # 3 - MODELS TABS FULL --------------------------------------------------------
@@ -201,16 +83,6 @@ tab_model(mod_full_z_cross_int, mod_full_n_cross_int,
           p.val = "kr", 
           show.df = TRUE, 
           dv.labels = c("Full int Zack", "Full int Nuuk"))
-
-# 2.3 - ICC: InterClass Correlations
-# ICC can be interpreted as “the proportion of the variance explained 
-# by the grouping structure in the population”. 
-# ICC “can also be interpreted as the expected correlation between two 
-# randomly drawn units that are in the same group
-# 0<ICC<1 (1=all obs in the group. struct. are equal)
-performance::icc(mod_full_z_cross_int, by_group = TRUE)
-performance::icc(mod_full_n_cross_int, by_group = TRUE)
-
 
 #Pvalue and distribution offset
 #NUUK
@@ -230,49 +102,48 @@ as.data.frame(pt(q = abs((1 - paramFix_z[pointerLag_z,1])/paramFix_z[pointerLag_
 
 
 
-
-# 4 - Forest PLOT FULL INT MOD -----------------------------------------------
-# FOREST PLOT 
-# High Arctic Zackenberg
-FP_zackInt <- sjPlot::plot_model(mod_full_z_cross_int, 
-                                 type = "est",
-                                 show.values=T, 
-                                 show.intercept = FALSE,
-                                 show.p = TRUE,
-                                 vline.color="grey", 
-                                 value.offset=-0.3, 
-                                 title = "Forest plot Zackenberg") +
-  theme(axis.text=element_text(size=10),
-        axis.title=element_text(size=10, face="bold"),
-        panel.background = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black"), 
-        strip.background = element_blank(),
-        strip.text = element_text(face = "bold", color="black")) 
-
-# Low Arctic - Nuuk
-FP_NuukInt <- sjPlot::plot_model(mod_full_n_cross_int, 
-                                 type = "est",
-                                 show.values=T, 
-                                 show.intercept = FALSE,
-                                 show.p = TRUE,
-                                 vline.color="grey", 
-                                 value.offset=-0.3, 
-                                 title = "Forest plot Nuuk - sans 0") +
-  theme(axis.text=element_text(size=10),
-        axis.title=element_text(size=10, face="bold"),
-        panel.background = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black"), 
-        strip.background = element_blank(),
-        strip.text = element_text(face = "bold", color="black"))
-
-#panel
-gridExtra::grid.arrange(FP_zackInt, FP_NuukInt, ncol=2)
-
-
+# # 4 - Forest PLOT FULL INT MOD -----------------------------------------------
+# # FOREST PLOT 
+# # High Arctic Zackenberg
+# FP_zackInt <- sjPlot::plot_model(mod_full_z_cross_int, 
+#                                  type = "est",
+#                                  show.values=T, 
+#                                  show.intercept = FALSE,
+#                                  show.p = TRUE,
+#                                  vline.color="grey", 
+#                                  value.offset=-0.3, 
+#                                  title = "Forest plot Zackenberg") +
+#   theme(axis.text=element_text(size=10),
+#         axis.title=element_text(size=10, face="bold"),
+#         panel.background = element_blank(),
+#         panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(),
+#         axis.line = element_line(colour = "black"), 
+#         strip.background = element_blank(),
+#         strip.text = element_text(face = "bold", color="black")) 
+# 
+# # Low Arctic - Nuuk
+# FP_NuukInt <- sjPlot::plot_model(mod_full_n_cross_int, 
+#                                  type = "est",
+#                                  show.values=T, 
+#                                  show.intercept = FALSE,
+#                                  show.p = TRUE,
+#                                  vline.color="grey", 
+#                                  value.offset=-0.3, 
+#                                  title = "Forest plot Nuuk - sans 0") +
+#   theme(axis.text=element_text(size=10),
+#         axis.title=element_text(size=10, face="bold"),
+#         panel.background = element_blank(),
+#         panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(),
+#         axis.line = element_line(colour = "black"), 
+#         strip.background = element_blank(),
+#         strip.text = element_text(face = "bold", color="black"))
+# 
+# #panel
+# gridExtra::grid.arrange(FP_zackInt, FP_NuukInt, ncol=2)
+# 
+# 
 # pdf("results/Models/FP_all_sans_zero.pdf",         # File name
 #     width = 12, height = 10, # Width and height in inches
 #     bg = "white",          # Background color
@@ -285,64 +156,30 @@ gridExtra::grid.arrange(FP_zackInt, FP_NuukInt, ncol=2)
 # 
 # # Closing the graphical device
 # dev.off() 
-
-
-
-# 
-# #PDF SAVING 
-# # Customizing the output
-# pdf("results/Models/FP_nuuk.pdf",         # File name
-#     width = 9, height = 8, # Width and height in inches
-#     bg = "white",          # Background color
-#     colormodel = "cmyk",    # Color model (cmyk is required for  publications)
-#     paper = "A4")          # Paper size
-# 
-# # Creating a plot
-# FP_NuukInt
-# 
-# # Closing the graphical device
-# dev.off() 
-# 
-# pdf("results/Models/FP_zack.pdf",         # File name
-#     width = 9, height = 8, # Width and height in inches
-#     bg = "white",          # Background color
-#     colormodel = "cmyk",  
-#     paper = "A4") 
-# 
-# # Creating a plot
-# FP_zackInt
-# 
-# # Closing the graphical device
-# dev.off() 
-# ##----------------------------------------------------------------------------
-# 
-# 
-# 
-# 
 # 
 # 
 # # 1.2 Exploratory graphs DOY ~ FLow density  ---------------------------------
 # #Zack
-# cor_doy_flow_z <- ggplot(flow_snow_clim_z, 
+# cor_doy_flow_z <- ggplot(flow_snow_clim_z,
 #                          aes(snowmelt_DOY, log_flow, group=Species, color=Species)) +
 #   geom_point() +
 #   geom_smooth(method='loess', se=TRUE) +
 #   labs(y='Flower density / m2') +
 #   ggtitle('Zackenberg') +
 #   facet_grid(Species~., scales="free_y") +
-#   theme_linedraw() 
+#   theme_linedraw()
 # 
 # #Nuuk
-# cor_doy_flow_n <- ggplot(flow_snow_clim_n, 
+# cor_doy_flow_n <- ggplot(flow_snow_clim_n,
 #                          aes(snowmelt_DOY, log_flow, group=Species, color=Species)) +
 #   geom_point() +
 #   geom_smooth(method='loess', se=TRUE) +
 #   labs(y='Flower density / m2') +
 #   ggtitle('Nuuk') +
 #   facet_grid(Species~., scales="free_y") +
-#   theme_linedraw() 
+#   theme_linedraw()
 # 
 # #  graph
-# gridExtra::grid.arrange(cor_doy_flow_z, cor_doy_flow_n, ncol=2, 
+# gridExtra::grid.arrange(cor_doy_flow_z, cor_doy_flow_n, ncol=2,
 #                         top = "Snowmelt_DOY ~ flowering density")
-# ##----------------------------------------------------------------------------
+##----------------------------------------------------------------------------
