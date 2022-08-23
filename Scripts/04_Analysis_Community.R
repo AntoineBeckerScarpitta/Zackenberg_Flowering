@@ -80,7 +80,7 @@ ggplot(flow_clim_com %>%
         axis.title=element_text(size=13),
         panel.background = element_blank(),
         axis.line = element_line(colour = "black"), 
-        title=element_text(size=18, face="bold")) 
+        title=element_text(size=18, face="bold"))
 
 
 

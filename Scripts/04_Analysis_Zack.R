@@ -5,7 +5,7 @@
 #
 ###############################################################################
 # Antoine Becker-Scarpitta
-# January 2021
+# July 2022
 
 #  clean R work-space
 # rm(list=ls())
@@ -34,10 +34,6 @@ remove("clim", "clim_year")
 
 
 # 1 - DATA MANAGMENT FOR MODEL -  ZACKENBERG ----------------------------------
-
-
-# log(density) !=0 (Flow_m2[abundace==0] <- 0.001 in 02_Creation_DB, line 210)
-# add snow covariate into flow
 flow_snow_z <- left_join(droplevels(flow %>% filter(Site=="Zackenberg")), 
                          droplevels(snow %>% filter(Site=="Zackenberg"))
                          , by=c("Year", "Plot", "Site")) 
@@ -78,25 +74,8 @@ flow_snow_clim_z <- flow_snow_clim_z %>%
   dplyr::select(Site, Year,  Plot, Species, log_flow, snowmelt_DOY, 
                 lag_Temp_fall, Temp_summer, log_lag_flow)
 ##----------------------------------------------------------------------------
-
 ##full dataset for mod
 # write.csv2(flow_snow_clim_z, "Guillaume/V2/flow_snow_clim_z.csv")
-
-
-
-##----------------------------------------------------------------------------
-## PLOT SnowMelt DOY Zackenberg
-temp_graph_z <- ggplot(flow_snow_clim_z , aes(x=Year, y=snowmelt_DOY, 
-                              group=Species, 
-                              color=Species)) +
-  geom_point(size=2) +
-  geom_smooth(method='lm', se=F) +
-  theme(axis.text=element_text(size=15),
-        axis.title=element_text(size=16,face="bold"),
-        panel.background = element_blank(),
-        axis.line = element_line(colour = "black"))
-##----------------------------------------------------------------------------
-
 
 
 
@@ -121,17 +100,6 @@ datZ$Temp_summer <- scale(datZ$Temp_summer)
 datZ$lag_Temp_fall <- scale(datZ$lag_Temp_fall)
 
 
-#  MODEL EQ3 - Full model
-# mod_full_z_cross <- lmer(log_flow ~  0 +
-#                            Species * Temp_summer +
-#                            Species * lag_Temp_fall +
-#                            Species * snowmelt_DOY +
-#                            Species * log_lag_flow +
-#                            (1|Plot) + (1|Plot:Year),
-#                          data=datZ,
-#                          REML=TRUE, 
-#                          na.action=na.omit)
-
 #  MODEL EQ3 - Interaction model
 mod_full_z_cross_int <- lmer(log_flow ~  0 +
                                Species : Temp_summer +
@@ -143,19 +111,7 @@ mod_full_z_cross_int <- lmer(log_flow ~  0 +
                              REML=TRUE, 
                              na.action=na.omit)
 
-# mod_full_z_cross_int <- lmer(log_flow ~  0 +
-#                                Species : Temp_summer +
-#                                Species : lag_Temp_fall +
-#                                Species : snowmelt_DOY +
-#                                Species : offset(1 * log_lag_flow) +
-#                                (1|Plot) + (1|Plot:Year),
-#                              data=datZ,
-#                              REML=TRUE, 
-#                              na.action=na.omit)
-
 #------------------------------------------------------------------------------
-
-
 #abbe plot Flo t ~ t-1
 # ggplot(datZ , aes(y=log_flow, x=log_lag_flow)) + 
 #   xlim(0,7) + 

@@ -207,7 +207,7 @@ flow_com <- flow %>% group_by(Site, Year) %>%
             ComArea=sum(Plot_size)) %>%
   ungroup() %>%
   #calculate the community level density
-  dplyr::mutate(ComFlow_m2=ComFlow/ComArea) %>%
+  dplyr::mutate(ComFlow_m2=ComFlow/ComArea)
 #### END -----------------------------------------------------------------------------
 
 

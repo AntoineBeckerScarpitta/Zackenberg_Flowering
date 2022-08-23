@@ -5,14 +5,12 @@
 #
 ###############################################################################
 # Antoine Becker-Scarpitta
-# January 2021
+# July 2022
 
 #  clean R work-space
 # rm(list=ls())
 
 # # Load 02 - Creation database (+ scripts 00 and 01)
-# source("Scripts/00_Load_libraries.r")
-# source("Scripts/01_Import_DB.r")
 source("Scripts/02_Creation_DB.r")
 source("Scripts/C1_Load_climatic_covariates.R")
 source("Scripts/C2_Build_all_snow_covariates.R")
@@ -21,9 +19,6 @@ remove("clim", "clim_year")
 
 
 # 1 - DATA MANAGMENT FOR MODEL -  NUUK ----------------------------------
-# log(density) !=0 (Flow_m2[abundace==0] <- 0.001 in 02_Creation_DB, line 210)
-# will be replace by NA later for full mod
-
 # add snow covariate into flow _ NO DATA FOR NUUK YET
 flow_snow_n <- left_join(droplevels(flow %>% filter(Site=="Nuuk")),
                          droplevels(snow %>% filter(Site=="Nuuk")), 
@@ -69,28 +64,8 @@ flow_snow_clim_n <- flow_snow_clim_n %>%
   dplyr::select(Site, Year,  Plot, Species, log_flow, snowmelt_DOY, 
          lag_Temp_fall, Temp_summer, log_lag_flow)
 #-----------------------------------------------------------------------------=
-
 ##full dataset for mod
 # write.csv2(flow_snow_clim_n, "Guillaume/V2/flow_snow_clim_n.csv")
-
-
-
-
-
-#-----------------------------------------------------------------------------=
-## PLOT SnowMelt DOY Nuuk
-temp_graph_n <- ggplot(flow_snow_clim_n,
-                       aes(x=Year, 
-                           y=snowmelt_DOY, 
-                           group=Species, 
-                           color=Species)) +
-  geom_point(size=2) +
-  geom_smooth(method='lm', se=F) +
-  theme(axis.text=element_text(size=15),
-        axis.title=element_text(size=16,face="bold"),
-        panel.background = element_blank(),
-        axis.line = element_line(colour = "black"))
-#-----------------------------------------------------------------------------=
 
 
 
@@ -113,17 +88,6 @@ datN$Temp_summer <- scale(datN$Temp_summer)
 datN$lag_Temp_fall <- scale(datN$lag_Temp_fall)
 
 
-#  MODEL EQ3 - Full model
-# mod_full_n_cross <- lmer(log_flow ~ 0 +
-#                            Species * Temp_summer +
-#                            Species * lag_Temp_fall +
-#                            Species * snowmelt_DOY +
-#                            Species * log_lag_flow +
-#                            (1|Plot) + (1|Plot:Year),
-#                          data=datN,
-#                          REML=T, 
-#                          na.action=na.omit)
-
 #  MODEL EQ3 -  Only interactions
 mod_full_n_cross_int <- lmer(log_flow ~   0 + 
                                Species : Temp_summer + 
@@ -135,7 +99,6 @@ mod_full_n_cross_int <- lmer(log_flow ~   0 +
                              REML=T, 
                              na.action=na.omit)
 #------------------------------------------------------------------------------
-
 #abbe plot Flo t ~ t-1
 # ggplot(datN , aes(y=log_flow, x=log_lag_flow)) + 
 #   xlim(0,7) + 

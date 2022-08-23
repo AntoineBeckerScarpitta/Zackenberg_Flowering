@@ -72,7 +72,7 @@ distdens <- ggplot(flow, aes(x=Flow_m2, fill=Species)) +
   theme(legend.position = "none")
 
 # log(density) !=0 (Flow_m2 + 0.0001 in 02_Creation_DB, line 131)
-dist_logdens_nn <- ggplot(flow, aes(x=log(trans_Flow_m2), fill=Species)) + 
+dist_logdens_nn <- ggplot(flow, aes(x=log1p(Flow_m2), fill=Species)) + 
   geom_density(alpha=.3) +
   labs(y='Density', x='log(Flowering density/m2)') +
   ggtitle('B - Distribution of log(Flowering density) !=0') +

@@ -4,8 +4,8 @@
 #                            05 - Models Exploration
 #
 ##############################################################################
-# Antoine Becker-Scarpitta & Laura Antao
-# May 2021
+# Antoine Becker-Scarpitta 
+# July 2022
 
 #SCRIPT SUMMARY
 # In this script no data, ONLY models outputs
@@ -87,20 +87,21 @@ data.frame(n_n,F_n ,df_n, p_n )
 #ZACKENBERG
 #extract the data used in mod_basic_z
 data_mod_z <- as.data.frame(mod_basic_z@frame)
-
 #extract the predict from mod_basic_z
-data_mod_z$pred <- predict(mod_basic_z, re.form=NA)  ## population level
+data_mod_z$pred <- predict(mod_basic_z, re.form=NULL)  ## population level
+
+
 
 #graph plot effect + predict sp level
 zack <- ggplot(data_mod_z, aes(Year, log_flow, 
                                group=Species, color=Species)) +
   geom_point(size=1) +
   # geom_smooth(method='lm', se=TRUE, aes(fill=Plot), alpha = 0.1) + #plot trends
-  geom_smooth(method='loess', se=FALSE, colour="black", 
-              aes(y=pred, group=Species)) + # sp prediction
+  geom_smooth(method='lm', se=FALSE, colour="black", 
+              aes(y=pred)) + # sp prediction  , group=Species
   labs(y='log(flower density)') +
   ggtitle('High Arctic - Zackenberg') +
-  facet_grid(Species~., scales="fixed") +
+  facet_grid(Species~., scales="free_y") +
   theme_linedraw() +
   scale_x_continuous(limits = c(1997, 2019),
                      breaks = c(1997, 2002, 2007, 2012, 2017)) +
@@ -115,10 +116,10 @@ zack <- ggplot(data_mod_z, aes(Year, log_flow,
         strip.text = element_text(face = "bold", color="black"))
 
 
+
 #NUUK
 #extract the data used in mod_basic_n
 data_mod_n <- as.data.frame(mod_basic_n@frame)
-
 #extract the predict from mod_basic_n
 data_mod_n$pred <- predict(mod_basic_n, re.form=NA)  ## population level
 
@@ -146,22 +147,22 @@ nuuk <- ggplot(data_mod_n, aes(Year, log_flow,
         strip.background = element_blank(),
         strip.text = element_text(face = "bold", color="black"))
 
-#panel
-gridExtra::grid.arrange(zack, nuuk, ncol=2)
-
-#PDF SAVING ------------------------------------------------------------------
-# Customizing the output
-pdf("results/Models/Sp_level_plot.pdf",         # File name
-    width = 9, height = 8, # Width and height in inches
-    bg = "white",          # Background color
-    colormodel = "cmyk",    # Color model (cmyk is required for  publications)
-    paper = "A4")          # Paper size
-
-# Creating a plot
-gridExtra::grid.arrange(zack, nuuk, ncol=2)
-
-# Closing the graphical device
-dev.off() 
+##panel
+# gridExtra::grid.arrange(zack, nuuk, ncol=2)
+# 
+# #PDF SAVING ------------------------------------------------------------------
+# # Customizing the output
+# pdf("results/Models/Sp_level_plot.pdf",         # File name
+#     width = 9, height = 8, # Width and height in inches
+#     bg = "white",          # Background color
+#     colormodel = "cmyk",    # Color model (cmyk is required for  publications)
+#     paper = "A4")          # Paper size
+# 
+# # Creating a plot
+# gridExtra::grid.arrange(zack, nuuk, ncol=2)
+# 
+# # Closing the graphical device
+# dev.off() 
 ##------------------------------------------------------------------------------
 
 # 
@@ -240,7 +241,7 @@ FP_zackInt <- sjPlot::plot_model(mod_full_z_cross_int,
                                  show.p = TRUE,
                                  vline.color="grey", 
                                  value.offset=-0.3, 
-                                 title = "Forest plot Zackenberg sans 0") +
+                                 title = "Forest plot Zackenberg") +
   theme(axis.text=element_text(size=10),
         axis.title=element_text(size=10, face="bold"),
         panel.background = element_blank(),
@@ -272,18 +273,18 @@ FP_NuukInt <- sjPlot::plot_model(mod_full_n_cross_int,
 gridExtra::grid.arrange(FP_zackInt, FP_NuukInt, ncol=2)
 
 
-pdf("results/Models/FP_all_sans_zero.pdf",         # File name
-    width = 12, height = 10, # Width and height in inches
-    bg = "white",          # Background color
-    colormodel = "cmyk")
-    # Color model (cmyk is required for  publications)
-    # paper = "A4")          # Paper size
-
-# Creating a plot
-gridExtra::grid.arrange(FP_zackInt, FP_NuukInt, ncol=2)
-
-# Closing the graphical device
-dev.off() 
+# pdf("results/Models/FP_all_sans_zero.pdf",         # File name
+#     width = 12, height = 10, # Width and height in inches
+#     bg = "white",          # Background color
+#     colormodel = "cmyk")
+#     # Color model (cmyk is required for  publications)
+#     # paper = "A4")          # Paper size
+# 
+# # Creating a plot
+# gridExtra::grid.arrange(FP_zackInt, FP_NuukInt, ncol=2)
+# 
+# # Closing the graphical device
+# dev.off() 
 
 
 
