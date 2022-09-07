@@ -142,7 +142,7 @@ data_mod_all[,c("Site","Species")]<-lapply(data_mod_all[,c("Site","Species")],as
 
 #### GRAPH PER SPECIES
 #CAS
-HA_CAS <- ggplot(data_mod_all %>% 
+{HA_CAS <- ggplot(data_mod_all %>% 
                    dplyr::filter(Site=="High_Arctic", 
                                  Species=="CAS"),
                  aes(Year, log_flow)) +
@@ -450,8 +450,8 @@ gridExtra::grid.arrange(HA_SAL_female, LA_SAL_female,
                         HA_SAX,
                         ncol=2)}
 
-
-## GRAPH SIMPLE
+# 
+# # GRAPH SIMPLE
 # pdf("results/Models/Sp_level_plot_MEP.pdf",         # File name
 #     width = 4, height = 10, # Width and height in inches
 #     bg = "white",          # Background color

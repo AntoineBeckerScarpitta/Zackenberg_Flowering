@@ -84,17 +84,28 @@ tab_model(mod_full_z_cross_int, mod_full_n_cross_int,
           show.df = TRUE, 
           dv.labels = c("Full int Zack", "Full int Nuuk"))
 
-#Pvalue and distribution offset
+
+# 1 - corrected value of the Offset
+# extract value
+intZ <- summary(mod_full_z)$coefficients
+intN <- summary(mod_full_n)$coefficients
+
+#correct offet: -beta
+intZ[grep("log_lag_flow",rownames(intZ)),1] <- -intZ[grep("log_lag_flow",rownames(intZ)),1]
+intN[grep("log_lag_flow",rownames(intN)),1] <- -intN[grep("log_lag_flow",rownames(intN)),1]
+
+
+# 2- Pvalue and distribution offset
 #NUUK
-paramFix_n <- summary(mod_full_n_cross_int)$coefficients
-pointerLag_n <- grep("log_lag_flow",rownames(paramFix_n))
+paramFix_n <- summary(mod_full_n)$coefficients
+pointerLag_n <- grep("log_lag_flow", rownames(paramFix_n))
 
 as.data.frame(pt(q = abs((1 - paramFix_n[pointerLag_n,1])/paramFix_n[pointerLag_n,2]), 
-   df =  paramFix_n[pointerLag_n,3], lower.tail = FALSE) * 2)
+                 df =  paramFix_n[pointerLag_n,3], lower.tail = FALSE) * 2)
 
 #ZACK
-paramFix_z <- summary(mod_full_z_cross_int)$coefficients
-pointerLag_z <- grep("log_lag_flow",rownames(paramFix_z))
+paramFix_z <- summary(mod_full_z)$coefficients
+pointerLag_z <- grep("log_lag_flow", rownames(paramFix_z))
 
 as.data.frame(pt(q = abs((1 - paramFix_z[pointerLag_z,1])/paramFix_z[pointerLag_z,2]), 
                  df =  paramFix_z[pointerLag_z,3], lower.tail = FALSE) * 2)

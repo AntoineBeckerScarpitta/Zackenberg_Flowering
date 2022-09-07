@@ -84,13 +84,17 @@ ggplot(clim_year %>% dplyr::filter(Variable!="Humidity_%"),
 
 # ANNUAL TRENDS
 #Zack
-fits_year_z <- droplevels(clim_year[clim_year$Site=="Zackenberg", ]) %>%
+fits_year_z <- droplevels(clim_year[clim_year$Site=="High_Arctic", ]) %>%
   dplyr::filter(Variable!="Humidity_%") %>% 
   group_by(Variable) %>%
   do(broom::tidy(lm(Value ~ Year, data=.))) %>%
   filter(term!= "(Intercept)")
+
+# summary(lm(Value ~ Year ,data=clim_year[clim_year$Site=="Low_Arctic", ] %>%
+#   dplyr::filter(Variable=="Temperature_C")))
+
 #Nuuk
-fits_year_n <- droplevels(clim_year[clim_year$Site=="Nuuk", ]) %>%
+fits_year_n <- droplevels(clim_year[clim_year$Site=="Low_Arctic", ]) %>%
   dplyr::filter(Variable!="Humidity_%") %>% 
   group_by(Variable) %>%
   do(broom::tidy(lm(Value ~ Year, data=.))) %>%

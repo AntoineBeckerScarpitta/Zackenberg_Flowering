@@ -51,15 +51,16 @@ datZ$lag_Temp_fall <- scale(datZ$lag_Temp_fall)
 
 
 #  MODEL EQ3 - Interaction model
-mod_full_z_cross_int <- lmer(log_flow ~  0 +
+mod_full_z <- lmer(log_flow ~  0 +
                                Species : Temp_summer +
-                               Species : lag_Temp_fall + 
+                               Species : lag_Temp_fall +
                                Species : snowmelt_DOY +
-                               Species : log_lag_flow + #forme autoregressive
-                               (1|Plot) + (1|Plot:Year),
+                               Species : log_lag_flow + offset(1 * log_lag_flow) +
+                               (1|Plot:Year),
                              data=datZ,
                              REML=TRUE, 
                              na.action=na.omit)
+
 #------------------------------------------------
 
 
@@ -81,12 +82,12 @@ datN$lag_Temp_fall <- scale(datN$lag_Temp_fall)
 
 
 #  MODEL EQ3 -  Only interactions
-mod_full_n_cross_int <- lmer(log_flow ~   0 + 
+mod_full_n <- lmer(log_flow ~   0 + 
                                Species : Temp_summer + 
                                Species : lag_Temp_fall +
                                Species : snowmelt_DOY + 
-                               Species : log_lag_flow + #forme autoregressive
-                               (1|Plot) + (1|Plot:Year),
+                               Species : log_lag_flow + offset(1 * log_lag_flow) + 
+                               (1|Plot:Year),
                              data=datN, 
                              REML=T, 
                              na.action=na.omit)
@@ -97,56 +98,35 @@ mod_full_n_cross_int <- lmer(log_flow ~   0 +
 
 # 3 - Table model output
 # full mod Zack + Nuuk
-tab_model(mod_full_z_cross_int, mod_full_n_cross_int,
+tab_model(mod_full_z, mod_full_n,
           p.val = "kr", 
           show.df = TRUE, 
           dv.labels = c("Full int Zack", "Full int Nuuk"))
-#------------------------------------------------
 
 
+# 1 - corrected value of the Offset
+# extract value
+intZ <- summary(mod_full_z)$coefficients
+intN <- summary(mod_full_n)$coefficients
 
-# 4 - Graphs Forest plot 
-# FOREST PLOT 
-# High Arctic Zackenberg
-FP_zackInt <- sjPlot::plot_model(mod_full_z_cross_int, 
-                                 type = "est",
-                                 show.values=T, 
-                                 show.intercept = FALSE,
-                                 show.p = TRUE,
-                                 vline.color="grey", 
-                                 value.offset=-0.3, 
-                                 title = "Forest plot Zackenberg sans 0") +
-  theme(axis.text=element_text(size=10),
-        axis.title=element_text(size=10, face="bold"),
-        panel.background = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black"), 
-        strip.background = element_blank(),
-        strip.text = element_text(face = "bold", color="black")) 
-
-# Low Arctic - Nuuk
-FP_NuukInt <- sjPlot::plot_model(mod_full_n_cross_int, 
-                                 type = "est",
-                                 show.values=T, 
-                                 show.intercept = FALSE,
-                                 show.p = TRUE,
-                                 vline.color="grey", 
-                                 value.offset=-0.3, 
-                                 title = "Forest plot Nuuk - sans 0") +
-  theme(axis.text=element_text(size=10),
-        axis.title=element_text(size=10, face="bold"),
-        panel.background = element_blank(),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        axis.line = element_line(colour = "black"), 
-        strip.background = element_blank(),
-        strip.text = element_text(face = "bold", color="black"))
-
-#panel
-gridExtra::grid.arrange(FP_zackInt, FP_NuukInt, ncol=2)
+#correct offet: -beta
+intZ[grep("log_lag_flow",rownames(intZ)),1] <- -intZ[grep("log_lag_flow",rownames(intZ)),1]
+intN[grep("log_lag_flow",rownames(intN)),1] <- -intN[grep("log_lag_flow",rownames(intN)),1]
 
 
+# 2- Pvalue and distribution offset
+#NUUK
+paramFix_n <- summary(mod_full_n)$coefficients
+pointerLag_n <- grep("log_lag_flow", rownames(paramFix_n))
 
+as.data.frame(pt(q = abs((1 - paramFix_n[pointerLag_n,1])/paramFix_n[pointerLag_n,2]), 
+                 df =  paramFix_n[pointerLag_n,3], lower.tail = FALSE) * 2)
 
+#ZACK
+paramFix_z <- summary(mod_full_z)$coefficients
+pointerLag_z <- grep("log_lag_flow", rownames(paramFix_z))
+
+as.data.frame(pt(q = abs((1 - paramFix_z[pointerLag_z,1])/paramFix_z[pointerLag_z,2]), 
+                 df =  paramFix_z[pointerLag_z,3], lower.tail = FALSE) * 2)
+##----------------------------------------------------------------------------
 
